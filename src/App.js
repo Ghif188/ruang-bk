@@ -1,9 +1,8 @@
-import Register from "../src/pages/register";
-
+import Login from "../src/pages/login";
 function App() {
   return (
     <div className="">
-      <Register />
+      <Login/>
     </div>
   );
 }
