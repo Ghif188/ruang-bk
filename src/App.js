@@ -1,7 +1,9 @@
+import Register from "../src/pages/register";
+
 function App() {
   return (
-    <div className=" bg-black w-screen h-screen">
-      
+    <div className="">
+      <Register />
     </div>
   );
 }
