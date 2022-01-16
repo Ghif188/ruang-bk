@@ -29,6 +29,7 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins"],
+        bahnschrift: ['Bahnschrift'],
       },
       fontWeight: {
         'extrablack' : 'bolder'
