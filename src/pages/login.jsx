@@ -1,18 +1,40 @@
 import React from 'react';
 import Bg from '../assets/bg.png';
 import { Formik } from 'formik';
-import { FormLabel, Input, FormHelperText, FormErrorMessage, Button} from '@chakra-ui/react';
+import { FormLabel, Input, FormHelperText, FormErrorMessage, Button } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const initialValues = {
         email: "",
         password: "",
     };
+    const [loginNum, setLoginNum] = React.useState(false);
 
+    const handleShow = () => {
+        setLoginNum(!loginNum);
+    };
     return (
         <React.Fragment>
             <div className="flex h-screen w-screen">
-                <div className="w-6/10 h-full">
+                <div className="w-6/10 flex items-center h-full">
+                    <div className='absolute m-20'>
+                        <div className='text-white font-bahnschrift tracking-wider mb-10 text-6xl font-bold'>WELCOME BACK!</div>
+                        <div className='text-white font font-sans text-2xl w-4/6 mb-44 font-semibold'>Hi, selamat datang di Ruang-BK sampaikan masalahmu kepada kami.</div>
+                        <div className='text-white text-2xl font-light hover:text-green-500'>
+                            <Button
+                                size='lg'
+                                variant='ghost'
+                                border='2px'
+                                height='50px'
+                                borderColor='#FFFFFF'
+                                rounded='xl'
+                            >
+                                <Link to="/register" componen></Link>
+                                Belum mempunyai akun?
+                            </Button>
+                        </div>
+                    </div>
                     <img src={Bg} alt="Background" className="h-full w-full" />
                 </div>
                 <div className="w-4/10 items-center flex h-full">
@@ -30,13 +52,26 @@ const Login = () => {
                             isSubmitting,
                         }) => (
                             <form onSubmit={handleSubmit} className='w-full'>
-                                <div className='text-2xl text-center m-10 font-bold '>
-                                    LOGIN
+                                <div className='text-3xl font-sans text-center m-10 font-semibold'>
+                                    Login
                                 </div>
                                 <div>
-                                    <div className='m-10'>
-                                        <FormLabel htmlFor='email'>Email</FormLabel>
+                                    {loginNum === false ? (
+                                        <div className='m-10'>
+                                            <FormLabel htmlFor='email'>Email</FormLabel>
+                                            <Input
+                                                focusBorderColor='pink.400'
+                                                id='email'
+                                                type='email'
+                                                value={values.email}
+                                                onChange={handleChange}
+                                            />
+                                            {errors.email && touched.email && errors.email}
+                                        </div>
+                                    ) : <div className='m-10'>
+                                        <FormLabel htmlFor='email'>Nomor WA</FormLabel>
                                         <Input
+                                            focusBorderColor='pink.400'
                                             id='email'
                                             type='email'
                                             value={values.email}
@@ -44,6 +79,7 @@ const Login = () => {
                                         />
                                         {errors.email && touched.email && errors.email}
                                     </div>
+                                    }
                                     <div className='m-10'>
                                         <FormLabel htmlFor='password'>Password</FormLabel>
                                         <Input
@@ -56,7 +92,7 @@ const Login = () => {
                                     </div>
                                     <div className="grid m-10 grid-cols-2">
                                         <div className="flex items-center">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" onClick={handleShow} />
                                             <label className="font-medium text-green-500  ml-1">
                                                 Remember me
                                             </label>
@@ -64,16 +100,19 @@ const Login = () => {
                                     </div>
                                     <div className='m-10'>
                                         <Button
+                                            size='lg'
+                                            isFullWidth
                                             tabIndex="3"
                                             htmlType="submit"
                                             disabled={isSubmitting}
                                             block
                                             variant="solid"
-                                            color="green"
+                                            bgColor="#2EBF91"
+                                            color="white"
                                             loading={isSubmitting}
                                             onSubmit={handleSubmit}
                                         >
-                                            <span className="font-semibold">Sign In</span>
+                                            <span className="font-semibold text-xl">login</span>
                                         </Button>
                                     </div>
                                 </div>
