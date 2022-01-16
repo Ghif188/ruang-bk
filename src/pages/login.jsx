@@ -22,17 +22,18 @@ const Login = () => {
                         <div className='text-white font-bahnschrift tracking-wider mb-10 text-6xl font-bold'>WELCOME BACK!</div>
                         <div className='text-white font font-sans text-2xl w-4/6 mb-44 font-semibold'>Hi, selamat datang di Ruang-BK sampaikan masalahmu kepada kami.</div>
                         <div className='text-white text-2xl font-light hover:text-green-500'>
-                            <Button
-                                size='lg'
-                                variant='ghost'
-                                border='2px'
-                                height='50px'
-                                borderColor='#FFFFFF'
-                                rounded='xl'
-                            >
-                                <Link to="/register" componen></Link>
-                                Belum mempunyai akun?
-                            </Button>
+                            <Link to="/reg">
+                                <Button
+                                    size='lg'
+                                    variant='ghost'
+                                    border='2px'
+                                    height='50px'
+                                    borderColor='#FFFFFF'
+                                    rounded='xl'
+                                >
+                                    Belum mempunyai akun?
+                                </Button>
+                            </Link>
                         </div>
                     </div>
                     <img src={Bg} alt="Background" className="h-full w-full" />
@@ -90,11 +91,11 @@ const Login = () => {
                                         />
                                         {errors.password && touched.password && errors.password}
                                     </div>
-                                    <div className="grid m-10 grid-cols-2">
+                                    <div className="m-10">
                                         <div className="flex items-center">
                                             <input type="checkbox" onClick={handleShow} />
                                             <label className="font-medium text-green-500  ml-1">
-                                                Remember me
+                                                Menggunakan nomor WhatsApp
                                             </label>
                                         </div>
                                     </div>
