@@ -7,18 +7,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { authLoginWa, authLoginEmail } from "../redux/actions/authAction";
 import { useNavigate } from "react-router-dom";
-const LoginEmailSchema = Yup.object().shape({
-    email: Yup.string().email().required("Wajib di isi"),
-    password: Yup.string()
-        .min(8, "Password minimal 8 Karakter")
-        .required("wajib di isi"),
-});
-const LoginWaSchema = Yup.object().shape({
-    nomor: Yup.string().email().required("Wajib di isi"),
-    password: Yup.string()
-        .min(8, "Password minimal 8 Karakter")
-        .required("wajib di isi"),
-});
+
 const Login = () => {
     const initialValuesEmail = {
         email: "",
@@ -29,30 +18,33 @@ const Login = () => {
         password: "",
     };
     const [loginNum, setLoginNum] = React.useState(false);
+    const [errorBE, setErrorBE] = React.useState({});
     const handleShow = () => {
         setLoginNum(!loginNum);
     };
-    const isLoading = useSelector((state) => state.auth.isLoading);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    // const isLoading = useSelector((state) => state.auth.isLoading);
+    // const navigate = useNavigate();
+    // const dispatch = useDispatch();
 
     const onSubmitEmail = async (values) => {
-        const result = await dispatch(authLoginEmail(values));
-        console.log("result", result);
-        if (result.status === "fail") {
-            alert(result?.msg)
-        }
-        if (result.status === "Success") return navigate("/dashboard");
+    //   const result = await dispatch(authLoginEmail(values));
+    //   console.log("result", result);
+    //   if (result.status === "fail") {
+    //     setErrorBE(result);
+    //     alert(result?.msg)
+    //   }
+    //   if (result.status === "Success") return navigate("/dashboard");
     };
 
     const onSubmitNomor = async (values) => {
-        const result = await dispatch(authLoginWa(values));
-        console.log("result", result);
-        if (result.status === "fail") {
-            alert(result?.msg)
-        }
-        if (result.status === "Success") return navigate("/dashboard");
-    };
+        // const result = await dispatch(authLoginWa(values));
+        // console.log("result", result);
+        // if (result.status === "fail") {
+        //   setErrorBE(result);
+        //   alert(result?.msg)
+        // }
+        // if (result.status === "Success") return navigate("/dashboard");
+      };
     return (
         <React.Fragment>
             <div className="flex h-screen w-screen">
@@ -81,7 +73,6 @@ const Login = () => {
                     <div className="w-4/10 items-center flex h-full">
                         <Formik
                             initialValues={initialValuesEmail}
-                            validationSchema={RegisterSchema}
                             enableReinitialize
                             onSubmit={onSubmitEmail}
                         >
@@ -213,7 +204,9 @@ const Login = () => {
                                             loading={isSubmitting}
                                             onSubmit={handleSubmit}
                                         >
-                                            <span className="font-semibold text-xl">login</span>
+                                            <span className="font-semibold text-xl">
+                                                {/* {isLoading ? "Process ..." : "Login"} */} Login
+                                            </span>
                                         </Button>
                                     </div>
                                 </div>
