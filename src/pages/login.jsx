@@ -1,8 +1,12 @@
 import React from 'react';
 import Bg from '../assets/bg.png';
 import { Formik } from 'formik';
-import { FormLabel, Input, FormHelperText, FormErrorMessage, Button } from '@chakra-ui/react';
+import { FormLabel, Input, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin } from "../../redux/actions/authAction";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const initialValues = {
