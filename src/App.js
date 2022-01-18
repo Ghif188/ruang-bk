@@ -1,6 +1,7 @@
 import { 
   Register as Reg,
   Login as Log,
+  Dashboard as Dash,
  } from '../src/pages';
 import {
   BrowserRouter,
@@ -21,6 +22,11 @@ function App() {
         exact
         path="/reg"
         element={<Reg/>} 
+      />
+      <Route
+        exact
+        path="/dash"
+        element={<Dash/>} 
       />
     </Routes>
   );
