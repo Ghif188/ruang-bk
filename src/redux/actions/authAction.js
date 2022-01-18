@@ -1,4 +1,4 @@
-import { register, login , authme } from "../../api/auth";
+import { register, loginEmail , loginWa } from "../../api/auth";
 import { syncToken } from "../../api/axiosClient";
 export function authRegister(payload) {
   return async (dispatch) => {
@@ -15,14 +15,14 @@ export function authRegister(payload) {
     }
   };
 }
-export function authLogin(payload) {
+export function authLoginEmail(payload) {
   return async (dispatch) => {
     dispatch(isloadingStart());
     try {
-      const response = await login(payload);
+      const response = await loginEmail(payload);
       const data = response.data;
 
-      dispatch(loginHandle(data));
+      dispatch(loginEmailHandle(data));
       localStorage.setItem("token", data.token);
       dispatch({
         type: "loadingEnd",
@@ -33,8 +33,31 @@ export function authLogin(payload) {
       dispatch({
         type: "loadingEnd",
       });
+      let data = err.response.data
+      return data
+   
+    }
+  };
+}
 
-     
+export function authLoginWa(payload) {
+  return async (dispatch) => {
+    dispatch(isloadingStart());
+    try {
+      const response = await loginWa(payload);
+      const data = response.data;
+
+      dispatch(loginWaHandle(data));
+      localStorage.setItem("token", data.token);
+      dispatch({
+        type: "loadingEnd",
+      });
+
+      return data;
+    } catch (err) {
+      dispatch({
+        type: "loadingEnd",
+      });
       let data = err.response.data
       return data
    
@@ -57,11 +80,20 @@ const registerHandle = (data) => {
   };
 };
 
-const loginHandle = (data) => {
+const loginEmailHandle = (data) => {
   return {
     type: "Login",
     nama: data?.user?.name,
     email: data?.user?.email,
+    token: data?.token,
+  };
+};
+
+const loginWaHandle = (data) => {
+  return {
+    type: "Login",
+    nama: data?.user?.name,
+    nomor: data?.user?.nomor,
     token: data?.token,
   };
 };
