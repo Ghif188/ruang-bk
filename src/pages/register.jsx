@@ -1,10 +1,10 @@
 import React from 'react';
 import Bg from '../assets/bg.png';
 import { Formik } from 'formik';
-import { FormLabel, Input, FormHelperText, FormErrorMessage, Button, Select } from '@chakra-ui/react';
+import { FormLabel, Input, Button, Select } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authRegister } from "../redux/actions/authAction";
 
 const RegisterSchema = Yup.object().shape({
@@ -27,13 +27,14 @@ const Register = () => {
         nama_user: "",
         nomor_telp: "",
         email: "",
-        role: "",
+        role: 3,
         status: 1,
         password: "",
         password_confirmation: "",
     };
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const isLoading = useSelector((state) => state.auth.isLoading);
     const onSubmit = async (values) => {
         const result = await dispatch(authRegister(values));
         if (result.status === "Success") return navigate("/dash");
@@ -121,7 +122,7 @@ const Register = () => {
                                             placeholder='Enter your Whatsapp number'
                                             borderColor='#2EBF91'
                                             id='nomor_telp'
-                                            type='number'
+                                            type=''
                                             value={values.nomor_telp}
                                             onChange={handleChange}
                                             disabled={isSubmitting}
@@ -131,15 +132,16 @@ const Register = () => {
                                     <div className='mx-10 my-5'>
                                         <FormLabel htmlFor='role'>Title</FormLabel>
                                         <Select
-                                            placeholder='Choose your Title'
-                                            borderColor='#2EBF91'
-                                            name='role'
-                                            id='role'
-
+                                            name="role"
+                                            id="role"
+                                            value={values.role}
+                                            onChange={handleChange}
                                         >
-                                            <option value='0'>Admin</option>
-                                            <option value='1'>Guru</option>
-                                            <option value='2'>Siswa</option>
+                                            <option value={1}>Admin</option>
+                                            <option value={2}>Guru</option>
+                                            <option value={3}>
+                                                Siswa
+                                            </option>
                                         </Select>
                                         {errors.role && touched.role && errors.role}
                                     </div>
@@ -184,7 +186,7 @@ const Register = () => {
                                             type='submit'
                                             onSubmit={handleSubmit}
                                         >
-                                            <span className="font-semibold text-xl">Register</span>
+                                            <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Register"}</span>
                                         </Button>
                                     </div>
                                 </div>

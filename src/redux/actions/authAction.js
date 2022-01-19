@@ -1,4 +1,4 @@
-import { register, loginEmail , loginWa } from "../../api/auth";
+import { register, login, loginWa  } from "../../api/auth";
 import { syncToken } from "../../api/axiosClient";
 export function authRegister(payload) {
   return async (dispatch) => {
@@ -15,14 +15,14 @@ export function authRegister(payload) {
     }
   };
 }
-export function authLoginEmail(payload) {
+export function authLogin(payload) {
   return async (dispatch) => {
     dispatch(isloadingStart());
     try {
-      const response = await loginEmail(payload);
+      const response = await login(payload);
       const data = response.data;
 
-      dispatch(loginEmailHandle(data));
+      dispatch(loginHandle(data));
       localStorage.setItem("token", data.token);
       dispatch({
         type: "loadingEnd",
@@ -33,13 +33,14 @@ export function authLoginEmail(payload) {
       dispatch({
         type: "loadingEnd",
       });
+
+     
       let data = err.response.data
       return data
    
     }
   };
 }
-
 export function authLoginWa(payload) {
   return async (dispatch) => {
     dispatch(isloadingStart());
@@ -47,7 +48,7 @@ export function authLoginWa(payload) {
       const response = await loginWa(payload);
       const data = response.data;
 
-      dispatch(loginWaHandle(data));
+      dispatch(loginHandle(data));
       localStorage.setItem("token", data.token);
       dispatch({
         type: "loadingEnd",
@@ -58,13 +59,14 @@ export function authLoginWa(payload) {
       dispatch({
         type: "loadingEnd",
       });
+
+     
       let data = err.response.data
       return data
    
     }
   };
 }
-
 const isloadingStart = () => {
   return {
     type: "loadingStart",
@@ -80,20 +82,12 @@ const registerHandle = (data) => {
   };
 };
 
-const loginEmailHandle = (data) => {
+const loginHandle = (data) => {
   return {
     type: "Login",
     nama: data?.user?.name,
     email: data?.user?.email,
-    token: data?.token,
-  };
-};
 
-const loginWaHandle = (data) => {
-  return {
-    type: "Login",
-    nama: data?.user?.name,
-    nomor: data?.user?.nomor,
     token: data?.token,
   };
 };

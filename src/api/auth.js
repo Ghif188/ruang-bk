@@ -4,7 +4,7 @@ export function register(values) {
   return axios.post("/register", values);
 }
 
-export function loginEmail(values) {
+export function login(values) {
   return axios.post("/login-email", values);
 }
 
