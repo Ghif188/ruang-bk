@@ -71,4 +71,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # ruang-bk
 
 ![Alt text](https://c.tenor.com/v4WfQ7kSLu8AAAAC/valorant-omen.gif "Optional Title")
+![Alt text](https://c.tenor.com/idaskd16WuUAAAAd/community-gaming-cgny.gif "Optional Title")
+
 
