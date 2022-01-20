@@ -70,5 +70,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # ruang-bk
 
-![Alt text](https://c.tenor.com/idaskd16WuUAAAAd/community-gaming-cgny.gif "Optional Title")
+![Alt text](https://tenor.com/bD7OT.gif "Optional Title")
 
