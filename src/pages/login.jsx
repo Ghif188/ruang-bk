@@ -44,7 +44,7 @@ const Login = () => {
         }
         if (result.message === "Success") {
             if (result.user.role === 1) {
-                return navigate("/reg");
+                return navigate("/dash");
             }
             if (result.user.role === 2) {
 
@@ -63,7 +63,7 @@ const Login = () => {
         }
         if (result.message === "Success") {
             if (result.user.role === 1) {
-                return navigate("/reg");
+                return navigate("/dash");
             }
             if (result.user.role === 2) {
 
@@ -241,7 +241,7 @@ const Login = () => {
                                                 size='lg'
                                                 isFullWidth
                                                 tabIndex="3"
-                                                type='submit'
+                                                type='submit' 
                                                 variant="solid"
                                                 bgColor="#2EBF91"
                                                 color="white"

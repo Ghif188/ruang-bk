@@ -24,6 +24,11 @@ export function authLogin(payload) {
 
       dispatch(loginHandle(data));
       localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.user.nama_user);
+      localStorage.setItem("email", data.user.email);
+      localStorage.setItem("nomor wa", data.user.nomor_telp);
+      localStorage.setItem("role", data.user.role);
+      localStorage.setItem("status", data.user.status);
       dispatch({
         type: "loadingEnd",
       });
@@ -50,6 +55,11 @@ export function authLoginWa(payload) {
 
       dispatch(loginHandle(data));
       localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.user.nama_user);
+      localStorage.setItem("email", data.user.email);
+      localStorage.setItem("nomor wa", data.user.nomor_telp);
+      localStorage.setItem("role", data.user.role);
+      localStorage.setItem("status", data.user.status);
       dispatch({
         type: "loadingEnd",
       });
