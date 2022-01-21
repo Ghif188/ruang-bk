@@ -7,15 +7,23 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link
+  Link,
+  Navigate
 } from "react-router-dom";
+import ProtectRoute from "./routers/ProtectRoute";
 
 function App() {
   return (
     <Routes>
+
+      <Route
+        path="/"
+        element={localStorage.getItem("token") ? <Navigate replace to="/dash"/> : <Log replace to="/log"/> } 
+      />
+
       <Route
         exact
-        path="/"
+        path="/log"
         element={<Log />}
       />
       <Route
@@ -26,7 +34,11 @@ function App() {
       <Route
         exact
         path="/dash"
-        element={<Dash/>} 
+        element={
+          <ProtectRoute>
+            <Dash/>
+          </ProtectRoute>
+        } 
       />
     </Routes>
   );
