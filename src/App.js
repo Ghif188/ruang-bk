@@ -1,8 +1,12 @@
-import { 
+import {
   Register as Reg,
   Login as Log,
   Dashboard as Dash,
- } from '../src/pages';
+} from '../src/pages';
+import DashSiswa from "./pages/siswa/dashboard"
+import DashGuru from "./pages/guru/dashboard"
+import ProfileAdmin from "./pages/admin/profile"
+import ManageUser from "./pages/admin/manage-akun"
 import {
   BrowserRouter,
   Routes,
@@ -18,7 +22,7 @@ function App() {
 
       <Route
         path="/"
-        element={localStorage.getItem("token") ? <Navigate replace to="/dash"/> : <Log replace to="/log"/> } 
+        element={localStorage.getItem("token") ? <Navigate replace to="/dash" /> : <Log replace to="/log" />}
       />
 
       <Route
@@ -29,17 +33,52 @@ function App() {
       <Route
         exact
         path="/reg"
-        element={<Reg/>} 
+        element={<Reg />}
       />
+
+      {/* ROUTE ADMIN */}
       <Route
         exact
         path="/dash"
         element={
           <ProtectRoute>
-            <Dash/>
+            <Dash />
           </ProtectRoute>
-        } 
+        }
       />
+      <Route
+        exact
+        path="/dash/profile"
+        element={
+          <ProtectRoute>
+            <ProfileAdmin />
+          </ProtectRoute>
+        }
+      />
+      <Route
+        exact
+        path="/dash/manage-user"
+        element={
+          <ProtectRoute>
+            <ManageUser />
+          </ProtectRoute>
+        }
+      />
+
+      {/* ROUTE SISWA */}
+      <Route
+        exact
+        path="/dash-siswa"
+        element={<DashSiswa />}
+      />
+
+      {/* ROUTE GURU */}
+      <Route
+        exact
+        path="/dash-guru"
+        element={<DashGuru />}
+      />
+
     </Routes>
   );
 }
