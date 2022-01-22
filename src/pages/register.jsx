@@ -54,7 +54,7 @@ const Register = () => {
                         <h1 className='text-7xl text-white pt-20 font-medium'>WELCOME</h1>
                         <div className="py-20"><p className='text-xl text-white'>Hii, daftarkan dirimu dan sampaikan masalahmu bersama Ruang-BK : )</p></div>
                         <div className="my-36 text-white font-light hover:text-green-500 text-2xl">
-                            <Link to="/">
+                            <Link to="/log">
                                 <Button
                                     borderRadius='30'
                                     size='lg'
