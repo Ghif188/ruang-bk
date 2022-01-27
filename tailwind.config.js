@@ -1,3 +1,5 @@
+const { color } = require("@chakra-ui/react");
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -49,7 +51,10 @@ module.exports = {
       },
       fontWeight: {
         'extrablack' : 'bolder'
-       }
+      },
+      colors: {
+        'hijau' : '#38E569' 
+      }
     },
   },
   plugins: [],
