@@ -43,31 +43,31 @@ export default function Profile() {
                         <Icon as={BsPersonCircle} w={28} h={28} />
                     </div>
                     <div className="ml-6 mt-1">
-                        <div className="text-xl mb-1 font-bold">{nama}</div>
-                        <div className="text-lg mb-1">{email}</div>
-                        <div className="bg-gradient-to-b rounded-lg to-red-500 from-red-700 border-2 border-red-500 text-white py-1 px-3 w-min">{role === "1" ? "Administrator" : ""}</div>
+                        <div className="text-xl mb-1 font-bold"></div>
+                        <div className="text-lg mb-1"></div>
+                        <div className="bg-gradient-to-b rounded-lg to-red-500 from-red-700 border-2 border-red-500 text-white py-1 px-3 w-min"></div>
                     </div>
                 </div>
                 <div className="mt-5 bg-gradient-to-b shadow-lg p-10 rounded-3xl from-cyan-500 to-sky-600">
                     <div className="flex justify-between text-white border-2 border-white rounded-xl py-4 px-10">
                         <div>Username</div>
-                        <div>{nama}</div>
+                        <div></div>
                     </div>
                     <div className="flex justify-between text-white py-4 px-10">
                         <div>Email</div>
-                        <div>{email}</div>
+                        <div></div>
                     </div>
                     <div className="flex justify-between text-white border-2 border-white rounded-xl py-4 px-10">
                         <div>Nomor Whatsapp</div>
-                        <div>{nomor_telp}</div>
+                        <div></div>
                     </div>
                     <div className="flex justify-between text-white py-4 px-10">
                         <div>Tempat Lahir</div>
-                        <div>Pemalang</div>
+                        <div></div>
                     </div>
                     <div className="flex justify-between text-white border-2 border-white rounded-xl py-4 px-10">
                         <div>Tanggal Lahir</div>
-                        <div>24 Februari 2004</div>
+                        <div></div>
                     </div>
                     <div className="flex justify-between border-b-2 border-sky-300 text-white py-4 px-10">
                         <div>Alamat Rumah</div>

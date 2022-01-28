@@ -26,7 +26,7 @@ function App() {
         path="/home"
         element={<Home/>}
       />
-      {/* <Route
+      <Route
         path="/"
         element={localStorage.getItem("token") ? <Navigate replace to="/dash" /> : <Log replace to="/log" />}
       />
@@ -43,7 +43,7 @@ function App() {
       />
 
       {/* ROUTE ADMIN */}
-      {/* <Route
+      <Route
         exact
         path="/dash"
         element={
@@ -69,7 +69,6 @@ function App() {
             <ManageUser />
           </ProtectRoute>
         }
-<<<<<<< HEAD
       />
 
       {/* ROUTE SISWA */}
