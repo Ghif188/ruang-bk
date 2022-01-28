@@ -8,10 +8,6 @@ import { useQuery } from "react-query";
 
 export default function Profile() {
     const navigate = useNavigate();
-    const nama = localStorage.getItem('username');
-    const role = localStorage.getItem('role');
-    const email = localStorage.getItem('email');
-    const nomor_telp = localStorage.getItem('nomor_telp');
     function logOut() {
         localStorage.clear();
         navigate("/log");

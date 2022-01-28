@@ -7,6 +7,7 @@ import DashSiswa from "./pages/siswa/dashboard"
 import DashGuru from "./pages/guru/dashboard"
 import ProfileAdmin from "./pages/admin/profile"
 import ManageUser from "./pages/admin/manage-akun"
+import Home from "../src/pages/home"
 import {
   BrowserRouter,
   Routes,
@@ -21,6 +22,11 @@ function App() {
     <Routes>
 
       <Route
+        exact
+        path="/home"
+        element={<Home/>}
+      />
+      {/* <Route
         path="/"
         element={localStorage.getItem("token") ? <Navigate replace to="/dash" /> : <Log replace to="/log" />}
       />
@@ -37,7 +43,7 @@ function App() {
       />
 
       {/* ROUTE ADMIN */}
-      <Route
+      {/* <Route
         exact
         path="/dash"
         element={
@@ -63,6 +69,7 @@ function App() {
             <ManageUser />
           </ProtectRoute>
         }
+<<<<<<< HEAD
       />
 
       {/* ROUTE SISWA */}
