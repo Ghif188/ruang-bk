@@ -12,23 +12,20 @@ export default function Profile() {
         localStorage.clear();
         navigate("/log");
     }
-    const { isLoading, isError, data, isFetching } = useQuery(
+    const { status, error, isLoading, isError, data, isFetching } = useQuery(
         [
             "profile-admin",
-            {
-            },
         ],
 
         () =>
             getProfile({
             }),
-
-        {
-            keepPreviousData: true,
-            select: (response) => response.data,
-        }
     );
-    console.log(data);
+    if (status === 'error') {
+        console.log(error.message)
+    } else {
+        console.log('salah')
+    }
     return (
         <Layout>
             <div className=" p-14 h-full w-full">
