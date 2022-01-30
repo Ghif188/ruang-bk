@@ -48,6 +48,7 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins"],
         bahnschrift: ['Bahnschrift'],
+        Montserrat: ['Montserrat'],
       },
       fontWeight: {
         'extrablack' : 'bolder'
