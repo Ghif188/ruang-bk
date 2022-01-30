@@ -1,12 +1,13 @@
 import axios from "./axiosClient";
 
-export async function getProfile() {
+export function getProfile() {
     let id = localStorage.getItem("id")
-    let token = localStorage.getItem("token")
-    axios.get(`/users/${id}`, {
-        headers: {
-            "Authorization": `Bearer ${token}`,
-        },
-    });
-    console.log(token)
+    return axios.get(`/users/${id}`);
+}
+
+export function getAllUser({ page, perPage, keyword }) {
+    console.log(perPage);
+    console.log(keyword);
+    console.log(page);
+    return axios.get(`/users?keywords=${keyword}&page=${page}&perpage=${perPage}`);
 }

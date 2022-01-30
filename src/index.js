@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
 import { QueryClient, QueryClientProvider } from 'react-query';
+import {ReactQueryDevtools} from 'react-query/devtools'
 const queryClient = new QueryClient()
 ReactDOM.render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.render(
         </ChakraProvider>
       </BrowserRouter>
     </Provider>
+    <ReactQueryDevtools/>
     </QueryClientProvider>
   </React.StrictMode>
   ,
