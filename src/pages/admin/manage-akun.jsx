@@ -49,6 +49,8 @@ export default function ManageUser() {
                         <Thead>
                             <Tr>
                                 <Th>Nama User</Th>
+                                <Th>Email</Th>
+                                <Th>Nomor Whatsapp</Th>
                                 <Th>Role</Th>
                                 <Th>Action</Th>
                             </Tr>
@@ -60,6 +62,7 @@ export default function ManageUser() {
                                     <Td>{dt.email}</Td>
                                     <Td>{dt.nomor_telp}</Td>
                                     <Td>{dt.role}</Td>
+                                    <Td></Td>
                                 </Tr>
                             ))}
                         </Tbody>
