@@ -28,7 +28,7 @@ function App() {
       />
       <Route
         path="/"
-        element={localStorage.getItem("token") ? <Navigate replace to="/dash" /> : <Log replace to="/log" />}
+        element={localStorage.getItem("token") ? <Navigate replace to="/dash" /> : <Navigate replace to="/home" />}
       />
 
       <Route

@@ -3,7 +3,13 @@ import Logo from "../assets/logo3.png"
 import Heart from "../assets/heart.png"
 import Hand from "../assets/hand.png"
 import Lamp from "../assets/lamp.png"
-import { Center, Box, Circle, Avatar } from '@chakra-ui/react';
+import bgLap from "../assets/bglap.png"
+import Whatsapp from "../assets/whatsapp.png"
+import Twitter from "../assets/twitter.png"
+import Instagram from "../assets/instagram.png"
+import Telegram from "../assets/telegram.png"
+import { Center, Box, Circle, Avatar, position, Button, Image } from '@chakra-ui/react';
+import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 import { Link } from 'react-router-dom';
 
 export default function Home() {
@@ -12,8 +18,8 @@ export default function Home() {
         "Menyesuaikan diri dengan lingkungan pendidikan dan lingkungan masyarakat.",
         "Mengetahui hambatan dan kesulitan yang dihadapi peserta didik dalam studi, penyesuaian dengan lingkungan pendidikan dalam masyarakat."
     ];
-    const numbers = [1,2,3,4,5];
-    const isiBox = list.map((isilist)=>{
+    const numbers = [1, 2, 3, 4, 5];
+    const isiBox = list.map((isilist) => {
         return <li>{isilist}</li>;
     });
     const [color, setColor] = React.useState(true);
@@ -38,9 +44,13 @@ export default function Home() {
         height: "50%",
         backgroundImage: `url(${Hand})`
     };
+    var BgMid = {
+        height: "100%",
+        backgroundImage: `url(${bgLap})`,
+    };
     return (
         <div className="h-full">
-            <div className="w-full lg:p-12 h-screen bg-gradient-to-r to-blue-700 from-blue-500">
+            <section className="w-full lg:p-12 h-screen bg-gradient-to-r to-blue-700 from-blue-500">
                 <div className="flex h-min justify-between">
                     <img src={Logo} className=" w-1/12" />
                     <Link to="/log">
@@ -68,8 +78,8 @@ export default function Home() {
                         {/* <p className="border-hijau border-b-8 rounded-md "></p> */}
                     </div>
                 </div>
-            </div>
-            <div className="w-full h-full bg-gray-200 py-24 px-10">
+            </section>
+            <section className="bg-gray-200 py-20 px-10">
                 <div className="w-full h-1/3 justify-center flex">
                     <div className="">
                         <p className="text-3xl text-blue-700 font-Montserrat font-medium">Bimbingan Konseling</p>
@@ -134,7 +144,77 @@ export default function Home() {
                         </Box>
                     </div>
                 </div>
-            </div>
+            </section>
+            <section className="bg-gradient-to-r justify-center flex p-32" style={BgMid}>
+                <div className="text-center ">
+                    <div className="text-white text-3xl mb-10">
+                        <p>Daftar dan gunakan Secara Gratis</p>
+                    </div>
+                    <Button
+                        size='lg'
+                        height='50px'
+                        px='100px'
+                        tabIndex="3"
+                        type='submit'
+                        variant="solid"
+                        bgColor="#38E569"
+                        color="white"
+                    >
+                        Coba sekarang
+                    </Button>
+                </div>
+                {/* <img src={bgLap} alt="asa" /> */}
+            </section>
+            <section className="px-16 py-16">
+                <div className="text-left pb-12">
+                    <div className="font-medium text-2xl pb-3">
+                        <p>Hubungi kami:</p>
+                    </div>
+                    <div className="text-gray-400 text-xl">
+                        <p>Anda Dapat menghubungi kami</p>
+                    </div>
+                </div>
+                <div className="w-full flex justify-center">
+                    <div className="w-1/4 flex justify-start">
+                        <PhoneIcon boxSize={10} pt='2'/>
+                        <div className="pl-10">
+                            <p className="text-xl font-medium">Phone  :</p>
+                            <p className="text-gray-400 text-md">+62 813-1328-8050</p>
+                        </div>
+                    </div>
+                    <div className="w-2/4 flex justify-start pl-12">
+                        <EmailIcon boxSize={10} pt='2'/>
+                        <div className="pl-10">
+                            <p className="text-xl font-medium">Email  :</p>
+                            <p className="text-gray-400 text-md">rizziqibarahim@gmail.com</p>
+                        </div>
+                    </div>
+                    <div className="w-1/4 flex justify-start">
+                        <PhoneIcon boxSize={10} pt='2'/>
+                        <div className="pl-10">
+                            <p className="text-xl font-medium">Address  :</p>
+                            <p className="text-gray-400 text-md">Cikarang</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex justify-center pt-10">
+                    <div className="p-6">
+                        <Image boxSize='60px' src={Instagram} alt="instagram" />
+                    </div>
+                    <div className="p-6">
+                        <Image boxSize='60px' src={Whatsapp} alt="whatsapp" />
+                    </div>
+                    <div className="p-6">
+                        <Image boxSize='60px' src={Telegram} alt="telegram" />
+                    </div>
+                    <div className="p-6">
+                        <Image boxSize='60px' src={Twitter} alt="twitter" />
+                    </div>
+                </div>
+            </section>
+            <section className="flex justify-center bg-gradient-to-r to-blue-500 from-blue-800 p-24">
+                <Image src={Logo} alt="akhir" height='100px'/>
+            </section>
         </div>
     )
 }

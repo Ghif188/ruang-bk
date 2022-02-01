@@ -9,5 +9,5 @@ export default function PrivateRoute({ children }) {
   }
   console.log(auth);
 
-  return auth ? children : <Navigate to="/log" />;
+  return auth ? children : <Navigate to="/home" />;
 }
