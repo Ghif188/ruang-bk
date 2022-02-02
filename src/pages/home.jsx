@@ -1,7 +1,10 @@
 import React from "react";
 import Logo from "../assets/logo3.png"
 import Heart from "../assets/heart.png"
+import Comment from "../assets/comment.png"
 import Hand from "../assets/hand.png"
+import Costumer from "../assets/costumer.png"
+import Business from "../assets/business.png"
 import Lamp from "../assets/lamp.png"
 import bgLap from "../assets/bglap.png"
 import Whatsapp from "../assets/whatsapp.png"
@@ -50,6 +53,7 @@ export default function Home() {
     };
     return (
         <div className="h-full">
+            {/* Home page */}
             <section className="w-full lg:p-12 h-screen bg-gradient-to-r to-blue-700 from-blue-500">
                 <div className="flex h-min justify-between">
                     <img src={Logo} className=" w-1/12" />
@@ -74,24 +78,26 @@ export default function Home() {
                     </div>
                     {/* <div className="w-1/10"></div> */}
                     <div className="w-3/10">
-                        <img src={Heart} alt="heart" className="w-full " />
+                        <img src={Comment} alt="heart" className="w-full " />
                         {/* <p className="border-hijau border-b-8 rounded-md "></p> */}
                     </div>
                 </div>
             </section>
+            {/* Bimbingan konseling */}
             <section className="bg-gray-200 py-20 px-10">
-                <div className="w-full h-1/3 justify-center flex">
+                <div className="w-full justify-center flex">
                     <div className="">
                         <p className="text-3xl text-blue-700 font-Montserrat font-medium">Bimbingan Konseling</p>
                         <div className="border-b-8 border-hijau rounded-md"></div>
                     </div>
                 </div>
-                <div className="h-2/3 flex justify-center">
+                <div className="flex bg-black justify-center">
                     <div className="w-1/3">
                         <Box
                             mx='5'
-                            my='20'
-                            p='10'
+                            mt='20'
+                            // mb='5'
+                            pt='10'
                             boxShadow='lg'
                             bgColor='white'
                             rounded='xl'
@@ -114,11 +120,12 @@ export default function Home() {
                             </div>
                         </Box>
                     </div>
-                    <div className="w-2/3">
+                    <div className="w-1/3">
                         <Box
                             mx='5'
-                            my='20'
-                            p='10'
+                            mt='20'
+                            // mb='5'
+                            pt='10'
                             boxShadow='lg'
                             bgColor='white'
                             rounded='xl'
@@ -129,22 +136,78 @@ export default function Home() {
                                     bg='#2776ED'
                                     color='white'
                                 >
-                                    <img src={Lamp} alt="" className="h-20" />
+                                    <img src={Business} alt="" className="h-20" />
                                 </Circle>
                             </div>
                             <div className="font-bold text-xl h-full text-center">
-                                <div className="border-t-8 border-hijau rounded-md my-5 mx-80"></div>
-                                <p>Tujuan Bimbingan Konseling ?</p>
+                                <div className="border-t-8 border-hijau rounded-md my-5 mx-20"></div>
+                                <p>Apa itu Konseling ?</p>
                             </div>
-                            <div className="flex justify-center text-gray-400 px-5 pt-5 text-lg">
-                                <ol className="px-4 py-3">
-                                    {isiBox}
-                                </ol>
+                            <div className="flex justify-center text-center text-gray-400 px-5 pt-4 text-lg">
+                                <p> proses pemberian bantuan yang dilakukan oleh seorang ahli (disebut konselor/pembimbing) kepada individu yang mengalami sesuatu masalah (disebut konseli) yang bermuara pada teratasinya masalah yang dihadapi klien.</p>
+                            </div>
+                        </Box>
+                    </div>
+                    <div className="w-1/3 h-max">
+                        <Box
+                            mx='5'
+                            mt='20'
+                            // mb='5'
+                            pt='10'
+                            boxShadow='lg'
+                            bgColor='white'
+                            rounded='xl'
+                        >
+                            <div className="h-full flex justify-center">
+                                <Circle
+                                    size='120px'
+                                    bg='#2776ED'
+                                    color='white'
+                                >
+                                    <img src={Business} alt="" className="h-20" />
+                                </Circle>
+                            </div>
+                            <div className="font-bold text-xl h-full text-center">
+                                <div className="border-t-8 border-hijau rounded-md my-5 mx-20"></div>
+                                <p>Bidang</p>
+                            </div>
+                            <div className="flex justify-center text-center text-gray-400 px-5 pt-4 text-lg">
+                                <p>Konseling bisa dilakukan dalam berbagai bidang kehidupan, seperti di masyarakat, di dunia industri, membantu korban bencana alam, maupun di lingkungan pendidikan.</p>
                             </div>
                         </Box>
                     </div>
                 </div>
+                <div className="">
+                    <Box
+                        mx='5'
+                        my='5'
+                        p='10'
+                        boxShadow='lg'
+                        bgColor='white'
+                        rounded='xl'
+                    >
+                        <div className="h-full flex justify-center">
+                            <Circle
+                                size='120px'
+                                bg='#2776ED'
+                                color='white'
+                            >
+                                <img src={Lamp} alt="" className="h-20" />
+                            </Circle>
+                        </div>
+                        <div className="border-t-8 border-hijau rounded-md my-5 mx-96 "></div>
+                        <div className="font-bold text-xl h-full text-center">
+                            <p>Tujuan Bimbingan Konseling ?</p>
+                        </div>
+                        <div className="flex justify-center text-gray-400 px-40 pt-5 text-lg">
+                            <ol className="px-4 py-3">
+                                {isiBox}
+                            </ol>
+                        </div>
+                    </Box>
+                </div>
             </section>
+            {/* Midder */}
             <section className="bg-gradient-to-r justify-center flex p-32" style={BgMid}>
                 <div className="text-center ">
                     <div className="text-white text-3xl mb-10">
@@ -165,6 +228,7 @@ export default function Home() {
                 </div>
                 {/* <img src={bgLap} alt="asa" /> */}
             </section>
+            {/* Contact */}
             <section className="px-16 py-16">
                 <div className="text-left pb-12">
                     <div className="font-medium text-2xl pb-3">
@@ -176,21 +240,21 @@ export default function Home() {
                 </div>
                 <div className="w-full flex justify-center">
                     <div className="w-1/4 flex justify-start">
-                        <PhoneIcon boxSize={10} pt='2'/>
+                        <PhoneIcon boxSize={10} pt='2' />
                         <div className="pl-10">
                             <p className="text-xl font-medium">Phone  :</p>
                             <p className="text-gray-400 text-md">+62 813-1328-8050</p>
                         </div>
                     </div>
                     <div className="w-2/4 flex justify-start pl-12">
-                        <EmailIcon boxSize={10} pt='2'/>
+                        <EmailIcon boxSize={10} pt='2' />
                         <div className="pl-10">
                             <p className="text-xl font-medium">Email  :</p>
                             <p className="text-gray-400 text-md">rizziqibarahim@gmail.com</p>
                         </div>
                     </div>
                     <div className="w-1/4 flex justify-start">
-                        <PhoneIcon boxSize={10} pt='2'/>
+                        <PhoneIcon boxSize={10} pt='2' />
                         <div className="pl-10">
                             <p className="text-xl font-medium">Address  :</p>
                             <p className="text-gray-400 text-md">Cikarang</p>
@@ -212,8 +276,9 @@ export default function Home() {
                     </div>
                 </div>
             </section>
+            {/* Footer */}
             <section className="flex justify-center bg-gradient-to-r to-blue-500 from-blue-800 p-24">
-                <Image src={Logo} alt="akhir" height='100px'/>
+                <Image src={Logo} alt="akhir" height='100px' />
             </section>
         </div>
     )
