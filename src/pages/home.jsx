@@ -11,19 +11,26 @@ import Whatsapp from "../assets/whatsapp.png"
 import Twitter from "../assets/twitter.png"
 import Instagram from "../assets/instagram.png"
 import Telegram from "../assets/telegram.png"
-import { Center, Box, Circle, Avatar, position, Button, Image } from '@chakra-ui/react';
+import { MdCheckCircle } from "react-icons/md"
+import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon } from '@chakra-ui/react';
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 import { Link } from 'react-router-dom';
 
 export default function Home() {
     const list = [
         "Merencanakan kegiatan penyelesaian studi, perkembangan karier, serta kehidupan peserta didik di masa yang akan datang.",
-        "Menyesuaikan diri dengan lingkungan pendidikan dan lingkungan masyarakat.",
         "Mengetahui hambatan dan kesulitan yang dihadapi peserta didik dalam studi, penyesuaian dengan lingkungan pendidikan dalam masyarakat."
     ];
     const numbers = [1, 2, 3, 4, 5];
     const isiBox = list.map((isilist) => {
-        return <li>{isilist}</li>;
+        return <ListItem>
+            <div className="flex my-3">
+                <div className="">
+                    <ListIcon as={MdCheckCircle} color='green.500' />
+                </div>
+                <div className="text-center">{isilist}</div>
+            </div>
+        </ListItem>;
     });
     const [color, setColor] = React.useState(true);
     const [color1, setColor1] = React.useState(false);
@@ -87,104 +94,73 @@ export default function Home() {
             <section className="bg-gray-200 py-20 px-10">
                 <div className="w-full justify-center flex">
                     <div className="">
-                        <p className="text-3xl text-blue-700 font-Montserrat font-medium">Bimbingan Konseling</p>
+                        <p className="text-3xl text-blue-700 font-bahnschrift font-medium">Bimbingan Konseling</p>
                         <div className="border-b-8 border-hijau rounded-md"></div>
                     </div>
                 </div>
-                <div className="flex bg-black justify-center">
-                    <div className="w-1/3">
-                        <Box
-                            mx='5'
-                            mt='20'
-                            // mb='5'
-                            pt='10'
-                            boxShadow='lg'
-                            bgColor='white'
-                            rounded='xl'
-                        >
-                            <div className="h-full flex justify-center">
-                                <Circle
-                                    size='120px'
-                                    bg='#2776ED'
-                                    color='white'
-                                >
-                                    <img src={Hand} alt="" className="h-20" />
-                                </Circle>
-                            </div>
-                            <div className="font-bold text-xl h-full text-center">
-                                <div className="border-t-8 border-hijau rounded-md my-5 mx-20"></div>
-                                <p>Apa itu Bimbingan Konseling ?</p>
-                            </div>
-                            <div className="flex justify-center text-center text-gray-400 px-5 pt-4 text-lg">
-                                <p>serangkaian kegiatan berupa bantuan yang dilakukan seorang ahli pada konseling dengan cara tatap muka, baik secara individu atau beberapa orang dengan memberikan pengetahuan tambahan.</p>
-                            </div>
-                        </Box>
+                <div className="flex h-max justify-center py-10 mx-10">
+                    <div className="w-1/3 mr-5 bg-white rounded-xl py-5 shadow-lg">
+                        <div className="flex justify-center">
+                            <Circle
+                                size='120px'
+                                bg='#2776ED'
+                                color='white'
+                            >
+                                <img src={Hand} alt="" className="h-20" />
+                            </Circle>
+                        </div>
+                        <div className="border-b-8 border-hijau rounded-md my-5 mx-10" />
+                        <div className="font-bold text-center text-lg">
+                            Apa itu Bimbingan Konseling ?
+                        </div>
+                        <div className="text-lg my-5 text-gray-400 text-center mx-10">
+                            serangkaian kegiatan berupa bantuan yang dilakukan seorang ahli pada konseling dengan cara tatap muka, baik secara individu atau beberapa orang dengan memberikan pengetahuan tambahan.
+                        </div>
                     </div>
-                    <div className="w-1/3">
-                        <Box
-                            mx='5'
-                            mt='20'
-                            // mb='5'
-                            pt='10'
-                            boxShadow='lg'
-                            bgColor='white'
-                            rounded='xl'
-                        >
-                            <div className="h-full flex justify-center">
-                                <Circle
-                                    size='120px'
-                                    bg='#2776ED'
-                                    color='white'
-                                >
-                                    <img src={Business} alt="" className="h-20" />
-                                </Circle>
-                            </div>
-                            <div className="font-bold text-xl h-full text-center">
-                                <div className="border-t-8 border-hijau rounded-md my-5 mx-20"></div>
-                                <p>Apa itu Konseling ?</p>
-                            </div>
-                            <div className="flex justify-center text-center text-gray-400 px-5 pt-4 text-lg">
-                                <p> proses pemberian bantuan yang dilakukan oleh seorang ahli (disebut konselor/pembimbing) kepada individu yang mengalami sesuatu masalah (disebut konseli) yang bermuara pada teratasinya masalah yang dihadapi klien.</p>
-                            </div>
-                        </Box>
+                    <div className="w-1/3 mr-5 bg-white rounded-xl py-5 shadow-lg">
+                        <div className="flex justify-center">
+                            <Circle
+                                size='120px'
+                                bg='#2776ED'
+                                color='white'
+                            >
+                                <img src={Business} alt="" className="h-20" />
+                            </Circle>
+                        </div>
+                        <div className="border-b-8 border-hijau rounded-md my-5 mx-10" />
+                        <div className="font-bold text-center text-lg">
+                            Apa itu Konseling ?
+                        </div>
+                        <div className="text-lg my-5 text-gray-400 text-center mx-10">
+                            proses pemberian bantuan yang dilakukan oleh seorang ahli (disebut konselor/pembimbing) kepada individu yang mengalami sesuatu masalah (disebut konseli) yang bermuara pada teratasinya masalah yang dihadapi klien.
+                        </div>
                     </div>
-                    <div className="w-1/3 h-max">
-                        <Box
-                            mx='5'
-                            mt='20'
-                            // mb='5'
-                            pt='10'
-                            boxShadow='lg'
-                            bgColor='white'
-                            rounded='xl'
-                        >
-                            <div className="h-full flex justify-center">
-                                <Circle
-                                    size='120px'
-                                    bg='#2776ED'
-                                    color='white'
-                                >
-                                    <img src={Business} alt="" className="h-20" />
-                                </Circle>
-                            </div>
-                            <div className="font-bold text-xl h-full text-center">
-                                <div className="border-t-8 border-hijau rounded-md my-5 mx-20"></div>
-                                <p>Bidang</p>
-                            </div>
-                            <div className="flex justify-center text-center text-gray-400 px-5 pt-4 text-lg">
-                                <p>Konseling bisa dilakukan dalam berbagai bidang kehidupan, seperti di masyarakat, di dunia industri, membantu korban bencana alam, maupun di lingkungan pendidikan.</p>
-                            </div>
-                        </Box>
+                    <div className="w-1/3 bg-white rounded-xl py-5 shadow-lg">
+                        <div className="flex justify-center">
+                            <Circle
+                                size='120px'
+                                bg='#2776ED'
+                                color='white'
+                            >
+                                <img src={Costumer} alt="" className="h-20" />
+                            </Circle>
+                        </div>
+                        <div className="border-b-8 border-hijau rounded-md my-5 mx-10" />
+                        <div className="font-bold text-center text-lg">
+                            Bidang Layanan
+                        </div>
+                        <div className="text-lg my-5 text-gray-400 text-center mx-10">
+                            Konseling bisa dilakukan dalam berbagai bidang kehidupan, seperti di masyarakat, di dunia industri, membantu korban bencana alam, maupun di lingkungan pendidikan.
+                        </div>
                     </div>
                 </div>
-                <div className="">
+                <div className="mx-10">
                     <Box
-                        mx='5'
-                        my='5'
                         p='10'
                         boxShadow='lg'
                         bgColor='white'
                         rounded='xl'
+                        height='100%'
                     >
                         <div className="h-full flex justify-center">
                             <Circle
@@ -199,10 +175,16 @@ export default function Home() {
                         <div className="font-bold text-xl h-full text-center">
                             <p>Tujuan Bimbingan Konseling ?</p>
                         </div>
-                        <div className="flex justify-center text-gray-400 px-40 pt-5 text-lg">
-                            <ol className="px-4 py-3">
+                        <div className="flex justify-center text-gray-400 pt-3 text-lg">
+                            <List>
                                 {isiBox}
-                            </ol>
+                                <div className="flex my-3">
+                                    <div className="">
+                                        <ListIcon as={MdCheckCircle} color='green.500' />
+                                    </div>
+                                    <div className="text-center items-center justify-center">Menyesuaikan diri dengan lingkungan pendidikan dan lingkungan masyarakat.</div>
+                                </div>
+                            </List>
                         </div>
                     </Box>
                 </div>
