@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../assets/logo3.png"
 import Heart from "../assets/heart.png"
 import Comment from "../assets/comment.png"
+import Cs from "../assets/cs.png"
 import Hand from "../assets/hand.png"
 import Costumer from "../assets/costumer.png"
 import Business from "../assets/business.png"
@@ -12,9 +13,10 @@ import Twitter from "../assets/twitter.png"
 import Instagram from "../assets/instagram.png"
 import Telegram from "../assets/telegram.png"
 import { MdCheckCircle } from "react-icons/md"
-import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon } from '@chakra-ui/react';
+import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon } from '@chakra-ui/react';
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 import { Link } from 'react-router-dom';
+import { MdLocationOn } from 'react-icons/md';
 
 export default function Home() {
     const list = [
@@ -71,7 +73,7 @@ export default function Home() {
                     </Link>
                 </div>
                 <div className="w-full flex justify-center py-5">
-                    <div className="w-1/2 flex justify-around shadow-md text-white p-3 bg-blue-200 bg-opacity-50 rounded-3xl">
+                    <div className="w-1/2 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl">
                         <div onClick={handleColor} className={color === true ? "px-7 rounded-full py-1 bg-hijau" : "px-7 py-1"}>Home</div>
                         <div onClick={handleColor2} className={color1 === true ? "px-7 rounded-full py-1 bg-hijau" : "px-7 py-1"}>Explanation</div>
                         <div onClick={handleColor3} className={color2 === true ? "px-7 rounded-full py-1 bg-hijau" : "py-1 px-7"}>Contact</div>
@@ -211,50 +213,70 @@ export default function Home() {
                 {/* <img src={bgLap} alt="asa" /> */}
             </section>
             {/* Contact */}
-            <section className="px-16 py-16">
-                <div className="text-left pb-12">
+            <section className="px-16 py-16 w-full flex justify-center">
+                <div className="text-left pb-12 w-1/4">
                     <div className="font-medium text-2xl pb-3">
-                        <p>Hubungi kami:</p>
+                        <p>NEED HELP?</p>
                     </div>
                     <div className="text-gray-400 text-xl">
-                        <p>Anda Dapat menghubungi kami</p>
+                        <p>Call Us :</p>
                     </div>
-                </div>
-                <div className="w-full flex justify-center">
-                    <div className="w-1/4 flex justify-start">
+                    <div className="flex justify-start py-6">
                         <PhoneIcon boxSize={10} pt='2' />
                         <div className="pl-10">
                             <p className="text-xl font-medium">Phone  :</p>
                             <p className="text-gray-400 text-md">+62 813-1328-8050</p>
                         </div>
                     </div>
-                    <div className="w-2/4 flex justify-start pl-12">
+                    <div className="flex justify-start py-6">
                         <EmailIcon boxSize={10} pt='2' />
                         <div className="pl-10">
                             <p className="text-xl font-medium">Email  :</p>
                             <p className="text-gray-400 text-md">rizziqibarahim@gmail.com</p>
                         </div>
                     </div>
-                    <div className="w-1/4 flex justify-start">
-                        <PhoneIcon boxSize={10} pt='2' />
+                    <div className="flex justify-start py-6">
+                        <Icon as={MdLocationOn} boxSize={10} pt='2' />
                         <div className="pl-10">
                             <p className="text-xl font-medium">Address  :</p>
                             <p className="text-gray-400 text-md">Cikarang</p>
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center pt-10">
-                    <div className="p-6">
+                <div className=" w-2/4">
+                    <div className="font-medium text-2xl pb-3 text-center">
+                        <p>OVERVIEW</p>
+                    </div>
+                    <div className="w-full flex justify-center">
+                        <div className="w-3/4 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl my-14">
+                            <div onClick={handleColor} className={color === true ? " rounded-full py-1 px-10 bg-hijau" : " py-1 px-10"}>Home</div>
+                            <div onClick={handleColor2} className={color1 === true ? " rounded-full py-1 px-10 bg-hijau" : " py-1 px-10"}>Explanation</div>
+                            <div onClick={handleColor3} className={color2 === true ? " rounded-full py-1 px-10 bg-hijau" : "py-1 px-10 "}>Contact</div>
+                        </div>
+                    </div>
+                    <div className="flex justify-center">
+                        <Image src={Cs} alt="cs" />
+                    </div>
+                </div>
+                <div className="w-1/4">
+                    <div className="font-medium text-2xl pb-3">
+                        <p>CONNECT WITH US</p>
+                    </div>
+                    <div className="pt-6 flex justify-start">
                         <Image boxSize='60px' src={Instagram} alt="instagram" />
+                        <p className="font-medium text-md p-4">Instagram</p>
                     </div>
-                    <div className="p-6">
-                        <Image boxSize='60px' src={Whatsapp} alt="whatsapp" />
-                    </div>
-                    <div className="p-6">
+                    <div className="pt-6 flex justify-start">
                         <Image boxSize='60px' src={Telegram} alt="telegram" />
+                        <p className="font-medium text-md p-4">Telegram</p>
                     </div>
-                    <div className="p-6">
+                    <div className="pt-6 flex justify-start">
                         <Image boxSize='60px' src={Twitter} alt="twitter" />
+                        <p className="font-medium text-md p-4">Twitter</p>
+                    </div>
+                    <div className="pt-6 flex justify-start">
+                        <Image boxSize='60px' src={Whatsapp} alt="whatsapp" />
+                        <p className="font-medium text-md p-4">Whatsapp</p>
                     </div>
                 </div>
             </section>

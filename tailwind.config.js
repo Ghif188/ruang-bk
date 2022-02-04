@@ -54,7 +54,8 @@ module.exports = {
         'extrablack' : 'bolder'
       },
       colors: {
-        'hijau' : '#38E569' 
+        'hijau' : '#38E569',
+        'blues' : '#0CA1F5'
       }
     },
   },
