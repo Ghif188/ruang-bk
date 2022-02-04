@@ -52,10 +52,6 @@ export default function Home() {
         setColor1(false);
         setColor2(true);
     };
-    var Handed = {
-        height: "50%",
-        backgroundImage: `url(${Hand})`
-    };
     var BgMid = {
         height: "100%",
         backgroundImage: `url(${bgLap})`,
@@ -63,7 +59,7 @@ export default function Home() {
     return (
         <div className="h-full">
             {/* Home page */}
-            <section className="w-full lg:p-12 h-screen bg-gradient-to-r to-blue-700 from-blue-500">
+            <section id="home" className="w-full lg:p-12 h-screen bg-gradient-to-r to-blue-700 from-blue-500">
                 <div className="flex h-min justify-between">
                     <img src={Logo} className=" w-1/12" />
                     <Link to="/log">
@@ -74,9 +70,9 @@ export default function Home() {
                 </div>
                 <div className="w-full flex justify-center py-5">
                     <div className="w-1/2 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl">
-                        <div onClick={handleColor} className={color === true ? "px-7 rounded-full py-1 bg-hijau" : "px-7 py-1"}>Home</div>
-                        <div onClick={handleColor2} className={color1 === true ? "px-7 rounded-full py-1 bg-hijau" : "px-7 py-1"}>Explanation</div>
-                        <div onClick={handleColor3} className={color2 === true ? "px-7 rounded-full py-1 bg-hijau" : "py-1 px-7"}>Contact</div>
+                        <a href="#home"><div className="px-7 rounded-full py-1 hover:bg-hijau">Home</div></a>
+                        <a href="#bk"><div className="px-7 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></a>
+                        <a href="#contact"><div className="px-7 rounded-full py-1 hover:bg-hijau">Contact</div></a>
                     </div>
                 </div>
                 <div className="w-full px-4 flex py-10 justify-between">
@@ -93,7 +89,7 @@ export default function Home() {
                 </div>
             </section>
             {/* Bimbingan konseling */}
-            <section className="bg-gray-200 py-20 px-10">
+            <section id="bk" className="bg-gray-200 py-20 px-10">
                 <div className="w-full justify-center flex">
                     <div className="">
                         <p className="text-3xl text-blue-700 font-bahnschrift font-medium">Bimbingan Konseling</p>
@@ -192,7 +188,7 @@ export default function Home() {
                 </div>
             </section>
             {/* Midder */}
-            <section className="bg-gradient-to-r justify-center flex p-32" style={BgMid}>
+            <section id="midder" className="bg-gradient-to-r justify-center flex p-32" style={BgMid}>
                 <div className="text-center ">
                     <div className="text-white text-3xl mb-10">
                         <p>Daftar dan gunakan Secara Gratis</p>
@@ -213,7 +209,7 @@ export default function Home() {
                 {/* <img src={bgLap} alt="asa" /> */}
             </section>
             {/* Contact */}
-            <section className="px-16 py-16 w-full flex justify-center">
+            <section id="contact" className="px-16 py-16 w-full flex justify-center">
                 <div className="text-left pb-12 w-1/4">
                     <div className="font-medium text-2xl pb-3">
                         <p>NEED HELP?</p>
@@ -249,9 +245,9 @@ export default function Home() {
                     </div>
                     <div className="w-full flex justify-center">
                         <div className="w-3/4 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl my-14">
-                            <div onClick={handleColor} className={color === true ? " rounded-full py-1 px-10 bg-hijau" : " py-1 px-10"}>Home</div>
-                            <div onClick={handleColor2} className={color1 === true ? " rounded-full py-1 px-10 bg-hijau" : " py-1 px-10"}>Explanation</div>
-                            <div onClick={handleColor3} className={color2 === true ? " rounded-full py-1 px-10 bg-hijau" : "py-1 px-10 "}>Contact</div>
+                        <a href="#home"><div className="px-8 rounded-full py-1 hover:bg-hijau">Home</div></a>
+                        <a href="#bk"><div className="px-8 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></a>
+                        <a href="#contact"><div className="px-8 rounded-full py-1 hover:bg-hijau">Contact</div></a>
                         </div>
                     </div>
                     <div className="flex justify-center">
@@ -281,7 +277,7 @@ export default function Home() {
                 </div>
             </section>
             {/* Footer */}
-            <section className="flex justify-center bg-gradient-to-r to-blue-500 from-blue-800 p-24">
+            <section id="footer" className="flex justify-center bg-gradient-to-r to-blue-500 from-blue-800 p-24">
                 <Image src={Logo} alt="akhir" height='100px' />
             </section>
         </div>
