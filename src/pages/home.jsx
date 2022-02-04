@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../assets/logo3.png"
 import Heart from "../assets/heart.png"
 import Comment from "../assets/comment.png"
+import Cs from "../assets/cs.png"
 import Hand from "../assets/hand.png"
 import Costumer from "../assets/costumer.png"
 import Business from "../assets/business.png"
@@ -72,7 +73,7 @@ export default function Home() {
                     </Link>
                 </div>
                 <div className="w-full flex justify-center py-5">
-                    <div className="w-1/2 flex justify-around shadow-md text-white p-3 bg-blue-200 bg-opacity-50 rounded-3xl">
+                    <div className="w-1/2 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl">
                         <div onClick={handleColor} className={color === true ? "px-7 rounded-full py-1 bg-hijau" : "px-7 py-1"}>Home</div>
                         <div onClick={handleColor2} className={color1 === true ? "px-7 rounded-full py-1 bg-hijau" : "px-7 py-1"}>Explanation</div>
                         <div onClick={handleColor3} className={color2 === true ? "px-7 rounded-full py-1 bg-hijau" : "py-1 px-7"}>Contact</div>
@@ -245,6 +246,16 @@ export default function Home() {
                 <div className=" w-2/4">
                     <div className="font-medium text-2xl pb-3 text-center">
                         <p>OVERVIEW</p>
+                    </div>
+                    <div className="w-full flex justify-center">
+                        <div className="w-3/4 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl my-14">
+                            <div onClick={handleColor} className={color === true ? " rounded-full py-1 px-10 bg-hijau" : " py-1 px-10"}>Home</div>
+                            <div onClick={handleColor2} className={color1 === true ? " rounded-full py-1 px-10 bg-hijau" : " py-1 px-10"}>Explanation</div>
+                            <div onClick={handleColor3} className={color2 === true ? " rounded-full py-1 px-10 bg-hijau" : "py-1 px-10 "}>Contact</div>
+                        </div>
+                    </div>
+                    <div className="flex justify-center">
+                        <Image src={Cs} alt="cs" />
                     </div>
                 </div>
                 <div className="w-1/4">
