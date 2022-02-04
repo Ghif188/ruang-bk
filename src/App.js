@@ -8,6 +8,7 @@ import DashGuru from "./pages/guru/dashboard"
 import ProfileAdmin from "./pages/admin/profile"
 import ManageUser from "./pages/admin/manage-akun"
 import Home from "../src/pages/home"
+import Cobain from './pages/cobain';
 import {
   BrowserRouter,
   Routes,
@@ -25,6 +26,11 @@ function App() {
         exact
         path="/home"
         element={<Home/>}
+      />
+      <Route
+        exact
+        path="/cobain"
+        element={<Cobain/>}
       />
       <Route
         path="/"
