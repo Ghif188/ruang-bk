@@ -81,6 +81,9 @@ const Login = () => {
         height: "100%",
         backgroundImage: `url(${Bg})`
     };
+    const handleNavigate = () => {
+        return navigate("/reg");
+    };
     return (
         <React.Fragment>
             <div className="flex items-center justify-center">
@@ -251,7 +254,7 @@ const Login = () => {
                         )}
                     </div>
                     <div className='w-full flex justify-center'>
-                        <div className='mt-5 w-3/5 p-2 border-white border-2 self-center text-white text-lg rounded-full bg-transparent'>
+                        <div className='mt-5 w-3/5 p-2 border-white border-2 self-center text-white text-lg rounded-full bg-transparent' onClick={handleNavigate}>
                             Belum Mempunyai Akun ?
                         </div>
                     </div>
