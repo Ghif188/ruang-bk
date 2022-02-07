@@ -8,6 +8,7 @@ import DashGuru from "./pages/guru/dashboard"
 import ProfileAdmin from "./pages/admin/profile"
 import ManageUser from "./pages/admin/manage-akun"
 import Home from "../src/pages/home"
+import Npsn from "../src/pages/guru/form-npsn"
 import Cobain from './pages/cobain';
 import {
   BrowserRouter,
@@ -90,7 +91,11 @@ function App() {
         path="/dash-guru"
         element={<DashGuru />}
       />
-
+      <Route
+        exact
+        path="/dash-guru?npsn"
+        element={<DashGuru />}
+      />
     </Routes>
   );
 }
