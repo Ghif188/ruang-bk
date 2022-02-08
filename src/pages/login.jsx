@@ -52,7 +52,7 @@ const Login = () => {
                 if (result.npsn === "terisi") {
                     return navigate("/dash-guru");
                 } else {
-                    return navigate("/dash-guru?npsn")   
+                    return navigate("/dash-guru/npsn")   
                 }
             }
             if (result.user.role === 3) {

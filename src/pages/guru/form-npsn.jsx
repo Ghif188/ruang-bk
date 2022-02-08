@@ -1,173 +1,119 @@
-import React from 'react';
-import BgLogin from '../assets/bglogin2.png';
+import React from "react";
+import BgLogin from '../../assets/bglogin2.png';
 import { Formik } from 'formik';
 import { FormLabel, Input, Button, Select, useMediaQuery } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from "react-redux";
-import { authRegister } from "../redux/actions/authAction";
+import { formNpsn } from "../../api/guru";
 
-const RegisterSchema = Yup.object().shape({
-    nama_user: Yup.string().required("Wajib di Isi"),
-    nomor_telp: Yup.number().required("Wajib di Isi").positive().integer(),
-    email: Yup.string().email().required("Wajib di isi"),
-    role: Yup.number().integer(),
-    status: Yup.number().integer(),
-    password: Yup.string()
-        .min(8, "Password minimal 8 Karakter")
-        .required("wajib di isi"),
-    password_confirmation: Yup.string()
-        .min(8, "Password minimal 8 Karakter")
-        .oneOf([Yup.ref("password")], "Password dan Konfirmasi Password wajib sama")
-        .required("wajib di isi"),
+const NpsnSchema = Yup.object().shape({
+    npsn: Yup.string().min(8, "Minimal 8 Digit").max(8, "Maximal 8 Digit").required("Wajib terisi *"),
+    nama_sekolah: Yup.string().required("Wajib terisi *")
 });
 
-const Register = () => {
+const FormNpsn = () => {
     const initialValues = {
-        nama_user: "",
-        nomor_telp: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
+        npsn: "",
+        nama_sekolah: "",
     };
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.auth.isLoading);
     const onSubmit = async (values) => {
-        const result = await dispatch(authRegister(values));
-        if (result.status === "Success") return navigate("/log");
-
+        const result = await dispatch(formNpsn(values));
+        if (result.status === "success") return navigate("/dash-guru");
         console.log("hasil", result);
     };
     return (
         <React.Fragment>
-            <div className="flex items-center justify-center">
+            <div className="flex">
                 <img src={BgLogin} alt="" className="w-screen max-h-screen min-h-fit" />
-                <div className="absolute w-1/4 h-max">
-                    <div className='bg-white rounded-xl pt-5 pb-5 shadow-xl'>
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={RegisterSchema}
-                            enableReinitialize
-                            onSubmit={onSubmit}
-                        >
-                            {({
-                                values,
-                                errors,
-                                touched,
-                                handleChange,
-                                handleBlur,
-                                handleSubmit,
-                                isSubmitting,
-                            }) => (
-                                <form onSubmit={handleSubmit} className='w-full'>
-                                    <div className='text-3xl font-sans flex font-semibold'>
-                                        <div className='text-center mx-10 mb-5 w-full'>
-                                            Register
+                <div className="absolute text-white font-bahnschrift text-2xl text-center mt-20 w-full">
+                    Daftar NPSN terlebih dahulu untuk Menggunakan
+                </div>
+                <div className="justify-center items-center flex absolute w-full h-full">
+                    <div className=" w-1/4 h-max">
+                        <div className='bg-white rounded-xl pt-5 pb-5 shadow-xl'>
+                            <Formik
+                                initialValues={initialValues}
+                                validationSchema={NpsnSchema}
+                                enableReinitialize
+                                onSubmit={onSubmit}
+                            >
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting,
+                                }) => (
+                                    <form onSubmit={handleSubmit} className='w-full'>
+                                        <div className='text-3xl font-sans flex font-semibold'>
+                                            <div className='text-center mx-10 mb-5 w-full'>
+                                                Register NPSN
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="border-b-8 border-blue-300 rounded-md mx-10" />
-                                    <div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='nama_user'>Username</FormLabel>
-                                            <Input
-                                                placeholder='Enter your name'
-                                                borderColor='#1F8AC6'
-                                                id='nama_user'
-                                                type='text'
-                                                value={values.nama_user}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                error={errors.nama_user && touched.nama_user}
-                                                disabled={isSubmitting}
-                                            />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>                                           
+                                        <div className="border-b-8 border-blue-300 rounded-md mx-10" />
+                                        <div>
+                                            <div className='mx-10 my-4'>
+                                                <FormLabel htmlFor='npsn'>NPSN</FormLabel>
+                                                <Input
+                                                    placeholder='Enter your NPSN'
+                                                    borderColor='#1F8AC6'
+                                                    id='npsn'
+                                                    type='text'
+                                                    value={values.npsn}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    error={errors.npsn && touched.npsn}
+                                                    disabled={isSubmitting}
+                                                />
+                                                <div className=' text-red-400 text-sm mt-2'>{errors.npsn && touched.npsn && errors.npsn}</div>
+                                            </div>
+                                            <div className='mx-10 my-4'>
+                                                <FormLabel htmlFor='nama_sekolah'>School Name</FormLabel>
+                                                <Input
+                                                    placeholder='Enter your nama_sekolah'
+                                                    borderColor='#1F8AC6'
+                                                    id='nama_sekolah'
+                                                    type='nama_sekolah'
+                                                    value={values.nama_sekolah}
+                                                    onBlur={handleBlur}
+                                                    error={errors.nama_sekolah && touched.nama_sekolah}
+                                                    onChange={handleChange}
+                                                    disabled={isSubmitting}
+                                                />
+                                                <div className=' text-red-400 text-sm mt-2'>{errors.nama_sekolah && touched.nama_sekolah && errors.nama_sekolah}</div>
+                                            </div>
+                                            <div className='mx-10 mt-5'>
+                                                <Button
+                                                    size='md'
+                                                    isFullWidth
+                                                    tabIndex="3"
+                                                    htmlType="submit"
+                                                    disabled={isSubmitting}
+                                                    block
+                                                    variant="solid"
+                                                    bgColor="#1F8AC6"
+                                                    color="white"
+                                                    loading={isSubmitting}
+                                                    type='submit'
+                                                    onSubmit={handleSubmit}
+                                                >
+                                                    <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Register"}</span>
+                                                </Button>
+                                            </div>
+                                            <div className='underline text-sm text-blue-400 mx-10 mt-3' onClick={() => navigate("/log")}>
+                                                Sudah Mempunyai Akun
+                                            </div>
                                         </div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='email'>Email</FormLabel>
-                                            <Input
-                                                placeholder='Enter your Email'
-                                                borderColor='#1F8AC6'
-                                                id='email'
-                                                type='email'
-                                                value={values.email}
-                                                onBlur={handleBlur}
-                                                error={errors.email && touched.email}
-                                                onChange={handleChange}
-                                                disabled={isSubmitting}
-                                            />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.email && touched.email && errors.email}</div>
-                                        </div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
-                                            <Input
-                                                placeholder='Enter your Whatsapp number'
-                                                borderColor='#1F8AC6'
-                                                id='nomor_telp'
-                                                type=''
-                                                value={values.nomor_telp}
-                                                onBlur={handleBlur}
-                                                error={errors.nomor_telp && touched.nomor_telp}
-                                                onChange={handleChange}
-                                                disabled={isSubmitting}
-                                            />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
-                                        </div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='password'>Password</FormLabel>
-                                            <Input
-                                                placeholder='Enter your Password'
-                                                borderColor='#1F8AC6'
-                                                id='password'
-                                                type='password'
-                                                value={values.password}
-                                                onBlur={handleBlur}
-                                                error={errors.password && touched.password}
-                                                onChange={handleChange}
-                                                disabled={isSubmitting}
-                                            />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.password && touched.password && errors.password}</div>
-                                        </div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='password_confirmation'>Password Confirmation</FormLabel>
-                                            <Input
-                                                placeholder='Enter your Password Confirmation'
-                                                borderColor='#1F8AC6'
-                                                id='password_confirmation'
-                                                type='password'
-                                                onBlur={handleBlur}
-                                                value={values.password_confirmation}
-                                                error={errors.password_confirmation && touched.password_confirmation}
-                                                onChange={handleChange}
-                                                disabled={isSubmitting}
-                                            />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.password_confirmation && touched.password_confirmation && errors.password_confirmation}</div>
-                                        </div>
-                                        <div className='mx-10 mt-5'>
-                                            <Button
-                                                size='md'
-                                                isFullWidth
-                                                tabIndex="3"
-                                                htmlType="submit"
-                                                disabled={isSubmitting}
-                                                block
-                                                variant="solid"
-                                                bgColor="#1F8AC6"
-                                                color="white"
-                                                loading={isSubmitting}
-                                                type='submit'
-                                                onSubmit={handleSubmit}
-                                            >
-                                                <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Register"}</span>
-                                            </Button>
-                                        </div>
-                                        <div className='underline text-sm text-blue-400 mx-10 mt-3' onClick={()=>navigate("/log")}>
-                                            Sudah Mempunyai Akun
-                                        </div>
-                                    </div>
-                                </form>
-                            )}
-                        </Formik>
+                                    </form>
+                                )}
+                            </Formik>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,4 +121,4 @@ const Register = () => {
     )
 }
 
-export default Register;
+export default FormNpsn;

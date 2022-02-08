@@ -18,6 +18,8 @@ import {
   Navigate
 } from "react-router-dom";
 import ProtectRoute from "./routers/ProtectRoute";
+import Angket from './pages/guru/angket';
+import Murid from './pages/guru/murid';
 
 function App() {
   return (
@@ -93,8 +95,18 @@ function App() {
       />
       <Route
         exact
-        path="/dash-guru?npsn"
-        element={<DashGuru />}
+        path="/dash-guru/npsn"
+        element={<Npsn/>}
+      />
+      <Route
+        exact
+        path="/dash-guru/angket"
+        element={<Angket/>}
+      />
+      <Route
+        exact
+        path="/dash-guru/murid"
+        element={<Murid/>}
       />
     </Routes>
   );
