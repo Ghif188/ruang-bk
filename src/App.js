@@ -20,6 +20,7 @@ import {
 import ProtectRoute from "./routers/ProtectRoute";
 import Angket from './pages/guru/angket';
 import Murid from './pages/guru/murid';
+import Profile from './pages/guru/profile';
 
 function App() {
   return (
@@ -92,6 +93,11 @@ function App() {
         exact
         path="/dash-guru"
         element={<DashGuru />}
+      />
+      <Route
+        exact
+        path="/dash-guru/profile"
+        element={<Profile />}
       />
       <Route
         exact
