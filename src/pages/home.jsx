@@ -15,8 +15,9 @@ import Telegram from "../assets/telegram.png"
 import { MdCheckCircle } from "react-icons/md"
 import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon } from '@chakra-ui/react';
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { MdLocationOn } from 'react-icons/md';
+import { Link } from 'react-scroll';
 
 export default function Home() {
     const list = [
@@ -57,22 +58,22 @@ export default function Home() {
         backgroundImage: `url(${bgLap})`,
     };
     return (
-        <div className="h-full">
+        <div className="h-full scroll-smooth">
             {/* Home page */}
             <section id="home" className="w-full lg:p-12 h-screen bg-gradient-to-r to-blue-700 from-blue-500">
                 <div className="flex h-min justify-between">
                     <img src={Logo} className=" w-1/12" />
-                    <Link to="/log">
+                    <a href="/log">
                         <button className="rounded-full px-7 h-min p-2 text-white shadow-slate-400 bg-hijau">
                             <text className="">Login</text>
                         </button>
-                    </Link>
+                    </a>
                 </div>
                 <div className="w-full flex justify-center py-5">
                     <div className="w-1/2 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl">
-                        <a href="#home"><div className="px-7 rounded-full py-1 hover:bg-hijau">Home</div></a>
-                        <a href="#bk"><div className="px-7 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></a>
-                        <a href="#contact"><div className="px-7 rounded-full py-1 hover:bg-hijau">Contact</div></a>
+                        <Link smooth={true} duration={1000} to="home"><div className="px-7 rounded-full py-1 hover:bg-hijau">Home</div></Link>
+                        <Link smooth={true} duration={1000} to="bk"><div className="px-7 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></Link>
+                        <Link smooth={true} duration={1000} to="contact"><div className="px-7 rounded-full py-1 hover:bg-hijau">Contact</div></Link>
                     </div>
                 </div>
                 <div className="w-full px-4 flex py-10 justify-between">
@@ -107,7 +108,7 @@ export default function Home() {
                                 <img src={Hand} alt="" className="h-20" />
                             </Circle>
                         </div>
-                        <div className="border-b-8 border-hijau rounded-md my-5 mx-10" />
+                        <div className="border-b-8 border-hijau rounded-md my-5 mx-32" />
                         <div className="font-bold text-center text-lg">
                             Apa itu Bimbingan Konseling ?
                         </div>
@@ -125,7 +126,7 @@ export default function Home() {
                                 <img src={Business} alt="" className="h-20" />
                             </Circle>
                         </div>
-                        <div className="border-b-8 border-hijau rounded-md my-5 mx-10" />
+                        <div className="border-b-8 border-hijau rounded-md my-5 mx-32" />
                         <div className="font-bold text-center text-lg">
                             Apa itu Konseling ?
                         </div>
@@ -143,7 +144,7 @@ export default function Home() {
                                 <img src={Costumer} alt="" className="h-20" />
                             </Circle>
                         </div>
-                        <div className="border-b-8 border-hijau rounded-md my-5 mx-10" />
+                        <div className="border-b-8 border-hijau rounded-md my-5 mx-32" />
                         <div className="font-bold text-center text-lg">
                             Bidang Layanan
                         </div>
@@ -169,7 +170,7 @@ export default function Home() {
                                 <img src={Lamp} alt="" className="h-20" />
                             </Circle>
                         </div>
-                        <div className="border-t-8 border-hijau rounded-md my-5 mx-96 "></div>
+                        <div className="border-t-8 border-hijau rounded-md my-5 mx-96"></div>
                         <div className="font-bold text-xl h-full text-center">
                             <p>Tujuan Bimbingan Konseling ?</p>
                         </div>
@@ -245,9 +246,9 @@ export default function Home() {
                     </div>
                     <div className="w-full flex justify-center">
                         <div className="w-3/4 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl my-14">
-                        <a href="#home"><div className="px-8 rounded-full py-1 hover:bg-hijau">Home</div></a>
-                        <a href="#bk"><div className="px-8 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></a>
-                        <a href="#contact"><div className="px-8 rounded-full py-1 hover:bg-hijau">Contact</div></a>
+                        <Link smooth={true} duration={1000} to="home"><div className="px-8 rounded-full py-1 hover:bg-hijau">Home</div></Link>
+                        <Link smooth={true} duration={1000} to="bk"><div className="px-8 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></Link>
+                        <Link smooth={true} duration={1000} to="contact"><div className="px-8 rounded-full py-1 hover:bg-hijau">Contact</div></Link>
                         </div>
                     </div>
                     <div className="flex justify-center">
