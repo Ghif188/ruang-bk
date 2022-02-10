@@ -5,7 +5,7 @@ import Bgm from "../assets/bglogin2.png"
 import Profile from "../pages/guru/dashboard";
 import { BsPersonCircle } from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { border, color } from "@chakra-ui/react";
 
 export default function GuruLayout({ children }) {
@@ -28,7 +28,7 @@ export default function GuruLayout({ children }) {
                     </div>
                     <div className="bg-gradient-to-r h-16 relative flex justify-between items-center from-sky-500 to-sky-700 w-full">
                         <img src={Logo} alt="" className="h-14" />
-                        <div className="w-full absolute h-16 m-0 flex justify-center">
+                        <div className="w-full h-16 m-0 flex justify-center">
                             <NavLink
                                 to="/dash-guru/murid"
                                 style={({ isActive }) => {
@@ -60,9 +60,13 @@ export default function GuruLayout({ children }) {
                                 Angket
                             </NavLink>
                         </div>
-                        <NavLink to="/dash-guru/profile">
-                            <BsPersonCircle className="w-12 h-12 mr-5"/>
-                        </NavLink>
+                        <div className="flex mr-10 rounded-full bg-black">
+                            <Link
+                                to="/dash-guru/profile"
+                            >
+                                <BsPersonCircle className="h-12 w-12 decoration-white text-white"/>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
