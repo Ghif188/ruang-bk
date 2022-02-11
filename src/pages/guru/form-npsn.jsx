@@ -106,9 +106,6 @@ const FormNpsn = () => {
                                                     <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Register"}</span>
                                                 </Button>
                                             </div>
-                                            <div className='underline text-sm text-blue-400 mx-10 mt-3' onClick={() => navigate("/log")}>
-                                                Sudah Mempunyai Akun
-                                            </div>
                                         </div>
                                     </form>
                                 )}

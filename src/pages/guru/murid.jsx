@@ -14,13 +14,14 @@ import {
     DrawerCloseButton,
     useDisclosure,
     Input,
-    FormLabel
+    FormLabel,
+    useToast
 } from "@chakra-ui/react";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from "react-redux";
-import { authRegister } from "../../redux/actions/authAction";
-
+import { registerSiswa, getSiswa } from "../../api/guru";
+import { useQuery } from "react-query";
 const RegisterSchema = Yup.object().shape({
     nama_user: Yup.string().required("Wajib di Isi"),
     nomor_telp: Yup.number().required("Wajib di Isi").positive().integer(),
@@ -47,14 +48,41 @@ export default function Murid() {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const navigate = useNavigate();
+    const toast = useToast()
     const dispatch = useDispatch();
-    const isLoading = useSelector((state) => state.auth.isLoading);
+    const loading = useSelector((state) => state.auth.isLoading);
     const onSubmit = async (values) => {
-        const result = await dispatch(authRegister(values));
-        if (result.status === "Success") return navigate("/log");
+        const result = await registerSiswa(values);
+        toast({
+            title: 'Account created.',
+            status: 'success',
+            position: 'top',
+            description: 'Akun Siswa Telah Terbuat.',
+            variant: 'left-accent',
+            duration: 9000,
+            isClosable: true,
+        })
+        if (result.data.massage === "Success") return navigate("/dash-guru/murid");
 
         console.log("hasil", result);
     };
+    const { isLoading, isError, data, isFetching, status, error, } = useQuery(
+        [
+            "siswa",
+            {
+            },
+        ],
+
+        () =>
+            getSiswa({
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
+    console.log(data)
     return (
         <Layout>
             <div className="bg-white h-full w-10/12 px-20 py-10 shadow-lg">
@@ -91,8 +119,8 @@ export default function Murid() {
                                 <DrawerContent>
                                     <DrawerCloseButton />
                                     <DrawerHeader>Buat Akun Siswa</DrawerHeader>
-                                    <DrawerBody>
-                                        <form onSubmit={handleSubmit} className='w-full'>
+                                    <form onSubmit={handleSubmit} className='w-full h-full'>
+                                        <DrawerBody>
                                             <div>
                                                 <div className='my-5'>
                                                     <FormLabel htmlFor='nama_user'>Username</FormLabel>
@@ -165,25 +193,25 @@ export default function Murid() {
                                                     <div className=' text-red-400 text-sm mt-2'>{errors.password_confirmation && touched.password_confirmation && errors.password_confirmation}</div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </DrawerBody>
-                                    <DrawerFooter>
-                                        <Button variant='outline' mr={3} onClick={onClose}>
-                                            Cancel
-                                        </Button>
-                                        <Button
-                                            colorScheme='blue'
-                                            htmlType="submit"
-                                            disabled={isSubmitting}
-                                            block
-                                            variant="solid"
-                                            bgColor="#1F8AC6"
-                                            color="white"
-                                            loading={isSubmitting}
-                                            type='submit'
-                                            onSubmit={handleSubmit}
-                                        >{isLoading ? "Process" : "Save"}</Button>
-                                    </DrawerFooter>
+                                        </DrawerBody>
+                                        <DrawerFooter>
+                                            <Button variant='outline' mr={3} onClick={onClose}>
+                                                Cancel
+                                            </Button>
+                                            <Button
+                                                colorScheme='blue'
+                                                htmlType="submit"
+                                                disabled={isSubmitting}
+                                                block
+                                                variant="solid"
+                                                bgColor="#1F8AC6"
+                                                color="white"
+                                                loading={isSubmitting}
+                                                type='submit'
+                                                onSubmit={handleSubmit}
+                                            >{loading ? "Process" : "Save"}</Button>
+                                        </DrawerFooter>
+                                    </form>
                                 </DrawerContent>
                             )}
                         </Formik>
@@ -192,21 +220,62 @@ export default function Murid() {
                 <Table variant='striped' colorScheme='red'>
                     <Thead>
                         <Tr>
-                            <Th>Nama User</Th>
-                            <Th>Email</Th>
-                            <Th>Nomor Whatsapp</Th>
-                            <Th>Role</Th>
-                            <Th>Action</Th>
+                            <Th>
+                                <div className="text-center">
+                                    Nama User
+                                </div>
+                            </Th>
+                            <Th>
+                                <div className="text-center">
+                                    Email
+                                </div>
+                            </Th>
+                            <Th>
+                                <div className="text-center">
+                                    Nomor Whatsapp
+                                </div>
+                            </Th>
+                            <Th>
+                                <div className="text-center">
+                                    Action
+                                </div>
+                            </Th>
                         </Tr>
                     </Thead>
                     <Tbody>
-                        <Tr >
-                            <Td></Td>
-                            <Td></Td>
-                            <Td></Td>
-                            <Td></Td>
-                            <Td></Td>
-                        </Tr>
+                        {data?.data.map((row, index) => (
+                            <Tr key={index}>
+                                <Td className="font-bold text-gray-600">
+                                    <div className="ml-5 uppercase">
+                                        {row.nama_siswa}
+                                    </div>
+                                </Td>
+                                <Td>
+                                    <div className="text-center">
+                                        {row.email}
+                                    </div></Td>
+                                <Td>
+                                    <div className="text-center">
+                                        {row.nomor_telp}
+                                    </div></Td>
+                                <Td>
+                                    <div className="flex justify-center">
+                                        <Button
+                                            colorScheme='blue'
+                                            className="mr-5"
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Button
+                                            colorScheme='red'
+                                        >
+                                            Delete
+                                        </Button>
+
+                                    </div>
+                                </Td>
+                            </Tr>
+                        ))}
                     </Tbody>
                 </Table>
             </div>
