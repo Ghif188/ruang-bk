@@ -8,8 +8,8 @@ export function registerSiswa(values) {
   return axios.post("/register-user", values);
 }
 
-export function getSiswa() {
-  return axios.get("/siswa");
+export function getSiswa({perpage, page}) {
+  return axios.get(`/siswa?perpage=${perpage}&page=${page}`);
 }
 
 export function deleteSiswa(id) {
