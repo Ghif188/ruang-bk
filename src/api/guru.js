@@ -12,3 +12,8 @@ export function getSiswa() {
   return axios.get("/siswa");
 }
 
+export function deleteSiswa(id) {
+  return axios.delete(`/siswa/${id}`);
+}
+
+

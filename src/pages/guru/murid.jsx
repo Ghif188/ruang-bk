@@ -15,13 +15,20 @@ import {
     useDisclosure,
     Input,
     FormLabel,
-    useToast
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    useToast,
+    Spinner
 } from "@chakra-ui/react";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from "react-redux";
-import { registerSiswa, getSiswa } from "../../api/guru";
-import { useQuery } from "react-query";
+import { registerSiswa, getSiswa, deleteSiswa } from "../../api/guru";
+import { useQuery, useQueryClient } from "react-query";
 const RegisterSchema = Yup.object().shape({
     nama_user: Yup.string().required("Wajib di Isi"),
     nomor_telp: Yup.number().required("Wajib di Isi").positive().integer(),
@@ -47,24 +54,58 @@ export default function Murid() {
     };
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const [open, setOpen] = React.useState(false)
+    const onTutup = () => setOpen(false)
+
+    let queryClient = useQueryClient();
     const navigate = useNavigate();
     const toast = useToast()
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.auth.isLoading);
+
     const onSubmit = async (values) => {
-        const result = await registerSiswa(values);
+        try {
+            await registerSiswa(values);
+            queryClient.invalidateQueries("users");
+            toast({
+                title: 'Account created.',
+                status: 'success',
+                position: 'top',
+                description: 'Akun Siswa Telah Terbuat.',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+            navigate("/dash-guru/murid")
+        } catch (err) {
+            let halo = (err.response.data.message)
+            toast({
+                title: 'Failed',
+                status: 'error',
+                position: 'top',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+                description: `${halo}`,
+            })
+        }
+    };
+    const multiFunc = async (id) => {
+        onDelete(id);
+        onTutup();
+    }
+    const onDelete = async (id) => {
+        const result = await deleteSiswa(id);
         toast({
-            title: 'Account created.',
+            title: 'Delete Account',
             status: 'success',
             position: 'top',
-            description: 'Akun Siswa Telah Terbuat.',
+            description: 'Akun Siswa Telah Dihapus.',
             variant: 'left-accent',
             duration: 9000,
             isClosable: true,
         })
-        if (result.data.massage === "Success") return navigate("/dash-guru/murid");
-
-        console.log("hasil", result);
+        if (result.data.status === "Success") return navigate("/dash-guru/murid");
     };
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
         [
@@ -82,7 +123,6 @@ export default function Murid() {
             select: (response) => response.data.data,
         }
     );
-    console.log(data)
     return (
         <Layout>
             <div className="bg-white h-full w-10/12 px-20 py-10 shadow-lg">
@@ -242,42 +282,82 @@ export default function Murid() {
                             </Th>
                         </Tr>
                     </Thead>
-                    <Tbody>
-                        {data?.data.map((row, index) => (
-                            <Tr key={index}>
-                                <Td className="font-bold text-gray-600">
-                                    <div className="ml-5 uppercase">
-                                        {row.nama_siswa}
-                                    </div>
-                                </Td>
-                                <Td>
-                                    <div className="text-center">
-                                        {row.email}
-                                    </div></Td>
-                                <Td>
-                                    <div className="text-center">
-                                        {row.nomor_telp}
-                                    </div></Td>
-                                <Td>
-                                    <div className="flex justify-center">
-                                        <Button
-                                            colorScheme='blue'
-                                            className="mr-5"
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            colorScheme='red'
-                                        >
-                                            Delete
-                                        </Button>
+                    {isFetching ? ''
+                        : (
+                            <Tbody>
+                                {data?.data.map((row, index) => (
+                                    <Tr key={index}>
+                                        <Td className="font-bold text-gray-600">
+                                            <div className="ml-5 uppercase">
+                                                {row.nama_siswa}
+                                            </div>
+                                        </Td>
+                                        <Td>
+                                            <div className="text-center">
+                                                {row.email}
+                                            </div></Td>
+                                        <Td>
+                                            <div className="text-center">
+                                                {row.nomor_telp}
+                                            </div></Td>
+                                        <Td>
+                                            <div className="flex justify-center">
+                                                <Button
+                                                    colorScheme='blue'
+                                                    className="mr-5"
+                                                >
+                                                    Edit
+                                                </Button>
+                                                <Button
+                                                    colorScheme='red'
+                                                    onClick={
+                                                        () => setOpen(true)
+                                                    }
+                                                >
+                                                    Delete
+                                                </Button>
+                                                <AlertDialog
+                                                    isOpen={open}
+                                                    onClose={onTutup}
+                                                >
+                                                    <AlertDialogOverlay>
+                                                        <AlertDialogContent>
+                                                            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                                                                Hapus Akun Siswa
+                                                            </AlertDialogHeader>
+                                                            <AlertDialogBody>
+                                                                Apakah kamu yakin untuk menghapus akun siswa ?.
+                                                            </AlertDialogBody>
 
-                                    </div>
-                                </Td>
-                            </Tr>
-                        ))}
-                    </Tbody>
+                                                            <AlertDialogFooter>
+                                                                <Button onClick={onTutup}>
+                                                                    Cancel
+                                                                </Button>
+                                                                <Button colorScheme='red' onClick={() => multiFunc(row.id)} ml={3}>
+                                                                    Delete
+                                                                </Button>
+                                                            </AlertDialogFooter>
+                                                        </AlertDialogContent>
+                                                    </AlertDialogOverlay>
+                                                </AlertDialog>
+                                            </div>
+                                        </Td>
+                                    </Tr>
+                                ))}
+                            </Tbody>
+                        )}
                 </Table>
+                {isFetching ? (
+                    <div className="flex mt-10 justify-center">
+                        <Spinner
+                            thickness='5px'
+                            speed='0.65s'
+                            emptyColor='gray.200'
+                            color='blue.500'
+                            size='xl'
+                        />
+                    </div>
+                ) : ''}
             </div>
         </Layout>
     );
