@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../layouts/gurulayout"
 import { Table, Th, Td, Thead, Tr, Tbody } from "@chakra-ui/react";
 import { IoMdPersonAdd } from "react-icons/io"
+import {MdOutlineNavigateNext, MdOutlineNavigateBefore} from "react-icons/md"
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Button,
@@ -62,7 +63,19 @@ export default function Murid() {
     const toast = useToast()
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.auth.isLoading);
+    const [page, setPage] = React.useState(1)
+    const [perpage, setPerpage] = React.useState(6)
 
+    const handleNextPage = () => {
+        setPage(page + 1)
+    }
+    const handleBeforePage = () => {
+        if (page === 1) {
+            setPage(1)
+        } else {
+            setPage(page - 1)
+        }
+    }
     const onSubmit = async (values) => {
         try {
             await registerSiswa(values);
@@ -111,11 +124,15 @@ export default function Murid() {
         [
             "siswa",
             {
+                page: page,
+                perpage: perpage,
             },
         ],
 
         () =>
             getSiswa({
+                page: page,
+                perpage: perpage,
             }),
 
         {
@@ -123,6 +140,7 @@ export default function Murid() {
             select: (response) => response.data.data,
         }
     );
+    console.log(data)
     return (
         <Layout>
             <div className="bg-white h-full w-10/12 px-20 py-10 shadow-lg">
@@ -257,97 +275,99 @@ export default function Murid() {
                         </Formik>
                     </Drawer>
                 </div>
-                <Table variant='striped' colorScheme='red'>
-                    <Thead>
-                        <Tr>
-                            <Th>
-                                <div className="text-center">
-                                    Nama User
-                                </div>
-                            </Th>
-                            <Th>
-                                <div className="text-center">
-                                    Email
-                                </div>
-                            </Th>
-                            <Th>
-                                <div className="text-center">
-                                    Nomor Whatsapp
-                                </div>
-                            </Th>
-                            <Th>
-                                <div className="text-center">
-                                    Action
-                                </div>
-                            </Th>
-                        </Tr>
-                    </Thead>
-                    {isFetching ? ''
-                        : (
-                            <Tbody>
-                                {data?.data.map((row, index) => (
-                                    <Tr key={index}>
-                                        <Td className="font-bold text-gray-600">
-                                            <div className="ml-5 uppercase">
-                                                {row.nama_siswa}
-                                            </div>
-                                        </Td>
-                                        <Td>
-                                            <div className="text-center">
-                                                {row.email}
-                                            </div></Td>
-                                        <Td>
-                                            <div className="text-center">
-                                                {row.nomor_telp}
-                                            </div></Td>
-                                        <Td>
-                                            <div className="flex justify-center">
-                                                <Button
-                                                    colorScheme='blue'
-                                                    className="mr-5"
-                                                >
-                                                    Edit
-                                                </Button>
-                                                <Button
-                                                    colorScheme='red'
-                                                    onClick={
-                                                        () => setOpen(true)
-                                                    }
-                                                >
-                                                    Delete
-                                                </Button>
-                                                <AlertDialog
-                                                    isOpen={open}
-                                                    onClose={onTutup}
-                                                >
-                                                    <AlertDialogOverlay>
-                                                        <AlertDialogContent>
-                                                            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                                                                Hapus Akun Siswa
-                                                            </AlertDialogHeader>
-                                                            <AlertDialogBody>
-                                                                Apakah kamu yakin untuk menghapus akun siswa ?.
-                                                            </AlertDialogBody>
+                <div className="h-2/3">
+                    <Table variant='striped' colorScheme='red'>
+                        <Thead>
+                            <Tr>
+                                <Th>
+                                    <div className="text-center">
+                                        Nama User
+                                    </div>
+                                </Th>
+                                <Th>
+                                    <div className="text-center">
+                                        Email
+                                    </div>
+                                </Th>
+                                <Th>
+                                    <div className="text-center">
+                                        Nomor Whatsapp
+                                    </div>
+                                </Th>
+                                <Th>
+                                    <div className="text-center">
+                                        Action
+                                    </div>
+                                </Th>
+                            </Tr>
+                        </Thead>
+                        {isLoading ? ''
+                            : (
+                                <Tbody>
+                                    {data?.data.map((row, index) => (
+                                        <Tr key={index}>
+                                            <Td className="font-bold text-gray-600">
+                                                <div className="ml-5 uppercase">
+                                                    {row.nama_siswa}
+                                                </div>
+                                            </Td>
+                                            <Td>
+                                                <div className="text-center">
+                                                    {row.email}
+                                                </div></Td>
+                                            <Td>
+                                                <div className="text-center">
+                                                    {row.nomor_telp}
+                                                </div></Td>
+                                            <Td>
+                                                <div className="flex justify-center">
+                                                    <Button
+                                                        colorScheme='blue'
+                                                        className="mr-5"
+                                                    >
+                                                        Edit
+                                                    </Button>
+                                                    <Button
+                                                        colorScheme='red'
+                                                        onClick={
+                                                            () => setOpen(true)
+                                                        }
+                                                    >
+                                                        Delete
+                                                    </Button>
+                                                    <AlertDialog
+                                                        isOpen={open}
+                                                        onClose={onTutup}
+                                                    >
+                                                        <AlertDialogOverlay>
+                                                            <AlertDialogContent>
+                                                                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                                                                    Hapus Akun Siswa
+                                                                </AlertDialogHeader>
+                                                                <AlertDialogBody>
+                                                                    Apakah kamu yakin untuk menghapus akun siswa ?.
+                                                                </AlertDialogBody>
 
-                                                            <AlertDialogFooter>
-                                                                <Button onClick={onTutup}>
-                                                                    Cancel
-                                                                </Button>
-                                                                <Button colorScheme='red' onClick={() => multiFunc(row.id)} ml={3}>
-                                                                    Delete
-                                                                </Button>
-                                                            </AlertDialogFooter>
-                                                        </AlertDialogContent>
-                                                    </AlertDialogOverlay>
-                                                </AlertDialog>
-                                            </div>
-                                        </Td>
-                                    </Tr>
-                                ))}
-                            </Tbody>
-                        )}
-                </Table>
-                {isFetching ? (
+                                                                <AlertDialogFooter>
+                                                                    <Button onClick={onTutup}>
+                                                                        Cancel
+                                                                    </Button>
+                                                                    <Button colorScheme='red' onClick={() => multiFunc(row.id)} ml={3}>
+                                                                        Delete
+                                                                    </Button>
+                                                                </AlertDialogFooter>
+                                                            </AlertDialogContent>
+                                                        </AlertDialogOverlay>
+                                                    </AlertDialog>
+                                                </div>
+                                            </Td>
+                                        </Tr>
+                                    ))}
+                                </Tbody>
+                            )}
+                    </Table>
+                </div>
+                {isLoading ? (
                     <div className="flex mt-10 justify-center">
                         <Spinner
                             thickness='5px'
@@ -357,7 +377,17 @@ export default function Murid() {
                             size='xl'
                         />
                     </div>
-                ) : ''}
+                ) : (
+                    <div className="flex mt-10 justify-center items-center">
+                        <div className="text-2xl text-blue-400 mx-3" onClick={handleBeforePage}>
+                            <MdOutlineNavigateBefore/>
+                        </div>
+                        <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
+                        <div className="text-2xl text-blue-400 font-bold mx-3" onClick={handleNextPage}>
+                            <MdOutlineNavigateNext/>
+                        </div>
+                    </div>
+                )}
             </div>
         </Layout>
     );
