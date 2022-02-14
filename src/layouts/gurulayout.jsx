@@ -1,5 +1,5 @@
 import React from "react";
-import Bg from "../assets/bg-dashguru.png"
+import Bg from "../assets/guru.png"
 import Logo from "../assets/logo3.png"
 import Bgm from "../assets/bglogin2.png"
 import Profile from "../pages/guru/dashboard";
@@ -20,7 +20,7 @@ export default function GuruLayout({ children }) {
         <React.Fragment>
             <div className="">
                 <div className="w-screen h-screen flex absolute">
-                    <img src={Bgm} alt="" className="w-screen h-screen" />
+                    <img src={Bg} alt="" className="w-screen h-screen" />
                 </div>
                 <div className="h-screen w-screen relative">
                     <div className="flex h-full pt-16 w-screen absolute justify-center">

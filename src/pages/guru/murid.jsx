@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../../layouts/gurulayout"
 import { Table, Th, Td, Thead, Tr, Tbody } from "@chakra-ui/react";
 import { IoMdPersonAdd } from "react-icons/io"
-import {MdOutlineNavigateNext, MdOutlineNavigateBefore} from "react-icons/md"
+import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Button,
@@ -64,7 +64,7 @@ export default function Murid() {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.auth.isLoading);
     const [page, setPage] = React.useState(1)
-    const [perpage, setPerpage] = React.useState(6)
+    const [perpage, setPerpage] = React.useState(5)
 
     const handleNextPage = () => {
         setPage(page + 1)
@@ -86,9 +86,10 @@ export default function Murid() {
                 position: 'top',
                 description: 'Akun Siswa Telah Terbuat.',
                 variant: 'left-accent',
-                duration: 9000,
+                duration: 1000,
                 isClosable: true,
-            })
+            });
+            onClose();
             navigate("/dash-guru/murid")
         } catch (err) {
             let halo = (err.response.data.message)
@@ -97,7 +98,7 @@ export default function Murid() {
                 status: 'error',
                 position: 'top',
                 variant: 'left-accent',
-                duration: 9000,
+                duration: 1000,
                 isClosable: true,
                 description: `${halo}`,
             })
@@ -140,17 +141,18 @@ export default function Murid() {
             select: (response) => response.data.data,
         }
     );
-    console.log(data)
+    console.log(data?.last_page)
+    const pageakhir = data?.last_page
     return (
         <Layout>
-            <div className="bg-white h-full w-10/12 px-20 py-10 shadow-lg">
+            <div className=" bg-transparent h-full w-10/12 px-20 py-10">
                 <div className=" flex items-center justify-between bg-hijau rounded-md p-5 mb-5  text-white">
                     <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/5 items-center">
                         <IoMdPersonAdd className="w-10 h-10" />
                         Tambah Siswa
                     </div>
                     <Button colorScheme='messenger' onClick={onOpen}>
-                        Add +
+                        Tambah +
                     </Button>
                     <Drawer
                         isOpen={isOpen}
@@ -267,7 +269,7 @@ export default function Murid() {
                                                 loading={isSubmitting}
                                                 type='submit'
                                                 onSubmit={handleSubmit}
-                                            >{loading ? "Process" : "Save"}</Button>
+                                            >{isSubmitting ? "Process" : "Save"}</Button>
                                         </DrawerFooter>
                                     </form>
                                 </DrawerContent>
@@ -377,17 +379,47 @@ export default function Murid() {
                             size='xl'
                         />
                     </div>
-                ) : (
-                    <div className="flex mt-10 justify-center items-center">
-                        <div className="text-2xl text-blue-400 mx-3" onClick={handleBeforePage}>
-                            <MdOutlineNavigateBefore/>
-                        </div>
-                        <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
-                        <div className="text-2xl text-blue-400 font-bold mx-3" onClick={handleNextPage}>
-                            <MdOutlineNavigateNext/>
-                        </div>
-                    </div>
-                )}
+                ) : ''}
+                {(() => {
+                    if (pageakhir === 1) {
+                        return (
+                            <div className="flex mt-10 justify-center items-center">
+                                <div className="text-2xl text-gray-400 mx-3">
+                                    <MdOutlineNavigateBefore />
+                                </div>
+                                <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
+                                <div className="text-2xl text-gray-400 font-bold mx-3">
+                                    <MdOutlineNavigateNext />
+                                </div>
+                            </div>
+                        )
+
+                    } else {
+                        return (
+                            <div className="flex mt-10 justify-center items-center">
+                                {page === 1 ? (
+                                    <div className="text-2xl text-gray-400 mx-3" onClick={handleBeforePage}>
+                                        <MdOutlineNavigateBefore />
+                                    </div>
+                                ) : (
+                                    <div className="text-2xl text-blue-400 mx-3" onClick={handleBeforePage}>
+                                        <MdOutlineNavigateBefore />
+                                    </div>
+                                )}
+                                <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
+                                {pageakhir === page ? (
+                                    <div className="text-2xl text-gray-400 font-bold mx-3">
+                                        <MdOutlineNavigateNext />
+                                    </div>
+                                ) : (
+                                    <div className="text-2xl text-blue-400 font-bold mx-3" onClick={handleNextPage}>
+                                        <MdOutlineNavigateNext />
+                                    </div>
+                                )}
+                            </div>
+                        )
+                    }
+                })()}
             </div>
         </Layout>
     );
