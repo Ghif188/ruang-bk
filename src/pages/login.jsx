@@ -92,7 +92,7 @@ const Login = () => {
         <React.Fragment>
             <div className="flex items-center justify-center">
                 <img src={BgLogin} alt="" className="w-screen h-screen" />
-                <div className="absolute w-1/4 h-max">
+                <div className="absolute w-1/4 h-max sm-max:w-full sm-max:px-6">
                     <div className='bg-white rounded-xl pb-5 shadow-xl'>
                         {show === false ? (
                             <Formik
@@ -112,15 +112,15 @@ const Login = () => {
                                     isSubmitting,
                                 }) => (
                                     <form onSubmit={handleSubmit} className='w-full'>
-                                        <div className='text-3xl font-sans flex font-semibold'>
-                                            <div className='text-center mx-10 mt-10 mb-5 w-full'>
+                                        <div className='text-3xl font-sans flex font-semibold sm-max:text-xl'>
+                                            <div className='text-center mx-10 mt-10 mb-5 w-full sm-max:mt-5 sm-max:mb-2 sm-max:mx-5'>
                                                 Login
                                             </div>
-                                            <div className='absolute mt-5 ml-10'>
+                                            <div className='absolute mt-5 ml-10 sm-max:mt-2 sm-max:ml-2'>
                                                 <IoMdArrowRoundBack />
                                             </div>
                                         </div>
-                                        <div className="border-b-8 border-blue-300 rounded-md mx-10" />
+                                        <div className="border-b-8 border-blue-300 rounded-md mx-10 sm-max:mx-12" />
                                         <div>
                                             <div className='mx-10 my-5'>
                                                 <FormLabel htmlFor='email'>Email</FormLabel>
@@ -152,14 +152,14 @@ const Login = () => {
                                                 />
                                                 <div className=' text-red-400 text-sm mt-2'>{errors.password && touched.password && errors.password}</div>
                                             </div>
-                                            <div className="mx-10 my-5">
+                                            <div className="mx-10 my-5 sm-max:my-1">
                                                 <div className="flex items-center" onClick={handleShow}>
-                                                    <FormLabel className="font-medium text-blue-500 underline  ml-1">
+                                                    <FormLabel fontSize='sm' className="font-medium text-blue-500 underline ml-1">
                                                         Sign in with Whatsapp
                                                     </FormLabel>
                                                 </div>
                                             </div>
-                                            <div className='mx-10 my-5'>
+                                            <div className='mx-10 my-5 sm-max:px-5 sm-max:my-0 sm-max:mx-5'>
                                                 <Button
                                                     size='lg'
                                                     isFullWidth
@@ -179,10 +179,10 @@ const Login = () => {
                             </Formik>
                         ) : (
                             <Formik
-                                initialValues={initialWaState}
-                                validationSchema={LoginWaSchema}
+                                initialValues={initialEmailState}
+                                validationSchema={LoginEmailSchema}
                                 enableReinitialize
-                                onSubmit={onSubmitWa}
+                                onSubmit={onSubmit}
                             >
                                 {({
                                     values,
@@ -195,16 +195,22 @@ const Login = () => {
                                     isSubmitting,
                                 }) => (
                                     <form onSubmit={handleSubmit} className='w-full'>
-                                        <div className='text-3xl font-sans text-center m-10 font-semibold'>
-                                            Login
+                                        <div className='text-3xl font-sans flex font-semibold sm-max:text-xl'>
+                                            <div className='text-center mx-10 mt-10 mb-5 w-full sm-max:mt-5 sm-max:mb-2 sm-max:mx-5'>
+                                                Login
+                                            </div>
+                                            <div className='absolute mt-5 ml-10 sm-max:mt-2 sm-max:ml-2'>
+                                                <IoMdArrowRoundBack />
+                                            </div>
                                         </div>
+                                        <div className="border-b-8 border-blue-300 rounded-md mx-10 sm-max:mx-12" />
                                         <div>
-                                            <div className='m-10'>
-                                                <FormLabel htmlFor='nomor_telp'>Nomor WhatsApp</FormLabel>
+                                            <div className='mx-10 my-5'>
+                                                <FormLabel htmlFor='nomor_telp'>Nomor Whatsapp</FormLabel>
                                                 <Input
                                                     borderColor='#1F8AC6'
                                                     id='nomor_telp'
-                                                    type=''
+                                                    type='nomor_telp'
                                                     error={errors.nomor_telp && touched.nomor_telp}
                                                     value={values.nomor_telp}
                                                     onBlur={handleBlur}
@@ -214,7 +220,7 @@ const Login = () => {
                                                 />
                                                 <div className=' text-red-400 text-sm mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
                                             </div>
-                                            <div className='m-10'>
+                                            <div className='mx-10'>
                                                 <FormLabel htmlFor='password'>Password</FormLabel>
                                                 <Input
                                                     borderColor='#1F8AC6'
@@ -229,15 +235,14 @@ const Login = () => {
                                                 />
                                                 <div className=' text-red-400 text-sm mt-2'>{errors.password && touched.password && errors.password}</div>
                                             </div>
-                                            <div className="m-10">
-                                                <div className="flex items-center">
-                                                    <input type="checkbox" onClick={handleShow} />
-                                                    <FormLabel className="font-medium text-blue-500  ml-1">
+                                            <div className="mx-10 my-5 sm-max:my-1">
+                                                <div className="flex items-center" onClick={handleShow}>
+                                                    <FormLabel fontSize='sm' className="font-medium text-blue-500 underline ml-1">
                                                         Sign in with Email
                                                     </FormLabel>
                                                 </div>
                                             </div>
-                                            <div className='m-10'>
+                                            <div className='mx-10 my-5 sm-max:px-5 sm-max:my-0 sm-max:mx-5'>
                                                 <Button
                                                     size='lg'
                                                     isFullWidth
@@ -258,7 +263,7 @@ const Login = () => {
                         )}
                     </div>
                     <div className='w-full flex justify-center'>
-                        <div className='mt-5 w-3/5 p-2 border-white border-2 self-center text-white text-lg rounded-full bg-transparent' onClick={handleNavigate}>
+                        <div className='mt-5 w-3/5 sm-max:w-2/3 sm-max:text-center p-2 border-white border-2 self-center text-white text-lg sm-max:text-sm rounded-full bg-transparent' onClick={handleNavigate}>
                             Belum Mempunyai Akun ?
                         </div>
                     </div>
