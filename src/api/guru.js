@@ -12,6 +12,10 @@ export function getSiswa({perpage, page}) {
   return axios.get(`/siswa?perpage=${perpage}&page=${page}`);
 }
 
+export function showSiswa(id) {
+  return axios.get(`/users/${id}`);
+}
+
 export function deleteSiswa(id) {
   return axios.delete(`/siswa/${id}`);
 }

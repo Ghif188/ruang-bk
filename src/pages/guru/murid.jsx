@@ -23,12 +23,13 @@ import {
     AlertDialogContent,
     AlertDialogOverlay,
     useToast,
-    Spinner
+    Spinner,
+    Collapse
 } from "@chakra-ui/react";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from "react-redux";
-import { registerSiswa, getSiswa, deleteSiswa } from "../../api/guru";
+import { registerSiswa, getSiswa, deleteSiswa, showSiswa } from "../../api/guru";
 import { useQuery, useQueryClient } from "react-query";
 const RegisterSchema = Yup.object().shape({
     nama_user: Yup.string().required("Wajib di Isi"),
@@ -58,6 +59,9 @@ export default function Murid() {
     const [open, setOpen] = React.useState(false)
     const onTutup = () => setOpen(false)
 
+    const [buka, setBuka] = React.useState(false)
+    const onTutup1 = () => setBuka(false)
+
     let queryClient = useQueryClient();
     const navigate = useNavigate();
     const toast = useToast()
@@ -65,6 +69,7 @@ export default function Murid() {
     const loading = useSelector((state) => state.auth.isLoading);
     const [page, setPage] = React.useState(1)
     const [perpage, setPerpage] = React.useState(5)
+    const [siswa, setSiswa] = React.useState([])
 
     const handleNextPage = () => {
         setPage(page + 1)
@@ -108,6 +113,11 @@ export default function Murid() {
         onDelete(id);
         onTutup();
     }
+    const multiFunct = async (id) => {
+        onShow(id);
+        setBuka(true);
+        console.log(id);
+    }
     const onDelete = async (id) => {
         const result = await deleteSiswa(id);
         toast({
@@ -120,6 +130,10 @@ export default function Murid() {
             isClosable: true,
         })
         if (result.data.status === "Success") return navigate("/dash-guru/murid");
+    };
+    const onShow = async (id) => {
+        const result = await showSiswa(id);
+        setSiswa(result.data.data)
     };
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
         [
@@ -141,7 +155,7 @@ export default function Murid() {
             select: (response) => response.data.data,
         }
     );
-    console.log(data?.last_page)
+    console.log(data)
     const pageakhir = data?.last_page
     return (
         <Layout>
@@ -178,7 +192,11 @@ export default function Murid() {
                             }) => (
                                 <DrawerContent>
                                     <DrawerCloseButton />
-                                    <DrawerHeader>Buat Akun Siswa</DrawerHeader>
+                                    <DrawerHeader
+                                        borderBottomWidth='1px'
+                                    >
+                                        Buat Akun Siswa
+                                    </DrawerHeader>
                                     <form onSubmit={handleSubmit} className='w-full h-full'>
                                         <DrawerBody>
                                             <div>
@@ -326,9 +344,70 @@ export default function Murid() {
                                                     <Button
                                                         colorScheme='blue'
                                                         className="mr-5"
+                                                        onClick={() => multiFunct(row.user_id)}
                                                     >
-                                                        Edit
+                                                        Show
                                                     </Button>
+                                                    <Drawer
+                                                        isOpen={buka}
+                                                        placement='right'
+                                                        onClose={onTutup1}
+                                                        size='sm'
+                                                    >
+                                                        <DrawerOverlay />
+                                                        <DrawerContent>
+                                                            <DrawerCloseButton />
+                                                            <DrawerHeader
+                                                                borderBottomWidth='1px'
+                                                            >
+                                                                Info Akun Siswa
+                                                            </DrawerHeader>
+                                                            <DrawerBody>
+                                                                <div>
+                                                                    <div className='my-5'>
+                                                                        <div className="text-sky-600 p-2 font-bold font-bahnschrift text-xl">Nama Siswa</div>
+                                                                        <div className="bg-pink-200 text-right px-5 py-2 uppercase text-lg rounded-md">{siswa.nama_siswa}</div>
+                                                                    </div>
+                                                                    <div className='my-5'>
+                                                                        <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">NISN</div>
+                                                                        <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nisn}</div>
+                                                                    </div>
+                                                                    <div className='my-5'>
+                                                                        <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tanggal Lahir</div>
+                                                                        <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tanggal_lahir}</div>
+                                                                    </div>
+                                                                    <div className='my-5'>
+                                                                        <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tempat Lahir</div>
+                                                                        <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tempat_lahir}</div>
+                                                                    </div>
+                                                                    <div className='my-5'>
+                                                                        <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Alamat</div>
+                                                                        <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.alamat}</div>
+                                                                    </div>
+                                                                    <div className='my-5'>
+                                                                        <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Email</div>
+                                                                        <div className="bg-pink-200 text-right px-5 py-2 text-md rounded-md">{siswa.email}</div>
+                                                                    </div>
+                                                                    <div className='my-5'>
+                                                                        <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Whatsapp</div>
+                                                                        <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nomor_telp}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </DrawerBody>
+                                                            <DrawerFooter>
+                                                                <Button variant='outline' mr={3} onClick={onTutup1}>
+                                                                    Cancel
+                                                                </Button>
+                                                                <Button
+                                                                    colorScheme='blue'
+                                                                    block
+                                                                    variant="solid"
+                                                                    bgColor="#1F8AC6"
+                                                                    color="white"
+                                                                >Save</Button>
+                                                            </DrawerFooter>
+                                                        </DrawerContent>
+                                                    </Drawer>
                                                     <Button
                                                         colorScheme='red'
                                                         onClick={
@@ -421,6 +500,6 @@ export default function Murid() {
                     }
                 })()}
             </div>
-        </Layout>
+        </Layout >
     );
 }

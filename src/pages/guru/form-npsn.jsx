@@ -21,9 +21,9 @@ const FormNpsn = () => {
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.auth.isLoading);
     const onSubmit = async (values) => {
-        const result = await dispatch(formNpsn(values));
-        if (result.status === "success") return navigate("/dash-guru");
-        console.log("hasil", result);
+        const result = await formNpsn(values);
+        if (result.data.status === "success") return navigate("/dash-guru");
+        console.log(result);
     };
     return (
         <React.Fragment>
