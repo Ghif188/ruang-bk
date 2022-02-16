@@ -4,6 +4,10 @@ export function formNpsn(values) {
   return axios.post("/guru/npsn", values);
 }
 
+export function getProfile() {
+  return axios.get("/profile");
+}
+
 export function registerSiswa(values) {
   return axios.post("/register-user", values);
 }

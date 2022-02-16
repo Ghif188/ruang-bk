@@ -49,7 +49,7 @@ const Login = () => {
                 return navigate("/dash");
             }
             if (result.user.role === 2) {
-                if (result.npsn === "terisi") {
+                if (result.npsn&&result.sekolah === "terisi") {
                     return navigate("/dash-guru");
                 } else {
                     return navigate("/dash-guru/npsn")   

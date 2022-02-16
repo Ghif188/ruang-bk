@@ -447,18 +447,18 @@ export default function Murid() {
                                 </Tbody>
                             )}
                     </Table>
+                    {isLoading ? (
+                        <div className="flex mt-10 justify-center">
+                            <Spinner
+                                thickness='5px'
+                                speed='0.65s'
+                                emptyColor='gray.200'
+                                color='blue.500'
+                                size='xl'
+                            />
+                        </div>
+                    ) : ''}
                 </div>
-                {isLoading ? (
-                    <div className="flex mt-10 justify-center">
-                        <Spinner
-                            thickness='5px'
-                            speed='0.65s'
-                            emptyColor='gray.200'
-                            color='blue.500'
-                            size='xl'
-                        />
-                    </div>
-                ) : ''}
                 {(() => {
                     if (pageakhir === 1) {
                         return (

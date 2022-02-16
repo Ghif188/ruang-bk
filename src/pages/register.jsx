@@ -35,7 +35,7 @@ const Register = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
     const onSubmit = async (values) => {
         const result = await dispatch(authRegister(values));
-        if (result.message === "Success") return navigate("/dash-guru");
+        if (result.message === "Success") return navigate("/dash-guru/npsn");
 
         console.log("hasil", result);
     };

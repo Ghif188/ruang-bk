@@ -1,8 +1,27 @@
 import React from "react";
 import Layout from "../../layouts/gurulayout"
 import { BsPersonCircle } from 'react-icons/bs';
+import {getProfile} from '../../api/guru';
+import {useQuery} from "react-query";
 import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon } from '@chakra-ui/react';
 export default function Profile() {
+    const { isLoading, isError, data, isFetching } = useQuery(
+        [
+            "profile",
+            {
+            },
+        ],
+
+        () =>
+            getProfile({
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
+    console.log(data)
     return (
         <Layout>
             <div className="bg-white h-full w-10/12 p-8 shadow-lg">
@@ -25,13 +44,13 @@ export default function Profile() {
                                     <div className=" border-b-8 border-hijau w-1/4 rounded-md"></div>
                                 </div>
                                 <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-xl py-2">
-                                    <p>Fulan</p>
+                                    <p>{data.nama_guru}</p>
                                 </div>
                                 <div className="text-right text-gray-500 text-xl py-2">
-                                    <p>+62-812-0005-5606</p>
+                                    <p>{data.nomor_telp}</p>
                                 </div>
                                 <div className="w-full border-b-2 border-gray-500 mt-4 text-gray-500 text-xl py-2">
-                                    <p>Fulan@gmail.com</p>
+                                    <p>{data.email}</p>
                                 </div>
                                 <div className="justify-center flex pt-8">
                                     <Button
@@ -65,7 +84,7 @@ export default function Profile() {
                                     </div>
                                     <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-xl py-2 flex justify-between">
                                         <p>NPSN</p>
-                                        <p>12345678</p>
+                                        <p>{data.npsn}</p>
                                     </div>
                                     <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-xl py-2 flex justify-between">
                                         <p>NIK</p>
@@ -73,7 +92,7 @@ export default function Profile() {
                                     </div>
                                     <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-xl py-2 flex justify-between">
                                         <p>Nama Sekolah</p>
-                                        <p>12345678</p>
+                                        <p>{data.sekolah}</p>
                                     </div>
                                 </div>
                             </Box>
@@ -88,11 +107,11 @@ export default function Profile() {
                                 <div className="font-bold text-xl py-4 px-8">
                                     <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-xl py-2 flex justify-between">
                                         <p>Tempat Lahir</p>
-                                        <p>jakarta</p>
+                                        <p>{data.tempat_lahir}</p>
                                     </div>
                                     <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-xl py-2 flex justify-between">
                                         <p>Tanggal lahir</p>
-                                        <p>12, Desember 1985</p>
+                                        <p>{data.tanggal_lahir}</p>
                                     </div>
                                 </div>
                             </Box>

@@ -9,13 +9,13 @@ import { formNpsn } from "../../api/guru";
 
 const NpsnSchema = Yup.object().shape({
     npsn: Yup.string().min(8, "Minimal 8 Digit").max(8, "Maximal 8 Digit").required("Wajib terisi *"),
-    nama_sekolah: Yup.string().required("Wajib terisi *")
+    sekolah: Yup.string().required("Wajib terisi *")
 });
 
 const FormNpsn = () => {
     const initialValues = {
         npsn: "",
-        nama_sekolah: "",
+        sekolah: "",
     };
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -74,19 +74,19 @@ const FormNpsn = () => {
                                                 <div className=' text-red-400 text-sm mt-2'>{errors.npsn && touched.npsn && errors.npsn}</div>
                                             </div>
                                             <div className='mx-10 my-4'>
-                                                <FormLabel htmlFor='nama_sekolah'>School Name</FormLabel>
+                                                <FormLabel htmlFor='sekolah'>School Name</FormLabel>
                                                 <Input
-                                                    placeholder='Enter your nama_sekolah'
+                                                    placeholder='Enter your Nama Sekolah'
                                                     borderColor='#1F8AC6'
-                                                    id='nama_sekolah'
-                                                    type='nama_sekolah'
-                                                    value={values.nama_sekolah}
+                                                    id='sekolah'
+                                                    type='sekolah'
+                                                    value={values.sekolah}
                                                     onBlur={handleBlur}
-                                                    error={errors.nama_sekolah && touched.nama_sekolah}
+                                                    error={errors.sekolah && touched.sekolah}
                                                     onChange={handleChange}
                                                     disabled={isSubmitting}
                                                 />
-                                                <div className=' text-red-400 text-sm mt-2'>{errors.nama_sekolah && touched.nama_sekolah && errors.nama_sekolah}</div>
+                                                <div className=' text-red-400 text-sm mt-2'>{errors.sekolah && touched.sekolah && errors.sekolah}</div>
                                             </div>
                                             <div className='mx-10 mt-5'>
                                                 <Button
