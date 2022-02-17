@@ -287,7 +287,16 @@ export default function Murid() {
                                                 loading={isSubmitting}
                                                 type='submit'
                                                 onSubmit={handleSubmit}
-                                            >{isSubmitting ? "Process" : "Save"}</Button>
+                                            >
+                                                {isSubmitting ? 
+                                                (<Spinner
+                                                    thickness='5px'
+                                                    speed='0.65s'
+                                                    emptyColor='gray.200'
+                                                    color='blue.500'
+                                                    size='xl'
+                                                />) : "Save"}
+                                            </Button>
                                         </DrawerFooter>
                                     </form>
                                 </DrawerContent>

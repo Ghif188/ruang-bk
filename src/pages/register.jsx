@@ -1,12 +1,13 @@
 import React from 'react';
 import BgLogin from '../assets/bglogin2.png';
 import { Formik } from 'formik';
-import { FormLabel, Input, Button, Select, useMediaQuery } from '@chakra-ui/react';
+import { FormLabel, Input, Button, Select, useMediaQuery, useToast } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from "react-redux";
 import { authRegister } from "../redux/actions/authAction";
-
+import { useQueryClient } from 'react-query';
+import { Spinner } from '@chakra-ui/react';
 const RegisterSchema = Yup.object().shape({
     nama_user: Yup.string().required("Wajib di Isi"),
     nomor_telp: Yup.number().required("Wajib di Isi").positive().integer(),
@@ -32,12 +33,24 @@ const Register = () => {
     };
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const queryClient = useQueryClient();
+    const toast = useToast()
     const isLoading = useSelector((state) => state.auth.isLoading);
     const onSubmit = async (values) => {
         const result = await dispatch(authRegister(values));
-        if (result.message === "Success") return navigate("/dash-guru/npsn");
-
-        console.log("hasil", result);
+        if (result.message === "Success") {
+            return navigate("/dash-guru/npsn");
+        } else {
+            toast({
+                title: 'Failed',
+                status: 'error',
+                position: 'top',
+                variant: 'left-accent',
+                duration: 10000,
+                isClosable: true,
+                description: `${result.message}`,
+            })
+        }
     };
     return (
         <React.Fragment>
@@ -81,7 +94,7 @@ const Register = () => {
                                                 error={errors.nama_user && touched.nama_user}
                                                 disabled={isSubmitting}
                                             />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>                                           
+                                            <div className=' text-red-400 text-sm mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
                                         </div>
                                         <div className='mx-10 my-4'>
                                             <FormLabel htmlFor='email'>Email</FormLabel>
@@ -158,10 +171,18 @@ const Register = () => {
                                                 type='submit'
                                                 onSubmit={handleSubmit}
                                             >
-                                                <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Register"}</span>
+                                                <span className="font-semibold text-xl">
+                                                    {isLoading ? (<Spinner
+                                                        thickness='5px'
+                                                        speed='0.65s'
+                                                        emptyColor='gray.200'
+                                                        color='blue.500'
+                                                        size='xl'
+                                                    />) : "Register"}
+                                                </span>
                                             </Button>
                                         </div>
-                                        <div className='underline text-sm text-blue-400 mx-10 mt-3' onClick={()=>navigate("/log")}>
+                                        <div className='underline text-sm text-blue-400 mx-10 mt-3' onClick={() => navigate("/log")}>
                                             Sudah Mempunyai Akun
                                         </div>
                                     </div>

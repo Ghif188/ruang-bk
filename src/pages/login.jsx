@@ -8,6 +8,7 @@ import { authLogin, authLoginWa } from "../redux/actions/authAction";
 import { useNavigate } from "react-router-dom";
 import BgLogin from "../assets/bglogin2.png"
 import { IoMdArrowRoundBack } from "react-icons/io"
+import { Spinner } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 const LoginEmailSchema = Yup.object().shape({
     email: Yup.string().email().required("Wajib terisi *"),
@@ -49,10 +50,10 @@ const Login = () => {
                 return navigate("/dash");
             }
             if (result.user.role === 2) {
-                if (result.npsn&&result.sekolah === "terisi") {
+                if (result.npsn === "terisi") {
                     return navigate("/dash-guru");
                 } else {
-                    return navigate("/dash-guru/npsn")   
+                    return navigate("/dash-guru/npsn")
                 }
             }
             if (result.user.role === 3) {
@@ -72,7 +73,11 @@ const Login = () => {
                 return navigate("/dash");
             }
             if (result.user.role === 2) {
-                return navigate("/dash-guru")
+                if (result.npsn === "terisi") {
+                    return navigate("/dash-guru");
+                } else {
+                    return navigate("/dash-guru/npsn")
+                }
             }
             if (result.user.role === 3) {
                 return navigate("/dash-siswa")
@@ -170,7 +175,15 @@ const Login = () => {
                                                     color="white"
                                                     onSubmit={handleSubmit}
                                                 >
-                                                    <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Login"}</span>
+                                                    <span className="font-semibold text-xl">
+                                                        {isLoading ? (<Spinner
+                                                            thickness='5px'
+                                                            speed='0.65s'
+                                                            emptyColor='gray.200'
+                                                            color='blue.500'
+                                                            size='xl'
+                                                        />) : "Login"}
+                                                    </span>
                                                 </Button>
                                             </div>
                                         </div>
@@ -179,10 +192,10 @@ const Login = () => {
                             </Formik>
                         ) : (
                             <Formik
-                                initialValues={initialEmailState}
-                                validationSchema={LoginEmailSchema}
+                                initialValues={initialWaState}
+                                validationSchema={LoginWaSchema}
                                 enableReinitialize
-                                onSubmit={onSubmit}
+                                onSubmit={onSubmitWa}
                             >
                                 {({
                                     values,
@@ -253,7 +266,15 @@ const Login = () => {
                                                     color="white"
                                                     onSubmit={handleSubmit}
                                                 >
-                                                    <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Login"}</span>
+                                                    <span className="font-semibold text-xl">
+                                                        {isLoading ? (<Spinner
+                                                            thickness='5px'
+                                                            speed='0.65s'
+                                                            emptyColor='gray.200'
+                                                            color='blue.500'
+                                                            size='xl'
+                                                        />) : "Login"}
+                                                    </span>
                                                 </Button>
                                             </div>
                                         </div>

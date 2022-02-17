@@ -11,7 +11,8 @@ export function authRegister(payload) {
 
       return data;
     } catch (err) {
-      console.log(err);
+      let error = err?.response?.data
+      return error
     }
   };
 }
