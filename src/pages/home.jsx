@@ -13,7 +13,7 @@ import Twitter from "../assets/twitter.png"
 import Instagram from "../assets/instagram.png"
 import Telegram from "../assets/telegram.png"
 import { MdCheckCircle } from "react-icons/md"
-import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon } from '@chakra-ui/react';
+import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon, useMediaQuery } from '@chakra-ui/react';
 import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 // import { Link } from 'react-router-dom';
 import { MdLocationOn } from 'react-icons/md';
@@ -36,6 +36,7 @@ export default function Home() {
             </div>
         </ListItem>;
     });
+    const [MediaQ] = useMediaQuery('(min-width: 1024px)');
     const [color, setColor] = React.useState(true);
     const [color1, setColor1] = React.useState(false);
     const [color2, setColor2] = React.useState(false);
@@ -226,58 +227,71 @@ export default function Home() {
                 </div>
             </section>
             {/* Midder */}
-            <section id="midder" className="bg-gradient-to-r justify-center flex p-32" style={BgMid}>
+            <section id="midder" className="bg-gradient-to-r justify-center flex p-32 sm-max:p-12" style={BgMid}>
                 <div className="text-center ">
-                    <div className="text-white text-3xl mb-10">
+                    <div className="text-white text-3xl mb-10 sm-max:text-base sm-max:mb-5">
                         <p>Daftar dan gunakan Secara Gratis</p>
                     </div>
-                    <Button
-                        size='lg'
-                        height='50px'
-                        px='100px'
-                        tabIndex="3"
-                        type='submit'
-                        variant="solid"
-                        bgColor="#38E569"
-                        color="white"
-                    >
-                        Coba sekarang
-                    </Button>
+                    {MediaQ ?
+                        <Button
+                            size='lg'
+                            height='50px'
+                            px='100px'
+                            tabIndex="3"
+                            type='submit'
+                            variant="solid"
+                            bgColor="#38E569"
+                            color="white"
+                        >
+                            Coba sekarang
+                        </Button> : <Button
+                            size='md'
+                            height='40px'
+                            px='50px'
+                            tabIndex="3"
+                            type='submit'
+                            variant="solid"
+                            bgColor="#38E569"
+                            color="white"
+                        >
+                            Coba sekarang
+                        </Button>}
+                    
                 </div>
                 {/* <img src={bgLap} alt="asa" /> */}
             </section>
             {/* Contact */}
-            <section id="contact" className="px-16 py-16 w-full flex justify-center">
-                <div className="text-left pb-12 w-1/4">
-                    <div className="font-medium text-2xl pb-3">
+            <section id="contact" className="px-16 py-16 w-full flex justify-center sm-max:justify-between sm-max:px-2">
+                <div className="text-left pb-12 w-1/4 sm-max:w-1/2">
+                    <div className="font-medium text-2xl sm-max:text-xl pb-3">
                         <p>NEED HELP?</p>
                     </div>
-                    <div className="text-gray-400 text-xl">
+                    <div className="text-gray-400 text-xl sm-max:text-base">
                         <p>Call Us :</p>
                     </div>
                     <div className="flex justify-start py-6">
-                        <PhoneIcon boxSize={10} pt='2' />
-                        <div className="pl-10">
-                            <p className="text-xl font-medium">Phone  :</p>
-                            <p className="text-gray-400 text-md">+62 813-1328-8050</p>
+                        {MediaQ ? <PhoneIcon boxSize={10} pt='2' /> : <PhoneIcon boxSize={8} pt='2' />}
+                        <div className="pl-10 sm-max:pl-2">
+                            <p className="text-xl sm-max:text-sm font-medium">Phone  :</p>
+                            <p className="text-gray-400 sm-max:text-xs">+62 813-1328-8050</p>
                         </div>
                     </div>
                     <div className="flex justify-start py-6">
-                        <EmailIcon boxSize={10} pt='2' />
-                        <div className="pl-10">
-                            <p className="text-xl font-medium">Email  :</p>
-                            <p className="text-gray-400 text-md">rizziqibarahim@gmail.com</p>
+                        {MediaQ ? <EmailIcon boxSize={10} pt='2' /> : <EmailIcon boxSize={8} pt='2' />}
+                        <div className="pl-10 sm-max:pl-2">
+                            <p className="text-xl sm-max:text-sm font-medium">Email  :</p>
+                            <p className="text-gray-400 sm-max:text-xs">rizziqibarahim@gmail.com</p>
                         </div>
                     </div>
                     <div className="flex justify-start py-6">
-                        <Icon as={MdLocationOn} boxSize={10} pt='2' />
-                        <div className="pl-10">
-                            <p className="text-xl font-medium">Address  :</p>
-                            <p className="text-gray-400 text-md">Cikarang</p>
+                        {MediaQ ? <Icon as={MdLocationOn} boxSize={10} pt='2' /> : <Icon as={MdLocationOn} boxSize={8} pt='2' />}
+                        <div className="pl-10 sm-max:pl-2">
+                            <p className="text-xl sm-max:text-sm font-medium">Address  :</p>
+                            <p className="text-gray-400 sm-max:text-xs">Cikarang</p>
                         </div>
                     </div>
                 </div>
-                <div className=" w-2/4">
+                <div className=" w-2/4 sm-max:hidden">
                     <div className="font-medium text-2xl pb-3 text-center">
                         <p>OVERVIEW</p>
                     </div>
@@ -292,31 +306,31 @@ export default function Home() {
                         <Image src={Cs} alt="cs" />
                     </div>
                 </div>
-                <div className="w-1/4">
-                    <div className="font-medium text-2xl pb-3">
+                <div className="w-1/4 sm-max:w-1/2">
+                    <div className="font-medium text-2xl pb-3 sm-max:hidden">
                         <p>CONNECT WITH US</p>
                     </div>
-                    <div className="pt-6 flex justify-start">
-                        <Image boxSize='60px' src={Instagram} alt="instagram" />
-                        <p className="font-medium text-md p-4">Instagram</p>
+                    <div className="pt-6 flex justify-start sm-max:justify-center">
+                        {MediaQ ? <Image boxSize='60px' src={Instagram} alt="instagram" /> : <Image boxSize='50px' src={Instagram} alt="instagram" /> }
+                        <p className="font-medium text-md p-4 sm-max:hidden">Instagram</p>
                     </div>
-                    <div className="pt-6 flex justify-start">
-                        <Image boxSize='60px' src={Telegram} alt="telegram" />
-                        <p className="font-medium text-md p-4">Telegram</p>
+                    <div className="pt-6 flex justify-start sm-max:justify-center">
+                        {MediaQ ? <Image boxSize='60px' src={Telegram} alt="telegram" /> :  <Image boxSize='50px' src={Telegram} alt="telegram" />}
+                        <p className="font-medium text-md p-4 sm-max:hidden">Telegram</p>
                     </div>
-                    <div className="pt-6 flex justify-start">
-                        <Image boxSize='60px' src={Twitter} alt="twitter" />
-                        <p className="font-medium text-md p-4">Twitter</p>
+                    <div className="pt-6 flex justify-start sm-max:justify-center">
+                        {MediaQ ? <Image boxSize='60px' src={Twitter} alt="twitter" /> : <Image boxSize='50px' src={Twitter} alt="twitter" /> }
+                        <p className="font-medium text-md p-4 sm-max:hidden">Twitter</p>
                     </div>
-                    <div className="pt-6 flex justify-start">
-                        <Image boxSize='60px' src={Whatsapp} alt="whatsapp" />
-                        <p className="font-medium text-md p-4">Whatsapp</p>
+                    <div className="pt-6 flex justify-start sm-max:justify-center">
+                        {MediaQ ? <Image boxSize='60px' src={Whatsapp} alt="whatsapp" /> : <Image boxSize='50px' src={Whatsapp} alt="whatsapp" /> }
+                        <p className="font-medium text-md p-4 sm-max:hidden">Whatsapp</p>
                     </div>
                 </div>
             </section>
             {/* Footer */}
-            <section id="footer" className="flex justify-center bg-gradient-to-r to-blue-500 from-blue-800 p-24">
-                <Image src={Logo} alt="akhir" height='100px' />
+            <section id="footer" className="flex justify-center bg-gradient-to-r to-blue-500 from-blue-800 p-24 sm-max:p-12">
+                {MediaQ ? <Image src={Logo} alt="akhir" height='100px' /> : <Image src={Logo} alt="akhir" height='50px' /> }
             </section>
         </div>
     )
