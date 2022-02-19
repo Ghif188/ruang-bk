@@ -156,6 +156,7 @@ export default function Murid() {
         }
     );
     console.log(data)
+    const pageakhir = data?.pageakhir
     return (
         <Layout>
             <div className=" bg-transparent h-full w-10/12 px-20 py-10">
