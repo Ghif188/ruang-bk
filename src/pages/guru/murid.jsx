@@ -70,7 +70,7 @@ export default function Murid() {
     const [page, setPage] = React.useState(1)
     const [perpage, setPerpage] = React.useState(5)
     const [siswa, setSiswa] = React.useState([])
-
+    console.log(localStorage.getItem("token"))
     const handleNextPage = () => {
         setPage(page + 1)
     }
@@ -156,7 +156,6 @@ export default function Murid() {
         }
     );
     console.log(data)
-    const pageakhir = data?.last_page
     return (
         <Layout>
             <div className=" bg-transparent h-full w-10/12 px-20 py-10">
