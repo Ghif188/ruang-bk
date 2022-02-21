@@ -52,12 +52,13 @@ const Register = () => {
             })
         }
     };
+    const [MediaQ] = useMediaQuery('(min-width: 1024px)');
     return (
         <React.Fragment>
             <div className="flex items-center justify-center">
-                <img src={BgLogin} alt="" className="w-screen max-h-screen min-h-fit" />
-                <div className="absolute w-1/4 h-max">
-                    <div className='bg-white rounded-xl pt-5 pb-5 shadow-xl'>
+                <img src={BgLogin} alt="" className="w-screen h-screen sm-max:" />
+                <div className="absolute w-1/4 h-max sm-max:w-full sm-max:px-6">
+                    <div className='bg-white rounded-xl pt-5 pb-5 sm-max:pb-2 sm-max:pt-2 shadow-xl'>
                         <Formik
                             initialValues={initialValues}
                             validationSchema={RegisterSchema}
@@ -74,16 +75,18 @@ const Register = () => {
                                 isSubmitting,
                             }) => (
                                 <form onSubmit={handleSubmit} className='w-full'>
-                                    <div className='text-3xl font-sans flex font-semibold'>
-                                        <div className='text-center mx-10 mb-5 w-full'>
+                                    <div className='text-3xl font-sans flex font-semibold sm-max:text-xl'>
+                                        <div className='text-center mx-10 mb-5 sm-max:mb-2 sm-max:mx-5 w-full'>
                                             Register
                                         </div>
                                     </div>
                                     <div className="border-b-8 border-blue-300 rounded-md mx-10" />
                                     <div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='nama_user'>Username</FormLabel>
+                                        <div className='mx-10 my-2 sm-max:my-1 sm-max:mx-5'>
+                                            <FormLabel htmlFor='nama_user'><p className='text-base sm-max:tetx-sm'>Username</p></FormLabel>
                                             <Input
+                                                size={MediaQ ? 'md' : 'sm'}
+                                                rounded='lg'
                                                 placeholder='Enter your name'
                                                 borderColor='#1F8AC6'
                                                 id='nama_user'
@@ -94,11 +97,13 @@ const Register = () => {
                                                 error={errors.nama_user && touched.nama_user}
                                                 disabled={isSubmitting}
                                             />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
+                                            <div className=' text-red-400 text-sm sm-max:text-xs mt-2 sm-max:mt-0'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
                                         </div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='email'>Email</FormLabel>
+                                        <div className='mx-10 my-2 sm-max:my-1 sm-max:mx-5'>
+                                            <FormLabel htmlFor='email'><p className='text-base sm-max:tetx-sm'>Email</p></FormLabel>
                                             <Input
+                                                size={MediaQ ? 'md' : 'sm'}
+                                                rounded='lg'
                                                 placeholder='Enter your Email'
                                                 borderColor='#1F8AC6'
                                                 id='email'
@@ -109,11 +114,13 @@ const Register = () => {
                                                 onChange={handleChange}
                                                 disabled={isSubmitting}
                                             />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.email && touched.email && errors.email}</div>
+                                            <div className=' text-red-400 text-sm sm-max:text-xs mt-2 sm-max:mt-0'>{errors.email && touched.email && errors.email}</div>
                                         </div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
+                                        <div className='mx-10 my-2 sm-max:my-1 sm-max:mx-5'>
+                                            <FormLabel htmlFor='nomor_telp'><p className='text-base sm-max:tetx-sm'>Whatsapp</p></FormLabel>
                                             <Input
+                                                size={MediaQ ? 'md' : 'sm'}
+                                                rounded='lg'
                                                 placeholder='Enter your Whatsapp number'
                                                 borderColor='#1F8AC6'
                                                 id='nomor_telp'
@@ -124,11 +131,13 @@ const Register = () => {
                                                 onChange={handleChange}
                                                 disabled={isSubmitting}
                                             />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
+                                            <div className=' text-red-400 text-sm sm-max:text-xs mt-2 sm-max:mt-0'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
                                         </div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='password'>Password</FormLabel>
+                                        <div className='mx-10 my-2 sm-max:my-1 sm-max:mx-5'>
+                                            <FormLabel htmlFor='password'><p className='text-base sm-max:tetx-sm'>Password</p></FormLabel>
                                             <Input
+                                                size={MediaQ ? 'md' : 'sm'}
+                                                rounded='lg'
                                                 placeholder='Enter your Password'
                                                 borderColor='#1F8AC6'
                                                 id='password'
@@ -139,11 +148,13 @@ const Register = () => {
                                                 onChange={handleChange}
                                                 disabled={isSubmitting}
                                             />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.password && touched.password && errors.password}</div>
+                                            <div className=' text-red-400 text-sm sm-max:text-xs mt-2 sm-max:mt-0'>{errors.password && touched.password && errors.password}</div>
                                         </div>
-                                        <div className='mx-10 my-4'>
-                                            <FormLabel htmlFor='password_confirmation'>Password Confirmation</FormLabel>
+                                        <div className='mx-10 my-2 sm-max:my-1 sm-max:mx-5'>
+                                            <FormLabel htmlFor='password_confirmation'><p className='text-base sm-max:tetx-sm'>Password Confirmation</p></FormLabel>
                                             <Input
+                                                size={MediaQ ? 'md' : 'sm'}
+                                                rounded='lg'
                                                 placeholder='Enter your Password Confirmation'
                                                 borderColor='#1F8AC6'
                                                 id='password_confirmation'
@@ -154,11 +165,12 @@ const Register = () => {
                                                 onChange={handleChange}
                                                 disabled={isSubmitting}
                                             />
-                                            <div className=' text-red-400 text-sm mt-2'>{errors.password_confirmation && touched.password_confirmation && errors.password_confirmation}</div>
+                                            <div className=' text-red-400 text-sm sm-max:text-xs mt-2 sm-max:mt-0'>{errors.password_confirmation && touched.password_confirmation && errors.password_confirmation}</div>
                                         </div>
-                                        <div className='mx-10 mt-5'>
+                                        <div className='mx-10 mt-5 sm-max:mx-5'>
                                             <Button
-                                                size='md'
+                                                size={MediaQ ? 'md' : 'sm'}
+                                                rounded='lg'
                                                 isFullWidth
                                                 tabIndex="3"
                                                 htmlType="submit"
@@ -171,7 +183,7 @@ const Register = () => {
                                                 type='submit'
                                                 onSubmit={handleSubmit}
                                             >
-                                                <span className="font-semibold text-xl">
+                                                <span className="font-semibold text-xl sm-max:text-base">
                                                     {isLoading ? (<Spinner
                                                         thickness='5px'
                                                         speed='0.65s'
@@ -182,7 +194,7 @@ const Register = () => {
                                                 </span>
                                             </Button>
                                         </div>
-                                        <div className='underline text-sm text-blue-400 mx-10 mt-3' onClick={() => navigate("/log")}>
+                                        <div className='underline text-center text-sm sm-max:text-xs text-blue-400 mx-10 mt-3' onClick={() => navigate("/log")}>
                                             Sudah Mempunyai Akun
                                         </div>
                                     </div>
