@@ -63,7 +63,6 @@ export default function Profile() {
                     />
                 </div>) :
                 (<div className="bg-white h-full w-10/12 p-8 shadow-lg">
-
                     <div className="bg-gray-200 h-full w-full rounded-2xl py-10 px-4 justify-center flex">
                         <div className="w-1/2 h-full p-1">
                             <Box
