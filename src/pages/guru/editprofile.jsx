@@ -77,7 +77,7 @@ export default function EditProfile() {
         } else if (res.data.status === "failed") {
             setError(res.data.errors);
         }
-        
+
     }
     console.log(data)
     const handleImage = (e) => {
@@ -101,7 +101,7 @@ export default function EditProfile() {
                     />
                 </div>
             ) : (
-                <form onSubmit={updateProfile}>
+                <form onSubmit={updateProfile} className="bg-white h-full w-10/12 p-8 justify-center flex items-center shadow-lg">
                     <div className="bg-gray-200 h-full w-full rounded-2xl py-10 px-4 justify-center flex">
                         <div className="w-1/2 h-full p-1">
                             <Box
@@ -112,8 +112,8 @@ export default function EditProfile() {
                             >
                                 <div className="flex rounded-t-2xl bg-sky-600 justify-center p-10">
                                     <div className="bg-black rounded-full">
-                                        <input 
-                                            type="file" 
+                                        <input
+                                            type="file"
                                             id="foto"
                                             name='foto'
                                             onChange={handleImage}
