@@ -18,6 +18,8 @@ import {
   Navigate
 } from "react-router-dom";
 import ProtectRoute from "./routers/ProtectRoute";
+import ProtectedLogin from "./routers/ProtectedLogin";
+import ProtectedGuru from "./routers/ProtectedGuru";
 import Angket from './pages/guru/angket';
 import Murid from './pages/guru/murid';
 import Profile from './pages/guru/profile';
@@ -26,6 +28,20 @@ import EditProfile from './pages/guru/editprofile';
 function App() {
   return (
     <Routes>
+
+      <Route element={<ProtectedLogin />}>
+        <Route path='log' element={<Log />}/>
+        <Route path='reg' element={<Reg />}/>
+      </Route>
+
+      <Route element={<ProtectedGuru />}>
+        <Route path='dash-guru' element={<DashGuru />}/>
+        <Route path='dash-guru/profile' element={<Profile />}/>
+        <Route path='dash-guru/edit-profile' element={<EditProfile />}/>
+        <Route path='dash-guru/npsn' element={<Npsn />}/>
+        <Route path='dash-guru/angket' element={<Angket />}/>
+        <Route path='dash-guru/murid' element={<Murid />}/>
+      </Route>
 
       <Route
         exact
@@ -40,17 +56,6 @@ function App() {
       <Route
         path="/"
         element={localStorage.getItem("token") ? <Navigate replace to="/dash" /> : <Navigate replace to="/home" />}
-      />
-
-      <Route
-        exact
-        path="/log"
-        element={<Log />}
-      />
-      <Route
-        exact
-        path="/reg"
-        element={<Reg />}
       />
 
       {/* ROUTE ADMIN */}
@@ -89,37 +94,6 @@ function App() {
         element={<DashSiswa />}
       />
 
-      {/* ROUTE GURU */}
-      <Route
-        exact
-        path="/dash-guru"
-        element={<DashGuru />}
-      />
-      <Route
-        exact
-        path="/dash-guru/profile"
-        element={<Profile />}
-      />
-      <Route
-        exact
-        path="/dash-guru/edit-profile"
-        element={<EditProfile />}
-      />
-      <Route
-        exact
-        path="/dash-guru/npsn"
-        element={<Npsn/>}
-      />
-      <Route
-        exact
-        path="/dash-guru/angket"
-        element={<Angket/>}
-      />
-      <Route
-        exact
-        path="/dash-guru/murid"
-        element={<Murid/>}
-      />
     </Routes>
   );
 }

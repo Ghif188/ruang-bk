@@ -53,7 +53,7 @@ export default function Profile() {
     return (
         <Layout>
             {isLoading ? (
-                <div className="bg-white h-full w-10/12 p-8 justify-center flex items-center shadow-lg">
+                <div className=" h-full w-10/12 p-8 justify-center flex items-center">
                     <Spinner
                         thickness='5px'
                         speed='0.65s'
@@ -62,8 +62,8 @@ export default function Profile() {
                         size='xl'
                     />
                 </div>) :
-                (<div className="bg-white h-full w-10/12 p-8 shadow-lg">
-                    <div className="bg-gray-200 h-full w-full rounded-2xl py-10 px-4 justify-center flex">
+                (<div className=" h-full w-10/12 p-8">
+                    <div className="bg-gray-400 bg-opacity-50 h-full w-full rounded-2xl py-10 px-4 justify-center flex shadow-lg">
                         <div className="w-1/2 h-full p-1">
                             <Box
                                 boxShadow='lg'

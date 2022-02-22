@@ -284,7 +284,7 @@ const Login = () => {
                         )}
                     </div>
                     <div className='w-full flex justify-center'>
-                        <div className='mt-5 w-3/5 sm-max:w-2/3 sm-max:text-center p-2 border-white border-2 self-center text-white text-lg sm-max:text-sm rounded-full bg-transparent' onClick={handleNavigate}>
+                        <div className='mt-5 w-3/5 sm-max:w-2/3 text-center p-2 border-white border-2 self-center text-white text-base sm-max:text-sm rounded-full bg-transparent' onClick={handleNavigate}>
                             Belum Mempunyai Akun ?
                         </div>
                     </div>
