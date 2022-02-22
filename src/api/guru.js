@@ -35,7 +35,7 @@ export function updateGuru(values) {
   formData.append("sekolah" , values.sekolah);
   formData.append("_method" , "put")
 
-  axios.put(`/guru/update`, formData,{
+  axios.post(`/guru/update`, formData,{
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
