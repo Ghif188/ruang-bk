@@ -1,5 +1,5 @@
 import React from "react";
-import Bg from "../assets/guru.png"
+import Bg from "../assets/bg-bagus.png"
 import Logo from "../assets/logo3.png"
 import Bgm from "../assets/bglogin2.png"
 import Profile from "../pages/guru/dashboard";
