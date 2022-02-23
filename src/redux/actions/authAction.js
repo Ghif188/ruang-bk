@@ -25,12 +25,12 @@ export function authLogin(payload) {
 
       dispatch(loginHandle(data));
       localStorage.setItem("token", data.token);
-      localStorage.setItem("username", data.user.nama_user);
-      localStorage.setItem("email", data.user.email);
-      localStorage.setItem("nomor_telp", data.user.nomor_telp);
+      // localStorage.setItem("username", data.user.nama_user);
+      // localStorage.setItem("email", data.user.email);
+      // localStorage.setItem("nomor_telp", data.user.nomor_telp);
       localStorage.setItem("role", data.user.role);
-      localStorage.setItem("status", data.user.status);
-      localStorage.setItem("id", data.user.id);
+      // localStorage.setItem("status", data.user.status);
+      // localStorage.setItem("id", data.user.id);
       dispatch({
         type: "loadingEnd",
       });
@@ -57,12 +57,12 @@ export function authLoginWa(payload) {
 
       dispatch(loginHandle(data));
       localStorage.setItem("token", data.token);
-      localStorage.setItem("username", data.user.nama_user);
-      localStorage.setItem("email", data.user.email);
-      localStorage.setItem("nomor_telp", data.user.nomor_telp);
+      // localStorage.setItem("username", data.user.nama_user);
+      // localStorage.setItem("email", data.user.email);
+      // localStorage.setItem("nomor_telp", data.user.nomor_telp);
       localStorage.setItem("role", data.user.role);
-      localStorage.setItem("status", data.user.status);
-      localStorage.setItem("id", data.user.id);
+      // localStorage.setItem("status", data.user.status);
+      // localStorage.setItem("id", data.user.id);
       dispatch({
         type: "loadingEnd",
       });

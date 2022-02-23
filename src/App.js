@@ -34,6 +34,7 @@ function App() {
         <Route path='reg' element={<Reg />}/>
       </Route>
 
+      {/* Route guru */}
       <Route element={<ProtectedGuru />}>
         <Route path='dash-guru' element={<DashGuru />}/>
         <Route path='dash-guru/profile' element={<Profile />}/>

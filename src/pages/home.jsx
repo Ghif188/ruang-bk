@@ -40,6 +40,9 @@ export default function Home() {
     const [color, setColor] = React.useState(true);
     const [color1, setColor1] = React.useState(false);
     const [color2, setColor2] = React.useState(false);
+    const clearLS=() => {
+        localStorage.clear()
+    }
     const handleColor = () => {
         setColor(true);
         setColor1(false);
@@ -242,6 +245,7 @@ export default function Home() {
                             variant="solid"
                             bgColor="#38E569"
                             color="white"
+                            onClick={clearLS}
                         >
                             Coba sekarang
                         </Button> : <Button
@@ -252,6 +256,7 @@ export default function Home() {
                             type='submit'
                             variant="solid"
                             bgColor="#38E569"
+                            onClick={clearLS}
                             color="white"
                         >
                             Coba sekarang
