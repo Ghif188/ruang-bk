@@ -1,5 +1,5 @@
 import axios from "./axiosClient";
-
+import {syncToken} from "./axiosClient"
 export function formNpsn(values) {
   return axios.post("/guru/npsn", values);
 }
@@ -12,8 +12,9 @@ export function registerSiswa(values) {
   return axios.post("/register-user", values);
 }
 
-export function getSiswa({perpage, page}) {
-  return axios.get(`/siswa?perpage=${perpage}&page=${page}`);
+export function getSiswa(params) {
+  syncToken()
+  return axios.get(`/siswa`, {params});
 }
 
 export function showSiswa(id) {

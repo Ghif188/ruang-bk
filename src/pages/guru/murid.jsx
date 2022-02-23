@@ -84,7 +84,7 @@ export default function Murid() {
     const onSubmit = async (values) => {
         try {
             await registerSiswa(values);
-            queryClient.invalidateQueries("users");
+            queryClient.invalidateQueries("siswa")
             toast({
                 title: 'Account created.',
                 status: 'success',
@@ -118,8 +118,10 @@ export default function Murid() {
         setBuka(true);
         console.log(id);
     }
+
     const onDelete = async (id) => {
         const result = await deleteSiswa(id);
+        queryClient.invalidateQueries("siswa")
         toast({
             title: 'Delete Account',
             status: 'success',
@@ -129,26 +131,23 @@ export default function Murid() {
             duration: 9000,
             isClosable: true,
         })
-        if (result.data.status === "Success") return navigate("/dash-guru/murid");
     };
     const onShow = async (id) => {
         const result = await showSiswa(id);
         setSiswa(result.data.data)
     };
+    let params = {
+        page,
+        perpage
+    }
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
         [
             "siswa",
-            {
-                page: page,
-                perpage: perpage,
-            },
+            params
         ],
 
         () =>
-            getSiswa({
-                page: page,
-                perpage: perpage,
-            }),
+            getSiswa(params),
 
         {
             keepPreviousData: true,

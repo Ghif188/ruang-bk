@@ -38,14 +38,14 @@ export default function EditProfile() {
     );
 
     const [values, setValues] = React.useState(data);
-    const [image, setImage] = React.useState([]);
+    const [image, setImage] = React.useState();
     const [error, setError] = React.useState(false);
     const toast = useToast();
     const navigate = useNavigate();
 
     const updateProfile = async (e) => {
         e.preventDefault();
-        let formData = new URLSearchParams
+        let formData = new FormData()
         formData.append("nama_guru", values.nama_guru);
         formData.append("npsn", values.npsn);
         formData.append("tanggal_lahir", values.tanggal_lahir);
@@ -55,9 +55,12 @@ export default function EditProfile() {
         formData.append("sekolah", values.sekolah);
         formData.append("_method", "put")
 
+        for(let pair of formData.entries()){
+            console.log(pair[0] + ',' + pair[1])
+        }
         const res = await axios.post(`/guru/update`, formData, {
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
+                "Content-Type": "multipart/form-data",
             },
         });
 
@@ -82,8 +85,9 @@ export default function EditProfile() {
     console.log(data)
     const handleImage = (e) => {
         e.persist();
-        setImage({ foto: e.target.files[0] });
+        setImage({ foto: e.currentTarget.files[0] });
     }
+    console.log(image)
     const handleInput = (e) => {
         e.persist();
         setValues({ ...values, [e.target.name]: e.target.value })
