@@ -1,7 +1,7 @@
 import React from 'react';
 import Bg from '../assets/bgb.png';
 import { Formik } from 'formik';
-import { FormLabel, Input, Button, useMediaQuery, Icon } from '@chakra-ui/react';
+import { FormLabel, Input, Button, useMediaQuery, Icon, useToast } from '@chakra-ui/react';
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin, authLoginWa } from "../redux/actions/authAction";
@@ -38,7 +38,7 @@ const Login = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const toast = useToast()
     const onSubmit = async (values) => {
         const result = await dispatch(authLogin(values));
         console.log(result);
@@ -59,6 +59,16 @@ const Login = () => {
             if (result.user.role === 3) {
                 return navigate("/dash-siswa");
             }
+        } else {
+            toast({
+                title: 'Failed',
+                status: 'error',
+                position: 'top',
+                variant: 'left-accent',
+                duration: 10000,
+                isClosable: true,
+                description: `${result.message}`,
+            })
         }
     };
 
@@ -122,7 +132,9 @@ const Login = () => {
                                                 Login
                                             </div>
                                             <div className='absolute mt-5 ml-10 sm-max:mt-2 sm-max:ml-2'>
-                                                <IoMdArrowRoundBack />
+                                                <Link to='/home'>
+                                                    <IoMdArrowRoundBack />
+                                                </Link>
                                             </div>
                                         </div>
                                         <div className="border-b-8 border-blue-300 rounded-md mx-10 sm-max:mx-12" />
@@ -213,7 +225,9 @@ const Login = () => {
                                                 Login
                                             </div>
                                             <div className='absolute mt-5 ml-10 sm-max:mt-2 sm-max:ml-2'>
-                                                <IoMdArrowRoundBack />
+                                                <Link to='/home'>
+                                                    <IoMdArrowRoundBack />
+                                                </Link>
                                             </div>
                                         </div>
                                         <div className="border-b-8 border-blue-300 rounded-md mx-10 sm-max:mx-12" />

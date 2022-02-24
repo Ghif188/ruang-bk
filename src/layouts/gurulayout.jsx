@@ -5,7 +5,9 @@ import Bgm from "../assets/bglogin2.png"
 import Profile from "../pages/guru/dashboard";
 import { BsPersonCircle } from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
-import {RiMenu4Line} from "react-icons/ri"
+import { RiMenu4Line, RiLockPasswordLine } from "react-icons/ri"
+import { BiLogOut } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 import { NavLink, Link } from "react-router-dom";
 import { border, color, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
@@ -72,9 +74,9 @@ export default function GuruLayout({ children }) {
                                         <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
                                     </MenuButton>
                                     <MenuList>
-                                        <MenuItem onClick={handleShow}>Profil</MenuItem>
-                                        <MenuItem>Change password</MenuItem>
-                                        <MenuItem onClick={logClear}>Logout</MenuItem>
+                                        <MenuItem icon={< CgProfile />} onClick={handleShow}>Profil</MenuItem>
+                                        <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
+                                        <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                     </MenuList>
                                 </Menu>
 
