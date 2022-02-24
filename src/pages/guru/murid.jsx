@@ -3,6 +3,7 @@ import Layout from "../../layouts/gurulayout"
 import { Table, Th, Td, Thead, Tr, Tbody } from "@chakra-ui/react";
 import { IoMdPersonAdd } from "react-icons/io"
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
+import { AiFillFileAdd } from "react-icons/ai"
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Button,
@@ -14,6 +15,13 @@ import {
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
     Input,
     FormLabel,
     AlertDialog,
@@ -71,7 +79,7 @@ export default function Murid() {
     const [perpage, setPerpage] = React.useState(5)
     const [userid, setUserid] = React.useState()
     const [siswa, setSiswa] = React.useState([])
-    console.log(localStorage.getItem("token"))
+
     const handleNextPage = () => {
         setPage(page + 1)
     }
@@ -111,15 +119,19 @@ export default function Murid() {
         }
     };
     const multiFunc = async (id) => {
-        onDelete(id);
-        onTutup();
+        setOpen(true);
+        setEditid(id);
+        console.log(id)
+    }
+    const multiFuncti = async () => {
+        onDelete(editid);
+        onTutup()
     }
     const multiFunct = async (id) => {
         onShow(id);
         setBuka(true);
-        console.log(id);
     }
-
+    const [editid, setEditid] = React.useState();
     const onDelete = async (id) => {
         const result = await deleteSiswa(id);
         queryClient.invalidateQueries("siswa")
@@ -157,18 +169,27 @@ export default function Murid() {
     );
     console.log(data)
     const pageakhir = data?.last_page
+
     return (
         <Layout>
             <div className=" bg-transparent h-full w-10/12 px-20 ">
-                <div className="mx-10 h-full shadow-md py-10 p-5">
-                    <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-md p-5 mb-5  text-white">
+                <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-10 p-5">
+                    <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-lg p-5 mb-5  text-white">
                         <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/5 items-center">
                             <IoMdPersonAdd className="w-10 h-10" />
                             Tambah Siswa
                         </div>
-                        <Button colorScheme='messenger' shadow='md' onClick={onOpen}>
-                            Tambah +
-                        </Button>
+                        <div className="flex w-1/4 justify-evenly">
+                            <Button colorScheme='twitter' color='white' shadow='md'>
+                                <div className="flex items-center">
+                                    Export
+                                    <AiFillFileAdd />
+                                </div>
+                            </Button>
+                            <Button colorScheme='messenger' shadow='md' onClick={onOpen}>
+                                Tambah +
+                            </Button>
+                        </div>
                         <Drawer
                             isOpen={isOpen}
                             placement='right'
@@ -360,21 +381,12 @@ export default function Murid() {
                                                         >
                                                             Show
                                                         </Button>
-                                                        <Drawer
-                                                            isOpen={buka}
-                                                            placement='right'
-                                                            onClose={onTutup1}
-                                                            size='sm'
-                                                        >
-                                                            <DrawerOverlay />
-                                                            <DrawerContent>
-                                                                <DrawerCloseButton />
-                                                                <DrawerHeader
-                                                                    borderBottomWidth='1px'
-                                                                >
-                                                                    Info Akun Siswa
-                                                                </DrawerHeader>
-                                                                <DrawerBody>
+                                                        <Modal onClose={onTutup1} isOpen={buka} isCentered>
+                                                            <ModalOverlay />
+                                                            <ModalContent>
+                                                                <ModalHeader>Info Akun Siswa</ModalHeader>
+                                                                <ModalCloseButton />
+                                                                <ModalBody>
                                                                     <div>
                                                                         <div className='my-5'>
                                                                             <div className="text-sky-600 p-2 font-bold font-bahnschrift text-xl">Nama Siswa</div>
@@ -405,27 +417,18 @@ export default function Murid() {
                                                                             <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nomor_telp}</div>
                                                                         </div>
                                                                     </div>
-                                                                </DrawerBody>
-                                                                <DrawerFooter>
-                                                                    <Button variant='outline' mr={3} onClick={onTutup1}>
-                                                                        Cancel
-                                                                    </Button>
-                                                                    <Button
-                                                                        colorScheme='blue'
-                                                                        block
-                                                                        variant="solid"
-                                                                        bgColor="#1F8AC6"
-                                                                        color="white"
-                                                                    >Save</Button>
-                                                                </DrawerFooter>
-                                                            </DrawerContent>
-                                                        </Drawer>
+                                                                </ModalBody>
+                                                                <ModalFooter>
+                                                                    <Button onClick={onTutup1}>Close</Button>
+                                                                </ModalFooter>
+                                                            </ModalContent>
+                                                        </Modal>
                                                         <Button
                                                             colorScheme='red'
                                                             size='sm'
                                                             shadow='md'
                                                             onClick={
-                                                                () => setOpen(true)
+                                                                () => multiFunc(row.id)
                                                             }
                                                         >
                                                             Delete
@@ -447,7 +450,7 @@ export default function Murid() {
                                                                         <Button onClick={onTutup}>
                                                                             Cancel
                                                                         </Button>
-                                                                        <Button colorScheme='red' onClick={() => multiFunc(row.user_id)} ml={3}>
+                                                                        <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
                                                                             Delete
                                                                         </Button>
                                                                     </AlertDialogFooter>
@@ -480,7 +483,7 @@ export default function Murid() {
                                     <div className="text-2xl text-gray-400 mx-3">
                                         <MdOutlineNavigateBefore />
                                     </div>
-                                    <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
+                                    <div className="bg-gray-200 p-3 w-12 h-12 text-center shadow-inner shadow-slate-300 font-bahnschrift rounded-md">{page}</div>
                                     <div className="text-2xl text-gray-400 font-bold mx-3">
                                         <MdOutlineNavigateNext />
                                     </div>
