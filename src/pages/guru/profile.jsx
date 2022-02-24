@@ -77,7 +77,7 @@ export default function Profile() {
                                             <BsPersonCircle className="h-32 w-32 decoration-white text-white" />
                                         </div>
                                     ) : (
-                                        <img src={data.foto} className="w-1/3 h-1/3 rounded-full" alt="" />
+                                        <img src={data.foto} className="w-32 h-32 rounded-full" alt="" />
                                     )}
                                 </div>
                                 <div className="font-bold text-lg py-4 px-8">
