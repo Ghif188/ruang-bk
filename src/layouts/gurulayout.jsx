@@ -6,7 +6,7 @@ import Profile from "../pages/guru/dashboard";
 import { BsPersonCircle } from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
 import { NavLink, Link } from "react-router-dom";
-import { border, color } from "@chakra-ui/react";
+import { border, color, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
 export default function GuruLayout({ children }) {
     const navigate = useNavigate();
@@ -16,6 +16,10 @@ export default function GuruLayout({ children }) {
         console.log("halo");
         navigate("/dash-guru/profile");
     };
+    const logClear = () => {
+        localStorage.clear()
+        navigate("/log")
+    }
     return (
         <React.Fragment>
             <div className="">
@@ -61,11 +65,17 @@ export default function GuruLayout({ children }) {
                             </NavLink>
                         </div>
                         <div className="flex mr-10 rounded-full bg-black">
-                            <Link
-                                to="/dash-guru/profile"
-                            >
-                                <BsPersonCircle className="h-12 w-12 decoration-white text-white"/>
-                            </Link>
+                            <Menu>
+                                <MenuButton>
+                                    <BsPersonCircle className="h-12 w-12 decoration-white text-white"/>
+                                </MenuButton>
+                                <MenuList>
+                                    <MenuItem onClick={handleShow}>Profil</MenuItem>
+                                    <MenuItem>Change password</MenuItem>
+                                    <MenuItem onClick={logClear}>Logout</MenuItem>
+                                </MenuList>
+                            </Menu>
+                            
                         </div>
                     </div>
                 </div>

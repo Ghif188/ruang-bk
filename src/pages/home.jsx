@@ -40,7 +40,7 @@ export default function Home() {
     const [color, setColor] = React.useState(true);
     const [color1, setColor1] = React.useState(false);
     const [color2, setColor2] = React.useState(false);
-    const clearLS=() => {
+    const clearLS = () => {
         localStorage.clear()
     }
     const handleColor = () => {
@@ -235,33 +235,19 @@ export default function Home() {
                     <div className="text-white text-3xl mb-10 sm-max:text-base sm-max:mb-5">
                         <p>Daftar dan gunakan Secara Gratis</p>
                     </div>
-                    {MediaQ ?
-                        <Button
-                            size='lg'
-                            height='50px'
-                            px='100px'
-                            tabIndex="3"
-                            type='submit'
-                            variant="solid"
-                            bgColor="#38E569"
-                            color="white"
-                            onClick={clearLS}
-                        >
-                            Coba sekarang
-                        </Button> : <Button
-                            size='md'
-                            height='40px'
-                            px='50px'
-                            tabIndex="3"
-                            type='submit'
-                            variant="solid"
-                            bgColor="#38E569"
-                            onClick={clearLS}
-                            color="white"
-                        >
-                            Coba sekarang
-                        </Button>}
-                    
+                    <Button
+                        size={MediaQ ? 'lg' : 'md'}
+                        height={MediaQ ? '50px' : '40px'}
+                        px={MediaQ ? '100px' : '50px'}
+                        tabIndex="3"
+                        type='submit'
+                        variant="solid"
+                        bgColor="#38E569"
+                        color="white"
+                        onClick={clearLS}
+                    >
+                        Coba sekarang
+                    </Button>
                 </div>
                 {/* <img src={bgLap} alt="asa" /> */}
             </section>
@@ -316,26 +302,26 @@ export default function Home() {
                         <p>CONNECT WITH US</p>
                     </div>
                     <div className="pt-6 flex justify-start sm-max:justify-center">
-                        {MediaQ ? <Image boxSize='60px' src={Instagram} alt="instagram" /> : <Image boxSize='50px' src={Instagram} alt="instagram" /> }
+                        {MediaQ ? <Image boxSize='60px' src={Instagram} alt="instagram" /> : <Image boxSize='50px' src={Instagram} alt="instagram" />}
                         <p className="font-medium text-md p-4 sm-max:hidden">Instagram</p>
                     </div>
                     <div className="pt-6 flex justify-start sm-max:justify-center">
-                        {MediaQ ? <Image boxSize='60px' src={Telegram} alt="telegram" /> :  <Image boxSize='50px' src={Telegram} alt="telegram" />}
+                        {MediaQ ? <Image boxSize='60px' src={Telegram} alt="telegram" /> : <Image boxSize='50px' src={Telegram} alt="telegram" />}
                         <p className="font-medium text-md p-4 sm-max:hidden">Telegram</p>
                     </div>
                     <div className="pt-6 flex justify-start sm-max:justify-center">
-                        {MediaQ ? <Image boxSize='60px' src={Twitter} alt="twitter" /> : <Image boxSize='50px' src={Twitter} alt="twitter" /> }
+                        {MediaQ ? <Image boxSize='60px' src={Twitter} alt="twitter" /> : <Image boxSize='50px' src={Twitter} alt="twitter" />}
                         <p className="font-medium text-md p-4 sm-max:hidden">Twitter</p>
                     </div>
                     <div className="pt-6 flex justify-start sm-max:justify-center">
-                        {MediaQ ? <Image boxSize='60px' src={Whatsapp} alt="whatsapp" /> : <Image boxSize='50px' src={Whatsapp} alt="whatsapp" /> }
+                        {MediaQ ? <Image boxSize='60px' src={Whatsapp} alt="whatsapp" /> : <Image boxSize='50px' src={Whatsapp} alt="whatsapp" />}
                         <p className="font-medium text-md p-4 sm-max:hidden">Whatsapp</p>
                     </div>
                 </div>
             </section>
             {/* Footer */}
             <section id="footer" className="flex justify-center bg-gradient-to-r to-blue-500 from-blue-800 p-24 sm-max:p-12">
-                {MediaQ ? <Image src={Logo} alt="akhir" height='100px' /> : <Image src={Logo} alt="akhir" height='50px' /> }
+                {MediaQ ? <Image src={Logo} alt="akhir" height='100px' /> : <Image src={Logo} alt="akhir" height='50px' />}
             </section>
         </div>
     )
