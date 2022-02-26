@@ -40,7 +40,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerSiswa, getSiswa, deleteSiswa, showSiswa } from "../../api/guru";
 import { useQuery, useQueryClient } from "react-query";
 const RegisterSchema = Yup.object().shape({
+    nisn: Yup.number().required("Wajib di Isi").positive().integer(),
     nama_user: Yup.string().required("Wajib di Isi"),
+    alamat: Yup.string().required("Wajib di Isi"),
+    sekolah: Yup.string().required("Wajib di Isi"),
     nomor_telp: Yup.number().required("Wajib di Isi").positive().integer(),
     email: Yup.string().email().required("Wajib di isi"),
     role: Yup.number().integer(),
@@ -222,7 +225,21 @@ export default function Murid() {
                                         <form onSubmit={handleSubmit} className='w-full h-full'>
                                             <DrawerBody>
                                                 <div>
-                                                    <div className='my-5'>
+                                                    <div className='my-2'>
+                                                        <FormLabel htmlFor='nisn'>NISN</FormLabel>
+                                                        <Input
+                                                            placeholder='Isi NISN Siswa'
+                                                            id='nisn'
+                                                            type='text'
+                                                            value={values.nisn}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            error={errors.nisn && touched.nisn}
+                                                            disabled={isSubmitting}
+                                                        />
+                                                        <div className=' text-red-400 text-xs mt-2'>{errors.nisn && touched.nisn && errors.nisn}</div>
+                                                    </div>
+                                                    <div className='my-2'>
                                                         <FormLabel htmlFor='nama_user'>Username</FormLabel>
                                                         <Input
                                                             placeholder='Enter your name'
@@ -234,9 +251,9 @@ export default function Murid() {
                                                             error={errors.nama_user && touched.nama_user}
                                                             disabled={isSubmitting}
                                                         />
-                                                        <div className=' text-red-400 text-sm mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
+                                                        <div className=' text-red-400 text-xs mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
                                                     </div>
-                                                    <div className='my-5'>
+                                                    <div className='my-2'>
                                                         <FormLabel htmlFor='email'>Email</FormLabel>
                                                         <Input
                                                             placeholder='Enter your Email'
@@ -248,49 +265,49 @@ export default function Murid() {
                                                             onChange={handleChange}
                                                             disabled={isSubmitting}
                                                         />
-                                                        <div className=' text-red-400 text-sm mt-2'>{errors.email && touched.email && errors.email}</div>
+                                                        <div className=' text-red-400 text-xs mt-2'>{errors.email && touched.email && errors.email}</div>
                                                     </div>
-                                                    <div className='my-5'>
+                                                    <div className='my-2'>
+                                                        <FormLabel htmlFor='alamat'>Alamat</FormLabel>
+                                                        <Input
+                                                            placeholder='isi Alamat Siswa'
+                                                            id='alamat'
+                                                            type='text'
+                                                            value={values.alamat}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            error={errors.alamat && touched.alamat}
+                                                            disabled={isSubmitting}
+                                                        />
+                                                        <div className=' text-red-400 text-xs mt-2'>{errors.alamat && touched.alamat && errors.alamat}</div>
+                                                    </div>
+                                                    <div className='my-2'>
+                                                        <FormLabel htmlFor='sekolah'>Asal Sekolah</FormLabel>
+                                                        <Input
+                                                            placeholder='Asal Sekolah Siswa'
+                                                            id='sekolah'
+                                                            type='text'
+                                                            value={values.sekolah}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            error={errors.sekolah && touched.sekolah}
+                                                            disabled={isSubmitting}
+                                                        />
+                                                        <div className=' text-red-400 text-xs mt-2'>{errors.sekolah && touched.sekolah && errors.sekolah}</div>
+                                                    </div>
+                                                    <div className='my-2'>
                                                         <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
                                                         <Input
                                                             placeholder='Enter your Whatsapp number'
                                                             id='nomor_telp'
-                                                            type=''
+                                                            type='number'
                                                             value={values.nomor_telp}
                                                             onBlur={handleBlur}
                                                             error={errors.nomor_telp && touched.nomor_telp}
                                                             onChange={handleChange}
                                                             disabled={isSubmitting}
                                                         />
-                                                        <div className=' text-red-400 text-sm mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
-                                                    </div>
-                                                    <div className='my-5'>
-                                                        <FormLabel htmlFor='password'>Password</FormLabel>
-                                                        <Input
-                                                            placeholder='Enter your Password'
-                                                            id='password'
-                                                            type='password'
-                                                            value={values.password}
-                                                            onBlur={handleBlur}
-                                                            error={errors.password && touched.password}
-                                                            onChange={handleChange}
-                                                            disabled={isSubmitting}
-                                                        />
-                                                        <div className=' text-red-400 text-sm mt-2'>{errors.password && touched.password && errors.password}</div>
-                                                    </div>
-                                                    <div className='my-5'>
-                                                        <FormLabel htmlFor='password_confirmation'>Password Confirmation</FormLabel>
-                                                        <Input
-                                                            placeholder='Enter your Password Confirmation'
-                                                            id='password_confirmation'
-                                                            type='password'
-                                                            onBlur={handleBlur}
-                                                            value={values.password_confirmation}
-                                                            error={errors.password_confirmation && touched.password_confirmation}
-                                                            onChange={handleChange}
-                                                            disabled={isSubmitting}
-                                                        />
-                                                        <div className=' text-red-400 text-sm mt-2'>{errors.password_confirmation && touched.password_confirmation && errors.password_confirmation}</div>
+                                                        <div className=' text-red-400 text-xs mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
                                                     </div>
                                                 </div>
                                             </DrawerBody>

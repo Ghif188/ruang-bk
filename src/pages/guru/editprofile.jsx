@@ -246,7 +246,7 @@ export default function EditProfile() {
                                             <p>Tanggal lahir</p>
                                             <div>
                                                 <input
-                                                    placeholder='Masukkan NPSN'
+                                                    placeholder='Masukkan Tanggal Lahir'
                                                     id='tanggal_lahir'
                                                     type='date'
                                                     name='tanggal_lahir'
