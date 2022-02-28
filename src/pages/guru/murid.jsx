@@ -170,7 +170,6 @@ export default function Murid() {
             select: (response) => response.data.data,
         }
     );
-    console.log(data)
     const pageakhir = data?.last_page
 
     return (
@@ -398,32 +397,38 @@ export default function Murid() {
                                                         >
                                                             Show
                                                         </Button>
-                                                        <Modal onClose={onTutup1} isOpen={buka} isCentered>
-                                                            <ModalOverlay />
-                                                            <ModalContent>
+                                                        <Modal onClose={onTutup1} isOpen={buka} size='xl' isCentered>
+                                                            <ModalOverlay bg='blackAlpha.200'
+                                                                backdropFilter='auto'
+                                                                backdropBlur='1px' />
+                                                            <ModalContent >
                                                                 <ModalHeader>Info Akun Siswa</ModalHeader>
                                                                 <ModalCloseButton />
                                                                 <ModalBody>
                                                                     <div>
-                                                                        <div className='my-5'>
-                                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-xl">Nama Siswa</div>
-                                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-lg rounded-md">{siswa.nama_siswa}</div>
+                                                                        <div className="flex justify-between mb-3 items-center">
+                                                                            <div className='w-4/10'>
+                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Nama Siswa</div>
+                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nama_siswa}</div>
+                                                                            </div>
+                                                                            <div className='w-4/10 '>
+                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">NISN</div>
+                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nisn === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.nisn)}</div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div className='my-5'>
-                                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">NISN</div>
-                                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nisn}</div>
-                                                                        </div>
-                                                                        <div className='my-5'>
-                                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tanggal Lahir</div>
-                                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tanggal_lahir}</div>
-                                                                        </div>
-                                                                        <div className='my-5'>
-                                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tempat Lahir</div>
-                                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tempat_lahir}</div>
+                                                                        <div className="flex justify-between mb-3 items-center">
+                                                                            <div className='w-4/10'>
+                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tanggal Lahir</div>
+                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tanggal_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tanggal_lahir)}</div>
+                                                                            </div>
+                                                                            <div className='w-4/10'>
+                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tempat Lahir</div>
+                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tempat_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tempat_lahir)}</div>
+                                                                            </div>
                                                                         </div>
                                                                         <div className='my-5'>
                                                                             <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Alamat</div>
-                                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.alamat}</div>
+                                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.alamat === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.alamat)}</div>
                                                                         </div>
                                                                         <div className='my-5'>
                                                                             <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Email</div>

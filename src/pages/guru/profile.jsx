@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
 import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon, Input, useToast, Spinner } from '@chakra-ui/react';
-
+import BgProfile from "../../assets/bg-profile.png"
 export default function Profile() {
     const [edit, setEdit] = React.useState(true)
     const { isLoading, isError, data, isFetching } = useQuery(
@@ -62,23 +62,29 @@ export default function Profile() {
                         size='xl'
                     />
                 </div>) :
-                (<div className=" h-full w-10/12 p-8">
-                    <div className="bg-gray-400 bg-opacity-50 h-full w-full rounded-2xl py-10 px-4 justify-center flex shadow-lg">
-                        <div className="w-1/2 h-full p-1">
-                            <Box
-                                boxShadow='lg'
-                                bgColor='white'
-                                rounded='xl'
-                                height='100%'
-                            >
-                                <div className="flex rounded-t-2xl bg-sky-600 justify-center p-10">
-                                    {data.foto === null ? (
-                                        <div className="bg-black rounded-full">
-                                            <BsPersonCircle className="h-32 w-32 decoration-white text-white" />
-                                        </div>
-                                    ) : (
-                                        <img src={data.foto} className="w-32 h-32 rounded-full" alt="" />
-                                    )}
+                (<div className="h-full w-10/12 flex items-center px-20">
+                    <div className="w-full py-10 px-4 h-4/10 shadow-md mb-3">
+                        halo
+                    </div>
+                    <div className="w-full h-4/10 shadow-md">
+                        halo
+                    </div>
+                    {/* <div className="h-full w-full rounded-2xl py-10 px-4 justify-center flex shadow-lg">
+                        <div className="w-1/2 h-full mr-2">
+                            <div className=" rounded-xl h-full shadow-lg shadow-sky-100">
+                                <div className="flex rounded-t-2xl p-1 shadow-inner shadow-sky-100 border-b-4 justify-center items-center border-sky-600">
+                                    <img src={BgProfile} alt="" className=" rounded-t-2xl w-full" />
+                                    <div className="flex absolute ">
+                                        {data.foto === null ? (
+                                            <div className="bg-black rounded-full">
+                                                <BsPersonCircle className="h-32 w-32 decoration-white text-white" />
+                                            </div>
+                                        ) : (
+                                            <div className=" rounded-full border-4 shadow-md border-white">
+                                                <img src={data.foto} className="w-32 h-32 rounded-full" alt="" />
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                                 <div className="font-bold text-lg py-4 px-8">
                                     <div className="">
@@ -110,57 +116,41 @@ export default function Profile() {
                                         </Button>
                                     </div>
                                 </div>
-                            </Box>
-                        </div>
-                        <div className="w-1/2 h-full">
-                            <div className="h-5/10 p-2">
-                                <Box
-                                    boxShadow='lg'
-                                    bgColor='white'
-                                    rounded='xl'
-                                    height='100%'
-                                >
-                                    <div className="font-bold text-lg py-4 px-8">
-                                        <div className="pb-6">
-                                            <p>My data</p>
-                                            <div className=" border-b-8 border-hijau w-1/4 rounded-md"></div>
-                                        </div>
-                                        <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-lg py-2 flex justify-between">
-                                            <p>NPSN</p>
-                                            <p>{data.npsn}</p>
-                                        </div>
-                                        <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-lg py-2 flex justify-between">
-                                            <p>Nama Sekolah</p>
-                                            <p>{data.sekolah}</p>
-                                        </div>
-                                    </div>
-                                </Box>
-                            </div>
-                            <div className="h-5/10 p-2">
-                                <Box
-                                    boxShadow='lg'
-                                    bgColor='white'
-                                    rounded='xl'
-                                    height='100%'
-                                >
-                                    <div className="font-bold text-lg py-4 px-8">
-                                        <div className="w-full border-b-2 border-gray-500 text-gray-500 text-lg py-2 flex justify-between">
-                                            <p>Alamat</p>
-                                            <p>{data.alamat}</p>
-                                        </div>
-                                        <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-lg py-2 flex justify-between">
-                                            <p>Tempat Lahir</p>
-                                            <p>{data.tempat_lahir}</p>
-                                        </div>
-                                        <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-lg py-2 flex justify-between">
-                                            <p>Tanggal lahir</p>
-                                            <p>{data.tanggal_lahir}</p>
-                                        </div>
-                                    </div>
-                                </Box>
                             </div>
                         </div>
-                    </div>
+                        <div className="w-1/2 py-1 bg-white rounded-xl shadow-lg shadow-sky-100 h-full">
+                            <div className="h-full">
+                                <div className="font-bold text-lg py-4 px-8">
+                                    <div className="pb-6">
+                                        <p>My data</p>
+                                        <div className=" border-b-8 border-hijau w-1/4 rounded-md"></div>
+                                    </div>
+                                    <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-lg py-2 flex justify-between">
+                                        <p>NPSN</p>
+                                        <p>{data.npsn}</p>
+                                    </div>
+                                    <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-lg py-2 flex justify-between">
+                                        <p>Nama Sekolah</p>
+                                        <p>{data.sekolah}</p>
+                                    </div>
+                                </div>
+                                <div className="font-bold text-lg py-4 px-8">
+                                    <div className="w-full border-b-2 border-gray-500 text-gray-500 text-lg py-2 flex justify-between">
+                                        <p>Alamat</p>
+                                        <p>{data.alamat}</p>
+                                    </div>
+                                    <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-lg py-2 flex justify-between">
+                                        <p>Tempat Lahir</p>
+                                        <p>{data.tempat_lahir}</p>
+                                    </div>
+                                    <div className="w-full border-b-2 border-gray-500 mt-6 text-gray-500 text-lg py-2 flex justify-between">
+                                        <p>Tanggal lahir</p>
+                                        <p>{data.tanggal_lahir}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> */}
                 </div>)
             }
         </Layout>
