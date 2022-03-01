@@ -38,6 +38,21 @@ export default function GuruLayout({ children }) {
                             <Link to="/dash-guru"><img src={Logo} alt="" className="h-10" /></Link>
                             <div className="w-full h-16 m-0 flex justify-center">
                                 <NavLink
+                                    to="/dash-guru/home"
+                                    style={({ isActive }) => {
+                                        return {
+                                            backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
+                                            padding: '1rem',
+                                            height: '100%',
+                                            borderBottom: isActive ? '4px solid #38E569' : '',
+                                            color: 'white',
+                                            fontWeight: '500'
+                                        }
+                                    }}
+                                >
+                                    Home
+                                </NavLink>
+                                <NavLink
                                     to="/dash-guru/murid"
                                     style={({ isActive }) => {
                                         return {

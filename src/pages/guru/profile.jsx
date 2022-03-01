@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
 import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon, Input, useToast, Spinner } from '@chakra-ui/react';
-import BgProfile from "../../assets/bg-profile.png"
+import BgProfile from "../../assets/bgprofile.png"
 export default function Profile() {
     const [edit, setEdit] = React.useState(true)
     const { isLoading, isError, data, isFetching } = useQuery(
@@ -62,11 +62,24 @@ export default function Profile() {
                         size='xl'
                     />
                 </div>) :
-                (<div className="h-full w-10/12 flex items-center px-20">
-                    <div className="w-full py-10 px-4 h-4/10 shadow-md mb-3">
-                        halo
+                (<div className="h-full w-10/12 px-20">
+                    <div className="w-full mt-10 rounded-t-3xl flex h-2/10 shadow-md rounded-b-2xl mb-3">
+                        <div className="flex rounded-t-2xl h-full w-full">
+                            <img src={BgProfile} alt="" className=" rounded-t-2xl h-full rounded-b-xl w-full" />
+                            <div className="flex absolute ">
+                                {data.foto === null ? (
+                                    <div className="bg-black w-full h-full p-10 rounded-full">
+                                        <BsPersonCircle className="h-32 w-32 decoration-white text-white" />
+                                    </div>
+                                ) : (
+                                    <div className=" rounded-full border-4 z-10 w-full h-full m-10 shadow-md border-white">
+                                        <img src={data.foto} className="w-32 h-32 rounded-full" alt="" />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
-                    <div className="w-full h-4/10 shadow-md">
+                    <div className="w-full h-5/10 shadow-md">
                         halo
                     </div>
                     {/* <div className="h-full w-full rounded-2xl py-10 px-4 justify-center flex shadow-lg">

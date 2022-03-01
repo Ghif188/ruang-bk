@@ -36,6 +36,7 @@ function App() {
 
       {/* Route guru */}
       <Route element={<ProtectedGuru />}>
+        <Route path='dash-guru/home' element={<DashGuru />}/>
         <Route path='dash-guru' element={<DashGuru />}/>
         <Route path='dash-guru/profile' element={<Profile />}/>
         <Route path='dash-guru/edit-profile' element={<EditProfile />}/>
