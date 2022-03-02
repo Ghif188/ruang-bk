@@ -159,6 +159,7 @@ export default function EditProfile() {
                                                         id='nama_guru'
                                                         name='nama_guru'
                                                         value={values.nama_guru}
+                                                        required
                                                         onChange={handleInput}
                                                     />
                                                 </div>
@@ -187,6 +188,7 @@ export default function EditProfile() {
                                             name='npsn'
                                             value={values.npsn}
                                             onChange={handleInput}
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -198,6 +200,7 @@ export default function EditProfile() {
                                             id='sekolah'
                                             name='sekolah'
                                             value={values.sekolah}
+                                            required
                                             onChange={handleInput}
                                         />
                                     </div>
@@ -213,6 +216,7 @@ export default function EditProfile() {
                                             name='alamat'
                                             value={values.alamat}
                                             onChange={handleInput}
+                                            required
                                             className="w-full focus:outline-sky-600 rounded-lg outline-inherit h-full"
                                             rows={3}
                                         />
@@ -226,6 +230,7 @@ export default function EditProfile() {
                                             id='tempat_lahir'
                                             name='tempat_lahir'
                                             value={values.tempat_lahir}
+                                            required
                                             onChange={handleInput}
                                         />
                                     </div>
@@ -239,6 +244,7 @@ export default function EditProfile() {
                                             type='date'
                                             name='tanggal_lahir'
                                             value={values.tanggal_lahir}
+                                            required
                                             onChange={handleInput}
                                         />
                                     </div>
