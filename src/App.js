@@ -57,7 +57,7 @@ function App() {
       />
       <Route
         path="/"
-        element={localStorage.getItem("token") ? <Navigate replace to="/dash-guru" /> : <Navigate replace to="/home" />}
+        element={localStorage.getItem("token") ? <Navigate replace to="/dash-guru/home" /> : <Navigate replace to="/home" />}
       />
 
       {/* ROUTE ADMIN */}

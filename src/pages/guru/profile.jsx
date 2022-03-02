@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../layouts/gurulayout"
 import { BsPersonCircle } from 'react-icons/bs';
+import { MdEdit } from 'react-icons/md';
 import { getProfile, updateGuru } from '../../api/guru';
 import { useQuery } from "react-query";
 import { Formik } from "formik";
@@ -63,24 +64,75 @@ export default function Profile() {
                     />
                 </div>) :
                 (<div className="h-full w-10/12 px-20">
-                    <div className="w-full mt-10 rounded-t-3xl flex h-2/10 shadow-md rounded-b-2xl mb-3">
-                        <div className="flex rounded-t-2xl h-full w-full">
-                            <img src={BgProfile} alt="" className=" rounded-t-2xl h-full rounded-b-xl w-full" />
-                            <div className="flex absolute ">
+                    <div className="w-full mt-10 rounded-3xl flex h-2/10 shadow-md mb-3">
+                        <div className="flex relative rounded-3xl h-full w-full">
+                            <div className="flex w-full h-full rounded-3xl justify-end">
+                                <img src={BgProfile} alt="" className="rounded-3xl absolute h-full w-full" />
+                                <div className="border-r-2 relative text-sky-900 border-sky-600 w-1/3 text-5xl capitalize pr-5 font-bahnschrift font-semibold h-full flex justify-end items-center">
+                                    {data.nama_guru}
+                                </div>
+                                <div className=" w-1/3 h-full pl-5 backdrop-hue-rotate-90 rounded-r-2xl bg-blue-50 bg-opacity-60 backdrop-blur-sm py-10">
+                                    <div className=" font-semibold text-sky-800 text-xl mb-3">{data.email}</div>
+                                    <div className="text-sky-700 text-lg">{data.nomor_telp}</div>
+                                </div>
+                            </div>
+                            <div className="flex absolute -bottom-1/2 left-5">
                                 {data.foto === null ? (
-                                    <div className="bg-black w-full h-full p-10 rounded-full">
+                                    <div className="bg-black p-10 rounded-full">
                                         <BsPersonCircle className="h-32 w-32 decoration-white text-white" />
                                     </div>
                                 ) : (
-                                    <div className=" rounded-full border-4 z-10 w-full h-full m-10 shadow-md border-white">
+                                    <div className="rounded-full border-4 shadow-md border-white">
                                         <img src={data.foto} className="w-32 h-32 rounded-full" alt="" />
                                     </div>
                                 )}
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-5/10 shadow-md">
-                        halo
+                    <div className="w-full p-5 h-6/10 shadow-md">
+                        <div className="w-full flex mb-3 justify-center">
+                            <div className="border-b-4 text-2xl font-semibold border-hijau">
+                                Data Diri
+                            </div>
+                        </div>
+                        <div className="w-full flex justify-between items-center p-5">
+                            <div className="w-1/2 pr-3 h-max text-center rounded-sm">
+                                <div className="w-full border-b-2 border-sky-700  py-2 flex justify-between">
+                                    <p>NPSN</p>
+                                    <p className="text-lg font-semibold">{data.npsn}</p>
+                                </div>
+                                <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between">
+                                    <p>Nama Sekolah</p>
+                                    <p className="text-lg font-semibold">{data.sekolah}</p>
+                                </div>
+                            </div>
+                            <div className="w-1/2 border-l-4 text-center pl-3 rounded-sm">
+                                <div className="w-full border-b-2 border-sky-700  py-2 flex justify-between">
+                                    <p>Alamat</p>
+                                    <p className="text-lg font-semibold">{data.alamat}</p>
+                                </div>
+                                <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between">
+                                    <p>Tempat Lahir</p>
+                                    <p className="text-lg font-semibold">{data.tempat_lahir}</p>
+                                </div>
+                                <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between">
+                                    <p>Tanggal lahir</p>
+                                    <p className="text-lg font-semibold">{data.tanggal_lahir}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="justify-center flex pt-8">
+                                <Button
+                                    size='lg'
+                                    colorScheme='facebook' 
+                                    leftIcon={<MdEdit />}
+                                    onClick={() => navigate("/dash-guru/edit-profile")}
+                                >
+                                    Edit
+                                </Button>
+                            </div>
+                        </div>
                     </div>
                     {/* <div className="h-full w-full rounded-2xl py-10 px-4 justify-center flex shadow-lg">
                         <div className="w-1/2 h-full mr-2">
@@ -112,21 +164,6 @@ export default function Profile() {
                                     </div>
                                     <div className="w-full border-b-2 border-gray-500 mt-4 text-gray-500 text-lg py-2">
                                         <p>{data.email}</p>
-                                    </div>
-                                    <div className="justify-center flex pt-8">
-                                        <Button
-                                            size='xl'
-                                            height='50px'
-                                            borderRadius='3xl'
-                                            px='70px'
-                                            type='submit'
-                                            variant="solid"
-                                            bgGradient='linear(to-r, #1F8AC6, #104D6F)'
-                                            color="white"
-                                            onClick={() => navigate("/dash-guru/edit-profile")}
-                                        >
-                                            Edit
-                                        </Button>
                                     </div>
                                 </div>
                             </div>
