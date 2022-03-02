@@ -51,7 +51,7 @@ const Login = () => {
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
-                    return navigate("/dash-guru");
+                    return navigate("/dash-guru/home");
                 } else {
                     return navigate("/dash-guru/npsn")
                 }

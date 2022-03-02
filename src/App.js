@@ -20,6 +20,7 @@ import {
 import ProtectRoute from "./routers/ProtectRoute";
 import ProtectedLogin from "./routers/ProtectedLogin";
 import ProtectedGuru from "./routers/ProtectedGuru";
+import ProtectedMurid from "./routers/ProtectedMurid";
 import Angket from './pages/guru/angket';
 import Murid from './pages/guru/murid';
 import Profile from './pages/guru/profile';
@@ -37,7 +38,7 @@ function App() {
       {/* Route guru */}
       <Route element={<ProtectedGuru />}>
         <Route path='dash-guru/home' element={<DashGuru />}/>
-        <Route path='dash-guru' element={<DashGuru />}/>
+        {/* <Route path='dash-guru' element={<DashGuru />}/> */}
         <Route path='dash-guru/profile' element={<Profile />}/>
         <Route path='dash-guru/edit-profile' element={<EditProfile />}/>
         <Route path='dash-guru/npsn' element={<Npsn />}/>
@@ -57,7 +58,7 @@ function App() {
       />
       <Route
         path="/"
-        element={localStorage.getItem("token") ? <Navigate replace to="/dash-guru/home" /> : <Navigate replace to="/home" />}
+        element={localStorage.getItem("role") == '2' ? <Navigate replace to="/dash-guru/home" /> : (localStorage.getItem("role") == '3' ? <Navigate replace to="/dash-murid/home" /> : <Navigate replace to="/home" />)}
       />
 
       {/* ROUTE ADMIN */}
@@ -92,7 +93,7 @@ function App() {
       {/* ROUTE SISWA */}
       <Route
         exact
-        path="/dash-siswa"
+        path="/dash-siswa/home"
         element={<DashSiswa />}
       />
 

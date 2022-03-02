@@ -17,7 +17,7 @@ export default function GuruLayout({ children }) {
     const [show1, setShow1] = React.useState(false);
     const handleShow = () => {
         console.log("halo");
-        navigate("/dash-guru/profile");
+        navigate("/dash-siswa/profile");
     };
     const logClear = () => {
         localStorage.clear()
@@ -38,7 +38,7 @@ export default function GuruLayout({ children }) {
                             <img src={Logo} alt="" className="h-10" />
                             <div className="w-full h-16 m-0 flex justify-center">
                                 <NavLink
-                                    to="/dash-guru/home"
+                                    to="/dash-siswa/home"
                                     style={({ isActive }) => {
                                         return {
                                             backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
@@ -51,36 +51,6 @@ export default function GuruLayout({ children }) {
                                     }}
                                 >
                                     Home
-                                </NavLink>
-                                <NavLink
-                                    to="/dash-guru/murid"
-                                    style={({ isActive }) => {
-                                        return {
-                                            backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
-                                            padding: '1rem',
-                                            height: '100%',
-                                            borderBottom: isActive ? '4px solid #38E569' : '',
-                                            color: 'white',
-                                            fontWeight: '500'
-                                        }
-                                    }}
-                                >
-                                    Murid
-                                </NavLink>
-                                <NavLink
-                                    to="/dash-guru/angket"
-                                    style={({ isActive }) => {
-                                        return {
-                                            backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
-                                            padding: '1rem',
-                                            height: '100%',
-                                            borderBottom: isActive ? '4px solid #38E569' : '',
-                                            color: 'white',
-                                            fontWeight: '500'
-                                        }
-                                    }}
-                                >
-                                    Angket
                                 </NavLink>
                             </div>
                             <div className="flex mr-10 rounded-full bg-black">

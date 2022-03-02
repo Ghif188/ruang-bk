@@ -48,22 +48,16 @@ const RegisterSchema = Yup.object().shape({
     email: Yup.string().email().required("Wajib di isi"),
     role: Yup.number().integer(),
     status: Yup.number().integer(),
-    password: Yup.string()
-        .min(8, "Password minimal 8 Karakter")
-        .required("wajib di isi"),
-    password_confirmation: Yup.string()
-        .min(8, "Password minimal 8 Karakter")
-        .oneOf([Yup.ref("password")], "Password dan Konfirmasi Password wajib sama")
-        .required("wajib di isi"),
 });
 
 export default function Murid() {
     const initialValues = {
+        nisn: "",
         nama_user: "",
+        alamat: "",
+        sekolah: "",
         nomor_telp: "",
         email: "",
-        password: "",
-        password_confirmation: "",
     };
     const { isOpen, onOpen, onClose } = useDisclosure()
 
