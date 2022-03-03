@@ -64,7 +64,7 @@ export default function Profile() {
                     />
                 </div>) :
                 (<div className="h-full w-10/12 px-20">
-                    <div className="w-full mt-10 rounded-3xl flex h-2/10 shadow-md mb-3">
+                    <div className="w-full mt-10 rounded-3xl flex h-2/10 shadow-md mb-3 shadow-green-200">
                         <div className="flex relative rounded-3xl h-full w-full">
                             <div className="flex w-full h-full rounded-3xl justify-end">
                                 <img src={BgProfile} alt="" className="rounded-3xl absolute h-full w-full" />
@@ -82,14 +82,14 @@ export default function Profile() {
                                         <BsPersonCircle className="h-32 w-32 decoration-white text-white" />
                                     </div>
                                 ) : (
-                                    <div className="rounded-full border-4 shadow-md border-white">
+                                    <div className="rounded-full shadow-xl">
                                         <img src={data.foto} className="w-32 h-32 rounded-full" alt="" />
                                     </div>
                                 )}
                             </div>
                         </div>
                     </div>
-                    <div className="w-full p-5 h-6/10 shadow-md">
+                    <div className="w-full p-5 rounded-b-lg h-6/10 shadow-md">
                         <div className="w-full flex mb-3 justify-center">
                             <div className="border-b-4 text-2xl font-semibold border-hijau">
                                 Data Diri

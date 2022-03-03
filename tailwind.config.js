@@ -56,7 +56,8 @@ module.exports = {
       },
       colors: {
         'hijau' : '#38E569',
-        'blues' : '#0CA1F5'
+        'blues' : '#0CA1F5',
+        'oren' : '#F0BF12'
       }
     },
   },
