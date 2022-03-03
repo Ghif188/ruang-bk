@@ -223,7 +223,7 @@ export default function Murid() {
                                                         <Input
                                                             placeholder='Isi NISN Siswa'
                                                             id='nisn'
-                                                            type='text'
+                                                            type='number'
                                                             value={values.nisn}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
@@ -291,13 +291,13 @@ export default function Murid() {
                                                     <div className='my-2'>
                                                         <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
                                                         <Input
-                                                            placeholder='Enter your Whatsapp number'
+                                                            placeholder='Isi nomor Whatsapp'
                                                             id='nomor_telp'
-                                                            type='number'
+                                                            type='text'
                                                             value={values.nomor_telp}
+                                                            onChange={handleChange}
                                                             onBlur={handleBlur}
                                                             error={errors.nomor_telp && touched.nomor_telp}
-                                                            onChange={handleChange}
                                                             disabled={isSubmitting}
                                                         />
                                                         <div className=' text-red-400 text-xs mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
