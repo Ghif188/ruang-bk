@@ -4,14 +4,15 @@ import Logo from "../assets/logo3.png"
 import Bgm from "../assets/bglogin2.png"
 import Profile from "../pages/guru/dashboard";
 import { BsPersonCircle } from 'react-icons/bs';
+import { CgMenuLeftAlt } from 'react-icons/cg';
 import { useNavigate } from "react-router-dom";
 import { RiMenu4Line, RiLockPasswordLine } from "react-icons/ri"
 import { BiLogOut } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { NavLink, Link } from "react-router-dom";
-import {getProfile} from "../api/guru"
+import { getProfile } from "../api/guru"
 import { useQuery } from "react-query";
-import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar } from "@chakra-ui/react";
+import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar, Slide } from "@chakra-ui/react";
 
 export default function GuruLayout({ children }) {
     const navigate = useNavigate();
@@ -41,10 +42,14 @@ export default function GuruLayout({ children }) {
             select: (response) => response.data.data,
         }
     );
+    const [showMenu, setShowMenu] = React.useState(false);
+    const handleShowMenu = () => {
+      setShowMenu(!showMenu);
+    };
     return (
         <React.Fragment>
-            <div className="">
-                <div className="w-screen h-screen flex absolute">
+            <div className="sm-max:hidden">
+                <div className="w-screen sm-max:hidden h-screen flex absolute">
                     <img src={Bg} alt="" className="w-screen h-screen" />
                 </div>
                 <div className="h-screen w-screen relative">
@@ -109,7 +114,7 @@ export default function GuruLayout({ children }) {
                                         ) : (
                                             <div className="bg-gray-500 p-0.5 shadow-inner shadow-gray-300 rounded-full">
                                                 <Avatar src={data.foto} />
-                                            </div> 
+                                            </div>
                                         )}
                                     </MenuButton>
                                     <MenuList>
@@ -120,6 +125,67 @@ export default function GuruLayout({ children }) {
                                 </Menu>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div className="sm:hidden h-screen w-screen">
+                <div className="flex h-full w-full">
+                    <div className="fixed w-20 h-20 left-0 rounded-br-full bg-opacity-60 bg-blue-500 text-white p-0.5">
+                        <CgMenuLeftAlt className="w-14 h-14"  onClick={() => {
+                      return handleShowMenu();
+                    }}/>
+                    </div>
+                    <Slide in={showMenu} direction="left" animateOpacity>
+                        <div className="h-screen w-max bg-blue-100">
+                            <NavLink
+                                to="/dash-guru/home"
+                                style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
+                                        padding: '1rem',
+                                        height: '100%',
+                                        borderBottom: isActive ? '4px solid #38E569' : '',
+                                        color: 'white',
+                                        fontWeight: '500'
+                                    }
+                                }}
+                            >
+                                Home
+                            </NavLink>
+                            <NavLink
+                                to="/dash-guru/murid"
+                                style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
+                                        padding: '1rem',
+                                        height: '100%',
+                                        borderBottom: isActive ? '4px solid #38E569' : '',
+                                        color: 'white',
+                                        fontWeight: '500'
+                                    }
+                                }}
+                            >
+                                Murid
+                            </NavLink>
+                            <NavLink
+                                to="/dash-guru/angket"
+                                style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
+                                        padding: '1rem',
+                                        height: '100%',
+                                        borderBottom: isActive ? '4px solid #38E569' : '',
+                                        color: 'white',
+                                        fontWeight: '500'
+                                    }
+                                }}
+                            >
+                                Angket
+                            </NavLink>
+                        </div>
+                    </Slide>
+                    <div className=" w-full h-full">
+                        halo
                     </div>
                 </div>
             </div>
