@@ -34,6 +34,7 @@ function App() {
       <Route element={<ProtectedLogin />}>
         <Route path='log' element={<Log />}/>
         <Route path='reg' element={<Reg />}/>
+        <Route path="/home" element={<Home/>}/>
       </Route>
 
       {/* Route guru */}
@@ -47,11 +48,12 @@ function App() {
         <Route path='dash-guru/murid' element={<Murid />}/>
       </Route>
 
-      <Route
-        exact
-        path="/home"
-        element={<Home/>}
-      />
+      {/* Route Siswa */}
+      <Route element={<ProtectedMurid />}>
+        <Route path="/dash-siswa/home" element={<DashSiswa />}/>
+        <Route path="/dash-siswa/profile" element={<ProfileSiswa />}/>
+      </Route>
+      
       <Route
         exact
         path="/cobain"
@@ -92,16 +94,7 @@ function App() {
       />
 
       {/* ROUTE SISWA */}
-      <Route
-        exact
-        path="/dash-siswa/home"
-        element={<DashSiswa />}
-      />
-      <Route
-        exact
-        path="/dash-siswa/profile"
-        element={<ProfileSiswa />}
-      />
+      
 
     </Routes>
   );

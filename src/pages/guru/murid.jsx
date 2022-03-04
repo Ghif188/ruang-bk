@@ -291,7 +291,7 @@ export default function Murid() {
                                                     <div className='my-2'>
                                                         <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
                                                         <Input
-                                                            placeholder='Isi nomor Whatsapp'
+                                                            placeholder='Isi nomor Whatsapp'g
                                                             id='nomor_telp'
                                                             type='text'
                                                             value={values.nomor_telp}

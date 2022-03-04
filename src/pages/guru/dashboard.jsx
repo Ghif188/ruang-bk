@@ -57,8 +57,7 @@ export default function Profile() {
                 <div className="flex w-full justify-center">
                     <div className="w-full">
                         <Box borderRadius='md' bg='firebrick' color='white' mx={5} h={300}>
-                            <div className="text-center p-4 text-lg"><p>Jumlah Angket terisi</p></div>
-                            <div className="text-center text-8xl">0</div>
+                            <div className="text-center p-4 text-4xl"><p>Untuk Grafik</p></div>
                         </Box>
                     </div>
                 </div>
