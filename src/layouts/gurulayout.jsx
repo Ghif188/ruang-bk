@@ -9,7 +9,9 @@ import { RiMenu4Line, RiLockPasswordLine } from "react-icons/ri"
 import { BiLogOut } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { NavLink, Link } from "react-router-dom";
-import { border, color, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import {getProfile} from "../api/guru"
+import { useQuery } from "react-query";
+import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar } from "@chakra-ui/react";
 
 export default function GuruLayout({ children }) {
     const navigate = useNavigate();
@@ -23,6 +25,22 @@ export default function GuruLayout({ children }) {
         localStorage.clear()
         navigate("/log")
     }
+    const { isLoading, isError, data, isFetching } = useQuery(
+        [
+            "profile",
+            {
+            },
+        ],
+
+        () =>
+            getProfile({
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
     return (
         <React.Fragment>
             <div className="">
@@ -34,7 +52,7 @@ export default function GuruLayout({ children }) {
                         {children}
                     </div>
                     <div className="relative flex items-center justify-center pt-7">
-                        <div className="bg-gradient-to-r rounded-full h-16 relative w-5/6 flex px-2 shadow-md shadow-slate-300 justify-between items-center from-sky-500 to-sky-700">
+                        <div className="bg-gradient-to-r rounded-full h-16 relative w-5/6 flex shadow-md shadow-slate-300 justify-between items-center from-sky-500 to-sky-700">
                             <img src={Logo} alt="" className="h-10" />
                             <div className="w-full h-16 m-0 flex justify-center">
                                 <NavLink
@@ -83,10 +101,16 @@ export default function GuruLayout({ children }) {
                                     Angket
                                 </NavLink>
                             </div>
-                            <div className="flex mr-10 rounded-full bg-black">
+                            <div className="flex px-10 h-full rounded-r-full border-l-2 border-white bg-hijau">
                                 <Menu>
                                     <MenuButton>
-                                        <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
+                                        {isLoading ? (
+                                            <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
+                                        ) : (
+                                            <div className="bg-gray-500 p-0.5 shadow-inner shadow-gray-300 rounded-full">
+                                                <Avatar src={data.foto} />
+                                            </div> 
+                                        )}
                                     </MenuButton>
                                     <MenuList>
                                         <MenuItem icon={< CgProfile />} onClick={handleShow}>Profil</MenuItem>
@@ -94,7 +118,6 @@ export default function GuruLayout({ children }) {
                                         <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                     </MenuList>
                                 </Menu>
-
                             </div>
                         </div>
                     </div>
