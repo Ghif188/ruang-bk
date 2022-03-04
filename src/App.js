@@ -4,6 +4,7 @@ import {
   Dashboard as Dash,
 } from '../src/pages';
 import DashSiswa from "./pages/siswa/dashboard"
+import ProfileSiswa from "./pages/siswa/profile"
 import DashGuru from "./pages/guru/dashboard"
 import ProfileAdmin from "./pages/admin/profile"
 import ManageUser from "./pages/admin/manage-akun"
@@ -58,7 +59,7 @@ function App() {
       />
       <Route
         path="/"
-        element={localStorage.getItem("role") == '2' ? <Navigate replace to="/dash-guru/home" /> : (localStorage.getItem("role") == '3' ? <Navigate replace to="/dash-murid/home" /> : <Navigate replace to="/home" />)}
+        element={localStorage.getItem("role") == '2' ? <Navigate replace to="/dash-guru/home" /> : (localStorage.getItem("role") == '3' ? <Navigate replace to="/dash-siswa/home" /> : <Navigate replace to="/home" />)}
       />
 
       {/* ROUTE ADMIN */}
@@ -95,6 +96,11 @@ function App() {
         exact
         path="/dash-siswa/home"
         element={<DashSiswa />}
+      />
+      <Route
+        exact
+        path="/dash-siswa/profile"
+        element={<ProfileSiswa />}
       />
 
     </Routes>

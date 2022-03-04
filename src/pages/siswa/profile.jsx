@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../../layouts/gurulayout"
+import Layout from "../../layouts/muridlayout"
 import { BsPersonCircle } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
 import { getProfile, updateGuru } from '../../api/guru';
@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { useNavigate } from "react-router";
 import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon, Input, useToast, Spinner } from '@chakra-ui/react';
 import BgProfile from "../../assets/bgprofile.png"
-export default function Profile() {
+export default function ProfileSiswa() {
     const [edit, setEdit] = React.useState(true)
     const { isLoading, isError, data, isFetching } = useQuery(
         [
@@ -105,7 +105,7 @@ export default function Profile() {
                             <div className="justify-center flex pt-8">
                                 <Button
                                     size='lg'
-                                    colorScheme='facebook' 
+                                    colorScheme='facebook'
                                     leftIcon={<MdEdit />}
                                     onClick={() => navigate("/dash-guru/edit-profile")}
                                 >

@@ -57,7 +57,7 @@ const Login = () => {
                 }
             }
             if (result.user.role === 3) {
-                return navigate("/dash-siswa");
+                return navigate("/dash-siswa/home");
             }
         } else {
             toast({
@@ -90,7 +90,7 @@ const Login = () => {
                 }
             }
             if (result.user.role === 3) {
-                return navigate("/dash-siswa")
+                return navigate("/dash-siswa/home")
             }
         }
     };
