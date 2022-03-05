@@ -12,7 +12,7 @@ import { CgProfile } from "react-icons/cg";
 import { NavLink, Link } from "react-router-dom";
 import { getProfile } from "../api/guru"
 import { useQuery } from "react-query";
-import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar, Slide } from "@chakra-ui/react";
+import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar, Slide, CloseButton } from "@chakra-ui/react";
 
 export default function GuruLayout({ children }) {
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ export default function GuruLayout({ children }) {
     );
     const [showMenu, setShowMenu] = React.useState(false);
     const handleShowMenu = () => {
-      setShowMenu(!showMenu);
+        setShowMenu(!showMenu);
     };
     return (
         <React.Fragment>
@@ -131,61 +131,73 @@ export default function GuruLayout({ children }) {
             <div className="sm:hidden h-screen w-screen">
                 <div className="flex h-full w-full">
                     <div className="fixed w-20 h-20 left-0 rounded-br-full bg-opacity-60 bg-blue-500 text-white p-0.5">
-                        <CgMenuLeftAlt className="w-14 h-14"  onClick={() => {
-                      return handleShowMenu();
-                    }}/>
+                        <CgMenuLeftAlt className="w-14 h-14" onClick={() => {
+                            return handleShowMenu();
+                        }} />
                     </div>
                     <Slide in={showMenu} direction="left" animateOpacity>
-                        <div className="h-screen w-max bg-blue-100">
-                            <NavLink
-                                to="/dash-guru/home"
-                                style={({ isActive }) => {
-                                    return {
-                                        backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
-                                        padding: '1rem',
-                                        height: '100%',
-                                        borderBottom: isActive ? '4px solid #38E569' : '',
-                                        color: 'white',
-                                        fontWeight: '500'
-                                    }
-                                }}
-                            >
-                                Home
-                            </NavLink>
-                            <NavLink
-                                to="/dash-guru/murid"
-                                style={({ isActive }) => {
-                                    return {
-                                        backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
-                                        padding: '1rem',
-                                        height: '100%',
-                                        borderBottom: isActive ? '4px solid #38E569' : '',
-                                        color: 'white',
-                                        fontWeight: '500'
-                                    }
-                                }}
-                            >
-                                Murid
-                            </NavLink>
-                            <NavLink
-                                to="/dash-guru/angket"
-                                style={({ isActive }) => {
-                                    return {
-                                        backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
-                                        padding: '1rem',
-                                        height: '100%',
-                                        borderBottom: isActive ? '4px solid #38E569' : '',
-                                        color: 'white',
-                                        fontWeight: '500'
-                                    }
-                                }}
-                            >
-                                Angket
-                            </NavLink>
+                        <div className="h-screen w-4/10 opa bg-blue-100">
+                            <div>
+                                <CloseButton bg="white" opacity={0.6} onClick={() => {
+                            return handleShowMenu();
+                        }}/>
+                            </div>
+                            <div className="p-5">
+                                <NavLink
+                                    to="/dash-guru/home"
+                                    style={({ isActive }) => {
+                                        return {
+                                            padding: '1rem',
+                                            height: '100%',
+                                            width: '100%',
+                                            borderBottom: isActive ? '4px solid #38E569' : '',
+                                            color: isActive ? 'black' : 'black',
+                                            fontWeight: '500'
+                                        }
+                                    }}
+                                >
+                                    Home
+                                </NavLink>
+                            </div>
+                            <div className="p-5">
+                                <NavLink
+                                    to="/dash-guru/murid"
+                                    style={({ isActive }) => {
+                                        return {
+                                            padding: '1rem',
+                                            height: '100%',
+                                            width: '100%',
+                                            borderBottom: isActive ? '4px solid #38E569' : '',
+                                            color: isActive ? 'black' : 'black',
+                                            fontWeight: '500'
+                                        }
+                                    }}
+                                >
+                                    Murid
+                                </NavLink>
+                            </div>
+                            
+                            <div className="p-5">
+                                <NavLink
+                                    to="/dash-guru/angket"
+                                    style={({ isActive }) => {
+                                        return {
+                                            padding: '1rem',
+                                            height: '100%',
+                                            width: '100%',
+                                            borderBottom: isActive ? '4px solid #38E569' : '',
+                                            color: isActive ? 'black' : 'black',
+                                            fontWeight: '500'
+                                        }
+                                    }}
+                                >
+                                    Angket
+                                </NavLink>
+                            </div>
                         </div>
                     </Slide>
-                    <div className=" w-full h-full">
-                        halo
+                    <div className=" w-full h-screen">
+                        {children}
                     </div>
                 </div>
             </div>

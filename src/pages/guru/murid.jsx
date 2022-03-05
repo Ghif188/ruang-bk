@@ -168,7 +168,7 @@ export default function Murid() {
 
     return (
         <Layout>
-            <div className=" bg-transparent h-full w-10/12 px-20 ">
+            <div className=" bg-transparent sm-max:h-screen h-full sm-max:w-max w-10/12 px-20 ">
                 <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-10 p-5">
                     <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-lg p-5 mb-5  text-white">
                         <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/5 items-center">
@@ -185,6 +185,9 @@ export default function Murid() {
                             <Button colorScheme='messenger' shadow='md' onClick={onOpen}>
                                 Tambah +
                             </Button>
+                        </div>
+                        <div>
+
                         </div>
                         <Drawer
                             isOpen={isOpen}

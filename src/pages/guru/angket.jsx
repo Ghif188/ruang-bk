@@ -5,7 +5,7 @@ import { Table, Th, Td, Thead, Tr, Tbody, Box, Button, Img, Icon } from "@chakra
 export default function Angket() {
     return (
         <Layout>
-            <div className="bg-white bg-opacity-50 h-full w-9/12 px-10 pt-2">
+            <div className="bg-white bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
                 <div className="bg-gray-200 h-full w-full p-5 justify-center flex">
                     <div className="h-full w-full">
                         <Box
