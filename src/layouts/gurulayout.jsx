@@ -3,24 +3,37 @@ import Bg from "../assets/bg-bagus.png"
 import Logo from "../assets/logo3.png"
 import Bgm from "../assets/bglogin2.png"
 import Profile from "../pages/guru/dashboard";
-import { BsPersonCircle } from 'react-icons/bs';
+import { BsPersonCircle, BsPeopleFill, BsFillFileTextFill } from 'react-icons/bs';
 import { CgMenuLeftAlt } from 'react-icons/cg';
 import { useNavigate } from "react-router-dom";
 import { RiMenu4Line, RiLockPasswordLine } from "react-icons/ri"
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiHomeCircle } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { NavLink, Link } from "react-router-dom";
 import { getProfile } from "../api/guru"
 import { useQuery } from "react-query";
-import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar, Slide, CloseButton } from "@chakra-ui/react";
+import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar, Slide, CloseButton, MenuGroup } from "@chakra-ui/react";
+import { MenuIcon } from '@heroicons/react/solid'
 
 export default function GuruLayout({ children }) {
     const navigate = useNavigate();
     const [show, setShow] = React.useState(true);
     const [show1, setShow1] = React.useState(false);
-    const handleShow = () => {
-        console.log("halo");
+    const handleProfile = () => {
+        // console.log("halo");
         navigate("/dash-guru/profile");
+    };
+    const handleHome = () => {
+        // console.log("halo");
+        navigate("/dash-guru/home");
+    };
+    const handleMurid = () => {
+        // console.log("halo");
+        navigate("/dash-guru/murid");
+    };
+    const handleAngket = () => {
+        // console.log("halo");
+        navigate("/dash-guru/angket");
     };
     const logClear = () => {
         localStorage.clear()
@@ -110,7 +123,7 @@ export default function GuruLayout({ children }) {
                                 <Menu>
                                     <MenuButton>
                                         {isLoading ? (
-                                            <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
+                                            <BsPersonCircle className="h-12 w-12 decoration-black text-black" />
                                         ) : (
                                             <div className="bg-gray-500 p-0.5 shadow-inner shadow-gray-300 rounded-full">
                                                 <Avatar src={data.foto} />
@@ -118,7 +131,7 @@ export default function GuruLayout({ children }) {
                                         )}
                                     </MenuButton>
                                     <MenuList>
-                                        <MenuItem icon={< CgProfile />} onClick={handleShow}>Profil</MenuItem>
+                                        <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
                                         <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
                                         <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                     </MenuList>
@@ -129,7 +142,40 @@ export default function GuruLayout({ children }) {
                 </div>
             </div>
             <div className="sm:hidden h-screen w-screen">
-                <div className="flex h-full w-full">
+                <div className="flex justify-between bg-gradient-to-r from-sky-500 to-sky-700">
+                    <Menu>
+                        <MenuButton>
+                            <MenuIcon className="h-10 w-10 text-white" />
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem icon={< CgProfile />} onClick={handleHome}>Home</MenuItem>
+                            <MenuItem icon={< BsPeopleFill />} onClick={handleMurid}>Murid</MenuItem>
+                            <MenuItem icon={<BsFillFileTextFill />} onClick={handleAngket}>Angket</MenuItem>
+                            {/* <MenuGroup title="Akun">
+                                <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
+                                <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
+                                <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
+                            </MenuGroup> */}
+                        </MenuList>
+                    </Menu>
+                    <Menu>
+                        <MenuButton>
+                            {isLoading ? (
+                                <BsPersonCircle className="h-10 w-10 decoration-white text-white" />
+                            ) : (
+                                <div className="bg-white p-0.5 m-1 shadow-inner shadow-gray-300 rounded-full">
+                                    <Avatar h={10} w={10} src={data.foto} />
+                                </div>
+                            )}
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
+                            <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
+                            <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
+                        </MenuList>
+                    </Menu>
+                </div>
+                {/* <div className="flex h-full w-full">
                     <div className="fixed w-20 h-20 left-0 rounded-br-full bg-opacity-60 bg-blue-500 text-white p-0.5">
                         <CgMenuLeftAlt className="w-14 h-14" onClick={() => {
                             return handleShowMenu();
@@ -199,7 +245,7 @@ export default function GuruLayout({ children }) {
                     <div className=" w-full h-screen">
                         {children}
                     </div>
-                </div>
+                </div> */}
             </div>
         </React.Fragment>
     );
