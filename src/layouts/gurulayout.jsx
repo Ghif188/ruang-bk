@@ -4,12 +4,10 @@ import Logo from "../assets/logo3.png"
 import Bgm from "../assets/bglogin2.png"
 import Profile from "../pages/guru/dashboard";
 import { BsPersonCircle, BsPeopleFill, BsFillFileTextFill } from 'react-icons/bs';
-import { CgMenuLeftAlt } from 'react-icons/cg';
-import { useNavigate } from "react-router-dom";
 import { RiMenu4Line, RiLockPasswordLine } from "react-icons/ri"
 import { BiLogOut, BiHomeCircle } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
-import { NavLink, Link } from "react-router-dom";
+import { CgProfile, CgMenuLeftAlt } from "react-icons/cg";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { getProfile } from "../api/guru"
 import { useQuery } from "react-query";
 import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar, Slide, CloseButton, MenuGroup } from "@chakra-ui/react";

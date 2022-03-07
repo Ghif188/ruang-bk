@@ -18,6 +18,7 @@ import { PhoneIcon, EmailIcon } from "@chakra-ui/icons";
 // import { Link } from 'react-router-dom';
 import { MdLocationOn } from 'react-icons/md';
 import { Link } from 'react-scroll';
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const list = [
@@ -40,8 +41,10 @@ export default function Home() {
     const [color, setColor] = React.useState(true);
     const [color1, setColor1] = React.useState(false);
     const [color2, setColor2] = React.useState(false);
-    const clearLS = () => {
-        localStorage.clear()
+    const navigate = useNavigate();
+    const clearLStoLog = () => {
+        localStorage.clear();
+        navigate("/log");
     }
     const handleColor = () => {
         setColor(true);
@@ -244,7 +247,7 @@ export default function Home() {
                         variant="solid"
                         bgColor="#38E569"
                         color="white"
-                        onClick={clearLS}
+                        onClick={clearLStoLog}
                     >
                         Coba sekarang
                     </Button>
