@@ -49,7 +49,7 @@ export default function ProfileSiswa() {
                                 <div className="flex w-full h-full rounded-3xl justify-end">
                                     <img src={BgProfile} alt="" className="rounded-3xl absolute h-full w-full" />
                                     <div className="border-r-2 relative text-sky-900 border-sky-600 w-1/3 text-5xl capitalize pr-5 font-bahnschrift font-semibold h-full flex justify-end items-center">
-                                        {data.nama_siswa}
+                                        {data.nama_siswa == null ? "Belum Diisi" : data.nama_siswa}
                                     </div>
                                     <div className=" w-1/3 h-full pl-5 backdrop-hue-rotate-90 rounded-r-2xl bg-blue-50 bg-opacity-60 backdrop-blur-sm py-10">
                                         <div className=" font-semibold text-sky-800 text-xl mb-3">{data.email}</div>
@@ -89,15 +89,15 @@ export default function ProfileSiswa() {
                                 <div className="w-1/2 border-l-4 text-center pl-3 rounded-sm">
                                     <div className="w-full border-b-2 border-sky-700  py-2 flex justify-between">
                                         <p>Alamat</p>
-                                        <p className="text-lg font-semibold">{data.alamat == null ? "belum diisi" : data.alamat}</p>
+                                        <p className="text-lg font-semibold">{data.alamat == null ? "Belum Diisi" : data.alamat}</p>
                                     </div>
                                     <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between">
                                         <p>Tempat Lahir</p>
-                                        <p className="text-lg font-semibold">{data.tempat_lahir == null ? "belum diisi" : data.tempat_lahir}</p>
+                                        <p className="text-lg font-semibold">{data.tempat_lahir == null ? "Belum Diisi" : data.tempat_lahir}</p>
                                     </div>
                                     <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between">
                                         <p>Tanggal lahir</p>
-                                        <p className="text-lg font-semibold">{data.tanggal_lahir == null ? "belum diisi" : data.tanggal_lahir}</p>
+                                        <p className="text-lg font-semibold">{data.tanggal_lahir == null ? "Belum Diisi" : data.tanggal_lahir}</p>
                                     </div>
                                 </div>
                             </div>

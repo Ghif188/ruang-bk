@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { RiMenu4Line, RiLockPasswordLine } from "react-icons/ri"
 import { BiLogOut } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+import { getProfileSiswa } from '../api/siswa';
+import { useQuery } from "react-query";
 import { NavLink, Link } from "react-router-dom";
-import { border, color, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { border, color, Menu, MenuButton, MenuList, MenuItem, Avatar } from "@chakra-ui/react";
 
 export default function MuridLayout({ children }) {
     const navigate = useNavigate();
@@ -23,6 +25,22 @@ export default function MuridLayout({ children }) {
         localStorage.clear()
         navigate("/log")
     }
+    const { isLoading, isError, data, isFetching } = useQuery(
+        [
+            "profile-siswa",
+            {
+            },
+        ],
+
+        () =>
+            getProfileSiswa({
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
     return (
         <React.Fragment>
             <div className="">
@@ -56,14 +74,13 @@ export default function MuridLayout({ children }) {
                             <div className="flex px-10 h-full rounded-r-full border-l-2 border-white bg-hijau">
                                 <Menu>
                                     <MenuButton>
-                                        <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
-                                        {/* {isLoading ? (
+                                        {isLoading ? (
                                             <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
                                         ) : (
                                             <div className="bg-gray-500 p-0.5 shadow-inner shadow-gray-300 rounded-full">
                                                 <Avatar src={data.foto} />
                                             </div> 
-                                        )} */}
+                                        )}
                                     </MenuButton>
                                     <MenuList>
                                         <MenuItem icon={< CgProfile />} onClick={handleShow}>Profil</MenuItem>

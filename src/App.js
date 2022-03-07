@@ -26,6 +26,8 @@ import Angket from './pages/guru/angket';
 import Murid from './pages/guru/murid';
 import Profile from './pages/guru/profile';
 import EditProfile from './pages/guru/editprofile';
+import EditProfileSiswa from './pages/siswa/editprofile';
+
 
 function App() {
   return (
@@ -52,6 +54,7 @@ function App() {
       <Route element={<ProtectedMurid />}>
         <Route path="/dash-siswa/home" element={<DashSiswa />}/>
         <Route path="/dash-siswa/profile" element={<ProfileSiswa />}/>
+        <Route path="/dash-siswa/edit-profile" element={<EditProfileSiswa />}/>
       </Route>
       
       <Route
