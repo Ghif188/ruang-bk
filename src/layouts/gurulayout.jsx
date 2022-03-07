@@ -123,7 +123,7 @@ export default function GuruLayout({ children }) {
                                 <Menu>
                                     <MenuButton>
                                         {isLoading ? (
-                                            <BsPersonCircle className="h-12 w-12 decoration-black text-black" />
+                                            <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
                                         ) : (
                                             <div className="bg-gray-500 p-0.5 shadow-inner shadow-gray-300 rounded-full">
                                                 <Avatar src={data.foto} />
