@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../../layouts/muridlayout"
 import { BsPersonCircle } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
-import { getProfile, updateGuru } from '../../api/siswa';
+import { getProfileSiswa } from '../../api/siswa';
 import { useQuery } from "react-query";
 import { Formik } from "formik";
 import * as Yup from 'yup';
@@ -13,13 +13,13 @@ export default function ProfileSiswa() {
     const [edit, setEdit] = React.useState(true)
     const { isLoading, isError, data, isFetching } = useQuery(
         [
-            "profile",
+            "profile-siswa",
             {
             },
         ],
 
         () =>
-            getProfile({
+            getProfileSiswa({
             }),
 
         {
@@ -27,7 +27,6 @@ export default function ProfileSiswa() {
             select: (response) => response.data.data,
         }
     );
-
     const toast = useToast();
     const navigate = useNavigate();
     console.log(data)

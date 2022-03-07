@@ -22,7 +22,7 @@ const FormNpsn = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
     const onSubmit = async (values) => {
         const result = await formNpsn(values);
-        if (result.data.status === "success") return navigate("/dash-guru");
+        if (result.data.status === "success") return navigate("/dash-guru/home");
         console.log(result);
     };
     return (

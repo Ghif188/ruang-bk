@@ -5,23 +5,23 @@ import { useQuery } from "react-query";
 import Layout from "../../layouts/muridlayout"
 import { Table, Th, Td, Thead, Tr, Tbody, Box, Button, Img, Icon } from "@chakra-ui/react";
 export default function Dashboard() {
-    const { isLoading, isError, data, isFetching } = useQuery(
-        [
-            "profile",
-            {
-            },
-        ],
+    // const { isLoading, isError, data, isFetching } = useQuery(
+    //     [
+    //         "profile",
+    //         {
+    //         },
+    //     ],
 
-        () =>
-            getProfile({
-            }),
+    //     () =>
+    //         getProfile({
+    //         }),
 
-        {
-            keepPreviousData: true,
-            select: (response) => response.data.data,
-        }
-    );
-    console.log(data)
+    //     {
+    //         keepPreviousData: true,
+    //         select: (response) => response.data.data,
+    //     }
+    // );
+    // console.log(data)
     return (
         <Layout>
             <div className="bg-white bg-opacity-50 h-full w-9/12 px-10 py-2">
@@ -41,8 +41,9 @@ export default function Dashboard() {
                                 <div className="w-1/3 py-5">
                                     <p>Be strong enough to let go and wise enough to wait for what you deserve.</p>
                                 </div>
-                                <div className="w-full px-5 py-3 flex rounded-lg text-white justify-between bg-oren">
-                                    Pak/Bu {isLoading ? "------" : data.nama_guru}
+                                <div className="w-full px-5 py-3 flex rounded-lg items-center text-white bg-oren">
+                                    <div className="mr-3">Bpk. / Ibu</div>
+                                    {/* <div className=" capitalize font-semibold text-sky-700">{isLoading ? "------" : data.nama_guru}</div>  */}
                                 </div>
                             </div>
                             {/* bawah */}

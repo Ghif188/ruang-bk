@@ -27,7 +27,6 @@ export default function Profile() {
             select: (response) => response.data.data,
         }
     );
-
     const toast = useToast();
     const navigate = useNavigate();
     console.log(data)
@@ -58,7 +57,7 @@ export default function Profile() {
                             </div>
                             <div className="flex absolute -bottom-1/2 left-5">
                                 {data.foto === null ? (
-                                    <div className="bg-black p-10 rounded-full">
+                                    <div className="bg-black rounded-full">
                                         <BsPersonCircle className="h-32 w-32 decoration-white text-white" />
                                     </div>
                                 ) : (

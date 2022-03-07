@@ -8,6 +8,7 @@ export function authRegister(payload) {
 
       dispatch(registerHandle(data));
       localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.user.role);
 
       return data;
     } catch (err) {

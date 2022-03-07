@@ -103,6 +103,7 @@ const Login = () => {
     const handleNavigate = () => {
         return navigate("/reg");
     };
+    console.log(localStorage)
     return (
         <React.Fragment>
             <div className="flex items-center justify-center">
