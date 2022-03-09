@@ -110,6 +110,9 @@ export default function EditProfile() {
         e.persist();
         setValues({ ...values, [e.target.name]: e.target.value })
     }
+    React.useEffect(() => {
+        console.log(image.foto)
+    })
     return (
         <Layout>
             {isLoading ? (

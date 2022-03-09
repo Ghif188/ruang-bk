@@ -1,10 +1,11 @@
 import React from "react";
 import Layout from "../../layouts/gurulayout"
-import { Table, Th, Td, Thead, Tr, Tbody } from "@chakra-ui/react";
+import { Table, Th, Td, Thead, Tr, Tbody, useMediaQuery } from "@chakra-ui/react";
 import { IoMdPersonAdd } from "react-icons/io"
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
 import { AiFillFileAdd } from "react-icons/ai"
 import { Link, useNavigate } from 'react-router-dom';
+import DataTable from "react-data-table-component";
 import {
     Button,
     Drawer,
@@ -115,6 +116,48 @@ export default function Murid() {
             })
         }
     };
+    const columns = [
+        {
+            name: 'Nama Siswa',
+            selector: 'nama_siswa',
+            sortable: true,
+        },
+        {
+            name: 'Email',
+            selector: 'email',
+            sortable: true,
+        },
+        {
+            name: 'Nomor Whatsapp',
+            selector: 'nomor_telp',
+            sortable: true,
+        },
+        {
+            name: 'Aksi',
+            button: true,
+            cell: row =>
+                <div className="flex justify-evenly">
+                    <Button
+                        colorScheme='facebook'
+                        className="mr-5"
+                        size='sm'
+                        shadow='md'
+                        onClick={() => multiFunct(row.user_id)} 
+                    >
+                        Show
+                    </Button>
+                    <Button
+                        colorScheme='red'
+                        size='sm'
+                        shadow='md'
+                        onClick={() => multiFunc(row.id)} 
+                    >
+                        Delete
+                    </Button>
+                </div>
+            ,
+        },
+    ];
     const multiFunc = async (id) => {
         setOpen(true);
         setEditid(id);
@@ -128,6 +171,7 @@ export default function Murid() {
         onShow(id);
         setBuka(true);
     }
+    const [MediaQ] = useMediaQuery('(min-width: 1024px)');
     const [editid, setEditid] = React.useState();
     const onDelete = async (id) => {
         const result = await deleteSiswa(id);
@@ -161,30 +205,30 @@ export default function Murid() {
 
         {
             keepPreviousData: true,
-            select: (response) => response.data.data,
+            select: (response) => response.data.data.data,
         }
     );
     const pageakhir = data?.last_page
-
+    console.log(data)
     return (
         <Layout>
-            <div className=" bg-transparent sm-max:h-screen h-full sm-max:w-max w-10/12 px-20 ">
-                <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-10 p-5">
-                    <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-lg p-5 mb-5  text-white">
-                        <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/4 items-center">
-                            <IoMdPersonAdd className="w-10 h-10" />
+            <div className="bg-transparent sm-max:h-screen sm-max:w-screen h-full w-10/12 px-20 sm-max:px-5">
+                <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-10 p-5 sm-max:w-full sm-max:mx-2 sm-max:px-0">
+                    <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-lg p-5 mb-5 sm-max:w-full text-white">
+                        <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/4 items-center sm-max:w-1/3 sm-max:text-xs">
+                            <IoMdPersonAdd className="w-10 sm-max:w-6 sm-max:h-6 h-10" />
                             Tambah Siswa
                         </div>
-                        <div className="w-1/4"></div>
-                        <div className="flex w-1/4 justify-evenly">
-                            <Button colorScheme='twitter' color='white' shadow='md'>
-                                <div className="flex items-center">
+                        <div className="w-1/4 sm-max:hidden"></div>
+                        <div className="flex w-1/4 justify-evenly sm-max:w-2/3">
+                            <Button size={MediaQ ? 'md' : 'xs'} colorScheme='twitter' color='white' shadow='md'>
+                                <div className="flex items-center sm-max:text-xs">
                                     Export
                                     <AiFillFileAdd />
                                 </div>
                             </Button>
-                            <Button colorScheme='messenger' shadow='md' onClick={onOpen}>
-                                Tambah +
+                            <Button size={MediaQ ? 'md' : 'xs'} colorScheme='messenger' shadow='md' onClick={onOpen}>
+                                <p className="sm-max:text-xs">Tambah +</p>
                             </Button>
                         </div>
                         <div>
@@ -295,7 +339,7 @@ export default function Murid() {
                                                     <div className='my-2'>
                                                         <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
                                                         <Input
-                                                            placeholder='Isi nomor Whatsapp'g
+                                                            placeholder='Isi nomor Whatsapp' g
                                                             id='nomor_telp'
                                                             type='text'
                                                             value={values.nomor_telp}
@@ -340,27 +384,28 @@ export default function Murid() {
                             </Formik>
                         </Drawer>
                     </div>
-                    <div className="h-2/3 m-10">
-                        <Table variant='striped' shadow='xl' rounded='xl' size='sm' colorScheme='whatsapp'>
+                    <div className="h-2/3 m-10 sm-max:w-1/2 sm-max:h-6/10">
+                        <div className="hidden">
+                            <Table variant='striped' shadow='xl' rounded='xl' size='sm' colorScheme='whatsapp'>
                             <Thead>
                                 <Tr>
                                     <Th padding='3'>
-                                        <div className="text-center text-blue-600">
+                                        <div className="text-center text-blue-600 sm-max:text-xs">
                                             Nama User
                                         </div>
                                     </Th>
                                     <Th>
-                                        <div className="text-center text-blue-600">
+                                        <div className="text-center text-blue-600 sm-max:text-xs">
                                             Email
                                         </div>
                                     </Th>
                                     <Th>
-                                        <div className="text-center text-blue-600">
+                                        <div className="text-center text-blue-600 sm-max:text-xs">
                                             Nomor Whatsapp
                                         </div>
                                     </Th>
                                     <Th>
-                                        <div className="text-center text-blue-600">
+                                        <div className="text-center text-blue-600 sm-max:text-xs">
                                             Action
                                         </div>
                                     </Th>
@@ -369,7 +414,7 @@ export default function Murid() {
                             {isLoading ? ''
                                 : (
                                     <Tbody>
-                                        {data?.data.map((row, index) => (
+                                        {data?.map((row, index) => (
                                             <Tr key={index}>
                                                 <Td className=" text-amber-800 font-semibold">
                                                     <div className="ml-5 my-3 uppercase">
@@ -484,6 +529,16 @@ export default function Murid() {
                                     </Tbody>
                                 )}
                         </Table>
+                        </div>
+                        <DataTable
+                            title="Movies"
+                            columns={columns}
+                            data={data}
+                            defaultSortFieldId={1}
+                            // sortIcon={<SortIcon />}
+                            pagination
+                            selectableRows
+                        />
                         {isLoading ? (
                             <div className="flex mt-10 justify-center">
                                 <Spinner
@@ -499,7 +554,7 @@ export default function Murid() {
                     {(() => {
                         if (pageakhir === 1) {
                             return (
-                                <div className="flex mt-10 justify-center items-center">
+                                <div className="flex mt-10 justify-center items-center sm-max:mt-5">
                                     <div className="text-2xl text-gray-400 mx-3">
                                         <MdOutlineNavigateBefore />
                                     </div>
@@ -512,7 +567,7 @@ export default function Murid() {
 
                         } else {
                             return (
-                                <div className="flex mt-10 justify-center items-center">
+                                <div className="flex mt-10 justify-center items-center sm-max:mt-5">
                                     {page === 1 ? (
                                         <div className="text-2xl text-gray-400 mx-3" onClick={handleBeforePage}>
                                             <MdOutlineNavigateBefore />
