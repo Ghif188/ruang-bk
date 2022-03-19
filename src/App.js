@@ -27,7 +27,7 @@ import Murid from './pages/guru/murid';
 import Profile from './pages/guru/profile';
 import EditProfile from './pages/guru/editprofile';
 import EditProfileSiswa from './pages/siswa/editprofile';
-
+import SoalSiswa from './pages/siswa/soal'
 
 function App() {
   return (
@@ -55,6 +55,7 @@ function App() {
         <Route path="/dash-siswa/home" element={<DashSiswa />}/>
         <Route path="/dash-siswa/profile" element={<ProfileSiswa />}/>
         <Route path="/dash-siswa/edit-profile" element={<EditProfileSiswa />}/>
+        <Route path="/dash-siswa/soal/:id" element={<SoalSiswa />}/>
       </Route>
       
       <Route

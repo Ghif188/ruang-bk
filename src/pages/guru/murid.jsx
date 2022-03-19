@@ -209,6 +209,7 @@ export default function Murid() {
         }
     );
     const pageakhir = data?.last_page
+    console.log(localStorage.getItem("token"))
     console.log(data)
     return (
         <Layout>
