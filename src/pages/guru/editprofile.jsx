@@ -27,16 +27,6 @@ import {
     Tooltip
 } from '@chakra-ui/react';
 
-const editGuruSchema = Yup.object().shape({
-    nama_guru: Yup.string().required("Wajib di Isi"),
-    npsn: Yup.number().required("Wajib di Isi").positive().integer(),
-    tempat_lahir: Yup.string().required("Wajib di isi"),
-    tanggal_lahir: Yup.string().required("Wajib di Isi"),
-    foto: Yup.mixed().required("Wajib di Isi"),
-    alamat: Yup.string().required("wajib di isi"),
-    sekolah: Yup.string().required("wajib di isi"),
-});
-
 export default function EditProfile() {
     const { isLoading, isError, data, isFetching } = useQuery(
         [
@@ -56,11 +46,11 @@ export default function EditProfile() {
     );
 
     const [values, setValues] = React.useState(data);
-    const [image, setImage] = React.useState(values.foto);
+    console.log(values)
+    const [image, setImage] = React.useState(values.foto === null ? 'null' : values.foto);
     const [error, setError] = React.useState(false);
     const toast = useToast();
     const navigate = useNavigate();
-
     const updateProfile = async (e) => {
         e.preventDefault();
         let formData = new FormData()
@@ -69,7 +59,7 @@ export default function EditProfile() {
         formData.append("tanggal_lahir", values.tanggal_lahir);
         formData.append("tempat_lahir", values.tempat_lahir);
         formData.append("alamat", values.alamat);
-        formData.append("foto", image.foto);
+        formData.append("foto", image);
         formData.append("sekolah", values.sekolah);
         formData.append("_method", "put")
 
@@ -103,16 +93,16 @@ export default function EditProfile() {
     console.log(data)
     const handleImage = (e) => {
         e.persist();
-        setImage({ foto: e.currentTarget.files[0] });
+        setImage(e.currentTarget.files[0]);
     }
     console.log(image)
     const handleInput = (e) => {
         e.persist();
         setValues({ ...values, [e.target.name]: e.target.value })
     }
-    React.useEffect(() => {
-        console.log(image.foto)
-    })
+    // React.useEffect(() => {
+    //     console.log(image.foto)
+    // })
     return (
         <Layout>
             {isLoading ? (

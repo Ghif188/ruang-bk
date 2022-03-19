@@ -142,7 +142,7 @@ export default function Murid() {
                         className="mr-5"
                         size='sm'
                         shadow='md'
-                        onClick={() => multiFunct(row.user_id)} 
+                        onClick={() => multiFunct(row.user_id)}
                     >
                         Show
                     </Button>
@@ -150,7 +150,7 @@ export default function Murid() {
                         colorScheme='red'
                         size='sm'
                         shadow='md'
-                        onClick={() => multiFunc(row.id)} 
+                        onClick={() => multiFunc(row.id)}
                     >
                         Delete
                     </Button>
@@ -205,395 +205,399 @@ export default function Murid() {
 
         {
             keepPreviousData: true,
-            select: (response) => response.data.data.data,
+            select: (response) => response.data.data,
         }
     );
     const pageakhir = data?.last_page
-    console.log(localStorage.getItem("token"))
+    const dataakhir = data?.data
     console.log(data)
     return (
-        <Layout>
-            <div className="bg-transparent sm-max:h-screen sm-max:w-screen h-full w-10/12 px-20 sm-max:px-5">
-                <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-10 p-5 sm-max:w-full sm-max:mx-2 sm-max:px-0">
-                    <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-lg p-5 mb-5 sm-max:w-full text-white">
-                        <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/4 items-center sm-max:w-1/3 sm-max:text-xs">
-                            <IoMdPersonAdd className="w-10 sm-max:w-6 sm-max:h-6 h-10" />
-                            Tambah Siswa
-                        </div>
-                        <div className="w-1/4 sm-max:hidden"></div>
-                        <div className="flex w-1/4 justify-evenly sm-max:w-2/3">
-                            <Button size={MediaQ ? 'md' : 'xs'} colorScheme='twitter' color='white' shadow='md'>
-                                <div className="flex items-center sm-max:text-xs">
-                                    Export
-                                    <AiFillFileAdd />
-                                </div>
-                            </Button>
-                            <Button size={MediaQ ? 'md' : 'xs'} colorScheme='messenger' shadow='md' onClick={onOpen}>
-                                <p className="sm-max:text-xs">Tambah +</p>
-                            </Button>
-                        </div>
-                        <div>
-
-                        </div>
-                        <Drawer
-                            isOpen={isOpen}
-                            placement='right'
-                            onClose={onClose}
-                            size='sm'
-                        >
-                            <DrawerOverlay />
-                            <Formik
-                                initialValues={initialValues}
-                                validationSchema={RegisterSchema}
-                                enableReinitialize
-                                onSubmit={onSubmit}
-                            >
-                                {({
-                                    values,
-                                    errors,
-                                    touched,
-                                    handleChange,
-                                    handleBlur,
-                                    handleSubmit,
-                                    isSubmitting,
-                                }) => (
-                                    <DrawerContent>
-                                        <DrawerCloseButton />
-                                        <DrawerHeader
-                                            borderBottomWidth='1px'
-                                        >
-                                            Buat Akun Siswa
-                                        </DrawerHeader>
-                                        <form onSubmit={handleSubmit} className='w-full h-full'>
-                                            <DrawerBody>
-                                                <div>
-                                                    <div className='my-2'>
-                                                        <FormLabel htmlFor='nisn'>NISN</FormLabel>
-                                                        <Input
-                                                            placeholder='Isi NISN Siswa'
-                                                            id='nisn'
-                                                            type='number'
-                                                            value={values.nisn}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            error={errors.nisn && touched.nisn}
-                                                            disabled={isSubmitting}
-                                                        />
-                                                        <div className=' text-red-400 text-xs mt-2'>{errors.nisn && touched.nisn && errors.nisn}</div>
-                                                    </div>
-                                                    <div className='my-2'>
-                                                        <FormLabel htmlFor='nama_user'>Username</FormLabel>
-                                                        <Input
-                                                            placeholder='Enter your name'
-                                                            id='nama_user'
-                                                            type='text'
-                                                            value={values.nama_user}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            error={errors.nama_user && touched.nama_user}
-                                                            disabled={isSubmitting}
-                                                        />
-                                                        <div className=' text-red-400 text-xs mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
-                                                    </div>
-                                                    <div className='my-2'>
-                                                        <FormLabel htmlFor='email'>Email</FormLabel>
-                                                        <Input
-                                                            placeholder='Enter your Email'
-                                                            id='email'
-                                                            type='email'
-                                                            value={values.email}
-                                                            onBlur={handleBlur}
-                                                            error={errors.email && touched.email}
-                                                            onChange={handleChange}
-                                                            disabled={isSubmitting}
-                                                        />
-                                                        <div className=' text-red-400 text-xs mt-2'>{errors.email && touched.email && errors.email}</div>
-                                                    </div>
-                                                    <div className='my-2'>
-                                                        <FormLabel htmlFor='alamat'>Alamat</FormLabel>
-                                                        <Input
-                                                            placeholder='isi Alamat Siswa'
-                                                            id='alamat'
-                                                            type='text'
-                                                            value={values.alamat}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            error={errors.alamat && touched.alamat}
-                                                            disabled={isSubmitting}
-                                                        />
-                                                        <div className=' text-red-400 text-xs mt-2'>{errors.alamat && touched.alamat && errors.alamat}</div>
-                                                    </div>
-                                                    <div className='my-2'>
-                                                        <FormLabel htmlFor='sekolah'>Asal Sekolah</FormLabel>
-                                                        <Input
-                                                            placeholder='Asal Sekolah Siswa'
-                                                            id='sekolah'
-                                                            type='text'
-                                                            value={values.sekolah}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            error={errors.sekolah && touched.sekolah}
-                                                            disabled={isSubmitting}
-                                                        />
-                                                        <div className=' text-red-400 text-xs mt-2'>{errors.sekolah && touched.sekolah && errors.sekolah}</div>
-                                                    </div>
-                                                    <div className='my-2'>
-                                                        <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
-                                                        <Input
-                                                            placeholder='Isi nomor Whatsapp' g
-                                                            id='nomor_telp'
-                                                            type='text'
-                                                            value={values.nomor_telp}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            error={errors.nomor_telp && touched.nomor_telp}
-                                                            disabled={isSubmitting}
-                                                        />
-                                                        <div className=' text-red-400 text-xs mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
-                                                    </div>
-                                                </div>
-                                            </DrawerBody>
-                                            <DrawerFooter>
-                                                <Button variant='outline' mr={3} onClick={onClose}>
-                                                    Cancel
-                                                </Button>
-                                                <Button
-                                                    colorScheme='blue'
-                                                    htmlType="submit"
-                                                    disabled={isSubmitting}
-                                                    block
-                                                    variant="solid"
-                                                    bgColor="#1F8AC6"
-                                                    color="white"
-                                                    loading={isSubmitting}
-                                                    type='submit'
-                                                    onSubmit={handleSubmit}
-                                                >
-                                                    {isSubmitting ?
-                                                        (<Spinner
-                                                            thickness='5px'
-                                                            speed='0.65s'
-                                                            emptyColor='gray.200'
-                                                            color='blue.500'
-                                                            size='xl'
-                                                        />) : "Save"}
-                                                </Button>
-                                            </DrawerFooter>
-                                        </form>
-                                    </DrawerContent>
-                                )}
-                            </Formik>
-                        </Drawer>
-                    </div>
-                    <div className="h-2/3 m-10 sm-max:w-1/2 sm-max:h-6/10">
-                        <div className="hidden">
-                            <Table variant='striped' shadow='xl' rounded='xl' size='sm' colorScheme='whatsapp'>
-                            <Thead>
-                                <Tr>
-                                    <Th padding='3'>
-                                        <div className="text-center text-blue-600 sm-max:text-xs">
-                                            Nama User
-                                        </div>
-                                    </Th>
-                                    <Th>
-                                        <div className="text-center text-blue-600 sm-max:text-xs">
-                                            Email
-                                        </div>
-                                    </Th>
-                                    <Th>
-                                        <div className="text-center text-blue-600 sm-max:text-xs">
-                                            Nomor Whatsapp
-                                        </div>
-                                    </Th>
-                                    <Th>
-                                        <div className="text-center text-blue-600 sm-max:text-xs">
-                                            Action
-                                        </div>
-                                    </Th>
-                                </Tr>
-                            </Thead>
-                            {isLoading ? ''
-                                : (
-                                    <Tbody>
-                                        {data?.map((row, index) => (
-                                            <Tr key={index}>
-                                                <Td className=" text-amber-800 font-semibold">
-                                                    <div className="ml-5 my-3 uppercase">
-                                                        {row.nama_siswa}
-                                                    </div>
-                                                </Td>
-                                                <Td>
-                                                    <div className="text-center">
-                                                        {row.email}
-                                                    </div></Td>
-                                                <Td>
-                                                    <div className="text-center">
-                                                        {row.nomor_telp}
-                                                    </div></Td>
-                                                <Td>
-                                                    <div className="flex justify-center">
-                                                        <Button
-                                                            colorScheme='facebook'
-                                                            className="mr-5"
-                                                            size='sm'
-                                                            shadow='md'
-                                                            onClick={() => multiFunct(row.user_id)}
-                                                        >
-                                                            Show
-                                                        </Button>
-                                                        <Modal onClose={onTutup1} isOpen={buka} size='xl' isCentered>
-                                                            <ModalOverlay bg='blackAlpha.200'
-                                                                backdropFilter='auto'
-                                                                backdropBlur='1px' />
-                                                            <ModalContent >
-                                                                <ModalHeader>Info Akun Siswa</ModalHeader>
-                                                                <ModalCloseButton />
-                                                                <ModalBody>
-                                                                    <div>
-                                                                        <div className="flex justify-between mb-3 items-center">
-                                                                            <div className='w-4/10'>
-                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Nama Siswa</div>
-                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nama_siswa}</div>
-                                                                            </div>
-                                                                            <div className='w-4/10 '>
-                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">NISN</div>
-                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nisn === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.nisn)}</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="flex justify-between mb-3 items-center">
-                                                                            <div className='w-4/10'>
-                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tanggal Lahir</div>
-                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tanggal_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tanggal_lahir)}</div>
-                                                                            </div>
-                                                                            <div className='w-4/10'>
-                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tempat Lahir</div>
-                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tempat_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tempat_lahir)}</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className='my-5'>
-                                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Alamat</div>
-                                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.alamat === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.alamat)}</div>
-                                                                        </div>
-                                                                        <div className='my-5'>
-                                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Email</div>
-                                                                            <div className="bg-pink-200 text-right px-5 py-2 text-md rounded-md">{siswa.email}</div>
-                                                                        </div>
-                                                                        <div className='my-5'>
-                                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Whatsapp</div>
-                                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nomor_telp}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </ModalBody>
-                                                                <ModalFooter>
-                                                                    <Button onClick={onTutup1}>Close</Button>
-                                                                </ModalFooter>
-                                                            </ModalContent>
-                                                        </Modal>
-                                                        <Button
-                                                            colorScheme='red'
-                                                            size='sm'
-                                                            shadow='md'
-                                                            onClick={
-                                                                () => multiFunc(row.id)
-                                                            }
-                                                        >
-                                                            Delete
-                                                        </Button>
-                                                        <AlertDialog
-                                                            isOpen={open}
-                                                            onClose={onTutup}
-                                                        >
-                                                            <AlertDialogOverlay>
-                                                                <AlertDialogContent>
-                                                                    <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                                                                        Hapus Akun Siswa
-                                                                    </AlertDialogHeader>
-                                                                    <AlertDialogBody>
-                                                                        Apakah kamu yakin untuk menghapus akun siswa ?.
-                                                                    </AlertDialogBody>
-
-                                                                    <AlertDialogFooter>
-                                                                        <Button onClick={onTutup}>
-                                                                            Cancel
-                                                                        </Button>
-                                                                        <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
-                                                                            Delete
-                                                                        </Button>
-                                                                    </AlertDialogFooter>
-                                                                </AlertDialogContent>
-                                                            </AlertDialogOverlay>
-                                                        </AlertDialog>
-                                                    </div>
-                                                </Td>
-                                            </Tr>
-                                        ))}
-                                    </Tbody>
-                                )}
-                        </Table>
-                        </div>
-                        <DataTable
-                            title="Movies"
-                            columns={columns}
-                            data={data}
-                            defaultSortFieldId={1}
-                            // sortIcon={<SortIcon />}
-                            pagination
-                            selectableRows
-                        />
-                        {isLoading ? (
-                            <div className="flex mt-10 justify-center">
-                                <Spinner
-                                    thickness='5px'
-                                    speed='0.65s'
-                                    emptyColor='gray.200'
-                                    color='blue.500'
-                                    size='xl'
-                                />
+        <React.Fragment>
+            <Layout>
+                <div className="bg-transparent sm-max:h-screen sm-max:w-screen h-full w-10/12 px-20 sm-max:px-5">
+                    <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-10 p-5 sm-max:w-full sm-max:mx-2 sm-max:px-0">
+                        <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-lg p-5 mb-5 sm-max:w-full text-white">
+                            <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/4 items-center sm-max:w-1/3 sm-max:text-xs">
+                                <IoMdPersonAdd className="w-10 sm-max:w-6 sm-max:h-6 h-10" />
+                                Tambah Siswa
                             </div>
-                        ) : ''}
-                    </div>
-                    {(() => {
-                        if (pageakhir === 1) {
-                            return (
-                                <div className="flex mt-10 justify-center items-center sm-max:mt-5">
-                                    <div className="text-2xl text-gray-400 mx-3">
-                                        <MdOutlineNavigateBefore />
+                            <div className="w-1/4 sm-max:hidden"></div>
+                            <div className="flex w-1/4 justify-evenly sm-max:w-2/3">
+                                <Button size={MediaQ ? 'md' : 'xs'} colorScheme='twitter' color='white' shadow='md'>
+                                    <div className="flex items-center sm-max:text-xs">
+                                        Export
+                                        <AiFillFileAdd />
                                     </div>
-                                    <div className="bg-gray-200 p-3 w-12 h-12 text-center shadow-inner shadow-slate-300 font-bahnschrift rounded-md">{page}</div>
-                                    <div className="text-2xl text-gray-400 font-bold mx-3">
-                                        <MdOutlineNavigateNext />
-                                    </div>
-                                </div>
-                            )
+                                </Button>
+                                <Button size={MediaQ ? 'md' : 'xs'} colorScheme='messenger' shadow='md' onClick={onOpen}>
+                                    <p className="sm-max:text-xs">Tambah +</p>
+                                </Button>
+                            </div>
+                            <div>
 
-                        } else {
-                            return (
-                                <div className="flex mt-10 justify-center items-center sm-max:mt-5">
-                                    {page === 1 ? (
-                                        <div className="text-2xl text-gray-400 mx-3" onClick={handleBeforePage}>
-                                            <MdOutlineNavigateBefore />
-                                        </div>
-                                    ) : (
-                                        <div className="text-2xl text-blue-400 mx-3" onClick={handleBeforePage}>
-                                            <MdOutlineNavigateBefore />
-                                        </div>
+                            </div>
+                            <Drawer
+                                isOpen={isOpen}
+                                placement='right'
+                                onClose={onClose}
+                                size='sm'
+                            >
+                                <DrawerOverlay />
+                                <Formik
+                                    initialValues={initialValues}
+                                    validationSchema={RegisterSchema}
+                                    enableReinitialize
+                                    onSubmit={onSubmit}
+                                >
+                                    {({
+                                        values,
+                                        errors,
+                                        touched,
+                                        handleChange,
+                                        handleBlur,
+                                        handleSubmit,
+                                        isSubmitting,
+                                    }) => (
+                                        <DrawerContent>
+                                            <DrawerCloseButton />
+                                            <DrawerHeader
+                                                borderBottomWidth='1px'
+                                            >
+                                                Buat Akun Siswa
+                                            </DrawerHeader>
+                                            <form onSubmit={handleSubmit} className='w-full h-full'>
+                                                <DrawerBody>
+                                                    <div>
+                                                        <div className='my-2'>
+                                                            <FormLabel htmlFor='nisn'>NISN</FormLabel>
+                                                            <Input
+                                                                placeholder='Isi NISN Siswa'
+                                                                id='nisn'
+                                                                type='number'
+                                                                value={values.nisn}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                error={errors.nisn && touched.nisn}
+                                                                disabled={isSubmitting}
+                                                            />
+                                                            <div className=' text-red-400 text-xs mt-2'>{errors.nisn && touched.nisn && errors.nisn}</div>
+                                                        </div>
+                                                        <div className='my-2'>
+                                                            <FormLabel htmlFor='nama_user'>Username</FormLabel>
+                                                            <Input
+                                                                placeholder='Enter your name'
+                                                                id='nama_user'
+                                                                type='text'
+                                                                value={values.nama_user}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                error={errors.nama_user && touched.nama_user}
+                                                                disabled={isSubmitting}
+                                                            />
+                                                            <div className=' text-red-400 text-xs mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
+                                                        </div>
+                                                        <div className='my-2'>
+                                                            <FormLabel htmlFor='email'>Email</FormLabel>
+                                                            <Input
+                                                                placeholder='Enter your Email'
+                                                                id='email'
+                                                                type='email'
+                                                                value={values.email}
+                                                                onBlur={handleBlur}
+                                                                error={errors.email && touched.email}
+                                                                onChange={handleChange}
+                                                                disabled={isSubmitting}
+                                                            />
+                                                            <div className=' text-red-400 text-xs mt-2'>{errors.email && touched.email && errors.email}</div>
+                                                        </div>
+                                                        <div className='my-2'>
+                                                            <FormLabel htmlFor='alamat'>Alamat</FormLabel>
+                                                            <Input
+                                                                placeholder='isi Alamat Siswa'
+                                                                id='alamat'
+                                                                type='text'
+                                                                value={values.alamat}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                error={errors.alamat && touched.alamat}
+                                                                disabled={isSubmitting}
+                                                            />
+                                                            <div className=' text-red-400 text-xs mt-2'>{errors.alamat && touched.alamat && errors.alamat}</div>
+                                                        </div>
+                                                        <div className='my-2'>
+                                                            <FormLabel htmlFor='sekolah'>Asal Sekolah</FormLabel>
+                                                            <Input
+                                                                placeholder='Asal Sekolah Siswa'
+                                                                id='sekolah'
+                                                                type='text'
+                                                                value={values.sekolah}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                error={errors.sekolah && touched.sekolah}
+                                                                disabled={isSubmitting}
+                                                            />
+                                                            <div className=' text-red-400 text-xs mt-2'>{errors.sekolah && touched.sekolah && errors.sekolah}</div>
+                                                        </div>
+                                                        <div className='my-2'>
+                                                            <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
+                                                            <Input
+                                                                placeholder='Isi nomor Whatsapp' g
+                                                                id='nomor_telp'
+                                                                type='text'
+                                                                value={values.nomor_telp}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                error={errors.nomor_telp && touched.nomor_telp}
+                                                                disabled={isSubmitting}
+                                                            />
+                                                            <div className=' text-red-400 text-xs mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
+                                                        </div>
+                                                    </div>
+                                                </DrawerBody>
+                                                <DrawerFooter>
+                                                    <Button variant='outline' mr={3} onClick={onClose}>
+                                                        Cancel
+                                                    </Button>
+                                                    <Button
+                                                        colorScheme='blue'
+                                                        htmlType="submit"
+                                                        disabled={isSubmitting}
+                                                        block
+                                                        variant="solid"
+                                                        bgColor="#1F8AC6"
+                                                        color="white"
+                                                        loading={isSubmitting}
+                                                        type='submit'
+                                                        onSubmit={handleSubmit}
+                                                    >
+                                                        {isSubmitting ?
+                                                            (<Spinner
+                                                                thickness='5px'
+                                                                speed='0.65s'
+                                                                emptyColor='gray.200'
+                                                                color='blue.500'
+                                                                size='xl'
+                                                            />) : "Save"}
+                                                    </Button>
+                                                </DrawerFooter>
+                                            </form>
+                                        </DrawerContent>
                                     )}
-                                    <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
-                                    {pageakhir === page ? (
+                                </Formik>
+                            </Drawer>
+                        </div>
+                        <div className="h-2/3 m-10 sm-max:w-1/2 sm-max:h-6/10">
+                            {/* <div className="hidden">
+                            <Table variant='striped' shadow='xl' rounded='xl' size='sm' colorScheme='whatsapp'>
+                                <Thead>
+                                    <Tr>
+                                        <Th padding='3'>
+                                            <div className="text-center text-blue-600 sm-max:text-xs">
+                                                Nama User
+                                            </div>
+                                        </Th>
+                                        <Th>
+                                            <div className="text-center text-blue-600 sm-max:text-xs">
+                                                Email
+                                            </div>
+                                        </Th>
+                                        <Th>
+                                            <div className="text-center text-blue-600 sm-max:text-xs">
+                                                Nomor Whatsapp
+                                            </div>
+                                        </Th>
+                                        <Th>
+                                            <div className="text-center text-blue-600 sm-max:text-xs">
+                                                Action
+                                            </div>
+                                        </Th>
+                                    </Tr>
+                                </Thead>
+                                {isLoading ? ''
+                                    : (
+                                        <Tbody>
+                                            {data?.map((row, index) => (
+                                                <Tr key={index}>
+                                                    <Td className=" text-amber-800 font-semibold">
+                                                        <div className="ml-5 my-3 uppercase">
+                                                            {row.nama_siswa}
+                                                        </div>
+                                                    </Td>
+                                                    <Td>
+                                                        <div className="text-center">
+                                                            {row.email}
+                                                        </div></Td>
+                                                    <Td>
+                                                        <div className="text-center">
+                                                            {row.nomor_telp}
+                                                        </div></Td>
+                                                    <Td>
+                                                        <div className="flex justify-center">
+                                                            <Button
+                                                                colorScheme='facebook'
+                                                                className="mr-5"
+                                                                size='sm'
+                                                                shadow='md'
+                                                                onClick={() => multiFunct(row.user_id)}
+                                                            >
+                                                                Show
+                                                            </Button>
+                                                            <Modal onClose={onTutup1} isOpen={buka} size='xl' isCentered>
+                                                                <ModalOverlay bg='blackAlpha.200'
+                                                                    backdropFilter='auto'
+                                                                    backdropBlur='1px' />
+                                                                <ModalContent >
+                                                                    <ModalHeader>Info Akun Siswa</ModalHeader>
+                                                                    <ModalCloseButton />
+                                                                    <ModalBody>
+                                                                        <div>
+                                                                            <div className="flex justify-between mb-3 items-center">
+                                                                                <div className='w-4/10'>
+                                                                                    <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Nama Siswa</div>
+                                                                                    <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nama_siswa}</div>
+                                                                                </div>
+                                                                                <div className='w-4/10 '>
+                                                                                    <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">NISN</div>
+                                                                                    <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nisn === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.nisn)}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className="flex justify-between mb-3 items-center">
+                                                                                <div className='w-4/10'>
+                                                                                    <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tanggal Lahir</div>
+                                                                                    <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tanggal_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tanggal_lahir)}</div>
+                                                                                </div>
+                                                                                <div className='w-4/10'>
+                                                                                    <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tempat Lahir</div>
+                                                                                    <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tempat_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tempat_lahir)}</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div className='my-5'>
+                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Alamat</div>
+                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.alamat === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.alamat)}</div>
+                                                                            </div>
+                                                                            <div className='my-5'>
+                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Email</div>
+                                                                                <div className="bg-pink-200 text-right px-5 py-2 text-md rounded-md">{siswa.email}</div>
+                                                                            </div>
+                                                                            <div className='my-5'>
+                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Whatsapp</div>
+                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nomor_telp}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ModalBody>
+                                                                    <ModalFooter>
+                                                                        <Button onClick={onTutup1}>Close</Button>
+                                                                    </ModalFooter>
+                                                                </ModalContent>
+                                                            </Modal>
+                                                            <Button
+                                                                colorScheme='red'
+                                                                size='sm'
+                                                                shadow='md'
+                                                                onClick={
+                                                                    () => multiFunc(row.id)
+                                                                }
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                            <AlertDialog
+                                                                isOpen={open}
+                                                                onClose={onTutup}
+                                                            >
+                                                                <AlertDialogOverlay>
+                                                                    <AlertDialogContent>
+                                                                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                                                                            Hapus Akun Siswa
+                                                                        </AlertDialogHeader>
+                                                                        <AlertDialogBody>
+                                                                            Apakah kamu yakin untuk menghapus akun siswa ?.
+                                                                        </AlertDialogBody>
+
+                                                                        <AlertDialogFooter>
+                                                                            <Button onClick={onTutup}>
+                                                                                Cancel
+                                                                            </Button>
+                                                                            <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
+                                                                                Delete
+                                                                            </Button>
+                                                                        </AlertDialogFooter>
+                                                                    </AlertDialogContent>
+                                                                </AlertDialogOverlay>
+                                                            </AlertDialog>
+                                                        </div>
+                                                    </Td>
+                                                </Tr>
+                                            ))}
+                                        </Tbody>
+                                    )}
+                            </Table>
+                        </div> */}
+                            {isLoading ? '' :
+                                (
+                                    <DataTable
+                                        columns={columns}
+                                        data={dataakhir}
+                                        defaultSortFieldId={1}
+                                        pagination
+                                        selectableRows
+                                    />
+                                )
+                            }
+                            {isLoading ? (
+                                <div className="flex mt-10 justify-center">
+                                    <Spinner
+                                        thickness='5px'
+                                        speed='0.65s'
+                                        emptyColor='gray.200'
+                                        color='blue.500'
+                                        size='xl'
+                                    />
+                                </div>
+                            ) : ''}
+                        </div>
+                        {(() => {
+                            if (pageakhir === 1) {
+                                return (
+                                    <div className="flex mt-10 justify-center items-center sm-max:mt-5">
+                                        <div className="text-2xl text-gray-400 mx-3">
+                                            <MdOutlineNavigateBefore />
+                                        </div>
+                                        <div className="bg-gray-200 p-3 w-12 h-12 text-center shadow-inner shadow-slate-300 font-bahnschrift rounded-md">{page}</div>
                                         <div className="text-2xl text-gray-400 font-bold mx-3">
                                             <MdOutlineNavigateNext />
                                         </div>
-                                    ) : (
-                                        <div className="text-2xl text-blue-400 font-bold mx-3" onClick={handleNextPage}>
-                                            <MdOutlineNavigateNext />
-                                        </div>
-                                    )}
-                                </div>
-                            )
-                        }
-                    })()}
+                                    </div>
+                                )
+
+                            } else {
+                                return (
+                                    <div className="flex mt-10 justify-center items-center sm-max:mt-5">
+                                        {page === 1 ? (
+                                            <div className="text-2xl text-gray-400 mx-3" onClick={handleBeforePage}>
+                                                <MdOutlineNavigateBefore />
+                                            </div>
+                                        ) : (
+                                            <div className="text-2xl text-blue-400 mx-3" onClick={handleBeforePage}>
+                                                <MdOutlineNavigateBefore />
+                                            </div>
+                                        )}
+                                        <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
+                                        {pageakhir === page ? (
+                                            <div className="text-2xl text-gray-400 font-bold mx-3">
+                                                <MdOutlineNavigateNext />
+                                            </div>
+                                        ) : (
+                                            <div className="text-2xl text-blue-400 font-bold mx-3" onClick={handleNextPage}>
+                                                <MdOutlineNavigateNext />
+                                            </div>
+                                        )}
+                                    </div>
+                                )
+                            }
+                        })()}
+                    </div>
                 </div>
-            </div>
-        </Layout >
+            </Layout >
+        </React.Fragment>
     );
 }
