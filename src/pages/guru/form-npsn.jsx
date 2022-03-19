@@ -25,6 +25,7 @@ const FormNpsn = () => {
         if (result.data.status === "success") return navigate("/dash-guru/home");
         console.log(result);
     };
+    console.log(localStorage.getItem("token"))
     return (
         <React.Fragment>
             <div className="flex">
