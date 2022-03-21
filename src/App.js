@@ -28,6 +28,7 @@ import Profile from './pages/guru/profile';
 import EditProfile from './pages/guru/editprofile';
 import EditProfileSiswa from './pages/siswa/editprofile';
 import SoalSiswa from './pages/siswa/soal'
+import SoalGuru from './pages/guru/soal-angket'
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path='dash-guru/edit-profile' element={<EditProfile />}/>
         <Route path='dash-guru/npsn' element={<Npsn />}/>
         <Route path='dash-guru/angket' element={<Angket />}/>
+        <Route path='dash-guru/angket/:id' element={<SoalGuru />}/>
         <Route path='dash-guru/murid' element={<Murid />}/>
       </Route>
 

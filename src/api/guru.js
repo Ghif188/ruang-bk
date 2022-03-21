@@ -50,3 +50,13 @@ export function getAngket() {
 export function tambahAngket(values) {
   return axios.post("/angket", values);
 }
+export function deleteAngket(id) {
+  return axios.delete(`/angket/${id}`);
+}
+
+export function getSoalAngket(id) {
+  console.log(id)
+  return axios.get(`/angket/${id.id}`);
+}
+
+

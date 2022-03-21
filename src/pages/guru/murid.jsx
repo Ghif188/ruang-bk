@@ -534,13 +534,40 @@ export default function Murid() {
                         </div> */}
                             {isLoading ? '' :
                                 (
-                                    <DataTable
-                                        columns={columns}
-                                        data={dataakhir}
-                                        defaultSortFieldId={1}
-                                        pagination
-                                        selectableRows
-                                    />
+                                    <div>
+                                        <DataTable
+                                            columns={columns}
+                                            data={dataakhir}
+                                            defaultSortFieldId={1}
+                                            pagination
+                                            selectableRows
+                                        />
+
+                                        <AlertDialog
+                                            isOpen={open}
+                                            onClose={onTutup}
+                                        >
+                                            <AlertDialogOverlay>
+                                                <AlertDialogContent>
+                                                    <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                                                        Hapus Akun Siswa
+                                                    </AlertDialogHeader>
+                                                    <AlertDialogBody>
+                                                        Apakah kamu yakin untuk menghapus akun siswa ?.
+                                                    </AlertDialogBody>
+
+                                                    <AlertDialogFooter>
+                                                        <Button onClick={onTutup}>
+                                                            Cancel
+                                                        </Button>
+                                                        <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
+                                                            Delete
+                                                        </Button>
+                                                    </AlertDialogFooter>
+                                                </AlertDialogContent>
+                                            </AlertDialogOverlay>
+                                        </AlertDialog>
+                                    </div>
                                 )
                             }
                             {isLoading ? (
