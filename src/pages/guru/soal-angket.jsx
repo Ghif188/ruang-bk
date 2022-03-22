@@ -36,7 +36,7 @@ export default function Soalangket() {
     console.log(data)
     return (
         <div className="h-screen relative">
-            <div className="h-1/10 w-full fixed shadow-md bg-sky-700">
+            <div className="h-1/10 w-full fixed shadow-md z-20 bg-sky-700">
 
             </div>
             <div className="w-full h-full">
@@ -50,12 +50,11 @@ export default function Soalangket() {
                                 </p>
                                 <div className="font-light flex justify-between items-center w-full">
                                     Tenggat: 20-09-2004
-                                    <div>
+                                    <div className=" z-0">
                                         <Button
                                             rounded='lg'
                                             size='md'
                                             colorScheme='twitter'
-                                            ite
                                         >
                                             <div className="flex items-center">
                                                 Edit Soal
@@ -70,96 +69,26 @@ export default function Soalangket() {
                         </div>
                         <div className="mt-5 rounded-xl">
                             <Accordion defaultIndex={[0]} allowMultiple>
-                                <AccordionItem mb={3}>
-                                    <AccordionButton _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                        <div className="w-full flex text-left justify-between">
-                                            1. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic provident corporis, reprehenderit optio sunt harum officiis ea? Sit quia in, pariatur, consequatur eveniet velit deserunt ut numquam magnam autem ea.
-                                            <AccordionIcon />
-                                        </div>
-                                    </AccordionButton>
-                                    <AccordionPanel pb={4}>
-                                        Jawaban :
-                                        <div className="flex items-center mt-3 justify-between">
-                                            <div>A) Aku</div>
-                                            <div>B) Dia</div>
-                                            <div>C) Kita</div>
-                                            <div>D) Kamu</div>
-                                            <div>E) Kalian</div>
-                                        </div>
-                                    </AccordionPanel>
-                                </AccordionItem>
-                                <AccordionItem mb={3}>
-                                    <AccordionButton _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                        <div className="w-full flex text-left justify-between">
-                                            2. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic provident corporis, reprehenderit optio sunt harum officiis ea? Sit quia in, pariatur, consequatur eveniet velit deserunt ut numquam magnam autem ea.
-                                            <AccordionIcon />
-                                        </div>
-                                    </AccordionButton>
-                                    <AccordionPanel pb={4}>
-                                        Jawaban :
-                                        <div className="flex items-center mt-3 justify-between">
-                                            <div>A) Aku</div>
-                                            <div>B) Dia</div>
-                                            <div>C) Kita</div>
-                                            <div>D) Kamu</div>
-                                            <div>E) Kalian</div>
-                                        </div>
-                                    </AccordionPanel>
-                                </AccordionItem>
-                                <AccordionItem mb={3}>
-                                    <AccordionButton _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                        <div className="w-full flex text-left justify-between">
-                                            3. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic provident corporis, reprehenderit optio sunt harum officiis ea? Sit quia in, pariatur, consequatur eveniet velit deserunt ut numquam magnam autem ea.
-                                            <AccordionIcon />
-                                        </div>
-                                    </AccordionButton>
-                                    <AccordionPanel pb={4}>
-                                        Jawaban :
-                                        <div className="flex items-center mt-3 justify-between">
-                                            <div>A) Aku</div>
-                                            <div>B) Dia</div>
-                                            <div>C) Kita</div>
-                                            <div>D) Kamu</div>
-                                            <div>E) Kalian</div>
-                                        </div>
-                                    </AccordionPanel>
-                                </AccordionItem>
-                                <AccordionItem mb={3}>
-                                    <AccordionButton _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                        <div className="w-full flex text-left justify-between">
-                                            4. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic provident corporis, reprehenderit optio sunt harum officiis ea? Sit quia in, pariatur, consequatur eveniet velit deserunt ut numquam magnam autem ea.
-                                            <AccordionIcon />
-                                        </div>
-                                    </AccordionButton>
-                                    <AccordionPanel pb={4}>
-                                        Jawaban :
-                                        <div className="flex items-center mt-3 justify-between">
-                                            <div>A) Aku</div>
-                                            <div>B) Dia</div>
-                                            <div>C) Kita</div>
-                                            <div>D) Kamu</div>
-                                            <div>E) Kalian</div>
-                                        </div>
-                                    </AccordionPanel>
-                                </AccordionItem>
-                                <AccordionItem mb={3}>
-                                    <AccordionButton _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                        <div className="w-full flex text-left justify-between">
-                                            5. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic provident corporis, reprehenderit optio sunt harum officiis ea? Sit quia in, pariatur, consequatur eveniet velit deserunt ut numquam magnam autem ea.
-                                            <AccordionIcon />
-                                        </div>
-                                    </AccordionButton>
-                                    <AccordionPanel pb={4}>
-                                        Jawaban :
-                                        <div className="flex items-center mt-3 justify-between">
-                                            <div>A) Aku</div>
-                                            <div>B) Dia</div>
-                                            <div>C) Kita</div>
-                                            <div>D) Kamu</div>
-                                            <div>E) Kalian</div>
-                                        </div>
-                                    </AccordionPanel>
-                                </AccordionItem>
+                                {data?.data.map((soal, index) => (
+                                    <AccordionItem key={index} mb={3}>
+                                        <AccordionButton _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                            <div className="w-full flex text-left justify-between">
+                                                {index + 1}. {soal.nama_soal}
+                                                <AccordionIcon />
+                                            </div>
+                                        </AccordionButton>
+                                        <AccordionPanel pb={4}>
+                                            Jawaban :
+                                            <div className="flex items-center mt-3 justify-between">
+                                                <div>{soal.jawaban[2]}{soal.jawaban[6]}</div>
+                                                <div>B) Dia</div>
+                                                <div>C) Kita</div>
+                                                <div>D) Kamu</div>
+                                                <div>E) Kalian</div>
+                                            </div>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                ))}
                             </Accordion>
                         </div>
                     </div>
