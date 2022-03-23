@@ -11,7 +11,8 @@ import {
     Button
 } from '@chakra-ui/react'
 import { FiEdit } from 'react-icons/fi'
-
+import {IoMdArrowRoundBack} from 'react-icons/io'
+import { Link } from "react-router-dom";
 export default function Soalangket() {
     let id = useParams().id
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
@@ -36,8 +37,10 @@ export default function Soalangket() {
     console.log(data)
     return (
         <div className="h-screen relative">
-            <div className="h-1/10 w-full fixed shadow-md z-20 bg-sky-700">
-
+            <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">
+                <Link to='/dash-guru/angket'>
+                    <IoMdArrowRoundBack className="text-2xl"/>
+                </Link>
             </div>
             <div className="w-full h-full">
                 <div className="h-1/10" />
@@ -80,11 +83,11 @@ export default function Soalangket() {
                                         <AccordionPanel pb={4}>
                                             Jawaban :
                                             <div className="flex items-center mt-3 justify-between">
-                                                <div>{soal.jawaban[2]}{soal.jawaban[6]}</div>
-                                                <div>B) Dia</div>
-                                                <div>C) Kita</div>
-                                                <div>D) Kamu</div>
-                                                <div>E) Kalian</div>
+                                                <div>A) {soal.jawaban[2]}</div>
+                                                <div>B) {soal.jawaban[6]}</div>
+                                                <div>C) {soal.jawaban[10]}</div>
+                                                <div>D) {soal.jawaban[14]}</div>
+                                                <div>E) {soal.jawaban[18]}</div>
                                             </div>
                                         </AccordionPanel>
                                     </AccordionItem>

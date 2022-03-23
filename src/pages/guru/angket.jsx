@@ -257,52 +257,67 @@ export default function Angket() {
                             {/* bawah */}
                             <div className="h-3/4 p-5 mt-5 scroll-smooth overflow-y-scroll snap-y">
                                 {
-                                    data?.data.length === 0 ? (
-                                        <div className="w-full flex items-center">Belum Ada Angket</div>
+                                    isLoading ? (
+                                        <div className=" h-full w-10/12 p-8 justify-center flex items-center">
+                                            <Spinner
+                                                thickness='5px'
+                                                speed='0.65s'
+                                                emptyColor='gray.200'
+                                                color='blue.500'
+                                                size='xl'
+                                            />
+                                        </div>
                                     ) : (
-                                        <div>{data?.data.map((angket, index) => (
-                                            <div key={index} className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3">
-                                                <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-oren">
-                                                    <div className="w-2/3">
-                                                        <p className="font-semibold pb-3 text-lg border-b-2">{angket.nama_angket}</p>
-                                                        <div className="flex pt-3 justify-between items-center">
-                                                            <p className="text-sm">{angket.keterangan}</p>
-                                                            <div className="text-gray-500">
-                                                                <span className="text-sm text-white font-semibold mr-2">tenggat :</span>{angket.batas_waktu}
+                                        <div>
+                                            {
+                                                data?.data.length === 0 ? (
+                                                    <div className="w-full flex justify-center">Belum Ada Angket</div>
+                                                ) : (
+                                                    <div>{data?.data.map((angket, index) => (
+                                                        <div key={index} className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3">
+                                                            <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-oren">
+                                                                <div className="w-2/3">
+                                                                    <p className="font-semibold pb-3 text-lg border-b-2">{angket.nama_angket}</p>
+                                                                    <div className="flex pt-3 justify-between items-center">
+                                                                        <p className="text-sm">{angket.keterangan}</p>
+                                                                        <div className="text-gray-500">
+                                                                            <span className="text-sm text-white font-semibold mr-2">tenggat :</span>{angket.batas_waktu}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="w-3/10 flex justify-between items-center">
+                                                                    <Button
+                                                                        rounded='lg'
+                                                                        size='md'
+                                                                        colorScheme='green'
+                                                                    >
+                                                                        Edit
+                                                                    </Button>
+                                                                    <Button
+                                                                        rounded='lg'
+                                                                        size='md'
+                                                                        colorScheme='red'
+                                                                        onClick={() => multiFunct(angket.id)}
+                                                                    >
+                                                                        Delete
+                                                                    </Button>
+                                                                    <Button
+                                                                        rounded='lg'
+                                                                        size='md'
+                                                                        colorScheme='twitter'
+                                                                        onClick={() => navigate(`/dash-guru/angket/${angket.id}`)}
+                                                                    >
+                                                                        Lihat
+                                                                    </Button>
+
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                    ))}
                                                     </div>
-                                                    <div className="w-3/10 flex justify-between items-center">
-                                                        <Button
-                                                            rounded='lg'
-                                                            size='md'
-                                                            colorScheme='green'
-                                                        >
-                                                            Edit
-                                                        </Button>
-                                                        <Button
-                                                            rounded='lg'
-                                                            size='md'
-                                                            colorScheme='red'
-                                                            onClick={() => multiFunct(angket.id)}
-                                                        >
-                                                            Delete
-                                                        </Button>
-                                                        <Button
-                                                            rounded='lg'
-                                                            size='md'
-                                                            colorScheme='twitter'
-                                                            onClick={() => navigate(`/dash-guru/angket/${angket.id}`)}
-                                                        >
-                                                            Lihat
-                                                        </Button>
-        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                            
+                                                )
+                                            }
+                                        </div>
                                     )
                                 }
                             </div>
