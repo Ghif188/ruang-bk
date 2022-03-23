@@ -23,7 +23,7 @@ export default function MuridLayout({ children }) {
     };
     const logClear = () => {
         localStorage.clear()
-        navigate("/log")
+        navigate("/login")
     }
     const { isLoading, isError, data, isFetching } = useQuery(
         [

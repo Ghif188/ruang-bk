@@ -39,7 +39,8 @@ const Register = () => {
     const onSubmit = async (values) => {
         const result = await dispatch(authRegister(values));
         if (result.message === "Success") {
-            return navigate("/dash-guru/npsn");
+            navigate("/dash-guru/npsn");
+            window.location.reload()
         } else {
             toast({
                 title: 'Failed',

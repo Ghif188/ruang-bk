@@ -7,6 +7,7 @@ import DashSiswa from "./pages/siswa/dashboard"
 import ProfileSiswa from "./pages/siswa/profile"
 import DashGuru from "./pages/guru/dashboard"
 import ProfileAdmin from "./pages/admin/profile"
+import EditSoal from './pages/guru/edit-soal';
 import ManageUser from "./pages/admin/manage-akun"
 import Home from "../src/pages/home"
 import Npsn from "../src/pages/guru/form-npsn"
@@ -22,21 +23,23 @@ import ProtectRoute from "./routers/ProtectRoute";
 import ProtectedLogin from "./routers/ProtectedLogin";
 import ProtectedGuru from "./routers/ProtectedGuru";
 import ProtectedMurid from "./routers/ProtectedMurid";
-import Angket from './pages/guru/angket';
+import AngketGuru from './pages/guru/angket';
 import Murid from './pages/guru/murid';
 import Profile from './pages/guru/profile';
 import EditProfile from './pages/guru/editprofile';
 import EditProfileSiswa from './pages/siswa/editprofile';
 import SoalSiswa from './pages/siswa/soal'
 import SoalGuru from './pages/guru/soal-angket'
+import AngketAdmin from './pages/admin/angket';
+import Soalangket from './pages/admin/soal-angket';
 
 function App() {
   return (
     <Routes>
 
       <Route element={<ProtectedLogin />}>
-        <Route path='log' element={<Log />}/>
-        <Route path='reg' element={<Reg />}/>
+        <Route path='login' element={<Log />}/>
+        <Route path='register' element={<Reg />}/>
         <Route path="/home" element={<Home/>}/>
       </Route>
 
@@ -47,8 +50,9 @@ function App() {
         <Route path='dash-guru/profile' element={<Profile />}/>
         <Route path='dash-guru/edit-profile' element={<EditProfile />}/>
         <Route path='dash-guru/npsn' element={<Npsn />}/>
-        <Route path='dash-guru/angket' element={<Angket />}/>
+        <Route path='dash-guru/angket' element={<AngketGuru />}/>
         <Route path='dash-guru/angket/:id' element={<SoalGuru />}/>
+        <Route path='dash-guru/angket/edit/:id' element={<EditSoal />}/>
         <Route path='dash-guru/murid' element={<Murid />}/>
       </Route>
 
@@ -101,6 +105,8 @@ function App() {
 
       {/* ROUTE SISWA */}
       
+      <Route exact path='/dash-admin/angket' element={<AngketAdmin/>}></Route>
+      <Route exact path='/dash-admin/angket/:id' element={<Soalangket/>}></Route>
 
     </Routes>
   );

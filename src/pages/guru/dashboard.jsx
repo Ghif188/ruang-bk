@@ -7,30 +7,31 @@ import { useQuery } from "react-query";
 
 export default function Profile() {
     const navigate = useNavigate();
-    const { isLoading, isError, data, isFetching, status, error, } = useQuery(
-        [
-            "jadwal",
-            {
-            },
-        ],
+    // const { isLoading, isError, data, isFetching, status, error, } = useQuery(
+    //     [
+    //         "jadwal",
+    //         {
+    //         },
+    //     ],
 
-        () =>
-            getProfile({
-            }),
+    //     () =>
+    //         getProfile({
+    //         }),
 
-        {
-            keepPreviousData: true,
-            select: (response) => response.data.data,
-        }
-    );
-    if (status === 'error') {
-        console.log(error.message)
-    } if (status === 'loading') {
-        console.log('loading')
-    } else {
-        console.log('berdata')
-    }
-    console.log(data)
+    //     {
+    //         keepPreviousData: true,
+    //         select: (response) => response.data.data,
+    //     }
+    // );
+    // if (status === 'error') {
+    //     console.log(error.message)
+    // } if (status === 'loading') {
+    //     console.log('loading')
+    // } else {
+    //     console.log('berdata')
+    // }
+    // console.log(data)
+    console.log(localStorage.getItem("token"))
     return (
         <Layout>
             <div className="bg-white h-full w-10/12 p-10  shadow-lg">

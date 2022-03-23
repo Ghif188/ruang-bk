@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { formNpsn } from "../../api/guru";
 
 const NpsnSchema = Yup.object().shape({
-    npsn: Yup.string().min(8, "Minimal 8 Digit").max(8, "Maximal 8 Digit").required("Wajib terisi *"),
+    npsn: Yup.string().min(6, "Minimal 6 Digit").max(6, "Maximal 6 Digit").required("Wajib terisi *"),
     sekolah: Yup.string().required("Wajib terisi *")
 });
 

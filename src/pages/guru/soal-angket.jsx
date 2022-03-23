@@ -2,6 +2,7 @@ import React from "react"
 import { useParams } from "react-router"
 import { getSoalAngket } from "../../api/guru";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router";
 import {
     Accordion,
     AccordionItem,
@@ -14,6 +15,7 @@ import { FiEdit } from 'react-icons/fi'
 import {IoMdArrowRoundBack} from 'react-icons/io'
 import { Link } from "react-router-dom";
 export default function Soalangket() {
+    const navigate = useNavigate()
     let id = useParams().id
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
         [
@@ -58,6 +60,7 @@ export default function Soalangket() {
                                             rounded='lg'
                                             size='md'
                                             colorScheme='twitter'
+                                            onClick={navigate(`dash-guru/angket/edit/{id}`)}
                                         >
                                             <div className="flex items-center">
                                                 Edit Soal
