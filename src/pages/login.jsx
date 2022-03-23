@@ -52,8 +52,10 @@ const Login = () => {
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
                     return navigate("/dash-guru/home");
+                    window.location.reload()
                 } else {
                     return navigate("/dash-guru/npsn")
+                    window.location.reload()
                 }
             }
             if (result.user.role === 3) {
@@ -101,7 +103,7 @@ const Login = () => {
         backgroundImage: `url(${Bg})`
     };
     const handleNavigate = () => {
-        return navigate("/reg");
+        return navigate("/register");
     };
     console.log(localStorage)
     return (
