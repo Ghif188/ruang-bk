@@ -15,10 +15,10 @@ import {
     TableCaption,
 } from '@chakra-ui/react'
 import { FiEdit } from 'react-icons/fi'
-import { IoMdArrowRoundBack } from 'react-icons/io'
+import { IoMdArrowRoundBack, IoMdAddCircle } from 'react-icons/io'
 import { Link } from "react-router-dom";
 export default function Soalangket() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     let id = useParams().id
     console.log(id)
     const [inputList, setInputList] = React.useState([{}]);
@@ -55,10 +55,10 @@ export default function Soalangket() {
                                             rounded='lg'
                                             size='md'
                                             colorScheme='twitter'
-                                            onClick={() => navigate(`dash-admin/angket/edit/{id}`)}
+                                            onClick={() => navigate(`dash-admin/angket/edit/${id}`)}
                                         >
                                             <div className="flex items-center">
-                                                Edit Soal
+                                                Simpan Soal
                                                 <span className="ml-3">
                                                     <FiEdit />
                                                 </span>
@@ -68,8 +68,8 @@ export default function Soalangket() {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-5 rounded-xl">
-                            <Table variant='striped' colorScheme='teal'>
+                        <div className="mt-5 rounded sky-xl">
+                            <Table variant='striped' colorScheme='twitter'>
                                 <Thead>
                                     <Tr>
                                         <Th>No.</Th>
@@ -79,29 +79,37 @@ export default function Soalangket() {
                                 <Tbody>
                                     {inputList.map((input, index) => (
                                         <Tr>
-                                            <Td>1.</Td>
+                                            <Td>{index + 1}.</Td>
                                             <Td className="w-full">
                                                 <Input
-                                                    value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos a voluptatibus ea ipsum molestias, voluptatem est. Nobis libero, unde minima dolor esse corrupti voluptatem odio sint animi inventore ea quaerat."
+                                                    borderColor={"purple.700"}
                                                 >
                                                 </Input>
                                             </Td>
                                             <Td>
-                                                <div className="">
-                                                    {inputList.length !== 1 && <Button onClick={() => handleRemoveClick(index)} className="mr-10">Remove</Button>}
-                                                    {inputList.length - 1 === index && <Button onClick={() => handleAddClick()}>Add</Button>}
+                                                <div className="flex items-center">
+                                                    {inputList.length !== 1 && <Button paddingX="10" colorScheme='red' onClick={() => handleRemoveClick(index)} className="mr-3">Hapus</Button>}
+                                                    {inputList.length - 1 === index && <IoMdAddCircle className=" text-hijau" size="sm" onClick={() => handleAddClick()}></IoMdAddCircle>}
                                                 </div>
-
                                             </Td>
                                         </Tr>
                                     ))}
                                 </Tbody>
-                                <Tfoot>
-                                    <Tr>
-
-                                    </Tr>
-                                </Tfoot>
                             </Table>
+                            <Button
+                                rounded='lg'
+                                size='md'
+                                marginTop='5'
+                                colorScheme='twitter'
+                                onClick={() => navigate(`dash-admin/angket/edit/${id}`)}
+                            >
+                                <div className="flex items-center">
+                                    Simpan Soal
+                                    <span className="ml-3">
+                                        <FiEdit />
+                                    </span>
+                                </div>
+                            </Button>
                         </div>
                     </div>
                 </div>

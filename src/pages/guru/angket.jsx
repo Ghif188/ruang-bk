@@ -124,27 +124,12 @@ export default function Angket() {
                             height='100%'
                         >
                             {/* atas */}
-                            <div className="rounded-t-2xl h-2/10 bg-gradient-to-r flex justify-center items-center from-sky-500 to-sky-800  text-white">
-                                <div className="w-7/10 h-7/10">
+                            <div className="rounded-t-2xl h-2/10 bg-gradient-to-r px-10 flex items-center from-sky-500 to-sky-800  text-white">
+                                <div className="">
                                     <div className="text-2xl pb-5 flex">
                                         <p className="pr-2">Give Your Best</p><img src={Jempol} className="w-9 h-9" alt="" />
                                     </div>
                                     <p>The more we are grateful, the more happiness we get.</p>
-                                </div>
-                                <div className="h-7/10 flex items-end">
-                                    <Button
-                                        size='sm'
-                                        height='40px'
-                                        rounded='lg'
-                                        px='25px'
-                                        type='submit'
-                                        variant="solid"
-                                        bgColor='#F0BF12'
-                                        color="white"
-                                        onClick={onOpen}
-                                    >
-                                        Tambah Angket
-                                    </Button>
                                 </div>
                                 <Drawer
                                     isOpen={isOpen}
@@ -256,7 +241,29 @@ export default function Angket() {
                             </div>
                             {/* bawah */}
                             <div className="h-3/4 p-5 mt-5 scroll-smooth overflow-y-scroll snap-y">
-                                {
+                                <div className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3">
+                                    <div className="w-full grid grid-cols-10 px-5 py-3  rounded-lg text-white items-center justify-between bg-oren">
+                                        <div className="col-span-8">
+                                            <p className="font-semibold pb-3 text-lg border-b-2">Halo</p>
+                                            <div className="flex pt-3 justify-between items-center">
+                                                <p className="text-sm">Keterangan</p>
+                                                <div className="text-gray-500">
+                                                    <span className="text-sm text-white font-semibold mr-2">Aktif</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex col-span-2 justify-center items-center">
+                                            <Button
+                                                rounded='lg'
+                                                size='md'
+                                                colorScheme='messenger'
+                                            >
+                                                Aktifkan
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* {
                                     isLoading ? (
                                         <div className=" h-full w-10/12 p-8 justify-center flex items-center">
                                             <Spinner
@@ -319,7 +326,7 @@ export default function Angket() {
                                             }
                                         </div>
                                     )
-                                }
+                                } */}
                             </div>
                         </Box>
                     </div>

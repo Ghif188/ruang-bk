@@ -15,7 +15,7 @@ import { FiEdit } from 'react-icons/fi'
 import {IoMdArrowRoundBack} from 'react-icons/io'
 import { Link } from "react-router-dom";
 export default function Soalangket() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     let id = useParams().id
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
         [
@@ -60,7 +60,7 @@ export default function Soalangket() {
                                             rounded='lg'
                                             size='md'
                                             colorScheme='twitter'
-                                            onClick={navigate(`dash-guru/angket/edit/{id}`)}
+                                            onClick={()=>navigate(`dash-guru/angket/edit/${id}`)}
                                         >
                                             <div className="flex items-center">
                                                 Edit Soal
