@@ -24,12 +24,19 @@ import {
     AlertDialogHeader,
     AlertDialogContent,
     AlertDialogOverlay,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
     Input,
+    Checkbox,
     Spinner,
     FormLabel,
     DrawerCloseButton,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
+import {FiEdit} from "react-icons/fi"
 import { useNavigate } from 'react-router-dom';
 const RegisterSchema = Yup.object().shape({
     nama_angket: Yup.string().required("Wajib di Isi"),
@@ -116,7 +123,7 @@ export default function Angket() {
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
                 <div className="bg-gray-200 h-full w-full p-5 justify-center flex">
-                    <div className="h-full w-full">
+                    <div className="h-full w-full scroll-smooth overflow-y-scroll snap-y">
                         <Box
                             boxShadow='lg'
                             bgColor='white'
@@ -240,29 +247,197 @@ export default function Angket() {
                                 </Drawer>
                             </div>
                             {/* bawah */}
-                            <div className="h-3/4 p-5 mt-5 scroll-smooth overflow-y-scroll snap-y">
-                                <div className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3">
-                                    <div className="w-full grid grid-cols-10 px-5 py-3  rounded-lg text-white items-center justify-between bg-oren">
-                                        <div className="col-span-8">
-                                            <p className="font-semibold pb-3 text-lg border-b-2">Halo</p>
-                                            <div className="flex pt-3 justify-between items-center">
-                                                <p className="text-sm">Keterangan</p>
-                                                <div className="text-gray-500">
-                                                    <span className="text-sm text-white font-semibold mr-2">Aktif</span>
+                            <div className="h-3/4 p-5 mt-5">
+                            <Accordion allowToggle defaultIndex={[0]}>
+                                    <AccordionItem p='3'>
+                                        <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                            <div className="w-full flex text-left justify-between">
+                                                Angket Peminatan Jurusan
+                                                <AccordionIcon />
+                                            </div>
+                                        </AccordionButton>
+                                        <AccordionPanel pb={4}>
+                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="flex col-span-2 justify-center items-center">
-                                            <Button
-                                                rounded='lg'
-                                                size='md'
-                                                colorScheme='messenger'
-                                            >
-                                                Aktifkan
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div className="w-full flex justify-end">
+                                                <Button
+                                                    rounded='lg'
+                                                    size='md'
+                                                    colorScheme='whatsapp'
+                                                >
+                                                    <div className="flex items-center">
+                                                        Aktifkan Angket
+                                                        <span className="ml-3">
+                                                            <FiEdit />
+                                                        </span>
+                                                    </div>
+                                                </Button>
+                                            </div>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                    <AccordionItem p='3'>
+                                        <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                            <div className="w-full flex text-left justify-between">
+                                                Angket Peminatan Jurusan
+                                                <AccordionIcon />
+                                            </div>
+                                        </AccordionButton>
+                                        <AccordionPanel pb={4}>
+                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                            </div>
+                                            <div className="w-full flex justify-end">
+                                                <Button
+                                                    rounded='lg'
+                                                    size='md'
+                                                    colorScheme='whatsapp'
+                                                >
+                                                    <div className="flex items-center">
+                                                        Aktifkan Angket
+                                                        <span className="ml-3">
+                                                            <FiEdit />
+                                                        </span>
+                                                    </div>
+                                                </Button>
+                                            </div>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                    <AccordionItem p='3'>
+                                        <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                            <div className="w-full flex text-left justify-between">
+                                                Angket Peminatan Jurusan
+                                                <AccordionIcon />
+                                            </div>
+                                        </AccordionButton>
+                                        <AccordionPanel pb={4}>
+                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                            </div>
+                                            <div className="w-full flex justify-end">
+                                                <Button
+                                                    rounded='lg'
+                                                    size='md'
+                                                    colorScheme='whatsapp'
+                                                >
+                                                    <div className="flex items-center">
+                                                        Aktifkan Angket
+                                                        <span className="ml-3">
+                                                            <FiEdit />
+                                                        </span>
+                                                    </div>
+                                                </Button>
+                                            </div>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                    <AccordionItem p='3'>
+                                        <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                            <div className="w-full flex text-left justify-between">
+                                                Angket Peminatan Jurusan
+                                                <AccordionIcon />
+                                            </div>
+                                        </AccordionButton>
+                                        <AccordionPanel pb={4}>
+                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                            </div>
+                                            <div className="w-full flex justify-end">
+                                                <Button
+                                                    rounded='lg'
+                                                    size='md'
+                                                    colorScheme='whatsapp'
+                                                >
+                                                    <div className="flex items-center">
+                                                        Aktifkan Angket
+                                                        <span className="ml-3">
+                                                            <FiEdit />
+                                                        </span>
+                                                    </div>
+                                                </Button>
+                                            </div>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                </Accordion>
                                 {/* {
                                     isLoading ? (
                                         <div className=" h-full w-10/12 p-8 justify-center flex items-center">

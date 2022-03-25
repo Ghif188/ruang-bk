@@ -25,6 +25,11 @@ import {
     AlertDialogContent,
     AlertDialogOverlay,
     Input,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
     Spinner,
     FormLabel,
     DrawerCloseButton,
@@ -115,16 +120,15 @@ export default function Angket() {
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
-                <div className="bg-gray-200 h-full w-full p-5 justify-center flex">
-                    <div className="h-full w-full">
+                <div className="bg-gray-200 h-full w-full p-2 justify-center flex">
+                    <div className="h-full w-full scroll-smooth overflow-y-scroll snap-y">
                         <Box
                             boxShadow='lg'
                             bgColor='white'
-                            rounded='xl'
                             height='100%'
                         >
                             {/* atas */}
-                            <div className="rounded-t-2xl h-2/10 bg-gradient-to-r flex justify-center items-center from-sky-500 to-sky-800  text-white">
+                            <div className="h-2/10 bg-gradient-to-r flex justify-center items-center from-sky-500 to-sky-800  text-white">
                                 <div className="w-7/10 h-7/10">
                                     <div className="text-2xl pb-5 flex">
                                         <p className="pr-2">Give Your Best</p><img src={Jempol} className="w-9 h-9" alt="" />
@@ -255,7 +259,7 @@ export default function Angket() {
                                 </Drawer>
                             </div>
                             {/* bawah */}
-                            <div className="h-3/4 p-5 mt-5 scroll-smooth overflow-y-scroll snap-y">
+                            <div className="h-3/4 p-5 mt-5">
                                 {
                                     isLoading ? (
                                         <div className="w-full h-full justify-center items-center flex">

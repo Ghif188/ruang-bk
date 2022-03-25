@@ -29,7 +29,7 @@ import Profile from './pages/guru/profile';
 import EditProfile from './pages/guru/editprofile';
 import EditProfileSiswa from './pages/siswa/editprofile';
 import SoalSiswa from './pages/siswa/soal'
-import SoalGuru from './pages/guru/soal-angket'
+import InfoAngketGuru from './pages/guru/info-angket'
 import AngketAdmin from './pages/admin/angket';
 import Soalangket from './pages/admin/soal-angket';
 
@@ -51,7 +51,7 @@ function App() {
         <Route path='dash-guru/edit-profile' element={<EditProfile />}/>
         <Route path='dash-guru/npsn' element={<Npsn />}/>
         <Route path='dash-guru/angket' element={<AngketGuru />}/>
-        <Route path='dash-guru/angket/:id' element={<SoalGuru />}/>
+        <Route path='dash-guru/angket/:id' element={<InfoAngketGuru />}/>
         <Route path='dash-guru/angket/edit/:id' element={<EditSoal />}/>
         <Route path='dash-guru/murid' element={<Murid />}/>
       </Route>
