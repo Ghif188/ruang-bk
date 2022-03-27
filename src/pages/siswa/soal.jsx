@@ -1,5 +1,7 @@
 import React from "react"
-import { Radio } from "@chakra-ui/react"
+import {
+    Button,
+} from "@chakra-ui/react"
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
 
 export default function Soal() {
@@ -13,7 +15,7 @@ export default function Soal() {
                         <div className="text-white text-lg font-semibold">Bahasa Indonesia</div>
                         <div>20:00:00</div>
                     </div>
-                    <div className="px-20 text-xl py-20 space-y-5">
+                    <div className="px-20 text-xl h-8/10 py-20 space-y-5">
                         <div className="flex">
                             <div className="mr-2">
                                 1.
@@ -31,6 +33,19 @@ export default function Soal() {
                             <div>E) Kalian</div>
                         </div>
                     </div>
+                    {
+                        page === pageakhir ? (
+                            <div className="flex justify-end px-20 items-end">
+                                <Button
+                                    rounded='lg'
+                                    size='md'
+                                    colorScheme='whatsapp'
+                                >
+                                    Selesai
+                                </Button>
+                            </div>
+                        ) : ''
+                    }
                 </div>
                 <div>
                     {(() => {
@@ -46,7 +61,6 @@ export default function Soal() {
                                     </div>
                                 </div>
                             )
-
                         } else {
                             return (
                                 <div className="flex justify-center items-center sm-max:mt-5">

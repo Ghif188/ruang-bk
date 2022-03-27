@@ -32,6 +32,7 @@ import SoalSiswa from './pages/siswa/soal'
 import InfoAngketGuru from './pages/guru/info-angket'
 import AngketAdmin from './pages/admin/angket';
 import Soalangket from './pages/admin/soal-angket';
+import AngketSiswa from './pages/siswa/angket';
 
 function App() {
   return (
@@ -61,7 +62,8 @@ function App() {
         <Route path="/dash-siswa/home" element={<DashSiswa />}/>
         <Route path="/dash-siswa/profile" element={<ProfileSiswa />}/>
         <Route path="/dash-siswa/edit-profile" element={<EditProfileSiswa />}/>
-        <Route path="/dash-siswa/soal/:id" element={<SoalSiswa />}/>
+        <Route path="/dash-siswa/angket" element={<AngketSiswa />}/>
+        <Route path="/dash-siswa/angket/soal/:id" element={<SoalSiswa />}/>
       </Route>
       
       <Route

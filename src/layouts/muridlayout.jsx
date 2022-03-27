@@ -70,6 +70,21 @@ export default function MuridLayout({ children }) {
                                 >
                                     Home
                                 </NavLink>
+                                <NavLink
+                                    to="/dash-siswa/angket"
+                                    style={({ isActive }) => {
+                                        return {
+                                            backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
+                                            padding: '1rem',
+                                            height: '100%',
+                                            borderBottom: isActive ? '4px solid #38E569' : '',
+                                            color: 'white',
+                                            fontWeight: '500'
+                                        }
+                                    }}
+                                >
+                                    Home
+                                </NavLink>
                             </div>
                             <div className="flex px-10 h-full rounded-r-full border-l-2 border-white bg-hijau">
                                 <Menu>
