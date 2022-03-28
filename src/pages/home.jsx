@@ -44,7 +44,7 @@ export default function Home() {
     const navigate = useNavigate();
     const clearLStoLog = () => {
         localStorage.clear();
-        navigate("/log");
+        navigate("/login");
     }
     const handleColor = () => {
         setColor(true);
@@ -71,7 +71,7 @@ export default function Home() {
             <section id="home" className="w-full lg:p-12 p-4 h-screen bg-gradient-to-r to-blue-700 from-blue-500">
                 <div className="flex h-min justify-between">
                     <img src={Logo} className="w-1/12 sm-max:w-4/12" />
-                    <a href="/log">
+                    <a href="/login">
                         <button className="rounded-full px-7 h-min p-2 text-white shadow-slate-400 bg-hijau sm-max:px-4 sm-max:text-sm sm-max:py-1">
                             <text className="">Login</text>
                         </button>

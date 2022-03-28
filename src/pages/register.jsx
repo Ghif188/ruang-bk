@@ -195,7 +195,7 @@ const Register = () => {
                                                 </span>
                                             </Button>
                                         </div>
-                                        <div className='underline text-center text-sm sm-max:text-xs text-blue-400 mx-10 mt-3' onClick={() => navigate("/log")}>
+                                        <div className='underline text-center text-sm sm-max:text-xs text-blue-400 mx-10 mt-3' onClick={() => navigate("/login")}>
                                             Sudah Mempunyai Akun
                                         </div>
                                     </div>
