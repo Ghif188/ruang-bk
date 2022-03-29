@@ -83,7 +83,7 @@ export default function MuridLayout({ children }) {
                                         }
                                     }}
                                 >
-                                    Home
+                                    Angket
                                 </NavLink>
                             </div>
                             <div className="flex px-10 h-full rounded-r-full border-l-2 border-white bg-hijau">

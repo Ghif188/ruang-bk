@@ -51,11 +51,10 @@ export default function Angket() {
                         <Box
                             boxShadow='lg'
                             bgColor='white'
-                            rounded='xl'
                             height='100%'
                         >
                             {/* atas */}
-                            <div className="rounded-t-2xl h-2/10 bg-gradient-to-r px-10 flex items-center from-sky-500 to-sky-800  text-white">
+                            <div className="h-2/10 bg-gradient-to-r px-10 flex items-center from-sky-500 to-sky-800  text-white">
                                 <div className="">
                                     <div className="text-2xl pb-5 flex">
                                         <p className="pr-2">Give Your Best</p><img src={Jempol} className="w-9 h-9" alt="" />
@@ -66,21 +65,22 @@ export default function Angket() {
                             {/* bawah */}
                             <div className="h-3/4 p-5 mt-5">
                                 <div className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3">
-                                    <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-oren">
-                                        <div className="w-2/3">
+                                    <div className="w-full px-5 py-3 flex rounded-lg text-white items-center bg-blue-300 justify-between ">
+                                        <div className="w-8/10">
                                             <p className="font-semibold pb-3 text-lg border-b-2">Angket Pemilihan Jurusan</p>
                                             <div className="flex pt-3 justify-between items-center">
-                                                <p className="text-sm">kerjain cok!!!</p>
+                                                <p className="text-sm">kerjain ya!!!</p>
                                                 <div className="text-gray-500">
                                                     <span className="text-sm text-white font-semibold mr-2">tenggat :</span>20-02-2022
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="w-3/10 flex justify-between items-center">
+                                        <div className="flex justify-between items-center">
                                             <Button
+                                            shadow='md'
                                                 rounded='lg'
                                                 size='md'
-                                                colorScheme='twitter'
+                                                bgColor='#38E569'
                                                 onClick={() => onOpen()}
                                             >
                                                 Kerjakan
@@ -164,13 +164,11 @@ export default function Angket() {
                 <AlertDialogOverlay>
                     <AlertDialogContent>
                         <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                            
+                            Kerjakan Soal
                         </AlertDialogHeader>
-
                         <AlertDialogBody>
                             Apakah Anda Siap Untuk Mengerjakan?
                         </AlertDialogBody>
-
                         <AlertDialogFooter>
                             <Button onClick={onClose}>
                                 Cancel

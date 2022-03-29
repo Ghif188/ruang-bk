@@ -82,16 +82,21 @@ const Login = () => {
         }
         if (result.message === "Success") {
             if (result.user.role === 1) {
+                window.location.reload()
+                
                 return navigate("/dash");
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
+                    window.location.reload()
                     return navigate("/dash-guru/home");
                 } else {
+                    window.location.reload()
                     return navigate("/dash-guru/npsn")
                 }
             }
             if (result.user.role === 3) {
+                window.location.reload()
                 return navigate("/dash-siswa/home")
             }
         }
@@ -289,7 +294,7 @@ const Login = () => {
                                                             speed='0.65s'
                                                             emptyColor='gray.200'
                                                             color='blue.500'
-                                                            size='xl'
+                                                            size='lg'
                                                         />) : "Login"}
                                                     </span>
                                                 </Button>
