@@ -116,6 +116,115 @@ export default function Murid() {
             })
         }
     };
+    const customStyles = {
+        header: {
+            style: {
+                minHeight: '10px',
+                borderTopStyle: 'hidden',
+                borderTopWidth: '0',
+                borderTopsColor: 'ffffff',
+
+            },
+        },
+        rows: {
+            style: {
+                borderTopStyle: 'solid',
+                borderTopWidth: '1px',
+                borderTopColor: '000000',
+                borderBottomStyle: 'solid',
+                borderBottomWidth: '1px',
+                borderBottomColor: '000000',
+                minWidth: '98%',
+                marginLeft: '7px', // override the cell padding for head cells
+                //paddingRight: '3px',
+                width: '98%',
+                minHeight: '30px', // override the row height
+
+            },
+
+        },
+        headRow: {
+            style: {
+                borderTopStyle: 'solid',
+                borderTopWidth: '1px',
+                borderTopColor: '000000',
+                //alignItems: 'center',
+                borderBottomStyle: 'solid',
+                borderBottomWidth: '1px',
+                borderBott0mColor: '000000',
+                width: '98%',
+
+                marginLeft: '7px', // override the cell padding for head cells
+                //paddingRight: '3px',
+
+                minHeight: '30px', // override the row height
+
+            },
+            //height: '30px',
+        },
+        headCells: {
+            style: {
+                '&:not(:last-of-type)': {
+
+                    borderLeftStyle: 'solid',
+                    borderLeftWidth: '1px',
+                    borderLeftColor: '000000',
+                    //marginLeft: '3px', // override the cell padding for head cells
+                    //          marginRight: '3px',
+                    minHeight: '30px', // override the row heigh
+                },
+
+                ':last-of-type': {
+                    borderLeftStyle: 'solid',
+                    borderLeftWidth: '1px',
+                    borderLeftColor: '000000',
+
+                    borderRightStyle: 'solid',
+                    borderRightWidth: '1px',
+                    borderRightColor: '000000',
+                    minHeight: '30px', // override the row heigh
+
+                },
+                //textAlign: 'center',
+                justifyContent: 'center',
+
+                //alignItems: 'center',
+
+
+            },
+
+        },
+        cells: {
+            style: {
+                '&:not(:last-of-type)': {
+
+                    borderLeftStyle: 'solid',
+                    borderLeftWidth: '1px',
+                    borderLeftColor: '000000',
+                    //marginLeft: '3px', // override the cell padding for head cells
+                    //          marginRight: '3px',
+                    minHeight: '30px', // override the row heigh
+                },
+
+                ':last-of-type': {
+                    borderLeftStyle: 'solid',
+                    borderLeftWidth: '1px',
+                    borderLeftColor: '000000',
+
+                    borderRightStyle: 'solid',
+                    borderRightWidth: '1px',
+                    borderRightColor: '000000',
+                    minHeight: '30px', // override the row heigh
+
+                }
+
+
+
+
+            },
+
+        },
+    };
     const columns = [
         {
             name: 'Nama Siswa',
@@ -134,27 +243,34 @@ export default function Murid() {
         },
         {
             name: 'Aksi',
+            sortable: true,
             button: true,
             cell: row =>
-                <div className="flex justify-evenly">
-                    <Button
-                        colorScheme='facebook'
-                        className="mr-5"
-                        size='sm'
-                        shadow='md'
-                        onClick={() => multiFunct(row.user_id)}
-                    >
-                        Show
-                    </Button>
-                    <Button
-                        colorScheme='red'
-                        size='sm'
-                        shadow='md'
-                        onClick={() => multiFunc(row.id)}
-                    >
-                        Delete
-                    </Button>
-                </div>
+                <Button
+                    colorScheme='facebook'
+                    className="m-2"
+                    size='sm'
+                    shadow='md'
+                    onClick={() => multiFunct(row.user_id)}
+                >
+                    Show
+                </Button>
+            ,
+        },
+        {
+            name: 'Aksi',
+            sortable: true,
+            button: true,
+            cell: row =>
+                <Button
+                    colorScheme='red'
+                    className="m-2"
+                    size='sm'
+                    shadow='md'
+                    onClick={() => multiFunc(row.id)}
+                >
+                    Delete
+                </Button>
             ,
         },
     ];
@@ -214,7 +330,7 @@ export default function Murid() {
     return (
         <React.Fragment>
             <Layout>
-                <div className="bg-transparent sm-max:h-screen sm-max:w-screen h-full w-10/12 px-20 sm-max:px-5">
+                <div className="bg-transparent sm-max:h-screen h-full w-10/12 px-20 sm-max:px-2">
                     <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-10 p-5 sm-max:w-full sm-max:mx-2 sm-max:px-0">
                         <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-lg p-5 mb-5 sm-max:w-full text-white">
                             <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/4 items-center sm-max:w-1/3 sm-max:text-xs">
@@ -263,7 +379,7 @@ export default function Murid() {
                                             <DrawerHeader
                                                 borderBottomWidth='1px'
                                             >
-                                                Buat Akun Siswa
+                                                <p className="md-max:text-sm">Buat Akun Siswa</p>
                                             </DrawerHeader>
                                             <form onSubmit={handleSubmit} className='w-full h-full'>
                                                 <DrawerBody>
@@ -280,7 +396,7 @@ export default function Murid() {
                                                                 error={errors.nisn && touched.nisn}
                                                                 disabled={isSubmitting}
                                                             />
-                                                            <div className=' text-red-400 text-xs mt-2'>{errors.nisn && touched.nisn && errors.nisn}</div>
+                                                            <div className=' text-red-400 text-xs'>{errors.nisn && touched.nisn && errors.nisn}</div>
                                                         </div>
                                                         <div className='my-2'>
                                                             <FormLabel htmlFor='nama_user'>Username</FormLabel>
@@ -294,7 +410,7 @@ export default function Murid() {
                                                                 error={errors.nama_user && touched.nama_user}
                                                                 disabled={isSubmitting}
                                                             />
-                                                            <div className=' text-red-400 text-xs mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
+                                                            <div className=' text-red-400 text-xs'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
                                                         </div>
                                                         <div className='my-2'>
                                                             <FormLabel htmlFor='email'>Email</FormLabel>
@@ -308,7 +424,7 @@ export default function Murid() {
                                                                 onChange={handleChange}
                                                                 disabled={isSubmitting}
                                                             />
-                                                            <div className=' text-red-400 text-xs mt-2'>{errors.email && touched.email && errors.email}</div>
+                                                            <div className=' text-red-400 text-xs'>{errors.email && touched.email && errors.email}</div>
                                                         </div>
                                                         <div className='my-2'>
                                                             <FormLabel htmlFor='alamat'>Alamat</FormLabel>
@@ -322,7 +438,7 @@ export default function Murid() {
                                                                 error={errors.alamat && touched.alamat}
                                                                 disabled={isSubmitting}
                                                             />
-                                                            <div className=' text-red-400 text-xs mt-2'>{errors.alamat && touched.alamat && errors.alamat}</div>
+                                                            <div className=' text-red-400 text-xs'>{errors.alamat && touched.alamat && errors.alamat}</div>
                                                         </div>
                                                         <div className='my-2'>
                                                             <FormLabel htmlFor='sekolah'>Asal Sekolah</FormLabel>
@@ -336,7 +452,7 @@ export default function Murid() {
                                                                 error={errors.sekolah && touched.sekolah}
                                                                 disabled={isSubmitting}
                                                             />
-                                                            <div className=' text-red-400 text-xs mt-2'>{errors.sekolah && touched.sekolah && errors.sekolah}</div>
+                                                            <div className=' text-red-400 text-xs'>{errors.sekolah && touched.sekolah && errors.sekolah}</div>
                                                         </div>
                                                         <div className='my-2'>
                                                             <FormLabel htmlFor='nomor_telp'>Whatsapp</FormLabel>
@@ -350,7 +466,7 @@ export default function Murid() {
                                                                 error={errors.nomor_telp && touched.nomor_telp}
                                                                 disabled={isSubmitting}
                                                             />
-                                                            <div className=' text-red-400 text-xs mt-2'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
+                                                            <div className=' text-red-400 text-xs'>{errors.nomor_telp && touched.nomor_telp && errors.nomor_telp}</div>
                                                         </div>
                                                     </div>
                                                 </DrawerBody>
@@ -386,163 +502,67 @@ export default function Murid() {
                                 </Formik>
                             </Drawer>
                         </div>
-                        <div className="h-2/3 m-10 sm-max:w-1/2 sm-max:h-6/10">
-                            {/* <div className="hidden">
-                            <Table variant='striped' shadow='xl' rounded='xl' size='sm' colorScheme='whatsapp'>
-                                <Thead>
-                                    <Tr>
-                                        <Th padding='3'>
-                                            <div className="text-center text-blue-600 sm-max:text-xs">
-                                                Nama User
-                                            </div>
-                                        </Th>
-                                        <Th>
-                                            <div className="text-center text-blue-600 sm-max:text-xs">
-                                                Email
-                                            </div>
-                                        </Th>
-                                        <Th>
-                                            <div className="text-center text-blue-600 sm-max:text-xs">
-                                                Nomor Whatsapp
-                                            </div>
-                                        </Th>
-                                        <Th>
-                                            <div className="text-center text-blue-600 sm-max:text-xs">
-                                                Action
-                                            </div>
-                                        </Th>
-                                    </Tr>
-                                </Thead>
-                                {isLoading ? ''
-                                    : (
-                                        <Tbody>
-                                            {data?.map((row, index) => (
-                                                <Tr key={index}>
-                                                    <Td className=" text-amber-800 font-semibold">
-                                                        <div className="ml-5 my-3 uppercase">
-                                                            {row.nama_siswa}
-                                                        </div>
-                                                    </Td>
-                                                    <Td>
-                                                        <div className="text-center">
-                                                            {row.email}
-                                                        </div></Td>
-                                                    <Td>
-                                                        <div className="text-center">
-                                                            {row.nomor_telp}
-                                                        </div></Td>
-                                                    <Td>
-                                                        <div className="flex justify-center">
-                                                            <Button
-                                                                colorScheme='facebook'
-                                                                className="mr-5"
-                                                                size='sm'
-                                                                shadow='md'
-                                                                onClick={() => multiFunct(row.user_id)}
-                                                            >
-                                                                Show
-                                                            </Button>
-                                                            <Modal onClose={onTutup1} isOpen={buka} size='xl' isCentered>
-                                                                <ModalOverlay bg='blackAlpha.200'
-                                                                    backdropFilter='auto'
-                                                                    backdropBlur='1px' />
-                                                                <ModalContent >
-                                                                    <ModalHeader>Info Akun Siswa</ModalHeader>
-                                                                    <ModalCloseButton />
-                                                                    <ModalBody>
-                                                                        <div>
-                                                                            <div className="flex justify-between mb-3 items-center">
-                                                                                <div className='w-4/10'>
-                                                                                    <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Nama Siswa</div>
-                                                                                    <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nama_siswa}</div>
-                                                                                </div>
-                                                                                <div className='w-4/10 '>
-                                                                                    <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">NISN</div>
-                                                                                    <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nisn === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.nisn)}</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className="flex justify-between mb-3 items-center">
-                                                                                <div className='w-4/10'>
-                                                                                    <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tanggal Lahir</div>
-                                                                                    <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tanggal_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tanggal_lahir)}</div>
-                                                                                </div>
-                                                                                <div className='w-4/10'>
-                                                                                    <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tempat Lahir</div>
-                                                                                    <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tempat_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tempat_lahir)}</div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div className='my-5'>
-                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Alamat</div>
-                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.alamat === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.alamat)}</div>
-                                                                            </div>
-                                                                            <div className='my-5'>
-                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Email</div>
-                                                                                <div className="bg-pink-200 text-right px-5 py-2 text-md rounded-md">{siswa.email}</div>
-                                                                            </div>
-                                                                            <div className='my-5'>
-                                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Whatsapp</div>
-                                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nomor_telp}</div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </ModalBody>
-                                                                    <ModalFooter>
-                                                                        <Button onClick={onTutup1}>Close</Button>
-                                                                    </ModalFooter>
-                                                                </ModalContent>
-                                                            </Modal>
-                                                            <Button
-                                                                colorScheme='red'
-                                                                size='sm'
-                                                                shadow='md'
-                                                                onClick={
-                                                                    () => multiFunc(row.id)
-                                                                }
-                                                            >
-                                                                Delete
-                                                            </Button>
-                                                            <AlertDialog
-                                                                isOpen={open}
-                                                                onClose={onTutup}
-                                                            >
-                                                                <AlertDialogOverlay>
-                                                                    <AlertDialogContent>
-                                                                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                                                                            Hapus Akun Siswa
-                                                                        </AlertDialogHeader>
-                                                                        <AlertDialogBody>
-                                                                            Apakah kamu yakin untuk menghapus akun siswa ?.
-                                                                        </AlertDialogBody>
+                        <div className="h-2/3 m-10 sm-max:m-8 sm-max:w-10/12 sm-max:h-6/10">
 
-                                                                        <AlertDialogFooter>
-                                                                            <Button onClick={onTutup}>
-                                                                                Cancel
-                                                                            </Button>
-                                                                            <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
-                                                                                Delete
-                                                                            </Button>
-                                                                        </AlertDialogFooter>
-                                                                    </AlertDialogContent>
-                                                                </AlertDialogOverlay>
-                                                            </AlertDialog>
-                                                        </div>
-                                                    </Td>
-                                                </Tr>
-                                            ))}
-                                        </Tbody>
-                                    )}
-                            </Table>
-                        </div> */}
                             {isLoading ? '' :
                                 (
                                     <div>
                                         <DataTable
                                             columns={columns}
                                             data={dataakhir}
+                                            customStyles={customStyles}
                                             defaultSortFieldId={1}
                                             pagination
                                             selectableRows
                                         />
-
+                                        <Modal onClose={onTutup1} isOpen={buka} size='xl' isCentered>
+                                            <ModalOverlay bg='blackAlpha.200'
+                                                backdropFilter='auto'
+                                                backdropBlur='1px' />
+                                            <ModalContent >
+                                                <ModalHeader>Info Akun Siswa</ModalHeader>
+                                                <ModalCloseButton />
+                                                <ModalBody>
+                                                    <div>
+                                                        <div className="flex justify-between mb-3 items-center">
+                                                            <div className='w-4/10'>
+                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Nama Siswa</div>
+                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nama_siswa}</div>
+                                                            </div>
+                                                            <div className='w-4/10 '>
+                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">NISN</div>
+                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nisn === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.nisn)}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex justify-between mb-3 items-center">
+                                                            <div className='w-4/10'>
+                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tanggal Lahir</div>
+                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tanggal_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tanggal_lahir)}</div>
+                                                            </div>
+                                                            <div className='w-4/10'>
+                                                                <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tempat Lahir</div>
+                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tempat_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tempat_lahir)}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className='my-5'>
+                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Alamat</div>
+                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.alamat === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.alamat)}</div>
+                                                        </div>
+                                                        <div className='my-5'>
+                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Email</div>
+                                                            <div className="bg-pink-200 text-right px-5 py-2 text-md rounded-md">{siswa.email}</div>
+                                                        </div>
+                                                        <div className='my-5'>
+                                                            <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Whatsapp</div>
+                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nomor_telp}</div>
+                                                        </div>
+                                                    </div>
+                                                </ModalBody>
+                                                <ModalFooter>
+                                                    <Button onClick={onTutup1}>Close</Button>
+                                                </ModalFooter>
+                                            </ModalContent>
+                                        </Modal>
                                         <AlertDialog
                                             isOpen={open}
                                             onClose={onTutup}

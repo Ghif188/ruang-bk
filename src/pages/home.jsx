@@ -79,8 +79,8 @@ export default function Home() {
                 </div>
                 <div className="w-full flex justify-center py-5 sm-max:hidden">
                     <div className="w-1/2 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl">
-                        <Link smooth={true} duration={1000} to="home"><div className="px-7 rounded-full py-1 hover:bg-hijau">Home</div></Link>
-                        <Link smooth={true} duration={1000} to="bk"><div className="px-7 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></Link>
+                        <Link smooth={true} duration={500} to="home"><div className="px-7 rounded-full py-1 hover:bg-hijau">Home</div></Link>
+                        <Link smooth={true} duration={700} to="bk"><div className="px-7 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></Link>
                         <Link smooth={true} duration={1000} to="contact"><div className="px-7 rounded-full py-1 hover:bg-hijau">Contact</div></Link>
                     </div>
                 </div>
@@ -99,12 +99,14 @@ export default function Home() {
             </section>
             {/* Bimbingan konseling */}
             <section id="bk" className="bg-gray-200 py-20 px-10 sm-max:px-4">
+                {/* title */}
                 <div className="w-full justify-center flex">
                     <div className="text-center">
                         <p className="text-3xl sm-max:text-xl text-blue-700 font-bahnschrift font-medium">Bimbingan Konseling</p>
                         <div className="border-b-8 border-hijau rounded-md"></div>
                     </div>
                 </div>
+                {/* 3 box */}
                 <div className="md:flex h-max justify-center py-10 mx-10 sm-max:py-2 sm-max:mx-2">
                     <div className="w-1/3 sm-max:w-full md:mr-5 bg-white rounded-xl py-5 sm-max:py-3 sm-max:my-3 shadow-lg">
                         <div className="flex justify-center sm-max:hidden">
@@ -188,6 +190,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+                {/* box */}
                 <div className="mx-10 sm-max:mx-2">
                     <Box
                         p='10'
@@ -256,6 +259,7 @@ export default function Home() {
             </section>
             {/* Contact */}
             <section id="contact" className="px-16 py-16 w-full flex justify-center sm-max:justify-between sm-max:px-2">
+                {/* left */}
                 <div className="text-left pb-12 w-1/4 sm-max:w-1/2">
                     <div className="font-medium text-2xl sm-max:text-xl pb-3">
                         <p>NEED HELP?</p>
@@ -285,6 +289,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+                {/* mid */}
                 <div className=" w-2/4 sm-max:hidden">
                     <div className="font-medium text-2xl pb-3 text-center">
                         <p>OVERVIEW</p>
@@ -292,14 +297,15 @@ export default function Home() {
                     <div className="w-full flex justify-center">
                         <div className="w-3/4 flex justify-around shadow-md text-white p-3 bg-blues rounded-3xl my-14">
                             <Link smooth={true} duration={1000} to="home"><div className="px-8 rounded-full py-1 hover:bg-hijau">Home</div></Link>
-                            <Link smooth={true} duration={1000} to="bk"><div className="px-8 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></Link>
-                            <Link smooth={true} duration={1000} to="contact"><div className="px-8 rounded-full py-1 hover:bg-hijau">Contact</div></Link>
+                            <Link smooth={true} duration={800} to="bk"><div className="px-8 rounded-full py-1 hover:bg-hijau">Bimbingan Konseling</div></Link>
+                            <Link smooth={true} duration={400} to="contact"><div className="px-8 rounded-full py-1 hover:bg-hijau">Contact</div></Link>
                         </div>
                     </div>
                     <div className="flex justify-center">
                         <Image src={Cs} alt="cs" />
                     </div>
                 </div>
+                {/* right */}
                 <div className="w-1/4 sm-max:w-1/2">
                     <div className="font-medium text-2xl pb-3 sm-max:hidden">
                         <p>CONNECT WITH US</p>
