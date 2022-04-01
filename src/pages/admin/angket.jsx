@@ -2,7 +2,7 @@ import React from "react";
 import Jempol from "../../assets/bouken.png"
 import Layout from "../../layouts/adminlayout"
 import * as Yup from 'yup';
-import { tambahAngket, getAngket, deleteAngket } from "../../api/guru";
+import { tambahAngket, getAngket, deleteAngket } from "../../api/admin";
 import { useQuery, useQueryClient } from "react-query";
 import {
     useDisclosure,
@@ -39,14 +39,12 @@ import { useNavigate } from 'react-router-dom';
 const RegisterSchema = Yup.object().shape({
     nama_angket: Yup.string().required("Wajib di Isi"),
     keterangan: Yup.string().required("Wajib di Isi"),
-    batas_waktu: Yup.date().required("Wajib di Isi"),
 });
 
 export default function Angket() {
     const initialValues = {
         nama_angket: "",
         keterangan: "",
-        batas_waktu: "",
     };
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
         [
@@ -177,7 +175,7 @@ export default function Angket() {
                                                 <DrawerHeader
                                                     borderBottomWidth='1px'
                                                 >
-                                                    Buat Akun Siswa
+                                                    Buat Angket
                                                 </DrawerHeader>
                                                 <form onSubmit={handleSubmit} className='w-full h-full'>
                                                     <DrawerBody>
@@ -209,20 +207,6 @@ export default function Angket() {
                                                                     disabled={isSubmitting}
                                                                 />
                                                                 <div className=' text-red-400 text-xs mt-2'>{errors.nama_user && touched.nama_user && errors.nama_user}</div>
-                                                            </div>
-                                                            <div className='my-2'>
-                                                                <FormLabel htmlFor='batas_waktu'>Batas Waktu</FormLabel>
-                                                                <Input
-                                                                    placeholder='Masukkan Batas Waktu'
-                                                                    id='batas_waktu'
-                                                                    type='date'
-                                                                    value={values.batas_waktu}
-                                                                    onBlur={handleBlur}
-                                                                    error={errors.batas_waktu && touched.batas_waktu}
-                                                                    onChange={handleChange}
-                                                                    disabled={isSubmitting}
-                                                                />
-                                                                <div className=' text-red-400 text-xs mt-2'>{errors.batas_waktu && touched.batas_waktu && errors.batas_waktu}</div>
                                                             </div>
                                                         </div>
                                                     </DrawerBody>
@@ -279,7 +263,7 @@ export default function Angket() {
                                                 ) : (
                                                     <div>{data?.data.map((angket, index) => (
                                                         <div key={index} className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3">
-                                                            <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-oren">
+                                                            <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-blue-400">
                                                                 <div className="w-2/3">
                                                                     <p className="font-semibold pb-3 text-lg border-b-2">{angket.nama_angket}</p>
                                                                     <div className="flex pt-3 justify-between items-center">
@@ -291,27 +275,33 @@ export default function Angket() {
                                                                 </div>
                                                                 <div className="w-3/10 flex justify-between items-center">
                                                                     <Button
+                                                                        shadow='md'
                                                                         rounded='lg'
                                                                         size='md'
-                                                                        colorScheme='green'
+                                                                        _hover={{ bg: '#55cc48'}}
+                                                                        bgColor={'#19ff00'}
                                                                     >
                                                                         Edit
                                                                     </Button>
                                                                     <Button
+                                                                        shadow='md'
                                                                         rounded='lg'
                                                                         size='md'
-                                                                        colorScheme='red'
+                                                                        _hover={{ bg: '#0369A1'}}
+                                                                        bgColor='red.700'
                                                                         onClick={() => multiFunct(angket.id)}
                                                                     >
                                                                         Delete
                                                                     </Button>
                                                                     <Button
+                                                                        shadow='md'
                                                                         rounded='lg'
                                                                         size='md'
-                                                                        colorScheme='twitter'
+                                                                        _hover={{ bg: '#0369A1'}}
+                                                                        bgColor='blue.200'
                                                                         onClick={() => navigate(`/dash-admin/angket/${angket.id}`)}
                                                                     >
-                                                                        Lihat
+                                                                        Soal
                                                                     </Button>
 
                                                                 </div>

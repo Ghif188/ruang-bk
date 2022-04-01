@@ -67,7 +67,7 @@ export default function GuruLayout({ children }) {
                             {children}
                         </div>
                         <div className="relative flex items-center justify-center pt-7">
-                            <div className="bg-gradient-to-r rounded-full h-16 relative w-5/6 flex shadow-md shadow-slate-300 justify-between items-center from-sky-500 to-sky-700">
+                            <div className="bg-gradient-to-r rounded-full h-16 relative w-5/6 flex shadow-md shadow-slate-300 justify-between items-center from-sky-500 to-sky-800">
                                 <img src={Logo} alt="" className="h-10" />
                                 <div className="w-full h-16 m-0 flex justify-center">
                                     <NavLink
@@ -104,13 +104,7 @@ export default function GuruLayout({ children }) {
                                 <div className="flex px-10 h-full rounded-r-full border-l-2 border-white bg-hijau">
                                     <Menu>
                                         <MenuButton>
-                                            {isLoading ? (
-                                                <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
-                                            ) : (
-                                                <div className="bg-gray-500 p-0.5 shadow-inner shadow-gray-300 rounded-full">
-                                                    <Avatar src={data.foto} />
-                                                </div>
-                                            )}
+                                            <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
                                         </MenuButton>
                                         <MenuList>
                                             <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
@@ -143,13 +137,7 @@ export default function GuruLayout({ children }) {
                             </Menu>
                             <Menu>
                                 <MenuButton>
-                                    {isLoading ? (
-                                        <BsPersonCircle className="h-10 w-10 decoration-white text-white" />
-                                    ) : (
-                                        <div className="bg-white p-0.5 m-1 shadow-inner shadow-gray-300 rounded-full">
-                                            <Avatar h={10} w={10} src={data.foto} />
-                                        </div>
-                                    )}
+                                    <BsPersonCircle className="h-10 w-10 decoration-white text-white" />
                                 </MenuButton>
                                 <MenuList>
                                     <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>

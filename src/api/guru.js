@@ -44,19 +44,5 @@ export function updateGuru(values) {
 }
 
 export function getAngket() {
-  return axios.get("/angket");
+    return axios.get(`/angket`);
 }
-
-export function tambahAngket(values) {
-  return axios.post("/angket", values);
-}
-export function deleteAngket(id) {
-  return axios.delete(`/angket/${id}`);
-}
-
-export function getSoalAngket(id) {
-  console.log(id)
-  return axios.get(`/angket/${id.id}`);
-}
-
-

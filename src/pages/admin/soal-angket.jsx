@@ -1,7 +1,8 @@
 import React from "react"
 import { useParams } from "react-router"
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router";
+import { getSoalAngket, tambahSoal } from "../../api/admin";
 import {
     Button,
     Input,
@@ -10,28 +11,73 @@ import {
     Tbody,
     Tfoot,
     Tr,
+    Spinner,
     Th,
     Td,
+    useToast,
     TableCaption,
+    Icon
 } from '@chakra-ui/react'
+import { Formik } from "formik";
 import { FiEdit } from 'react-icons/fi'
 import { IoMdArrowRoundBack, IoMdAddCircle } from 'react-icons/io'
 import { Link } from "react-router-dom";
 export default function Soalangket() {
     const navigate = useNavigate();
+    let queryClient = useQueryClient();
     let id = useParams().id
-    console.log(id)
-    const [inputList, setInputList] = React.useState([{}]);
-    const handleAddClick = () => {
-        setInputList([...inputList, {}]);
-    };
+    const toast = useToast()
+    const { isLoading, isError, data, isFetching, status, error, } = useQuery(
+        [
+            "soal-angket",
+            {
+                id: id
+            }
+        ],
 
-    const handleRemoveClick = index => {
-        const list = [...inputList];
-        list.splice(index, 1);
-        setInputList(list);
-    };
+        () =>
+            getSoalAngket({
+                id: id
+            }),
 
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
+    const initialValues = {
+        soal: "",
+        angket_id: id
+    };
+    const onSubmit = async (values) => {
+        try {
+            await tambahSoal(values);
+            queryClient.invalidateQueries("soal-angket")
+            toast({
+                title: 'Soal Terbuat.',
+                status: 'success',
+                position: 'top',
+                description: 'Pertanyaan Soal Telah Terbuat.',
+                variant: 'left-accent',
+                duration: 1000,
+                isClosable: true,
+            });
+        } catch (err) {
+            let halo = (err.response.data.message)
+            toast({
+                title: 'Failed',
+                status: 'error',
+                position: 'top',
+                variant: 'left-accent',
+                duration: 1000,
+                isClosable: true,
+                description: `${halo}`,
+            })
+        }
+    };
+    console.log(data)
+    let hasil = data?.data[0].soal
+    console.log(hasil)
     return (
         <div className="h-screen relative">
             <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">
@@ -49,7 +95,6 @@ export default function Soalangket() {
                                     Angket Bahasa Inggris
                                 </p>
                                 <div className="font-light flex justify-between items-center w-full">
-                                    Tenggat: 20-09-2004
                                     <div className=" z-0">
                                         <Button
                                             rounded='lg'
@@ -72,44 +117,92 @@ export default function Soalangket() {
                             <Table variant='striped' colorScheme='twitter'>
                                 <Thead>
                                     <Tr>
-                                        <Th>No.</Th>
+                                        <Th w='min'>No.</Th>
                                         <Th>Soal</Th>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    {inputList.map((input, index) => (
-                                        <Tr>
-                                            <Td>{index + 1}.</Td>
-                                            <Td className="w-full">
-                                                <Input
-                                                    borderColor={"purple.700"}
-                                                >
-                                                </Input>
+                                    {data?.data.map((row, index) => (
+                                        <Tr key={index}>
+                                            <Td>
+                                                {index + 1}
                                             </Td>
                                             <Td>
-                                                <div className="flex items-center">
-                                                    {inputList.length !== 1 && <Button paddingX="10" colorScheme='red' onClick={() => handleRemoveClick(index)} className="mr-3">Hapus</Button>}
-                                                    {inputList.length - 1 === index && <IoMdAddCircle className=" text-hijau" size="sm" onClick={() => handleAddClick()}></IoMdAddCircle>}
-                                                </div>
+                                                {row.soal}
                                             </Td>
                                         </Tr>
                                     ))}
                                 </Tbody>
                             </Table>
-                            <Button
-                                rounded='lg'
-                                size='md'
-                                marginTop='5'
-                                colorScheme='twitter'
-                                onClick={() => navigate(`dash-admin/angket/edit/${id}`)}
+                            {data?.data.length === 0 ? (
+                                <div className="text-center">Belum ada Soal</div>
+                            ) : ''}
+
+                            <div className="flex text-xl items-center mt-10 font-semibold">
+                                <IoMdAddCircle className=" text-green-500 mr-2" />
+                                Masukkan Soal
+                            </div>
+                            <Formik
+                                initialValues={initialValues}
+                                enableReinitialize
+                                onSubmit={onSubmit}
                             >
-                                <div className="flex items-center">
-                                    Simpan Soal
-                                    <span className="ml-3">
-                                        <FiEdit />
-                                    </span>
-                                </div>
-                            </Button>
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting,
+                                }) => (
+                                    <form onSubmit={handleSubmit}>
+                                        <Table variant='' colorScheme='twitter'>
+                                            <Tbody>
+                                                <Tr>
+                                                    <Td>
+                                                        <Input
+                                                            placeholder='Masukkan Soal'
+                                                            id='soal'
+                                                            type='text'
+                                                            value={values.soal}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            w='full'
+                                                            error={errors.nama_user && touched.nama_user}
+                                                            disabled={isSubmitting}
+                                                        />
+
+                                                    </Td>
+                                                    <Td>
+                                                        <Button
+                                                            colorScheme='blue'
+                                                            htmlType="submit"
+                                                            disabled={isSubmitting}
+                                                            block
+                                                            variant="solid"
+                                                            bgColor="#1F8AC6"
+                                                            color="white"
+                                                            loading={isSubmitting}
+                                                            type='submit'
+                                                            onSubmit={handleSubmit}
+                                                        >
+                                                            {isSubmitting ?
+                                                                (<Spinner
+                                                                    thickness='5px'
+                                                                    speed='0.65s'
+                                                                    emptyColor='gray.200'
+                                                                    color='blue.500'
+                                                                    size='md'
+                                                                />) : "Save"}
+                                                        </Button>
+                                                    </Td>
+                                                </Tr>
+                                            </Tbody>
+                                        </Table>
+                                    </form>
+                                )}
+                            </Formik>
                         </div>
                     </div>
                 </div>

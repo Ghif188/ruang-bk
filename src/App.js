@@ -22,8 +22,8 @@ import {
 import ProtectRoute from "./routers/ProtectRoute";
 import ProtectedLogin from "./routers/ProtectedLogin";
 import ProtectedGuru from "./routers/ProtectedGuru";
-import ProtectedMurid from "./routers/ProtectedMurid";
 import ProtectedAdmin from "./routers/ProtectedAdmin";
+import ProtectedMurid from "./routers/ProtectedMurid";
 import AngketGuru from './pages/guru/angket';
 import Murid from './pages/guru/murid';
 import Profile from './pages/guru/profile';
@@ -34,7 +34,7 @@ import InfoAngketGuru from './pages/guru/info-angket'
 import AngketAdmin from './pages/admin/angket';
 import Soalangket from './pages/admin/soal-angket';
 import AngketSiswa from './pages/siswa/angket';
-
+import DashAdmin from './pages/admin/dashboard';
 function App() {
   return (
     <Routes>
@@ -67,12 +67,6 @@ function App() {
         <Route path="/dash-siswa/angket/soal/:id" element={<SoalSiswa />} />
       </Route>
 
-      {/* Route Admin */}
-      <Route element={<ProtectedAdmin />}>
-        <Route exact path='/dash-admin/angket' element={<AngketAdmin />}></Route>
-        <Route exact path='/dash-admin/angket/:id' element={<Soalangket />}></Route>
-      </Route>
-
       <Route
         exact
         path="/cobain"
@@ -84,33 +78,16 @@ function App() {
       />
 
       {/* ROUTE ADMIN */}
-      <Route
-        exact
-        path="/dash"
-        element={
-          <ProtectRoute>
-            <Dash />
-          </ProtectRoute>
-        }
-      />
-      <Route
-        exact
-        path="/dash/profile"
-        element={
-          <ProtectRoute>
-            <ProfileAdmin />
-          </ProtectRoute>
-        }
-      />
-      <Route
-        exact
-        path="/dash/manage-user"
-        element={
-          <ProtectRoute>
-            <ManageUser />
-          </ProtectRoute>
-        }
-      />
+      <Route element={<ProtectedAdmin />}>
+        <Route path='/dash-admin/angket' element={<AngketAdmin />}></Route>
+        <Route path='/dash-admin/angket/:id' element={<Soalangket />}></Route>
+      </Route>
+
+      {/* ROUTE SISWA */}
+
+
+      <Route path="/dash-admin/home" element={<DashAdmin />} />
+
     </Routes>
   );
 }

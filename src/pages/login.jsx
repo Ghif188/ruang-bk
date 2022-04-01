@@ -88,7 +88,7 @@ const Login = () => {
             if (result.user.role === 1) {
                 window.location.reload()
                 
-                return navigate("/dash");
+                return navigate("/dash-admin/home");
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
