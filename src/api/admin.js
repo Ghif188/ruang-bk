@@ -11,3 +11,7 @@ export function getAllUser({ page, perPage, keyword }) {
     console.log(page);
     return axios.get(`/users?keywords=${keyword}&page=${page}&perpage=${perPage}`);
 }
+
+export function getAngket() {
+    return axios.get(`/angket`);
+}
