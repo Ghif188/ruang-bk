@@ -248,7 +248,7 @@ export default function Angket() {
                             </div>
                             {/* bawah */}
                             <div className="h-3/4 p-5 mt-5">
-                            <Accordion allowToggle defaultIndex={[0]}>
+                            <Accordion allowToggle>
                                     <AccordionItem p='3'>
                                         <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
                                             <div className="w-full flex text-left justify-between">

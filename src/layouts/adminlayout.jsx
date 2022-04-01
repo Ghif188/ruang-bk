@@ -15,8 +15,6 @@ import { MenuIcon } from '@heroicons/react/solid'
 
 export default function GuruLayout({ children }) {
     const navigate = useNavigate();
-    const [show, setShow] = React.useState(true);
-    const [show1, setShow1] = React.useState(false);
     const handleProfile = () => {
         // console.log("halo");
         navigate("/dash-guru/profile");

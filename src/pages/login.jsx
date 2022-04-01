@@ -38,10 +38,14 @@ const Login = () => {
     const isLoading = useSelector((state) => state.auth.isLoading);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const toast = useToast()
+    const toast = useToast();
+    const [hasil, setHasil] = React.useState();
     const onSubmit = async (values) => {
         const result = await dispatch(authLogin(values));
         console.log(result);
+        if (result.massage === "Unauthorized") {
+            setHasil("Akun Belum Terbuat")
+        }
         if (result.message === "fail") {
             alert(result?.msg)
         }
@@ -69,7 +73,7 @@ const Login = () => {
                 variant: 'left-accent',
                 duration: 10000,
                 isClosable: true,
-                description: `${result.message}`,
+                description: hasil,
             })
         }
     };
