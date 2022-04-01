@@ -23,6 +23,7 @@ import ProtectRoute from "./routers/ProtectRoute";
 import ProtectedLogin from "./routers/ProtectedLogin";
 import ProtectedGuru from "./routers/ProtectedGuru";
 import ProtectedMurid from "./routers/ProtectedMurid";
+import ProtectedAdmin from "./routers/ProtectedAdmin";
 import AngketGuru from './pages/guru/angket';
 import Murid from './pages/guru/murid';
 import Profile from './pages/guru/profile';
@@ -39,37 +40,43 @@ function App() {
     <Routes>
 
       <Route element={<ProtectedLogin />}>
-        <Route path='login' element={<Log />}/>
-        <Route path='register' element={<Reg />}/>
-        <Route path="/home" element={<Home/>}/>
+        <Route path='login' element={<Log />} />
+        <Route path='register' element={<Reg />} />
+        <Route path="/home" element={<Home />} />
       </Route>
 
       {/* Route guru */}
       <Route element={<ProtectedGuru />}>
-        <Route path='dash-guru/home' element={<DashGuru />}/>
+        <Route path='dash-guru/home' element={<DashGuru />} />
         {/* <Route path='dash-guru' element={<DashGuru />}/> */}
-        <Route path='dash-guru/profile' element={<Profile />}/>
-        <Route path='dash-guru/edit-profile' element={<EditProfile />}/>
-        <Route path='dash-guru/npsn' element={<Npsn />}/>
-        <Route path='dash-guru/angket' element={<AngketGuru />}/>
-        <Route path='dash-guru/angket/:id' element={<InfoAngketGuru />}/>
-        <Route path='dash-guru/angket/edit/:id' element={<EditSoal />}/>
-        <Route path='dash-guru/murid' element={<Murid />}/>
+        <Route path='dash-guru/profile' element={<Profile />} />
+        <Route path='dash-guru/edit-profile' element={<EditProfile />} />
+        <Route path='dash-guru/npsn' element={<Npsn />} />
+        <Route path='dash-guru/angket' element={<AngketGuru />} />
+        <Route path='dash-guru/angket/:id' element={<InfoAngketGuru />} />
+        <Route path='dash-guru/angket/edit/:id' element={<EditSoal />} />
+        <Route path='dash-guru/murid' element={<Murid />} />
       </Route>
 
       {/* Route Siswa */}
       <Route element={<ProtectedMurid />}>
-        <Route path="/dash-siswa/home" element={<DashSiswa />}/>
-        <Route path="/dash-siswa/profile" element={<ProfileSiswa />}/>
-        <Route path="/dash-siswa/edit-profile" element={<EditProfileSiswa />}/>
-        <Route path="/dash-siswa/angket" element={<AngketSiswa />}/>
-        <Route path="/dash-siswa/angket/soal/:id" element={<SoalSiswa />}/>
+        <Route path="/dash-siswa/home" element={<DashSiswa />} />
+        <Route path="/dash-siswa/profile" element={<ProfileSiswa />} />
+        <Route path="/dash-siswa/edit-profile" element={<EditProfileSiswa />} />
+        <Route path="/dash-siswa/angket" element={<AngketSiswa />} />
+        <Route path="/dash-siswa/angket/soal/:id" element={<SoalSiswa />} />
       </Route>
-      
+
+      {/* Route Admin */}
+      <Route element={<ProtectedAdmin />}>
+        <Route exact path='/dash-admin/angket' element={<AngketAdmin />}></Route>
+        <Route exact path='/dash-admin/angket/:id' element={<Soalangket />}></Route>
+      </Route>
+
       <Route
         exact
         path="/cobain"
-        element={<Cobain/>}
+        element={<Cobain />}
       />
       <Route
         path="/"
@@ -104,12 +111,6 @@ function App() {
           </ProtectRoute>
         }
       />
-
-      {/* ROUTE SISWA */}
-      
-      <Route exact path='/dash-admin/angket' element={<AngketAdmin/>}></Route>
-      <Route exact path='/dash-admin/angket/:id' element={<Soalangket/>}></Route>
-
     </Routes>
   );
 }

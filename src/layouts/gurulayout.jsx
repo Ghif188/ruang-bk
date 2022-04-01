@@ -142,11 +142,11 @@ export default function GuruLayout({ children }) {
                     </div>
                 </div>
                 <div className="sm:hidden">
-                    <div className="w-screen sm-max:hidden h-screen flex absolute">
-                        <img src={Bg} alt="" className="w-screen h-screen" />
+                    <div className="w-full sm-max:hidden h-screen flex absolute">
+                        <img src={Bg} alt="" className="w-full h-screen" />
                     </div>
-                    <div className="h-screen w-screen relative">
-                        <div className="flex h-full pt-5 w-screen absolute justify-center">
+                    <div className="h-screen w-full relative">
+                        <div className="flex h-full pt-5 w-full absolute justify-center">
                             {children}
                         </div>
                         <div className="flex justify-between bg-gradient-to-r from-sky-500 to-sky-700 relative">
