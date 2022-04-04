@@ -25,10 +25,33 @@ export function deleteAngket(id) {
 }
 
 export function getSoalAngket(id) {
-    console.log(id)
     return axios.get(`/angket/${id.id}`);
 }
 
 export function tambahSoal(values) {
     return axios.post("/soal", values);
+}
+export function deleteSoal(id) {
+    return axios.delete(`/soal/${id}`);
+}
+export function showSoal(id) {
+    console.log(id)
+    return axios.get(`/soal/${id}`);
+}
+
+export function updateSoal(values) {
+    console.log(values.id)
+    let formData = new FormData()
+    formData.append("soal", values.soal);
+    formData.append("angket_id", values.angket_id);
+    formData.append("_method", "put")
+
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ',' + pair[1])
+    }
+    axios.post(`/soal/${values.id}`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 }

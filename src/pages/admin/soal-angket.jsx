@@ -2,7 +2,9 @@ import React from "react"
 import { useParams } from "react-router"
 import { useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router";
-import { getSoalAngket, tambahSoal } from "../../api/admin";
+import { getSoalAngket, tambahSoal, deleteSoal, updateSoal, showSoal } from "../../api/admin";
+import axios from "../../api/axiosClient";
+import * as Yup from 'yup';
 import {
     Button,
     Input,
@@ -11,17 +13,35 @@ import {
     Tbody,
     Tfoot,
     Tr,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
     Spinner,
     Th,
     Td,
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    useDisclosure,
     useToast,
     TableCaption,
-    Icon
+    Icon,
+    FormLabel,
 } from '@chakra-ui/react'
 import { Formik } from "formik";
 import { FiEdit } from 'react-icons/fi'
 import { IoMdArrowRoundBack, IoMdAddCircle } from 'react-icons/io'
 import { Link } from "react-router-dom";
+const SoalSchema = Yup.object().shape({
+    soal: Yup.string().required("Wajib di Isi"),
+});
 export default function Soalangket() {
     const navigate = useNavigate();
     let queryClient = useQueryClient();
@@ -75,9 +95,61 @@ export default function Soalangket() {
             })
         }
     };
+    // console.log(data)
+    const [open, setOpen] = React.useState(false)
+    const onTutup = () => setOpen(false)
+    const onDelete = async (id) => {
+        const result = await deleteSoal(id);
+        queryClient.invalidateQueries("soal-angket")
+        toast({
+            title: 'Hapus Soal',
+            status: 'success',
+            position: 'top',
+            description: 'Soal Telah Dihapus.',
+            variant: 'left-accent',
+            duration: 9000,
+            isClosable: true,
+        })
+    };
     console.log(data)
-    let hasil = data?.data[0].soal
-    console.log(hasil)
+    const [editid, setEditid] = React.useState();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const multiFuncti = async () => {
+        onDelete(editid);
+        onTutup()
+    }
+    const multiFunc = async (id) => {
+        setOpen(true);
+        setEditid(id);
+    }
+    const multiButton = async (id) => {
+        onOpen();
+        onShow(id);
+    }
+    const [getDetail, setGetDetail] = React.useState([])
+    const onShow = async (id) => {
+        const result = await showSoal(id);
+        setGetDetail(result.data.data);
+    };
+    const [errors, setErrors] = React.useState(false);
+    const onUpdate = async (values) => {
+        console.log("ok")
+        console.log(values)
+        try {
+            await updateSoal(values);
+            queryClient.invalidateQueries("saol-angket");
+            toast({
+                position: "top-right",
+                title: "Berhasil",
+                description: "berhasil",
+                status: "success",
+                duration: 4000,
+                isClosable: true,
+            });
+        } catch (err) {
+            console.log(err.response.errors)
+        }
+    };
     return (
         <div className="h-screen relative">
             <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">
@@ -89,46 +161,54 @@ export default function Soalangket() {
                 <div className="h-1/10" />
                 <div className="w-full h-8/10 mt-10 justify-center flex ">
                     <div className="w-3/4">
-                        <div className="h-2/10 px-10 flex items-center rounded-t-xl bg-amber-200">
+                        <div className="h-2/10 px-10 flex items-center rounded-t-xl bg-amber-300">
                             <div className="w-full">
-                                <p className="text-xl text-white font-semibold mb-5">
+                                <p className="text-xl text-white font-semibold">
                                     Angket Bahasa Inggris
                                 </p>
-                                <div className="font-light flex justify-between items-center w-full">
-                                    <div className=" z-0">
-                                        <Button
-                                            rounded='lg'
-                                            size='md'
-                                            colorScheme='twitter'
-                                            onClick={() => navigate(`dash-admin/angket/edit/${id}`)}
-                                        >
-                                            <div className="flex items-center">
-                                                Simpan Soal
-                                                <span className="ml-3">
-                                                    <FiEdit />
-                                                </span>
-                                            </div>
-                                        </Button>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div className="mt-5 rounded sky-xl">
                             <Table variant='striped' colorScheme='twitter'>
                                 <Thead>
                                     <Tr>
-                                        <Th w='min'>No.</Th>
+                                        <Th>No.</Th>
                                         <Th>Soal</Th>
+                                        <Th textAlign={'center'}>
+                                            Aksi
+                                        </Th>
                                     </Tr>
                                 </Thead>
                                 <Tbody>
                                     {data?.data.map((row, index) => (
                                         <Tr key={index}>
                                             <Td>
-                                                {index + 1}
+                                                {index + 1} .
                                             </Td>
                                             <Td>
                                                 {row.soal}
+                                            </Td>
+                                            <Td display={'flex'} justifyContent='center'>
+                                                <Button
+                                                    colorScheme='blue'
+                                                    htmlType="submit"
+                                                    block
+                                                    variant="solid"
+                                                    bgColor="#1F8AC6"
+                                                    color="white"
+                                                    type='submit'
+                                                    onClick={() => multiButton(row.id)}
+                                                >
+                                                    Edit
+                                                </Button>
+                                                <Button
+                                                    colorScheme='red'
+                                                    shadow='md'
+                                                    marginLeft={'5'}
+                                                    onClick={() => multiFunc(row.id)}
+                                                >
+                                                    Delete
+                                                </Button>
                                             </Td>
                                         </Tr>
                                     ))}
@@ -207,6 +287,99 @@ export default function Soalangket() {
                     </div>
                 </div>
             </div>
-        </div>
+            <AlertDialog
+                isOpen={open}
+                onClose={onTutup}
+            >
+                <AlertDialogOverlay>
+                    <AlertDialogContent>
+                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                            Hapus Akun Siswa
+                        </AlertDialogHeader>
+                        <AlertDialogBody>
+                            Apakah kamu yakin untuk menghapus akun siswa ?.
+                        </AlertDialogBody>
+
+                        <AlertDialogFooter>
+                            <Button onClick={onTutup}>
+                                Cancel
+                            </Button>
+                            <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
+                                Delete
+                            </Button>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialogOverlay>
+            </AlertDialog>
+            <Drawer
+                isOpen={isOpen}
+                placement='right'
+                onClose={onClose}
+                size='sm'
+            >
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader
+                        borderBottomWidth='1px'
+                    >
+                        <p className="md-max:text-sm">Update Soal</p>
+                    </DrawerHeader>
+                    <Formik
+                        initialValues={initialValues}
+                        enableReinitialize
+                        onSubmit={onSubmit}
+                    >
+                        {({
+                            values,
+                            errors,
+                            touched,
+                            handleChange,
+                            handleBlur,
+                            handleSubmit,
+                            isSubmitting,
+                        }) => (
+                            <form onSubmit={onUpdate} className='w-full h-full'>
+                                <DrawerBody>
+                                    <div>
+                                        <div className='my-2'>
+                                            <FormLabel htmlFor='soal'>Soal</FormLabel>
+                                            <Input
+                                                name="soal"
+                                                disabled={isSubmitting}
+                                                id="soal"
+                                                type="text"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.soal}
+                                                placeholder="Soal"
+                                                tabIndex="1"
+                                                size="lg"
+                                            ></Input>
+                                        </div>
+                                    </div>
+                                </DrawerBody>
+                                <DrawerFooter>
+                                    <Button variant='outline' mr={3} onClick={onClose}>
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        colorScheme='blue'
+                                        htmlType="submit"
+                                        block
+                                        variant="solid"
+                                        bgColor="#1F8AC6"
+                                        color="white"
+                                        type='submit'
+                                    >
+                                        Save
+                                    </Button>
+                                </DrawerFooter>
+                            </form>
+                        )}
+                    </Formik>
+                </DrawerContent>
+            </Drawer>
+        </div >
     )
 }

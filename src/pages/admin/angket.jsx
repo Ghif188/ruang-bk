@@ -115,6 +115,7 @@ export default function Angket() {
             isClosable: true,
         })
     };
+    
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
@@ -287,8 +288,8 @@ export default function Angket() {
                                                                         shadow='md'
                                                                         rounded='lg'
                                                                         size='md'
-                                                                        _hover={{ bg: '#0369A1'}}
-                                                                        bgColor='red.700'
+                                                                        _hover={{ bg: 'red.700'}}
+                                                                        bgColor='red.600'
                                                                         onClick={() => multiFunct(angket.id)}
                                                                     >
                                                                         Delete
@@ -303,7 +304,6 @@ export default function Angket() {
                                                                     >
                                                                         Soal
                                                                     </Button>
-
                                                                 </div>
                                                             </div>
                                                         </div>

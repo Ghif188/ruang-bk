@@ -29,6 +29,7 @@ const Register = () => {
         nomor_telp: "",
         email: "",
         password: "",
+        role: 2,
         password_confirmation: "",
     };
     const navigate = useNavigate();

@@ -81,12 +81,10 @@ function App() {
       <Route element={<ProtectedAdmin />}>
         <Route path='/dash-admin/angket' element={<AngketAdmin />}></Route>
         <Route path='/dash-admin/angket/:id' element={<Soalangket />}></Route>
+        <Route path="/dash-admin/home" element={<DashAdmin />} />
       </Route>
 
       {/* ROUTE SISWA */}
-
-
-      <Route path="/dash-admin/home" element={<DashAdmin />} />
 
     </Routes>
   );
