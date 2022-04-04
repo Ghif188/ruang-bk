@@ -95,7 +95,6 @@ export default function Soalangket() {
             })
         }
     };
-    // console.log(data)
     const [open, setOpen] = React.useState(false)
     const onTutup = () => setOpen(false)
     const onDelete = async (id) => {
@@ -111,7 +110,6 @@ export default function Soalangket() {
             isClosable: true,
         })
     };
-    console.log(data)
     const [editid, setEditid] = React.useState();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const multiFuncti = async () => {
@@ -129,7 +127,7 @@ export default function Soalangket() {
     const [getDetail, setGetDetail] = React.useState([])
     const onShow = async (id) => {
         const result = await showSoal(id);
-        setGetDetail(result.data.data);
+        setGetDetail(result.data.data.data[0]);
     };
     const [errors, setErrors] = React.useState(false);
     const onUpdate = async (values) => {
@@ -137,7 +135,7 @@ export default function Soalangket() {
         console.log(values)
         try {
             await updateSoal(values);
-            queryClient.invalidateQueries("saol-angket");
+            queryClient.invalidateQueries("soal-angket");
             toast({
                 position: "top-right",
                 title: "Berhasil",
@@ -150,6 +148,7 @@ export default function Soalangket() {
             console.log(err.response.errors)
         }
     };
+    console.log(getDetail)
     return (
         <div className="h-screen relative">
             <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">
@@ -326,9 +325,9 @@ export default function Soalangket() {
                         <p className="md-max:text-sm">Update Soal</p>
                     </DrawerHeader>
                     <Formik
-                        initialValues={initialValues}
+                        initialValues={getDetail}
                         enableReinitialize
-                        onSubmit={onSubmit}
+                        onSubmit={onUpdate}
                     >
                         {({
                             values,
@@ -339,7 +338,7 @@ export default function Soalangket() {
                             handleSubmit,
                             isSubmitting,
                         }) => (
-                            <form onSubmit={onUpdate} className='w-full h-full'>
+                            <form onSubmit={handleSubmit} className='w-full h-full'>
                                 <DrawerBody>
                                     <div>
                                         <div className='my-2'>
@@ -364,15 +363,19 @@ export default function Soalangket() {
                                         Cancel
                                     </Button>
                                     <Button
-                                        colorScheme='blue'
-                                        htmlType="submit"
+                                        htmlType="button"
+                                        disabled={isSubmitting}
                                         block
                                         variant="solid"
-                                        bgColor="#1F8AC6"
-                                        color="white"
-                                        type='submit'
+                                        color="green"
+                                        loading={isSubmitting}
+                                        loadingText="Loading..."
+                                        onClick={() =>{
+                                            onClose()
+                                           return handleSubmit(values)
+                                        } }
                                     >
-                                        Save
+                                        <span className="font-semibold">Simpan</span>
                                     </Button>
                                 </DrawerFooter>
                             </form>

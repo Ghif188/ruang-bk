@@ -40,18 +40,17 @@ export function showSoal(id) {
 }
 
 export function updateSoal(values) {
-    console.log(values.id)
-    let formData = new FormData()
+    console.log(values)
+    let formData = new URLSearchParams
     formData.append("soal", values.soal);
     formData.append("angket_id", values.angket_id);
-    formData.append("_method", "put")
 
     for (let pair of formData.entries()) {
         console.log(pair[0] + ',' + pair[1])
     }
-    axios.post(`/soal/${values.id}`, formData, {
+    axios.put(`/soal/${values.id}`, formData, {
         headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/x-www-form-urlencoded",
         },
     });
 }

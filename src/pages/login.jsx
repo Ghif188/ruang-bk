@@ -51,7 +51,7 @@ const Login = () => {
         }
         if (result.message === "Success") {
             if (result.user.role === 1) {
-                return navigate("/dash");
+                return navigate("/dash-admin/home");
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
