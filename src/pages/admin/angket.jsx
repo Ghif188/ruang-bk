@@ -144,6 +144,7 @@ export default function Angket() {
                                         variant="solid"
                                         bgColor='#F0BF12'
                                         color="white"
+                                        _hover={{ bg: 'orange.500'}}
                                         onClick={onOpen}
                                     >
                                         Tambah Angket

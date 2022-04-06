@@ -17,7 +17,7 @@ export default function GuruLayout({ children }) {
     const navigate = useNavigate();
     const handleProfile = () => {
         // console.log("halo");
-        navigate("/dash-guru/profile");
+        navigate("/dash-admin/profile");
     };
     const handleHome = () => {
         // console.log("halo");

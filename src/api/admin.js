@@ -54,3 +54,15 @@ export function updateSoal(values) {
         },
     });
 }
+
+// export function importSoal(values) {
+//     console.log(values)
+//     e.prevent
+//     let formData = new FormData();
+//     formData.append("soal", values);
+//     axios.post(`/import-soal`, formData, {
+//         headers: {
+//             "Content-Type": "multipart/form-data",
+//         },
+//     });
+// }

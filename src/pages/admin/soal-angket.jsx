@@ -31,6 +31,12 @@ import {
     DrawerCloseButton,
     useDisclosure,
     useToast,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
     TableCaption,
     Icon,
     FormLabel,
@@ -39,9 +45,6 @@ import { Formik } from "formik";
 import { FiEdit } from 'react-icons/fi'
 import { IoMdArrowRoundBack, IoMdAddCircle } from 'react-icons/io'
 import { Link } from "react-router-dom";
-const SoalSchema = Yup.object().shape({
-    soal: Yup.string().required("Wajib di Isi"),
-});
 export default function Soalangket() {
     const navigate = useNavigate();
     let queryClient = useQueryClient();
@@ -68,6 +71,9 @@ export default function Soalangket() {
     const initialValues = {
         soal: "",
         angket_id: id
+    };
+    const initValues = {
+        soal: "",
     };
     const onSubmit = async (values) => {
         try {
@@ -97,6 +103,8 @@ export default function Soalangket() {
     };
     const [open, setOpen] = React.useState(false)
     const onTutup = () => setOpen(false)
+    const [buka, setBuka] = React.useState(false)
+    const tutupPopup = () => setBuka(false)
     const onDelete = async (id) => {
         const result = await deleteSoal(id);
         queryClient.invalidateQueries("soal-angket")
@@ -148,7 +156,40 @@ export default function Soalangket() {
             console.log(err.response.errors)
         }
     };
-    console.log(getDetail)
+    const handleFile = (e) => {
+        e.persist();
+        setValues(e.currentTarget.files[0]);
+    }
+    const [values, setValues] = React.useState({ soal: '' })
+    const onImport = async (e) => {
+        e.preventDefault();
+        let formData = new FormData()
+        formData.append("soal", values);
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ',' + pair[1])
+        }
+        queryClient.invalidateQueries("soal-angket");
+        const res = await axios.post(`/import-soal`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        console.log(res)
+        if (res.data.status === "success") {
+            toast({
+                title: 'Berhasil',
+                status: 'success',
+                position: 'top',
+                description: 'Berhasil Import Soal',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+        } else if (res.data.status === "failed") {
+            console.log('error')
+        }
+    }
+    console.log(values)
     return (
         <div className="h-screen relative">
             <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">
@@ -161,10 +202,57 @@ export default function Soalangket() {
                 <div className="w-full h-8/10 mt-10 justify-center flex ">
                     <div className="w-3/4">
                         <div className="h-2/10 px-10 flex items-center rounded-t-xl bg-amber-300">
-                            <div className="w-full">
+                            <div className="w-full flex items-center justify-between">
                                 <p className="text-xl text-white font-semibold">
                                     Angket Bahasa Inggris
                                 </p>
+                                <Popover>
+                                    <PopoverTrigger>
+                                        <Button
+                                            bgColor={'green.400'}
+                                            shadow='md'
+                                            marginLeft={'5'}
+                                            display={'flex'}
+                                            _hover={{ bg: 'green.500' }}
+                                            onClick={() => setBuka(true)}
+                                        >
+                                            <IoMdAddCircle className=" text-white mr-2" />
+                                            Import Soal
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent>
+                                        <PopoverHeader>Put File</PopoverHeader>
+                                        <PopoverBody>
+                                            <form onSubmit={onImport}>
+                                                <div className="">
+                                                    <div className="mb-5">
+                                                        <input
+                                                            name="soal"
+                                                            id="soal"
+                                                            type="file"
+                                                            onChange={handleFile}
+                                                            value={values.soal}
+                                                            placeholder="Soal"
+                                                            tabIndex="1"
+                                                            size="lg"
+                                                        ></input>
+                                                    </div>
+                                                    <Button
+                                                        tabIndex="3"
+                                                        block
+                                                        variant="solid"
+                                                        color="green"
+                                                        type="submit"
+                                                    >
+                                                        <span className="font-semibold">Simpan Data</span>
+                                                    </Button>
+                                                </div>
+                                            </form>
+                                        </PopoverBody>
+                                        <PopoverFooter>
+                                        </PopoverFooter>
+                                    </PopoverContent>
+                                </Popover>
                             </div>
                         </div>
                         <div className="mt-5 rounded sky-xl">
@@ -195,6 +283,7 @@ export default function Soalangket() {
                                                     variant="solid"
                                                     bgColor="#1F8AC6"
                                                     color="white"
+                                                    shadow='md'
                                                     type='submit'
                                                     onClick={() => multiButton(row.id)}
                                                 >
@@ -292,21 +381,73 @@ export default function Soalangket() {
             >
                 <AlertDialogOverlay>
                     <AlertDialogContent>
-                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                            Hapus Akun Siswa
-                        </AlertDialogHeader>
-                        <AlertDialogBody>
-                            Apakah kamu yakin untuk menghapus akun siswa ?.
-                        </AlertDialogBody>
-
-                        <AlertDialogFooter>
-                            <Button onClick={onTutup}>
-                                Cancel
-                            </Button>
-                            <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
-                                Delete
-                            </Button>
-                        </AlertDialogFooter>
+                        <Formik
+                            enableReinitialize
+                            onSubmit={onSubmit}
+                        >
+                            {({
+                                values,
+                                errors,
+                                touched,
+                                handleChange,
+                                handleBlur,
+                                setFieldValue,
+                                handleSubmit,
+                                isSubmitting,
+                            }) => (<form onSubmit={handleSubmit}>
+                                <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                                    Hapus Soal
+                                </AlertDialogHeader>
+                                <AlertDialogBody>
+                                    <div className="">
+                                        halo
+                                        <div className="mb-5">
+                                            <input
+                                                name="file"
+                                                disabled={isSubmitting}
+                                                id="file"
+                                                type="file"
+                                                onChange={(event) => {
+                                                    let reader = new FileReader();
+                                                    reader.readAsDataURL(
+                                                        event.target.files[0]
+                                                    );
+                                                    setFieldValue(
+                                                        `values.file`,
+                                                        event.currentTarget.files[0]
+                                                    );
+                                                }}
+                                                onBlur={handleBlur}
+                                                //value={values.file}
+                                                placeholder="Name"
+                                                tabIndex="1"
+                                                size="lg"
+                                            ></input>
+                                        </div>
+                                        <Button
+                                            tabIndex="3"
+                                            block
+                                            variant="solid"
+                                            color="green"
+                                            onClick={() => {
+                                                onSubmit(values);
+                                            }}
+                                        >
+                                            <span className="font-semibold">Simpan Data</span>
+                                        </Button>
+                                    </div>
+                                </AlertDialogBody>
+                                <AlertDialogFooter>
+                                    <Button onClick={onTutup}>
+                                        Cancel
+                                    </Button>
+                                    <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
+                                        Delete
+                                    </Button>
+                                </AlertDialogFooter>
+                            </form>
+                            )}
+                        </Formik>
                     </AlertDialogContent>
                 </AlertDialogOverlay>
             </AlertDialog>
@@ -370,10 +511,10 @@ export default function Soalangket() {
                                         color="green"
                                         loading={isSubmitting}
                                         loadingText="Loading..."
-                                        onClick={() =>{
+                                        onClick={() => {
                                             onClose()
-                                           return handleSubmit(values)
-                                        } }
+                                            return handleSubmit(values)
+                                        }}
                                     >
                                         <span className="font-semibold">Simpan</span>
                                     </Button>
