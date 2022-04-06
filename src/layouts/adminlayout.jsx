@@ -21,15 +21,15 @@ export default function GuruLayout({ children }) {
     };
     const handleHome = () => {
         // console.log("halo");
-        navigate("/dash-guru/home");
+        navigate("/dash-admin/home");
     };
     const handleMurid = () => {
         // console.log("halo");
-        navigate("/dash-guru/murid");
+        navigate("/dash-admin/murid");
     };
     const handleAngket = () => {
         // console.log("halo");
-        navigate("/dash-guru/angket");
+        navigate("/dash-admin/angket");
     };
     const logClear = () => {
         localStorage.clear()

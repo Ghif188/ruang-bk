@@ -9,7 +9,7 @@ const useAuth = () => {
 
 const ProtectedGuru = () => {
     const isAuth = useAuth()
-    return isAuth ? <Outlet/> : <Navigate to="/log" />
+    return isAuth ? <Outlet/> : <Navigate to="/login" />
 }
 
 export default ProtectedGuru
