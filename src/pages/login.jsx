@@ -51,17 +51,22 @@ const Login = () => {
         }
         if (result.message === "Success") {
             if (result.user.role === 1) {
-                return navigate("/dash-admin/home");
+                navigate("/dash-admin/home");
+                window.location.reload();
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
-                    return navigate("/dash-guru/home");
+                    navigate("/dash-guru/home");
                 } else {
-                    return navigate("/dash-guru/npsn")
+                    navigate("/dash-guru/npsn")
                 }
             }
             if (result.user.role === 3) {
-                return navigate("/dash-siswa/home");
+                if (result.user.password_status) {
+                    navigate("/dash-siswa/change-password");
+                } else {
+                    navigate("/dash-siswa/home");
+                }
             }
         } else {
             toast({

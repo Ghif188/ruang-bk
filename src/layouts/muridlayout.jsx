@@ -22,8 +22,9 @@ export default function MuridLayout({ children }) {
         navigate("/dash-siswa/profile");
     };
     const logClear = () => {
-        localStorage.clear()
-        navigate("/login")
+        window.localStorage.clear();
+        navigate("/login");
+        window.location.reload();
     }
     const { isLoading, isError, data, isFetching } = useQuery(
         [
@@ -89,13 +90,14 @@ export default function MuridLayout({ children }) {
                             <div className="flex px-10 h-full rounded-r-full border-l-2 border-white bg-hijau">
                                 <Menu>
                                     <MenuButton>
-                                        {isLoading ? (
+                                        {/* {isLoading ? (
                                             <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
                                         ) : (
                                             <div className="bg-gray-500 p-0.5 shadow-inner shadow-gray-300 rounded-full">
                                                 <Avatar src={data.foto} />
                                             </div> 
-                                        )}
+                                        )} */}
+                                            <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
                                     </MenuButton>
                                     <MenuList>
                                         <MenuItem icon={< CgProfile />} onClick={handleShow}>Profil</MenuItem>

@@ -35,6 +35,7 @@ import AngketAdmin from './pages/admin/angket';
 import Soalangket from './pages/admin/soal-angket';
 import AngketSiswa from './pages/siswa/angket';
 import DashAdmin from './pages/admin/dashboard';
+import ChangePass from './pages/siswa/change-pass';
 function App() {
   return (
     <Routes>
@@ -61,6 +62,7 @@ function App() {
       {/* Route Siswa */}
       <Route element={<ProtectedMurid />}>
         <Route path="/dash-siswa/home" element={<DashSiswa />} />
+        <Route path="/dash-siswa/change-password" element={<ChangePass />} />
         <Route path="/dash-siswa/profile" element={<ProfileSiswa />} />
         <Route path="/dash-siswa/edit-profile" element={<EditProfileSiswa />} />
         <Route path="/dash-siswa/angket" element={<AngketSiswa />} />

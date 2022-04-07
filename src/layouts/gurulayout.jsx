@@ -34,9 +34,9 @@ export default function GuruLayout({ children }) {
         navigate("/dash-guru/angket");
     };
     const logClear = () => {
-        localStorage.clear()
-        navigate("/login")
-        window.location.reload()
+        window.localStorage.clear();
+        navigate("/login");
+        window.location.reload();
     }
     const { isLoading, isError, data, isFetching } = useQuery(
         [

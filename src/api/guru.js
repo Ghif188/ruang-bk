@@ -14,7 +14,7 @@ export function registerSiswa(values) {
 
 export function getSiswa(params) {
   syncToken()
-  return axios.get(`/siswa`, { params });
+  return axios.get(`/getSiswa`, { params });
 }
 
 export function showSiswa(id) {
