@@ -103,8 +103,6 @@ export default function Soalangket() {
     };
     const [open, setOpen] = React.useState(false)
     const onTutup = () => setOpen(false)
-    const [buka, setBuka] = React.useState(false)
-    const tutupPopup = () => setBuka(false)
     const onDelete = async (id) => {
         const result = await deleteSoal(id);
         queryClient.invalidateQueries("soal-angket")
@@ -168,14 +166,14 @@ export default function Soalangket() {
         for (let pair of formData.entries()) {
             console.log(pair[0] + ',' + pair[1])
         }
-        queryClient.invalidateQueries("soal-angket");
         const res = await axios.post(`/import-soal`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
+        queryClient.invalidateQueries("soal-angket");
         console.log(res)
-        if (res.data.status === "success") {
+        if (res.status === 200) {
             toast({
                 title: 'Berhasil',
                 status: 'success',
@@ -189,7 +187,6 @@ export default function Soalangket() {
             console.log('error')
         }
     }
-    console.log(values)
     return (
         <div className="h-screen relative">
             <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">
@@ -214,7 +211,6 @@ export default function Soalangket() {
                                             marginLeft={'5'}
                                             display={'flex'}
                                             _hover={{ bg: 'green.500' }}
-                                            onClick={() => setBuka(true)}
                                         >
                                             <IoMdAddCircle className=" text-white mr-2" />
                                             Import Soal
@@ -275,28 +271,30 @@ export default function Soalangket() {
                                             <Td>
                                                 {row.soal}
                                             </Td>
-                                            <Td display={'flex'} justifyContent='center'>
-                                                <Button
-                                                    colorScheme='blue'
-                                                    htmlType="submit"
-                                                    block
-                                                    variant="solid"
-                                                    bgColor="#1F8AC6"
-                                                    color="white"
-                                                    shadow='md'
-                                                    type='submit'
-                                                    onClick={() => multiButton(row.id)}
-                                                >
-                                                    Edit
-                                                </Button>
-                                                <Button
-                                                    colorScheme='red'
-                                                    shadow='md'
-                                                    marginLeft={'5'}
-                                                    onClick={() => multiFunc(row.id)}
-                                                >
-                                                    Delete
-                                                </Button>
+                                            <Td>
+                                                <div className="flex justify-center">
+                                                    <Button
+                                                        colorScheme='blue'
+                                                        htmlType="submit"
+                                                        block
+                                                        variant="solid"
+                                                        bgColor="#1F8AC6"
+                                                        color="white"
+                                                        shadow='md'
+                                                        type='submit'
+                                                        onClick={() => multiButton(row.id)}
+                                                    >
+                                                        Edit
+                                                    </Button>
+                                                    <Button
+                                                        colorScheme='red'
+                                                        shadow='md'
+                                                        marginLeft={'5'}
+                                                        onClick={() => multiFunc(row.id)}
+                                                    >
+                                                        Delete
+                                                    </Button>
+                                                </div>
                                             </Td>
                                         </Tr>
                                     ))}

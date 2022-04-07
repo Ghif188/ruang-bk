@@ -52,13 +52,14 @@ const Login = () => {
         if (result.message === "Success") {
             if (result.user.role === 1) {
                 navigate("/dash-admin/home");
-                window.location.reload();
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
                     navigate("/dash-guru/home");
+                    window.location.reload();
                 } else {
-                    navigate("/dash-guru/npsn")
+                    navigate("/dash-guru/npsn");
+                    window.location.reload();
                 }
             }
             if (result.user.role === 3) {

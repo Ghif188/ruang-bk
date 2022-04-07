@@ -5,6 +5,7 @@ import { IoMdPersonAdd } from "react-icons/io"
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
 import { AiFillFileAdd } from "react-icons/ai"
 import { Link, useNavigate } from 'react-router-dom';
+import axios from "../../api/axiosClient";
 import DataTable from "react-data-table-component";
 import {
     Button,
@@ -33,7 +34,12 @@ import {
     AlertDialogOverlay,
     useToast,
     Spinner,
-    Collapse
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
 } from "@chakra-ui/react";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -327,6 +333,39 @@ export default function Murid() {
     const pageakhir = data?.last_page
     const dataakhir = data?.data
     console.log(data)
+    const handleFile = (e) => {
+        e.persist();
+        setValues(e.currentTarget.files[0]);
+    }
+    const [values, setValues] = React.useState({ user: '' })
+    const onImport = async (e) => {
+        e.preventDefault();
+        let formData = new FormData()
+        formData.append("user", values);
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ',' + pair[1])
+        }
+        const res = await axios.post(`/import-users`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        queryClient.invalidateQueries("siswa");
+        console.log(res)
+        if (res.status === 200) {
+            toast({
+                title: 'Berhasil',
+                status: 'success',
+                position: 'top',
+                description: 'Berhasil Import Soal',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+        } else if (res.data.status === "failed") {
+            console.log('error')
+        }
+    }
     return (
         <React.Fragment>
             <Layout>
@@ -339,12 +378,52 @@ export default function Murid() {
                             </div>
                             <div className="w-1/4 sm-max:hidden"></div>
                             <div className="flex w-1/4 justify-evenly sm-max:w-2/3">
-                                <Button size={MediaQ ? 'md' : 'xs'} colorScheme='twitter' color='white' shadow='md'>
-                                    <div className="flex items-center sm-max:text-xs">
-                                        Export
-                                        <AiFillFileAdd />
-                                    </div>
-                                </Button>
+                                <Popover>
+                                    <PopoverTrigger>
+                                        <Button
+                                            size={MediaQ ? 'md' : 'xs'}
+                                            colorScheme='twitter'
+                                            color='white'
+                                            shadow='md'>
+                                            <div className="flex items-center sm-max:text-xs">
+                                                Import
+                                                <AiFillFileAdd className="ml-2" />
+                                            </div>
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent>
+                                        <PopoverHeader>Put File</PopoverHeader>
+                                        <PopoverBody>
+                                            <form onSubmit={onImport}>
+                                                <div className="">
+                                                    <div className="mb-5">
+                                                        <input
+                                                            name="user"
+                                                            id="user"
+                                                            type="file"
+                                                            onChange={handleFile}
+                                                            value={values.user}
+                                                            placeholder="user"
+                                                            tabIndex="1"
+                                                            size="lg"
+                                                        ></input>
+                                                    </div>
+                                                    <Button
+                                                        tabIndex="3"
+                                                        block
+                                                        variant="solid"
+                                                        color="green"
+                                                        type="submit"
+                                                    >
+                                                        <span className="font-semibold">Simpan Data</span>
+                                                    </Button>
+                                                </div>
+                                            </form>
+                                        </PopoverBody>
+                                        <PopoverFooter>
+                                        </PopoverFooter>
+                                    </PopoverContent>
+                                </Popover>
                                 <Button size={MediaQ ? 'md' : 'xs'} colorScheme='messenger' shadow='md' onClick={onOpen}>
                                     <p className="sm-max:text-xs">Tambah +</p>
                                 </Button>

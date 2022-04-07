@@ -25,11 +25,13 @@ import {
     AlertDialogContent,
     AlertDialogOverlay,
     Input,
-    Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionPanel,
-    AccordionIcon,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
     Spinner,
     FormLabel,
     DrawerCloseButton,
@@ -115,7 +117,7 @@ export default function Angket() {
             isClosable: true,
         })
     };
-    
+
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
@@ -144,7 +146,7 @@ export default function Angket() {
                                         variant="solid"
                                         bgColor='#F0BF12'
                                         color="white"
-                                        _hover={{ bg: 'orange.500'}}
+                                        _hover={{ bg: 'orange.500' }}
                                         onClick={onOpen}
                                     >
                                         Tambah Angket
@@ -280,7 +282,7 @@ export default function Angket() {
                                                                         shadow='md'
                                                                         rounded='lg'
                                                                         size='md'
-                                                                        _hover={{ bg: '#55cc48'}}
+                                                                        _hover={{ bg: '#55cc48' }}
                                                                         bgColor={'#19ff00'}
                                                                     >
                                                                         Edit
@@ -289,7 +291,7 @@ export default function Angket() {
                                                                         shadow='md'
                                                                         rounded='lg'
                                                                         size='md'
-                                                                        _hover={{ bg: 'red.700'}}
+                                                                        _hover={{ bg: 'red.700' }}
                                                                         bgColor='red.600'
                                                                         onClick={() => multiFunct(angket.id)}
                                                                     >
@@ -299,7 +301,7 @@ export default function Angket() {
                                                                         shadow='md'
                                                                         rounded='lg'
                                                                         size='md'
-                                                                        _hover={{ bg: '#0369A1'}}
+                                                                        _hover={{ bg: '#0369A1' }}
                                                                         bgColor='blue.200'
                                                                         onClick={() => navigate(`/dash-admin/angket/${angket.id}`)}
                                                                     >
