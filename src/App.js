@@ -76,7 +76,7 @@ function App() {
       />
       <Route
         path="/"
-        element={localStorage.getItem("role") == '2' ? <Navigate replace to="/dash-guru/home" /> : (localStorage.getItem("role") == '3' ? <Navigate replace to="/dash-siswa/home" /> : (localStorage.getItem("role") == '3' ? <Navigate replace to="/dash-admin/home" /> : <Navigate replace to="/home" />))}
+        element={localStorage.getItem("role") == '2' ? <Navigate replace to="/dash-guru/home" /> : (localStorage.getItem("role") == '3' ? <Navigate replace to="/dash-siswa/home" /> : (localStorage.getItem("role") == '1' ? <Navigate replace to="/dash-admin/home" /> : <Navigate replace to="/home" />))}
       />
 
       {/* ROUTE ADMIN */}
