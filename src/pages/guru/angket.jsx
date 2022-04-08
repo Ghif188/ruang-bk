@@ -78,6 +78,7 @@ export default function Angket() {
     }
     const [open, setOpen] = React.useState(false)
     const onTutup = () => setOpen(false)
+    const [checked, setCheked] = React.useState([])
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
@@ -109,27 +110,18 @@ export default function Angket() {
                                             </div>
                                         </AccordionButton>
                                         <AccordionPanel pb={4}>
-                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
+                                            <div role={'group'} className="grid w-full gap-3 mb-3 h-full grid-cols-4">
                                                 <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                    <Checkbox value="1" name="checked" size='lg'>Halo</Checkbox>
                                                 </div>
                                                 <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                    <Checkbox name="checked" value="2" size='lg'>Halo</Checkbox>
                                                 </div>
                                                 <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                    <Checkbox name="checked" value="3" size='lg'>Halo</Checkbox>
                                                 </div>
                                                 <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                    <Checkbox name="checked" value="4" size='lg'>Halo</Checkbox>
                                                 </div>
                                             </div>
                                             <div className="w-full flex justify-end">
