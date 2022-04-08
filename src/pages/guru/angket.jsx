@@ -2,8 +2,9 @@ import React from "react";
 import Jempol from "../../assets/bouken.png"
 import Layout from "../../layouts/gurulayout"
 import * as Yup from 'yup';
-import { getAngket } from "../../api/guru";
+import { getAngket, getSiswa, } from "../../api/guru";
 import { useQuery, useQueryClient } from "react-query";
+import axios from "../../api/axiosClient";
 import {
     useDisclosure,
     Tbody,
@@ -36,7 +37,7 @@ import {
     DrawerCloseButton,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
-import {FiEdit} from "react-icons/fi"
+import { FiEdit } from "react-icons/fi"
 import { useNavigate } from 'react-router-dom';
 const RegisterSchema = Yup.object().shape({
     nama_angket: Yup.string().required("Wajib di Isi"),
@@ -63,7 +64,17 @@ export default function Angket() {
             select: (response) => response.data.data,
         }
     );
-    console.log(data)
+    const { data: datauser } = useQuery(
+        [
+            "siswa",
+        ],
+        () =>
+            getSiswa(),
+        {
+            keepPreviousData: true,
+            select: (response) => response.data,
+        }
+    );
     const [editId, setEditId] = React.useState()
     let queryClient = useQueryClient();
     const toast = useToast()
@@ -79,6 +90,50 @@ export default function Angket() {
     const [open, setOpen] = React.useState(false)
     const onTutup = () => setOpen(false)
     const [checked, setCheked] = React.useState([])
+    const handleCheckbox = (e) => {
+        e.persist();
+        setCheked({ ...checked, [e.target.name]: e.target.value });
+    }
+    const haloPro = () => {
+        const halo = checked.toString()
+        console.log(halo)
+    }
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        let formData = new FormData()
+        formData.append("angket_id", '1');
+        formData.append("time", '3600');
+        formData.append("start_at", '3600');
+        formData.append("finish_at", '3600');
+        for (let index = 0; index < checked.length; index++) {
+            formData.append("user_id[" + [index] + "]" , checked[index]);
+        }
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ',' + pair[1])
+        }
+        const res = await axios.post(`/akses`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+
+        console.log(res)
+        if (res.data.status === "success") {
+            toast({
+                title: 'Berhasil',
+                status: 'success',
+                position: 'top',
+                description: 'Anda berhasil edit akun',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+        } else if (res.data.status === "failed") {
+            console.log('error')
+        }
+
+    }
+    console.log(checked[1])
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
@@ -101,94 +156,56 @@ export default function Angket() {
                             </div>
                             {/* bawah */}
                             <div className="h-3/4 p-5 mt-5">
-                            <Accordion allowToggle>
+                                <Accordion allowToggle>
                                     <AccordionItem p='3'>
-                                        <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                        <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
                                             <div className="w-full flex text-left justify-between">
                                                 Angket Peminatan Jurusan
                                                 <AccordionIcon />
                                             </div>
                                         </AccordionButton>
                                         <AccordionPanel pb={4}>
-                                            <div role={'group'} className="grid w-full gap-3 mb-3 h-full grid-cols-4">
-                                                <div className="col-span-1">
-                                                    <Checkbox value="1" name="checked" size='lg'>Halo</Checkbox>
+                                            <form onSubmit={onSubmit} className="">
+                                                <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
+                                                    {datauser?.data.data.map((siswa, index) => (
+                                                        <div key={index} className="col-span-1">
+                                                            <Checkbox value={siswa.id} onChange={handleCheckbox} name={index} size='lg'>{siswa.nama_siswa}</Checkbox>
+                                                        </div>
+                                                    ))}
                                                 </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox name="checked" value="2" size='lg'>Halo</Checkbox>
+                                                <div className="w-full flex justify-end">
+                                                    <Button
+                                                        rounded='lg'
+                                                        size='md'
+                                                        colorScheme='whatsapp'
+                                                        onClick={() => setCheked(checked => [])}
+                                                    >
+                                                        <div className="flex items-center">
+                                                            Aktifkan Angket
+                                                            <span className="ml-3">
+                                                                <FiEdit />
+                                                            </span>
+                                                        </div>
+                                                    </Button>
+                                                    <Button
+                                                        rounded='lg'
+                                                        size='md'
+                                                        colorScheme='whatsapp'
+                                                        type="submit"
+                                                    >
+                                                        <div className="flex items-center">
+                                                            Akt
+                                                            <span className="ml-3">
+                                                                <FiEdit />
+                                                            </span>
+                                                        </div>
+                                                    </Button>
                                                 </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox name="checked" value="3" size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox name="checked" value="4" size='lg'>Halo</Checkbox>
-                                                </div>
-                                            </div>
-                                            <div className="w-full flex justify-end">
-                                                <Button
-                                                    rounded='lg'
-                                                    size='md'
-                                                    colorScheme='whatsapp'
-                                                >
-                                                    <div className="flex items-center">
-                                                        Aktifkan Angket
-                                                        <span className="ml-3">
-                                                            <FiEdit />
-                                                        </span>
-                                                    </div>
-                                                </Button>
-                                            </div>
+                                            </form>
                                         </AccordionPanel>
                                     </AccordionItem>
                                     <AccordionItem p='3'>
-                                        <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                            <div className="w-full flex text-left justify-between">
-                                                Angket Peminatan Jurusan
-                                                <AccordionIcon />
-                                            </div>
-                                        </AccordionButton>
-                                        <AccordionPanel pb={4}>
-                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                            </div>
-                                            <div className="w-full flex justify-end">
-                                                <Button
-                                                    rounded='lg'
-                                                    size='md'
-                                                    colorScheme='whatsapp'
-                                                >
-                                                    <div className="flex items-center">
-                                                        Aktifkan Angket
-                                                        <span className="ml-3">
-                                                            <FiEdit />
-                                                        </span>
-                                                    </div>
-                                                </Button>
-                                            </div>
-                                        </AccordionPanel>
-                                    </AccordionItem>
-                                    <AccordionItem p='3'>
-                                        <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                        <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
                                             <div className="w-full flex text-left justify-between">
                                                 Angket Peminatan Jurusan
                                                 <AccordionIcon />
@@ -235,7 +252,54 @@ export default function Angket() {
                                         </AccordionPanel>
                                     </AccordionItem>
                                     <AccordionItem p='3'>
-                                        <AccordionButton fontWeight='semibold' color='blue.700'  _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                        <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                            <div className="w-full flex text-left justify-between">
+                                                Angket Peminatan Jurusan
+                                                <AccordionIcon />
+                                            </div>
+                                        </AccordionButton>
+                                        <AccordionPanel pb={4}>
+                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                                <div className="col-span-1">
+                                                    <Checkbox size='lg'>Halo</Checkbox>
+                                                </div>
+                                            </div>
+                                            <div className="w-full flex justify-end">
+                                                <Button
+                                                    rounded='lg'
+                                                    size='md'
+                                                    colorScheme='whatsapp'
+                                                >
+                                                    <div className="flex items-center">
+                                                        Aktifkan Angket
+                                                        <span className="ml-3">
+                                                            <FiEdit />
+                                                        </span>
+                                                    </div>
+                                                </Button>
+                                            </div>
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                    <AccordionItem p='3'>
+                                        <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
                                             <div className="w-full flex text-left justify-between">
                                                 Angket Peminatan Jurusan
                                                 <AccordionIcon />
