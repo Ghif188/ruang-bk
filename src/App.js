@@ -36,6 +36,7 @@ import Soalangket from './pages/admin/soal-angket';
 import AngketSiswa from './pages/siswa/angket';
 import DashAdmin from './pages/admin/dashboard';
 import ChangePass from './pages/siswa/change-pass';
+import '../src/css/dropdown.css'
 function App() {
   return (
     <Routes>
