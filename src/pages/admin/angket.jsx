@@ -35,9 +35,11 @@ import {
     Spinner,
     FormLabel,
     DrawerCloseButton,
+    useMediaQuery
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import { useNavigate } from 'react-router-dom';
+import { Media } from "react-data-table-component";
 const RegisterSchema = Yup.object().shape({
     nama_angket: Yup.string().required("Wajib di Isi"),
     keterangan: Yup.string().required("Wajib di Isi"),
@@ -117,11 +119,12 @@ export default function Angket() {
             isClosable: true,
         })
     };
+    const [MediaQ] = useMediaQuery('(min-width: 766px)');
 
     return (
         <Layout>
-            <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
-                <div className="bg-gray-200 h-full w-full p-2 justify-center flex">
+            <div className="bg-white antialiased bg-opacity-50 h-full w-9/12 px-10 md-max:px-0 pt-2 md-max:w-full">
+                <div className="bg-gray-200 h-full w-full p-2 md-max:p-0 justify-center flex">
                     <div className="h-full w-full scroll-smooth overflow-y-scroll snap-y">
                         <Box
                             boxShadow='lg'
@@ -129,19 +132,19 @@ export default function Angket() {
                             height='100%'
                         >
                             {/* atas */}
-                            <div className="h-2/10 bg-gradient-to-r flex justify-center items-center from-sky-500 to-sky-800  text-white">
-                                <div className="w-7/10 h-7/10">
-                                    <div className="text-2xl pb-5 flex">
-                                        <p className="pr-2">Give Your Best</p><img src={Jempol} className="w-9 h-9" alt="" />
+                            <div className="h-2/10 bg-gradient-to-r flex justify-center items-center from-sky-500 to-sky-800  text-white md-max:px-4 md-max:pt-6 md-max:h-3/10">
+                                <div className="w-7/10 h-7/10 md-max:h-full">
+                                    <div className="text-2xl pb-5 flex md-max:text-base">
+                                        <p className="pr-2">Give Your Best</p><img src={Jempol} className="w-9 h-9 md-max:w-6 md-max:h-6" alt="" />
                                     </div>
-                                    <p>The more we are grateful, the more happiness we get.</p>
+                                    <p className="md-max:text-sm">The more we are grateful, the more happiness we get.</p>
                                 </div>
                                 <div className="h-7/10 flex items-end">
                                     <Button
                                         size='sm'
-                                        height='40px'
+                                        height={MediaQ ? '40px' : '30px'}
                                         rounded='lg'
-                                        px='25px'
+                                        px={MediaQ ? '25px' : '10px'}
                                         type='submit'
                                         variant="solid"
                                         bgColor='#F0BF12'
@@ -149,7 +152,9 @@ export default function Angket() {
                                         _hover={{ bg: 'orange.500' }}
                                         onClick={onOpen}
                                     >
-                                        Tambah Angket
+                                        <p className="text-xs md:text-base">
+                                            Tambah Angket
+                                        </p>
                                     </Button>
                                 </div>
                                 <Drawer
@@ -247,7 +252,7 @@ export default function Angket() {
                                 </Drawer>
                             </div>
                             {/* bawah */}
-                            <div className="h-3/4 p-5 mt-5">
+                            <div className="h-3/4 p-5 mt-5 md-max:w-full">
                                 {
                                     isLoading ? (
                                         <div className="w-full h-full justify-center items-center flex">
@@ -266,46 +271,55 @@ export default function Angket() {
                                                     <div className="w-full flex justify-center">Belum Ada Angket</div>
                                                 ) : (
                                                     <div>{data?.data.map((angket, index) => (
-                                                        <div key={index} className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3">
-                                                            <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-blue-400">
+                                                        <div key={index} className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3 md-max:px-1">
+                                                            <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-blue-400 md-max:py-2 md-max:px-2">
                                                                 <div className="w-2/3">
-                                                                    <p className="font-semibold pb-3 text-lg border-b-2">{angket.nama_angket}</p>
-                                                                    <div className="flex pt-3 justify-between items-center">
-                                                                        <p className="text-sm">{angket.keterangan}</p>
-                                                                        <div className="text-gray-500">
+                                                                    <p className="font-semibold pb-3 text-lg border-b-2 md-max:text-sm md-max:pb-1">{angket.nama_angket}</p>
+                                                                    <div className="flex pt-3 justify-between items-center md-max:pt-1">
+                                                                        <p className="text-sm md-max:text-xs">{angket.keterangan}</p>
+                                                                        {/* <div className="text-gray-500">
                                                                             <span className="text-sm text-white font-semibold mr-2">tenggat :</span>{angket.batas_waktu}
-                                                                        </div>
+                                                                        </div> */}
                                                                     </div>
                                                                 </div>
-                                                                <div className="w-3/10 flex justify-between items-center">
+                                                                <div className="w-3/10 md:flex justify-between items-center md-max:px-2">
                                                                     <Button
                                                                         shadow='md'
                                                                         rounded='lg'
-                                                                        size='md'
+                                                                        width={MediaQ ? '20' : '16'}
+                                                                        size={MediaQ ? 'md' : 'sm'}
                                                                         _hover={{ bg: '#55cc48' }}
                                                                         bgColor={'#19ff00'}
                                                                     >
-                                                                        Edit
+                                                                        <p className="text-xs md:text-base">
+                                                                            Edit
+                                                                        </p>
                                                                     </Button>
                                                                     <Button
                                                                         shadow='md'
                                                                         rounded='lg'
-                                                                        size='md'
-                                                                        _hover={{ bg: 'red.700' }}
-                                                                        bgColor='red.600'
-                                                                        onClick={() => multiFunct(angket.id)}
-                                                                    >
-                                                                        Delete
-                                                                    </Button>
-                                                                    <Button
-                                                                        shadow='md'
-                                                                        rounded='lg'
-                                                                        size='md'
+                                                                        width={MediaQ ? '20' : '16'}
+                                                                        size={MediaQ ? 'md' : 'sm'}
                                                                         _hover={{ bg: '#0369A1' }}
                                                                         bgColor='blue.200'
                                                                         onClick={() => navigate(`/dash-admin/angket/${angket.id}`)}
                                                                     >
-                                                                        Soal
+                                                                        <p className="text-xs md:text-base">
+                                                                            Soal
+                                                                        </p>
+                                                                    </Button>
+                                                                    <Button
+                                                                        shadow='md'
+                                                                        rounded='lg'
+                                                                        width={MediaQ ? '20' : '16'}
+                                                                        size={MediaQ ? 'md' : 'sm'}
+                                                                        _hover={{ bg: 'red.700' }}
+                                                                        bgColor='red.600'
+                                                                        onClick={() => multiFunct(angket.id)}
+                                                                    >
+                                                                        <p className="text-xs md:text-base">
+                                                                            Delete
+                                                                        </p>
                                                                     </Button>
                                                                 </div>
                                                             </div>
