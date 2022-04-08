@@ -130,9 +130,12 @@ export default function MuridLayout({ children }) {
                                 <MenuButton>
                                     <MenuIcon className="h-10 w-10 text-white" />
                                 </MenuButton>
-                                <MenuList>
-                                    <MenuItem icon={< CgProfile />} onClick={handleHome}>Home</MenuItem>
-                                    <MenuItem icon={<BsFillFileTextFill />} onClick={handleAngket}>Angket</MenuItem>
+                                <MenuList
+                                p='2px'
+                                bgColor='gray.100'
+                                >
+                                    <MenuItem mb='2px' rounded='lg' _hover={{ fontWeight:'semibold', bgColor:'gray.300'}} icon={< CgProfile />} onClick={handleHome}>Home</MenuItem>
+                                    <MenuItem rounded='lg' _hover={{ fontWeight:'semibold', bgColor:'gray.300'}} icon={<BsFillFileTextFill />} onClick={handleAngket}>Angket</MenuItem>
                                 </MenuList>
                             </Menu>
                             <Menu>
@@ -145,10 +148,13 @@ export default function MuridLayout({ children }) {
                                         </div>
                                     )}
                                 </MenuButton>
-                                <MenuList>
-                                    <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
-                                    <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
-                                    <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
+                                <MenuList
+                                p='2px'
+                                bgColor='gray.100'
+                                >
+                                    <MenuItem mb='2px' rounded='lg' _hover={{ fontWeight:'semibold', bgColor:'gray.300'}} icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
+                                    <MenuItem mb='2px' rounded='lg' _hover={{ fontWeight:'semibold', bgColor:'gray.300'}} icon={< RiLockPasswordLine />}>Change password</MenuItem>
+                                    <MenuItem rounded='lg' _hover={{ fontWeight:'semibold', bgColor:'gray.300'}} icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>
                         </div>
