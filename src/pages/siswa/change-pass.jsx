@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changePass } from "../../api/siswa";
 
 const NpsnSchema = Yup.object().shape({
-    password: Yup.string().min(8, "Minimal 6 Digit").max(12, "Maximal 12 Digit").required("Wajib terisi *"),
+    password: Yup.string().min(8, "Minimal 8 Digit").max(12, "Maximal 12 Digit").required("Wajib terisi *"),
 });
 
 const ChangePass = () => {

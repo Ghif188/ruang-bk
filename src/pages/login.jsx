@@ -63,8 +63,9 @@ const Login = () => {
                 }
             }
             if (result.user.role === 3) {
-                if (result.user.password_status) {
+                if (result.user.password_status === 0) {
                     navigate("/dash-siswa/change-password");
+                    window.location.reload();
                 } else {
                     navigate("/dash-siswa/home");
                 }
@@ -104,8 +105,9 @@ const Login = () => {
                 }
             }
             if (result.user.role === 3) {
+                if (result.user.password_status)
+                navigate("/dash-siswa/home")
                 window.location.reload()
-                return navigate("/dash-siswa/home")
             }
         }
     };

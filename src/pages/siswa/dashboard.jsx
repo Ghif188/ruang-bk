@@ -22,7 +22,6 @@ export default function Dashboard() {
     //     }
     // );
     // console.log(data)
-    window.location.reload();
     return (
         <Layout>
             <div className="bg-white bg-opacity-50 h-full w-9/12 px-10 py-2">

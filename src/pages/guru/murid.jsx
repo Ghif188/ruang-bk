@@ -357,13 +357,21 @@ export default function Murid() {
                 title: 'Berhasil',
                 status: 'success',
                 position: 'top',
-                description: 'Berhasil Import Soal',
+                description: 'Berhasil Import Excel',
                 variant: 'left-accent',
                 duration: 9000,
                 isClosable: true,
             })
-        } else if (res.data.status === "failed") {
-            console.log('error')
+        } else {
+            toast({
+                title: 'Gagal',
+                status: 'error',
+                position: 'top',
+                description: 'Gagal Import Excel',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
         }
     }
     return (
@@ -378,7 +386,7 @@ export default function Murid() {
                             </div>
                             <div className="w-1/4 sm-max:hidden"></div>
                             <div className="flex w-1/4 justify-evenly sm-max:w-2/3">
-                                <Popover>
+                                <Popover >
                                     <PopoverTrigger>
                                         <Button
                                             size={MediaQ ? 'md' : 'xs'}
@@ -391,37 +399,33 @@ export default function Murid() {
                                             </div>
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent>
-                                        <PopoverHeader>Put File</PopoverHeader>
-                                        <PopoverBody>
-                                            <form onSubmit={onImport}>
-                                                <div className="">
-                                                    <div className="mb-5">
-                                                        <input
-                                                            name="user"
-                                                            id="user"
-                                                            type="file"
-                                                            onChange={handleFile}
-                                                            value={values.user}
-                                                            placeholder="user"
-                                                            tabIndex="1"
-                                                            size="lg"
-                                                        ></input>
-                                                    </div>
-                                                    <Button
-                                                        tabIndex="3"
-                                                        block
-                                                        variant="solid"
-                                                        color="green"
-                                                        type="submit"
-                                                    >
-                                                        <span className="font-semibold">Simpan Data</span>
-                                                    </Button>
-                                                </div>
-                                            </form>
-                                        </PopoverBody>
-                                        <PopoverFooter>
-                                        </PopoverFooter>
+                                    <PopoverContent textColor={'black'} >
+                                        <PopoverHeader bgColor={'honeydew'} fontWeight='semibold' fontSize='lg'>Import Excel Siswa</PopoverHeader>
+                                        <form onSubmit={onImport}>
+                                            <PopoverBody paddingY={'4'}>
+                                                <input
+                                                    name="user"
+                                                    id="user"
+                                                    type="file"
+                                                    onChange={handleFile}
+                                                    value={values.user}
+                                                    placeholder="user"
+                                                    tabIndex="1"
+                                                    className="text-black"
+                                                    size="lg"
+                                                ></input>
+                                            </PopoverBody>
+                                            <PopoverFooter display={'flex'} justifyContent={'end'}>
+                                                <Button
+                                                    block
+                                                    variant="solid"
+                                                    bgColor={'greenyellow'}
+                                                    type="submit"
+                                                >
+                                                    <span className="font-semibold">Simpan Data</span>
+                                                </Button>
+                                            </PopoverFooter>
+                                        </form>
                                     </PopoverContent>
                                 </Popover>
                                 <Button size={MediaQ ? 'md' : 'xs'} colorScheme='messenger' shadow='md' onClick={onOpen}>
@@ -571,7 +575,7 @@ export default function Murid() {
                                                                 speed='0.65s'
                                                                 emptyColor='gray.200'
                                                                 color='blue.500'
-                                                                size='xl'
+                                                                size='md'
                                                             />) : "Save"}
                                                     </Button>
                                                 </DrawerFooter>
