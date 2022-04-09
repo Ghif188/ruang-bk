@@ -1,6 +1,6 @@
 import React from "react";
 import Bg from "../assets/bg-bagus.png"
-import Logo from "../assets/logo3.png"
+import Logo from "../assets/logo-baru.png"
 import Bgm from "../assets/bglogin2.png"
 import Profile from "../pages/guru/dashboard";
 import { BsPersonCircle, BsPeopleFill, BsFillFileTextFill } from 'react-icons/bs';
@@ -72,7 +72,7 @@ export default function GuruLayout({ children }) {
                         </div>
                         <div className="relative flex items-center justify-center pt-7">
                             <div className="bg-gradient-to-r rounded-full h-16 relative w-5/6 flex shadow-md shadow-slate-300 justify-between items-center from-sky-500 to-sky-700">
-                                <img src={Logo} alt="" className="h-10" />
+                                <img src={Logo} alt="" className="ml-5 h-16" />
                                 <div className="w-full h-16 m-0 flex justify-center">
                                     <NavLink
                                         to="/dash-guru/home"

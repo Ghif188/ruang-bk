@@ -7,8 +7,32 @@ import { useQuery } from "react-query";
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
-import { Center, Box, Circle, Avatar, position, useMediaQuery, Button, Image, List, ListItem, ListIcon, Icon, Input, useToast, Spinner } from '@chakra-ui/react';
-import BgProfile from "../../assets/bgprofile.png"
+
+import { 
+    Center, 
+    Box, 
+    Circle, 
+    Avatar, 
+    position, 
+    useMediaQuery, 
+    Button, 
+    Image, 
+    List, 
+    ListItem, 
+    ListIcon, 
+    Icon, 
+    Input, 
+    useToast, 
+    Spinner,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+} from '@chakra-ui/react';
+import BgProfile from "../../assets/bg-profil.jpg"
 export default function Profile() {
     const [edit, setEdit] = React.useState(true)
     const { isLoading, isError, data, isFetching } = useQuery(
@@ -31,6 +55,8 @@ export default function Profile() {
     const navigate = useNavigate();
     const [MediaQ] = useMediaQuery('(min-width: 1024px)');
     console.log(data)
+    const [buka, setBuka] = React.useState(false)
+    const onTutup1 = () => setBuka(false)
     return (
         <Layout>
             {isLoading ? (
@@ -46,14 +72,15 @@ export default function Profile() {
                 (<div className="h-full w-10/12 px-20 md-max:w-full md-max:px-10">
                     <div className="w-full mt-10 rounded-3xl flex h-1/6 shadow-md mb-3 shadow-green-200 md-max:relative">
                         <div className="flex relative rounded-3xl h-full w-full">
-                            <div className="flex w-full h-full rounded-3xl justify-end">
-                                <img src={BgProfile} alt="" className="rounded-3xl absolute h-full w-full" />
-                                <div className="border-r-2 relative text-sky-900 border-sky-600 w-1/3 text-5xl capitalize pr-5 font-bahnschrift font-semibold h-full flex justify-end items-center md-max:text-2xl md-max:justify-start">
+                            <div style={{ backgroundImage: `url(${BgProfile})` }} className="flex bg-blue-50 bg-cover w-full h-full rounded-3xl justify-end">
+                                <div className="border-r-2 relative text-white border-sky-600 w-1/3 text-5xl capitalize pr-5 font-bahnschrift font-semibold h-full flex justify-end items-center md-max:text-2xl md-max:justify-start">
                                     <p className="">{data.nama_guru}</p>
                                 </div>
-                                <div className=" w-1/3 h-full pl-5 backdrop-hue-rotate-90 rounded-r-2xl bg-blue-50 bg-opacity-60 backdrop-blur-sm py-10 md-max:py-5 md-max:w-6/10">
-                                    <div className=" font-semibold text-sky-800 text-xl mb-3 md-max:text-sm">{data.email}</div>
-                                    <div className="text-sky-700 text-lg md-max:text-sm">{data.nomor_telp}</div>
+                                <div className=" w-1/3 h-full pl-5 rounded-r-2xl bg-blue-50 flex items-center bg-opacity-60 backdrop-contrast-50 md-max:py-5 md-max:w-6/10">
+                                    <div>
+                                        <div className=" font-semibold text-sky-800 text-xl mb-3 md-max:text-sm">{data.email}</div>
+                                        <div className="text-sky-700 text-lg md-max:text-sm">{data.nomor_telp}</div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="flex absolute -bottom-1/2 left-5 md-max:hidden">
@@ -100,15 +127,15 @@ export default function Profile() {
                             <div className="w-1/2 md:border-l-4 text-center md:pl-3 rounded-sm md-max:w-full">
                                 <div className="w-full border-b-2 border-sky-700  py-2 flex justify-between md-max:mt-3">
                                     <p>Alamat</p>
-                                    <p className="text-lg font-semibold md-max:text-sm">{data.alamat}</p>
+                                    <p className="text-lg font-semibold md-max:text-sm">{data.alamat === null ? (<div className="text-red-500">Belum Terisi</div>) : (data.alamat)}</p>
                                 </div>
                                 <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between md-max:mt-3">
                                     <p>Tempat Lahir</p>
-                                    <p className="text-lg font-semibold md-max:text-sm">{data.tempat_lahir}</p>
+                                    <p className="text-lg font-semibold md-max:text-sm">{data.tempat_lahir === null ? (<div className="text-red-500">Belum Terisi</div>) : (data.tempat_lahir)}</p>
                                 </div>
                                 <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between md-max:mt-3">
                                     <p>Tanggal lahir</p>
-                                    <p className="text-lg font-semibold md-max:text-sm">{data.tanggal_lahir}</p>
+                                    <p className="text-lg font-semibold md-max:text-sm">{data.tanggal_lahir === null ? (<div className="text-red-500">Belum Terisi</div>) : (data.tanggal_lahir)}</p>
                                 </div>
                             </div>
                         </div>
@@ -122,9 +149,35 @@ export default function Profile() {
                                 >
                                     Edit
                                 </Button>
+                                <Button
+                                    size={MediaQ ? 'lg' : 'md'}
+                                    colorScheme='facebook'
+                                    marginLeft={'5'}
+                                    leftIcon={<MdEdit />}
+                                    onClick={() => setBuka(true)}
+                                >
+                                    Ubah Password
+                                </Button>
                             </div>
                         </div>
                     </div>
+                    <Modal onClose={onTutup1} isOpen={buka} size='xl' isCentered>
+                        <ModalOverlay bg='blackAlpha.200'
+                            backdropFilter='auto'
+                            backdropBlur='1px' />
+                        <ModalContent >
+                            <ModalHeader>Info Akun Siswa</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <div>
+                                    
+                                </div>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button onClick={onTutup1}>Close</Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
                 </div>)
             }
         </Layout>
