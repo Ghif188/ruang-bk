@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
-import BgProfile from "../../assets/bgprofile.png"
+import BgProfile from "../../assets/bg-profil.jpg"
 import { MdEdit } from 'react-icons/md';
 import axios from "../../api/axiosClient";
 import {
@@ -117,18 +117,17 @@ export default function EditProfile() {
                 </div>
             ) : (
                 <form onSubmit={updateProfile} className="h-full w-10/12 px-20">
-                    <div className="w-full mt-10 rounded-3xl flex h-2/10 mb-3">
+                    <div className="w-full mt-10 rounded-3xl flex h-1/6 mb-3">
                         <div className="flex relative rounded-3xl shadow-sm h-full w-full">
-                            <div className="flex w-full h-full rounded-3xl">
-                                <img src={BgProfile} alt="" className="rounded-3xl opacity-40 absolute h-full w-full" />
-                                <div className=" w-full flex justify-between h-full pl-10 backdrop-hue-rotate-90 rounded-3xl">
-                                    <div className="font-semibold font-bahnschrift flex items-center text-sky-800 text-3xl">
+                            <div style={{ backgroundImage: `url(${BgProfile})` }} className="flex w-full h-full rounded-3xl bg-cover">
+                                <div className=" w-full flex justify-between h-full pl-10 rounded-3xl">
+                                    <div className="font-semibold font-bahnschrift flex items-center text-gray-800 text-3xl">
                                         Edit Profile
                                     </div>
                                     <div className="w-2/4 pr-5 h-full bg-gray-300 flex items-center bg-opacity-30">
                                         <div className="w-full  pl-3">
                                             <div className="w-full flex mb-3  justify-between">
-                                                <div className="font-semibold text-lg text-sky-800">
+                                                <div className="font-semibold text-lg text-white">
                                                     Foto Profile
                                                 </div>
                                                 <div className="rounded-full">
@@ -143,7 +142,7 @@ export default function EditProfile() {
                                                 </div>
                                             </div>
                                             <div className="w-full flex items-center justify-between">
-                                                <div className="font-semibold text-lg text-sky-800">
+                                                <div className="font-semibold text-lg text-white">
                                                     Username
                                                 </div>
                                                 <div className="rounded-full bg-white">

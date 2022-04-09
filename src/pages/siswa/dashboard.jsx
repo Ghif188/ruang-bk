@@ -1,5 +1,6 @@
 import React from "react";
 import Jempol from "../../assets/bouken.png"
+import Hei from "../../assets/Hey.png"
 import { getProfileSiswa } from "../../api/siswa"
 import { useQuery } from "react-query";
 import Layout from "../../layouts/muridlayout"
@@ -42,15 +43,15 @@ export default function Dashboard() {
                                         <div className="flex">
                                             <p className="pr-2">Never Give Up</p><img src={Jempol} className="w-9 h-9 md-max:h-6 md-max:w-6" alt="" />
                                         </div>
-                                        <div className="flex w-2/3">
+                                        {/* <div className="flex w-2/3">
                                             <div className="mr-3">Bpk. / Ibu</div>
                                             <div className=" capitalize font-semibold text-sky-700">{isLoading ? "------" : data.nama_guru}</div>
                                             <div className="ml-3">Sebagai Pengampu</div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="py-5 items-center flex md-max:text-xs">
                                         <div className="w-full flex items-center">
-                                            <div className="w-1/3">
+                                            <div className="w-2/3">
                                                 <p>Be strong enough to let go and wise enough to wait for what you deserve.</p>
                                             </div>
                                         </div>
@@ -61,7 +62,9 @@ export default function Dashboard() {
                                 </div> */}
                             </div>
                             {/* bawah */}
-                            <div className="h-3/4 bg-cover" style={{ backgroundImage: `url(${Gambar})` }}>
+                            <div className="h-3/4 bg-cover rounded-b-2xl md-max:hidden" style={{ backgroundImage: `url(${Gambar})` }}>
+                            </div>
+                            <div className="h-3/4 bg-cover rounded-b-2xl md:hidden" style={{ backgroundImage: `url(${Hei})` }}>
                             </div>
                         </Box>
                     </div>
