@@ -29,10 +29,10 @@ const ChangePass = () => {
             <div style={{ backgroundImage: `url(${BgLogin})` }} className="flex h-screen bg-cover w-full">
                 <div className="justify-center items-center flex absolute w-full h-full">
                     <div className="">
-                        <div className="text-white font-bahnschrift text-3xl text-center w-full">
+                        <div className="text-white font-bahnschrift text-3xl text-center w-full md-max:text-lg">
                             Ganti password terlebih dahulu untuk menggunakan
                         </div>
-                        <div className="w-full mt-10 p-5 h-max">
+                        <div className="w-full mt-10 p-5 h-max md-max:mt-4 md-max:p-2">
                             <div className='bg-white rounded-xl pt-5 pb-5 shadow-xl'>
                                 <Formik
                                     initialValues={initialValues}
@@ -50,14 +50,14 @@ const ChangePass = () => {
                                         isSubmitting,
                                     }) => (
                                         <form onSubmit={handleSubmit} className='w-full'>
-                                            <div className='text-3xl font-sans flex font-semibold'>
-                                                <div className='text-center mx-10 mb-5 w-full'>
+                                            <div className='text-3xl font-sans flex font-semibold md-max:text-lg md-max:font-normal'>
+                                                <div className='text-center mx-10 mb-5 w-full md-max:mx-5 md-max:mb-1'>
                                                     Ubah Password
                                                 </div>
                                             </div>
-                                            <div className="border-b-8 border-blue-300 rounded-md mx-10" />
+                                            <div className="border-b-8 border-blue-300 rounded-md mx-10 md-max:mx-5" />
                                             <div>
-                                                <div className='mx-10 my-4'>
+                                                <div className='mx-10 my-4 md-max:mx-5 md-max:my-2'>
                                                     <FormLabel htmlFor='password'>Password</FormLabel>
                                                     <Input
                                                         placeholder='Enter your password'
@@ -70,9 +70,9 @@ const ChangePass = () => {
                                                         error={errors.password && touched.password}
                                                         disabled={isSubmitting}
                                                     />
-                                                    <div className=' text-red-400 text-sm mt-2'>{errors.password && touched.password && errors.password}</div>
+                                                    <div className=' text-red-400 text-sm mt-2 md-max:mt-0 md-max:text-xs'>{errors.password && touched.password && errors.password}</div>
                                                 </div>
-                                                <div className='mx-10 mt-5'>
+                                                <div className='mx-10 mt-5 md-max:mx-5 md-max:mt-2'>
                                                     <Button
                                                         size='md'
                                                         isFullWidth
@@ -87,7 +87,7 @@ const ChangePass = () => {
                                                         type='submit'
                                                         onSubmit={handleSubmit}
                                                     >
-                                                        <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Simpan"}</span>
+                                                        <span className="font-semibold text-xl md-max:text-base">{isLoading ? "Process ..." : "Simpan"}</span>
                                                     </Button>
                                                 </div>
                                             </div>

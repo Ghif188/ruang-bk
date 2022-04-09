@@ -10,6 +10,7 @@ import ProfileAdmin from "./pages/admin/profile"
 import EditSoal from './pages/guru/edit-soal';
 import ManageUser from "./pages/admin/manage-akun"
 import Home from "../src/pages/home"
+import NotFound from "../src/pages/notFound"
 import Npsn from "../src/pages/guru/form-npsn"
 import Cobain from './pages/cobain';
 import {
@@ -74,6 +75,16 @@ function App() {
         exact
         path="/cobain"
         element={<Cobain />}
+      />
+      <Route
+        exact
+        path="*"
+        element={<Navigate replace to="/404-error" />}
+      />
+      <Route
+        exact
+        path="/404-error"
+        element={<NotFound />}
       />
       <Route
         path="/"

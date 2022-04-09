@@ -298,13 +298,13 @@ const Login = () => {
                                                     color="white"
                                                     onSubmit={handleSubmit}
                                                 >
-                                                    <span className="font-semibold text-xl">
+                                                    <span className="font-semibold text-xl md-max:text-base">
                                                         {isLoading ? (<Spinner
-                                                            thickness='5px'
+                                                            thickness={button ? '5px' : '2px'}
                                                             speed='0.65s'
                                                             emptyColor='gray.200'
                                                             color='blue.500'
-                                                            size='lg'
+                                                            size={button ? 'lg' : 'sm'}
                                                         />) : "Login"}
                                                     </span>
                                                 </Button>

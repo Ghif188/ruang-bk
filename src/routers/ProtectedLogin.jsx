@@ -9,7 +9,7 @@ const useAuth = () => {
 
 const ProtectedLogin = () => {
     const isAuth = useAuth()
-    return isAuth ? <Outlet/> : <Navigate to="/home" />
+    return isAuth ? <Outlet/> : <Navigate to="/404-error" />
 }
 
 export default ProtectedLogin
