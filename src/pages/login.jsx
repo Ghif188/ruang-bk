@@ -93,17 +93,16 @@ const Login = () => {
         }
         if (result.message === "Success") {
             if (result.user.role === 1) {
+                navigate("/dash-admin/home");
                 window.location.reload()
-                
-                return navigate("/dash-admin/home");
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
+                    navigate("/dash-guru/home");
                     window.location.reload()
-                    return navigate("/dash-guru/home");
                 } else {
+                    navigate("/dash-guru/npsn")
                     window.location.reload()
-                    return navigate("/dash-guru/npsn")
                 }
             }
             if (result.user.role === 3) {
@@ -213,7 +212,7 @@ const Login = () => {
                                                             speed='0.65s'
                                                             emptyColor='gray.200'
                                                             color='blue.500'
-                                                            size='xl'
+                                                            size='sm'
                                                         />) : "Login"}
                                                     </span>
                                                 </Button>
@@ -306,7 +305,7 @@ const Login = () => {
                                                             speed='0.65s'
                                                             emptyColor='gray.200'
                                                             color='blue.500'
-                                                            size={button ? 'lg' : 'sm'}
+                                                            size={'sm'}
                                                         />) : "Login"}
                                                     </span>
                                                 </Button>

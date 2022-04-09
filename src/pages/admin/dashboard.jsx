@@ -1,37 +1,31 @@
 import React from "react"
 import Layout from "../../layouts/adminlayout"
 import { useNavigate } from "react-router";
-import { getProfile } from "../../api/admin";
+import { getJumlah } from "../../api/admin";
 import { border, color, Menu, Box, MenuList, MenuItem, useMediaQuery } from "@chakra-ui/react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { Media } from "react-data-table-component";
 
 export default function Profile() {
     const navigate = useNavigate();
-    // const { isLoading, isError, data, isFetching, status, error, } = useQuery(
-    //     [
-    //         "jadwal",
-    //         {
-    //         },
-    //     ],
+    let queryClient = useQueryClient();
+    const { isLoading, isError, data } = useQuery(
+        [
+            "jumlah",
+            {
+            },
+        ],
 
-    //     () =>
-    //         getProfile({
-    //         }),
+        () =>
+            getJumlah({
+            }),
 
-    //     {
-    //         keepPreviousData: true,
-    //         select: (response) => response.data.data,
-    //     }
-    // );
-    // if (status === 'error') {
-    //     console.log(error.message)
-    // } if (status === 'loading') {
-    //     console.log('loading')
-    // } else {
-    //     console.log('berdata')
-    // }
-    // console.log(data)
+        {
+            keepPreviousData: true,
+            select: (response) => response.data,
+        }
+    );
+    console.log(data)
     console.log(localStorage.getItem("token"))
     const [MediaQ] = useMediaQuery('(min-width: 766px)');
 
@@ -42,13 +36,13 @@ export default function Profile() {
                     <div className="w-1/3">
                         <Box borderRadius='md' bg='whatsapp.600' color='white' mx={MediaQ ? 5 : 2} h={MediaQ ? 180 : 100}>
                             <div className="text-center p-4 md-max:p-2 md-max:text-xs text-lg"><p>Jumlah Murid</p></div>
-                            <div className="text-center text-8xl md-max:text-4xl">0</div>
+                            <div className="text-center text-8xl md-max:text-4xl">{data.user}</div>
                         </Box>
                     </div>
                     <div className="w-1/3">
                         <Box borderRadius='md' bg='twitter.600' color='white' mx={MediaQ ? 5 : 2} h={MediaQ ? 180 : 100}>
                             <div className="text-center p-4 md-max:p-2 md-max:text-xs text-lg"><p>Jumlah Angket</p></div>
-                            <div className="text-center text-8xl md-max:text-4xl">0</div>
+                            <div className="text-center text-8xl md-max:text-4xl">{data.angket}</div>
                         </Box>
                     </div>
                     <div className="w-1/3">

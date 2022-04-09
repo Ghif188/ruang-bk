@@ -75,6 +75,7 @@ export default function Soalangket() {
     const initValues = {
         soal: "",
     };
+    console.log(data)
     const onSubmit = async (values) => {
         try {
             await tambahSoal(values);

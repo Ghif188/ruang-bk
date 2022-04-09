@@ -101,14 +101,12 @@ export default function GuruLayout({ children }) {
                                         Angket
                                     </NavLink>
                                 </div>
-                                <div className="flex px-10 h-full rounded-r-full border-l-2 border-white bg-hijau">
+                                <div className="flex px-10 h-full rounded-r-full">
                                     <Menu>
                                         <MenuButton>
-                                            <BsPersonCircle className="h-12 w-12 decoration-white text-white" />
+                                            <MenuIcon className="h-10 w-10 text-white" />
                                         </MenuButton>
                                         <MenuList>
-                                            <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
-                                            <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
                                             <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                         </MenuList>
                                     </Menu>
@@ -140,8 +138,6 @@ export default function GuruLayout({ children }) {
                                     <BsPersonCircle className="h-10 w-10 decoration-white text-white" />
                                 </MenuButton>
                                 <MenuList>
-                                    <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
-                                    <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
                                     <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>

@@ -2,40 +2,91 @@ import React from "react"
 import {
     Button,
     useMediaQuery,
+    Radio,
+    RadioGroup,
+    Stack
 } from "@chakra-ui/react"
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
-
+import { Navigate, useParams } from "react-router"
+import { useQuery, useQueryClient } from "react-query";
+import { getSoalAngket } from "../../api/siswa"
+import { useNavigate } from "react-router";
 export default function Soal() {
-    const [page, setPage] = React.useState(1)
-    const [pageakhir, setPageakhir] = React.useState(1)
+    const [page, setPage] = React.useState(1);
+    const [perPage, setPerPage] = React.useState(1);
     const [MediaQ] = useMediaQuery('(min-width: 766px)');
+    let id = useParams();
+    const setid = id.id
+    let navigate = useNavigate()
+    const { isLoading, isError, data, isFetching } = useQuery(
+        [
+            "angket",
+            {
+                page: page,
+                perPage: perPage,
+                id: setid,
+            },
+        ],
 
+        () =>
+            getSoalAngket({
+                page: page,
+                perPage: perPage,
+                id: setid,
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
+    const [pageakhir, setPageakhir] = React.useState(data?.last_page)
+    const [nomor, setNomor] = React.useState(1);
+    const handleNextPage = () => {
+        setNomor(nomor + 1)
+        setPage(page + 1)
+    }
+    const handleBeforePage = () => {
+        setNomor(nomor - 1)
+        setPage(page - 1)
+    }
+    const namaangket = data?.data[0].nama_angket
+    const [value, setValue] = React.useState(0)
+    console.log(value)
+    // const handleCheckbox = (e) => {
+    //     setValue({ ...value, [e.target.name]: e.target.value });
+    // }
     return (
         <div className="w-screen flex justify-center items-center bg-gray-100 h-screen">
             <div className="w-9/10 h-9/10 rounded-xl bg-white shadow-md md-max:w-11/12">
                 <div className="h-9/10">
                     {/* atas */}
                     <div className="flex justify-between items-center px-5 py-2 bg-gradient-to-r rounded-t-xl from-sky-700 to-sky-500 p-10 w-full h-1/10 md-max:p-2">
-                        <div className="text-white text-lg font-semibold sm-max:font-medium sm-max:text-base">Bahasa Indonesia</div>
+                        <div className="text-white text-lg font-semibold sm-max:font-medium sm-max:text-base">{namaangket}</div>
                         <div>20:00:00</div>
                     </div>
                     {/* bawah */}
                     <div className="px-20 text-xl h-8/10 py-20 space-y-5 md-max:px-5 md-max:py-12 md-max:text-sm">
-                        <div className="flex">
-                            <div className="mr-2">
-                                1.
+                        {data?.data.map((row, index) => (
+                            <div key={index} className="flex">
+                                <div className="mr-2">
+                                    {nomor}.
+                                </div>
+                                <div>
+                                    {row.soal}
+                                </div>
                             </div>
-                            <div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias nam quibusdam rem maxime, optio dolore! Magnam tenetur molestiae, excepturi officiis magni ratione libero sit atque earum nemo, ut laudantium odio.
-                            </div>
-
-                        </div>
+                        ))}
                         <div className="w-full">
-                            <div>A) Aku</div>
-                            <div>B) Dia</div>
-                            <div>C) Kita</div>
-                            <div>D) Kamu</div>
-                            <div>E) Kalian</div>
+                            <RadioGroup onChange={setValue} value={value}>
+                                <Stack>
+                                    <Radio value='1'>Setuju Sekali</Radio>
+                                    <Radio value='2'>Setuju</Radio>
+                                    <Radio value='3'>Biasa Saja</Radio>
+                                    <Radio value='4'>Tidak Setuju</Radio>
+                                    <Radio value='5'>Sangat Tidak Setuju</Radio>
+                                </Stack>
+                            </RadioGroup>
                         </div>
                     </div>
                     {
@@ -45,6 +96,7 @@ export default function Soal() {
                                     rounded='lg'
                                     size={MediaQ ? 'md' : 'sm'}
                                     colorScheme='whatsapp'
+                                    onClick={()=>navigate('/dash-siswa/angket')}
                                 >
                                     <p className="text-sm md:text-lg">Selesai</p>
                                 </Button>
@@ -74,17 +126,17 @@ export default function Soal() {
                                             <MdOutlineNavigateBefore />
                                         </div>
                                     ) : (
-                                        <div className="text-2xl md-max:text-xl text-blue-400 mx-3">
+                                        <div onClick={() => handleBeforePage()} className="text-2xl md-max:text-xl text-blue-400 mx-3">
                                             <MdOutlineNavigateBefore />
                                         </div>
                                     )}
                                     <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
-                                    {pageakhir === page ? (
+                                    {page === pageakhir ? (
                                         <div className="text-2xl md-max:text-xl text-gray-400 font-bold mx-3">
                                             <MdOutlineNavigateNext />
                                         </div>
                                     ) : (
-                                        <div className="text-2xl md-max:text-xl text-blue-400 font-bold mx-3">
+                                        <div onClick={() => handleNextPage()} className="text-2xl md-max:text-xl text-blue-400 font-bold mx-3">
                                             <MdOutlineNavigateNext />
                                         </div>
                                     )}

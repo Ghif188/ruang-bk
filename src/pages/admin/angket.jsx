@@ -252,7 +252,7 @@ export default function Angket() {
                                 </Drawer>
                             </div>
                             {/* bawah */}
-                            <div className="h-3/4 p-5 mt-5 md-max:w-full">
+                            <div className="h-full p-5 mt-5 bg-white md-max:w-full">
                                 {
                                     isLoading ? (
                                         <div className="w-full h-full justify-center items-center flex">
@@ -265,36 +265,21 @@ export default function Angket() {
                                             />
                                         </div>
                                     ) : (
-                                        <div>
+                                        <div >
                                             {
                                                 data?.data.length === 0 ? (
                                                     <div className="w-full flex justify-center">Belum Ada Angket</div>
                                                 ) : (
-                                                    <div>{data?.data.map((angket, index) => (
+                                                    <div className="">{data?.data.map((angket, index) => (
                                                         <div key={index} className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3 md-max:px-1">
                                                             <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-blue-400 md-max:py-2 md-max:px-2">
-                                                                <div className="w-2/3">
+                                                                <div className="w-8/10">
                                                                     <p className="font-semibold pb-3 text-lg border-b-2 md-max:text-sm md-max:pb-1">{angket.nama_angket}</p>
                                                                     <div className="flex pt-3 justify-between items-center md-max:pt-1">
                                                                         <p className="text-sm md-max:text-xs">{angket.keterangan}</p>
-                                                                        {/* <div className="text-gray-500">
-                                                                            <span className="text-sm text-white font-semibold mr-2">tenggat :</span>{angket.batas_waktu}
-                                                                        </div> */}
                                                                     </div>
                                                                 </div>
-                                                                <div className="w-3/10 md:flex justify-between items-center md-max:px-2">
-                                                                    <Button
-                                                                        shadow='md'
-                                                                        rounded='lg'
-                                                                        width={MediaQ ? '20' : '16'}
-                                                                        size={MediaQ ? 'md' : 'sm'}
-                                                                        _hover={{ bg: '#55cc48' }}
-                                                                        bgColor={'#19ff00'}
-                                                                    >
-                                                                        <p className="text-xs md:text-base">
-                                                                            Edit
-                                                                        </p>
-                                                                    </Button>
+                                                                <div className="w-2/10 md:flex justify-around items-center md-max:px-2">
                                                                     <Button
                                                                         shadow='md'
                                                                         rounded='lg'

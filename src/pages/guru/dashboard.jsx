@@ -1,12 +1,29 @@
 import React from "react"
 import Layout from "../../layouts/gurulayout"
 import { useNavigate } from "react-router";
-import { getProfile } from "../../api/admin";
+import { getJumlah } from "../../api/guru";
 import { border, color, Menu, Box, MenuList, MenuItem } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 
 export default function Profile() {
     const navigate = useNavigate();
+    const { isLoading, isError, data } = useQuery(
+        [
+            "jumlah",
+            {
+            },
+        ],
+
+        () =>
+            getJumlah({
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data,
+        }
+    );
+    console.log(data)
     // const { isLoading, isError, data, isFetching, status, error, } = useQuery(
     //     [
     //         "jadwal",
@@ -39,13 +56,13 @@ export default function Profile() {
                     <div className="w-1/3">
                         <Box borderRadius='md' bg='whatsapp.600' color='white' mx={5} h={180}>
                             <div className="text-center p-4 text-lg"><p>Jumlah Murid</p></div>
-                            <div className="text-center text-8xl">0</div>
+                            <div className="text-center text-8xl">{data.siswa}</div>
                         </Box>
                     </div>
                     <div className="w-1/3">
                         <Box borderRadius='md' bg='twitter.600' color='white' mx={5} h={180}>
                             <div className="text-center p-4 text-lg"><p>Jumlah Angket</p></div>
-                            <div className="text-center text-8xl">0</div>
+                            <div className="text-center text-8xl">{data.angket}</div>
                         </Box>
                     </div>
                     <div className="w-1/3">

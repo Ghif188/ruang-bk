@@ -17,6 +17,10 @@ export function getSiswa(params) {
   return axios.get(`/getSiswa`, { params });
 }
 
+export function getJumlah() {
+  return axios.get(`/jumlah`);
+}
+
 export function showSiswa(id) {
   return axios.get(`/users/${id}`);
 }

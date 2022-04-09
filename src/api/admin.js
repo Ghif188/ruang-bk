@@ -38,7 +38,9 @@ export function showSoal(id) {
     console.log(id)
     return axios.get(`/soal/${id}`);
 }
-
+export function getJumlah() {
+    return axios.get(`/jumlah`);
+}
 export function updateSoal(values) {
     console.log(values)
     let formData = new URLSearchParams
