@@ -46,3 +46,7 @@ export function updateGuru(values) {
 export function getAngket() {
     return axios.get(`/angket`);
 }
+
+export function changePass(values) {
+  return axios.post("/change-password", values);
+}

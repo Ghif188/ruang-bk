@@ -52,6 +52,7 @@ const Login = () => {
         if (result.message === "Success") {
             if (result.user.role === 1) {
                 navigate("/dash-admin/home");
+                window.location.reload();
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
@@ -68,6 +69,7 @@ const Login = () => {
                     window.location.reload();
                 } else {
                     navigate("/dash-siswa/home");
+                    window.location.reload();
                 }
             }
         } else {

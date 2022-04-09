@@ -1,27 +1,28 @@
 import React from "react";
 import Jempol from "../../assets/bouken.png"
-import { getProfile } from "../../api/siswa"
+import { getProfileSiswa } from "../../api/siswa"
 import { useQuery } from "react-query";
 import Layout from "../../layouts/muridlayout"
 import { Table, Th, Td, Thead, Tr, Tbody, Box, Button, Img, Icon, useMediaQuery } from "@chakra-ui/react";
+import Gambar from "../../assets/landing-page.jpg"
 export default function Dashboard() {
-    // const { isLoading, isError, data, isFetching } = useQuery(
-    //     [
-    //         "profile",
-    //         {
-    //         },
-    //     ],
+    const { isLoading, isError, data, isFetching } = useQuery(
+        [
+            "profile",
+            {
+            },
+        ],
 
-    //     () =>
-    //         getProfile({
-    //         }),
+        () =>
+            getProfileSiswa({
+            }),
 
-    //     {
-    //         keepPreviousData: true,
-    //         select: (response) => response.data.data,
-    //     }
-    // );
-    // console.log(data)
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
+    console.log(data)
     const [MediaQ] = useMediaQuery('(min-width: 766px)');
     return (
         <Layout>
@@ -35,72 +36,32 @@ export default function Dashboard() {
                             height='100%'
                         >
                             {/* atas */}
-                            <div className=" rounded-t-2xl bg-gradient-to-r from-sky-500 to-sky-800 py-8 px-20 text-white md-max:px-4">
-                                <div className="text-2xl flex md-max:text-lg">
-                                    <p className="pr-2">Never Give Up</p><img src={Jempol} className="w-9 h-9 md-max:h-6 md-max:w-6" alt="" />
+                            <div className=" h-1/4 rounded-t-2xl flex items-center bg-gradient-to-r from-sky-500 to-sky-800 px-20 text-white md-max:px-4">
+                                <div className="w-full">
+                                    <div className="text-2xl justify-between flex md-max:text-lg">
+                                        <div className="flex">
+                                            <p className="pr-2">Never Give Up</p><img src={Jempol} className="w-9 h-9 md-max:h-6 md-max:w-6" alt="" />
+                                        </div>
+                                        <div className="flex w-2/3">
+                                            <div className="mr-3">Bpk. / Ibu</div>
+                                            <div className=" capitalize font-semibold text-sky-700">{isLoading ? "------" : data.nama_guru}</div>
+                                            <div className="ml-3">Sebagai Pengampu</div>
+                                        </div>
+                                    </div>
+                                    <div className="py-5 items-center flex md-max:text-xs">
+                                        <div className="w-full flex items-center">
+                                            <div className="w-1/3">
+                                                <p>Be strong enough to let go and wise enough to wait for what you deserve.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="w-1/3 py-5 md-max:text-xs md-max:w-4/5">
-                                    <p>Be strong enough to let go and wise enough to wait for what you deserve.</p>
-                                </div>
-                                <div className="w-full px-5 py-3 flex rounded-lg items-center text-white bg-oren md-max:p-2 md-max:text-xs">
-                                    <div className="mr-3">Bpk. / Ibu</div>
-                                    {/* <div className=" capitalize font-semibold text-sky-700">{isLoading ? "------" : data.nama_guru}</div>  */}
-                                </div>
+                                {/* <div className="w-full px-5 py-3 flex rounded-lg items-center text-white bg-oren md-max:p-2 md-max:text-xs">
+
+                                </div> */}
                             </div>
                             {/* bawah */}
-                            <div className="font-bold text-xl py-4 px-14 md-max:p-2 md-max:px-1 md-max:text-sm md-max:font-medium">
-                                <div className="flex items-center px-5 mb-5  justify-between pb-3 md-max:px-2 md-max:mb-2">
-                                    <div className="w-8/10 px-5 py-1.5 flex rounded-lg text-white justify-between bg-oren md-max:px-2 md-max:w-7/10">
-                                        Bahasa Indonesia
-                                    </div>
-                                    <Button
-                                        rounded='lg'
-                                        size={MediaQ ? 'md' : 'sm'}
-                                        width={MediaQ ? '140px' : '60px'}
-                                        colorScheme='twitter'
-                                    >
-                                        <p className="text-lg md-max:text-sm">Lihat</p>
-                                    </Button>
-                                </div>
-                                <div className="flex items-center px-5 mb-5  justify-between pb-3 md-max:px-2 md-max:mb-2">
-                                    <div className="w-8/10 px-5 py-1.5 flex rounded-lg text-white justify-between bg-oren md-max:px-2 md-max:w-7/10">
-                                        Bahasa Indonesia
-                                    </div>
-                                    <Button
-                                        rounded='lg'
-                                        size={MediaQ ? 'md' : 'sm'}
-                                        width={MediaQ ? '140px' : '60px'}
-                                        colorScheme='twitter'
-                                    >
-                                        <p className="text-lg md-max:text-sm">Lihat</p>
-                                    </Button>
-                                </div>
-                                <div className="flex items-center px-5 mb-5  justify-between pb-3 md-max:px-2 md-max:mb-2">
-                                    <div className="w-8/10 px-5 py-1.5 flex rounded-lg text-white justify-between bg-oren md-max:px-2 md-max:w-7/10">
-                                        Bahasa Indonesia
-                                    </div>
-                                    <Button
-                                        rounded='lg'
-                                        size={MediaQ ? 'md' : 'sm'}
-                                        width={MediaQ ? '140px' : '60px'}
-                                        colorScheme='twitter'
-                                    >
-                                        <p className="text-lg md-max:text-sm">Lihat</p>
-                                    </Button>
-                                </div>
-                                <div className="flex items-center px-5 mb-5  justify-between pb-3 md-max:px-2 md-max:mb-2">
-                                    <div className="w-8/10 px-5 py-1.5 flex rounded-lg text-white justify-between bg-oren md-max:px-2 md-max:w-7/10">
-                                        Bahasa Indonesia
-                                    </div>
-                                    <Button
-                                        rounded='lg'
-                                        size={MediaQ ? 'md' : 'sm'}
-                                        width={MediaQ ? '140px' : '60px'}
-                                        colorScheme='twitter'
-                                    >
-                                        <p className="text-lg md-max:text-sm">Lihat</p>
-                                    </Button>
-                                </div>
+                            <div className="h-3/4 bg-cover" style={{ backgroundImage: `url(${Gambar})` }}>
                             </div>
                         </Box>
                     </div>

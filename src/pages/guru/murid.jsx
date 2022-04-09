@@ -79,8 +79,8 @@ export default function Murid() {
     const toast = useToast()
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.auth.isLoading);
-    const [page, setPage] = React.useState(1)
-    const [perpage, setPerpage] = React.useState(5)
+    const [page, setPage] = React.useState()
+    const [perpage, setPerpage] = React.useState()
     const [userid, setUserid] = React.useState()
     const [siswa, setSiswa] = React.useState([])
 
@@ -685,46 +685,6 @@ export default function Murid() {
                                 </div>
                             ) : ''}
                         </div>
-                        {(() => {
-                            if (pageakhir === 1) {
-                                return (
-                                    <div className="flex mt-10 justify-center items-center sm-max:mt-5">
-                                        <div className="text-2xl text-gray-400 mx-3">
-                                            <MdOutlineNavigateBefore />
-                                        </div>
-                                        <div className="bg-gray-200 p-3 w-12 h-12 text-center shadow-inner shadow-slate-300 font-bahnschrift rounded-md">{page}</div>
-                                        <div className="text-2xl text-gray-400 font-bold mx-3">
-                                            <MdOutlineNavigateNext />
-                                        </div>
-                                    </div>
-                                )
-
-                            } else {
-                                return (
-                                    <div className="flex mt-10 justify-center items-center sm-max:mt-5">
-                                        {page === 1 ? (
-                                            <div className="text-2xl text-gray-400 mx-3" onClick={handleBeforePage}>
-                                                <MdOutlineNavigateBefore />
-                                            </div>
-                                        ) : (
-                                            <div className="text-2xl text-blue-400 mx-3" onClick={handleBeforePage}>
-                                                <MdOutlineNavigateBefore />
-                                            </div>
-                                        )}
-                                        <div className="bg-gray-200 p-3 w-12 h-12 text-center  font-bahnschrift rounded-md">{page}</div>
-                                        {pageakhir === page ? (
-                                            <div className="text-2xl text-gray-400 font-bold mx-3">
-                                                <MdOutlineNavigateNext />
-                                            </div>
-                                        ) : (
-                                            <div className="text-2xl text-blue-400 font-bold mx-3" onClick={handleNextPage}>
-                                                <MdOutlineNavigateNext />
-                                            </div>
-                                        )}
-                                    </div>
-                                )
-                            }
-                        })()}
                     </div>
                 </div>
             </Layout >

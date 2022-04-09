@@ -127,7 +127,6 @@ export default function GuruLayout({ children }) {
                                         </MenuButton>
                                         <MenuList>
                                             <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
-                                            <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
                                             <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                         </MenuList>
                                     </Menu>
@@ -167,7 +166,6 @@ export default function GuruLayout({ children }) {
                                 </MenuButton>
                                 <MenuList>
                                     <MenuItem icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
-                                    <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
                                     <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>

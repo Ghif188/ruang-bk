@@ -106,7 +106,7 @@ export default function Angket() {
         formData.append("start_at", '3600');
         formData.append("finish_at", '3600');
         for (let index = 0; index < checked.length; index++) {
-            formData.append("user_id[" + [index] + "]" , checked[index]);
+            formData.append("user_id[" + [index] + "]", checked[index]);
         }
         for (let pair of formData.entries()) {
             console.log(pair[0] + ',' + pair[1])
@@ -131,9 +131,8 @@ export default function Angket() {
         } else if (res.data.status === "failed") {
             console.log('error')
         }
-
     }
-    console.log(checked[1])
+    console.log(data)
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
@@ -157,194 +156,71 @@ export default function Angket() {
                             {/* bawah */}
                             <div className="h-3/4 p-5 mt-5">
                                 <Accordion allowToggle>
-                                    <AccordionItem p='3'>
-                                        <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                            <div className="w-full flex text-left justify-between">
-                                                Angket Peminatan Jurusan
-                                                <AccordionIcon />
-                                            </div>
-                                        </AccordionButton>
-                                        <AccordionPanel pb={4}>
-                                            <form onSubmit={onSubmit} className="">
-                                                <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
-                                                    {datauser?.data.data.map((siswa, index) => (
-                                                        <div key={index} className="col-span-1">
-                                                            <Checkbox value={siswa.id} onChange={handleCheckbox} name={index} size='lg'>{siswa.nama_siswa}</Checkbox>
+                                    {data?.data.map((row, index) => (
+                                        <AccordionItem key={index} p='3'>
+                                            <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
+                                                <div className="w-full flex text-left justify-between">
+                                                    {row.nama_angket}
+                                                    <AccordionIcon />
+                                                </div>
+                                            </AccordionButton>
+                                            <AccordionPanel py={4}>
+                                                <form onSubmit={onSubmit} className="">
+                                                    <div className="flex justify-between">
+                                                        <div>
+                                                            <FormLabel htmlFor='durasi'>Durasi Pengerjaan</FormLabel>
+                                                            <Input
+                                                                placeholder='Durasi'
+                                                                id='durasi'
+                                                                type='number'
+                                                            />
                                                         </div>
-                                                    ))}
-                                                </div>
-                                                <div className="w-full flex justify-end">
-                                                    <Button
-                                                        rounded='lg'
-                                                        size='md'
-                                                        colorScheme='whatsapp'
-                                                        onClick={() => setCheked(checked => [])}
-                                                    >
-                                                        <div className="flex items-center">
-                                                            Aktifkan Angket
-                                                            <span className="ml-3">
-                                                                <FiEdit />
-                                                            </span>
+                                                        <div>
+                                                            <FormLabel htmlFor='durasi'>Awal Pengerjaan</FormLabel>
+                                                            <Input
+                                                                placeholder='Durasi'
+                                                                id='durasi'
+                                                                type='date'
+                                                            />
                                                         </div>
-                                                    </Button>
-                                                    <Button
-                                                        rounded='lg'
-                                                        size='md'
-                                                        colorScheme='whatsapp'
-                                                        type="submit"
-                                                    >
-                                                        <div className="flex items-center">
-                                                            Akt
-                                                            <span className="ml-3">
-                                                                <FiEdit />
-                                                            </span>
+                                                        <div>
+                                                            <FormLabel htmlFor='durasi'>Tenggat Pengerjaan</FormLabel>
+                                                            <Input
+                                                                placeholder='Durasi'
+                                                                id='durasi'
+                                                                type='date'
+                                                            />
                                                         </div>
-                                                    </Button>
-                                                </div>
-                                            </form>
-                                        </AccordionPanel>
-                                    </AccordionItem>
-                                    <AccordionItem p='3'>
-                                        <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                            <div className="w-full flex text-left justify-between">
-                                                Angket Peminatan Jurusan
-                                                <AccordionIcon />
-                                            </div>
-                                        </AccordionButton>
-                                        <AccordionPanel pb={4}>
-                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                            </div>
-                                            <div className="w-full flex justify-end">
-                                                <Button
-                                                    rounded='lg'
-                                                    size='md'
-                                                    colorScheme='whatsapp'
-                                                >
-                                                    <div className="flex items-center">
-                                                        Aktifkan Angket
-                                                        <span className="ml-3">
-                                                            <FiEdit />
-                                                        </span>
                                                     </div>
-                                                </Button>
-                                            </div>
-                                        </AccordionPanel>
-                                    </AccordionItem>
-                                    <AccordionItem p='3'>
-                                        <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                            <div className="w-full flex text-left justify-between">
-                                                Angket Peminatan Jurusan
-                                                <AccordionIcon />
-                                            </div>
-                                        </AccordionButton>
-                                        <AccordionPanel pb={4}>
-                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                            </div>
-                                            <div className="w-full flex justify-end">
-                                                <Button
-                                                    rounded='lg'
-                                                    size='md'
-                                                    colorScheme='whatsapp'
-                                                >
-                                                    <div className="flex items-center">
-                                                        Aktifkan Angket
-                                                        <span className="ml-3">
-                                                            <FiEdit />
-                                                        </span>
+                                                    <div className="mt-5">
+                                                        <FormLabel>Siswa</FormLabel>
+                                                        <div className="grid w-full gap-3 mb-3 h-full grid-cols-5">
+                                                            {datauser?.data.data.map((siswa, index) => (
+                                                                <div key={index} className="col-span-1">
+                                                                    <Checkbox value={siswa.id} onChange={handleCheckbox} name={'user[' + index + ']'} size='md'>{siswa.nama_siswa}</Checkbox>
+                                                                </div>
+                                                            ))}
+                                                        </div>
                                                     </div>
-                                                </Button>
-                                            </div>
-                                        </AccordionPanel>
-                                    </AccordionItem>
-                                    <AccordionItem p='3'>
-                                        <AccordionButton fontWeight='semibold' color='blue.700' _expanded={{ bg: '#0369A1', color: 'white' }}>
-                                            <div className="w-full flex text-left justify-between">
-                                                Angket Peminatan Jurusan
-                                                <AccordionIcon />
-                                            </div>
-                                        </AccordionButton>
-                                        <AccordionPanel pb={4}>
-                                            <div className="grid w-full gap-3 mb-3 h-full grid-cols-4">
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                                <div className="col-span-1">
-                                                    <Checkbox size='lg'>Halo</Checkbox>
-                                                </div>
-                                            </div>
-                                            <div className="w-full flex justify-end">
-                                                <Button
-                                                    rounded='lg'
-                                                    size='md'
-                                                    colorScheme='whatsapp'
-                                                >
-                                                    <div className="flex items-center">
-                                                        Aktifkan Angket
-                                                        <span className="ml-3">
-                                                            <FiEdit />
-                                                        </span>
+                                                    <div className="w-full flex justify-end">
+                                                        <Button
+                                                            rounded='lg'
+                                                            size='md'
+                                                            colorScheme='whatsapp'
+                                                            onClick={() => setCheked(checked => [])}
+                                                        >
+                                                            <div className="flex items-center">
+                                                                Aktifkan Angket
+                                                                <span className="ml-3">
+                                                                    <FiEdit />
+                                                                </span>
+                                                            </div>
+                                                        </Button>
                                                     </div>
-                                                </Button>
-                                            </div>
-                                        </AccordionPanel>
-                                    </AccordionItem>
+                                                </form>
+                                            </AccordionPanel>
+                                        </AccordionItem>
+                                    ))}
                                 </Accordion>
                                 {/* {
                                     isLoading ? (
