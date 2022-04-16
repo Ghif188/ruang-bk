@@ -378,7 +378,7 @@ export default function Murid() {
         <React.Fragment>
             <Layout>
                 <div className="bg-transparent sm-max:h-screen h-full w-10/12 px-20 sm-max:px-2">
-                    <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-10 p-5 sm-max:w-full sm-max:mx-2 sm-max:px-0">
+                    <div className="mx-10 h-full shadow-lg shadow-cyan-100 py-5 p-5 sm-max:w-full sm-max:mx-2 sm-max:px-0">
                         <div className=" flex items-center justify-between shadow-green-500 shadow-inner bg-hijau rounded-lg p-5 mb-5 sm-max:w-full text-white">
                             <div className="flex justify-around text-lg font-bahnschrift font-bold w-1/4 items-center sm-max:w-1/3 sm-max:text-xs">
                                 <IoMdPersonAdd className="w-10 sm-max:w-6 sm-max:h-6 h-10" />
@@ -585,8 +585,7 @@ export default function Murid() {
                                 </Formik>
                             </Drawer>
                         </div>
-                        <div className="h-2/3 m-10 sm-max:m-8 sm-max:w-10/12 sm-max:h-6/10">
-
+                        <div className="h-2/3 m-5 sm-max:m-8 sm-max:w-10/12 sm-max:h-6/10">
                             {isLoading ? '' :
                                 (
                                     <div>

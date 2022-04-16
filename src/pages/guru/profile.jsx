@@ -187,7 +187,7 @@ export default function Profile() {
                                 </Button>
                                 <Button
                                     size={MediaQ ? 'lg' : 'md'}
-                                    colorScheme='facebook'
+                                    colorScheme='yellow'
                                     marginLeft={'5'}
                                     leftIcon={<MdEdit />}
                                     onClick={() => setBuka(true)}

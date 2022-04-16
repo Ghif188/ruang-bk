@@ -56,13 +56,13 @@ export default function Profile() {
                     <div className="w-1/3">
                         <Box borderRadius='md' bg='whatsapp.600' color='white' mx={5} h={180}>
                             <div className="text-center p-4 text-lg"><p>Jumlah Murid</p></div>
-                            <div className="text-center text-8xl">{data.siswa}</div>
+                            <div className="text-center text-8xl">{data?.siswa}</div>
                         </Box>
                     </div>
                     <div className="w-1/3">
                         <Box borderRadius='md' bg='twitter.600' color='white' mx={5} h={180}>
                             <div className="text-center p-4 text-lg"><p>Jumlah Angket</p></div>
-                            <div className="text-center text-8xl">{data.angket}</div>
+                            <div className="text-center text-8xl">{data?.angket}</div>
                         </Box>
                     </div>
                     <div className="w-1/3">

@@ -53,8 +53,10 @@ export default function EditProfile() {
     const [error, setError] = React.useState(false);
     const [MediaQ] = useMediaQuery('(min-width: 1024px)');
     const toast = useToast();
+    const [loading, setLoading] = React.useState(false);
     const navigate = useNavigate();
     const updateProfile = async (e) => {
+        setLoading(!loading);
         e.preventDefault();
         let formData = new FormData()
         formData.append("nama_guru", values.nama_guru);
@@ -203,6 +205,7 @@ export default function EditProfile() {
                                         />
                                     </div>
                                 </div>
+                                <img src={image} className="h-10" alt="" />
                             </div>
                             <div className="w-1/2 border-l-4 md:text-center pl-3 rounded-sm">
                                 <div className="w-full border-b-2 border-sky-700  py-2 md:flex justify-between">
@@ -251,23 +254,35 @@ export default function EditProfile() {
                         </div>
                         <div>
                             <div className="md:justify-center justify-evenly flex pt-8">
-                                <Button
-                                    size={MediaQ ? 'lg' : 'sm'}
-                                    colorScheme='facebook'
-                                    leftIcon={<MdEdit />}
-                                    type='submit'
-                                    loadingText="tunggu"
-                                    marginRight={5}
-                                >
-                                    <p className="text-sm md:text-lg">Save</p>
-                                </Button>
-                                <Button
-                                    size={MediaQ ? 'lg' : 'sm'}
-                                    colorScheme='green'
-                                    onClick={() => navigate("/dash-guru/profile")}
-                                >
-                                    <p className="text-sm md:text-lg">Cancel</p>
-                                </Button>
+                                {
+                                    loading ? (<Spinner
+                                        thickness='5px'
+                                        speed='0.65s'
+                                        emptyColor='gray.200'
+                                        color='blue.500'
+                                        size='lg'
+                                    />) : (<div>
+                                        <Button
+                                            size={MediaQ ? 'lg' : 'sm'}
+                                            colorScheme='facebook'
+                                            leftIcon={<MdEdit />}
+                                            type='submit'
+                                            loadingText="tunggu"
+                                            marginRight={5}
+                                        >
+                                            <p className="text-sm md:text-lg">
+                                                Save
+                                            </p>
+                                        </Button>
+                                        <Button
+                                            size={MediaQ ? 'lg' : 'sm'}
+                                            colorScheme='green'
+                                            onClick={() => navigate("/dash-guru/profile")}
+                                        >
+                                            <p className="text-sm md:text-lg">Cancel</p>
+                                        </Button>
+                                    </div>)
+                                }
                             </div>
                         </div>
                     </div>
