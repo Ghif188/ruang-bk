@@ -50,9 +50,10 @@ export default function EditProfileSiswa() {
     const [error, setError] = React.useState(false);
     const toast = useToast();
     const navigate = useNavigate();
-
+    const [loading, setLoading] = React.useState(false);
     console.log(image)
     const updateProfile = async (e) => {
+        setLoading(!loading);
         e.preventDefault();
         let formData = new FormData()
         formData.append("nama_guru", values.nama_guru);
@@ -246,23 +247,35 @@ export default function EditProfileSiswa() {
                         </div>
                         <div>
                             <div className="justify-center flex pt-8">
-                                <Button
-                                    size='lg'
-                                    colorScheme='facebook'
-                                    leftIcon={<MdEdit />}
-                                    type='submit'
-                                    loadingText="tunggu"
-                                    marginRight={5}
-                                >
-                                    Save
-                                </Button>
-                                <Button
-                                    size='lg'
-                                    colorScheme='green'
-                                    onClick={() => navigate("/dash-siswa/profile")}
-                                >
-                                    Cancel
-                                </Button>
+                                {
+                                    loading ? (<Spinner
+                                        thickness='5px'
+                                        speed='0.65s'
+                                        emptyColor='gray.200'
+                                        color='blue.500'
+                                        size='lg'
+                                    />) : (
+                                        <div>
+                                            <Button
+                                                size='lg'
+                                                colorScheme='facebook'
+                                                leftIcon={<MdEdit />}
+                                                type='submit'
+                                                loadingText="tunggu"
+                                                marginRight={5}
+                                            >
+                                                Save
+                                            </Button>
+                                            <Button
+                                                size='lg'
+                                                colorScheme='green'
+                                                onClick={() => navigate("/dash-siswa/profile")}
+                                            >
+                                                Cancel
+                                            </Button>
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
