@@ -37,6 +37,7 @@ import Soalangket from './pages/admin/soal-angket';
 import AngketSiswa from './pages/siswa/angket';
 import DashAdmin from './pages/admin/dashboard';
 import ChangePass from './pages/siswa/change-pass';
+import LihatAkses from './pages/guru/lihat-akses';
 import '../src/css/dropdown.css'
 function App() {
   return (
@@ -55,7 +56,8 @@ function App() {
         <Route path='dash-guru/profile' element={<Profile />} />
         <Route path='dash-guru/edit-profile' element={<EditProfile />} />
         <Route path='dash-guru/npsn' element={<Npsn />} />
-        <Route path='dash-guru/angket' element={<AngketGuru />} />
+        <Route path='dash-guru/angket' element={<LihatAkses />} />
+        <Route path='dash-guru/angket/akses' element={<AngketGuru />} />
         <Route path='dash-guru/angket/:id' element={<InfoAngketGuru />} />
         <Route path='dash-guru/angket/edit/:id' element={<EditSoal />} />
         <Route path='dash-guru/murid' element={<Murid />} />
