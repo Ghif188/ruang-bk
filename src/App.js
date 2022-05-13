@@ -56,9 +56,8 @@ function App() {
         <Route path='dash-guru/profile' element={<Profile />} />
         <Route path='dash-guru/edit-profile' element={<EditProfile />} />
         <Route path='dash-guru/npsn' element={<Npsn />} />
-        <Route path='dash-guru/angket' element={<LihatAkses />} />
-        <Route path='dash-guru/angket/akses' element={<AngketGuru />} />
-        <Route path='dash-guru/angket/:id' element={<InfoAngketGuru />} />
+        <Route path='dash-guru/angket' element={<AngketGuru />} />
+        <Route path='dash-guru/angket/akses/:id' element={<LihatAkses />} />
         <Route path='dash-guru/angket/edit/:id' element={<EditSoal />} />
         <Route path='dash-guru/murid' element={<Murid />} />
       </Route>

@@ -2,7 +2,8 @@ import React from "react";
 import Jempol from "../../assets/bouken.png"
 import Layout from "../../layouts/gurulayout"
 import * as Yup from 'yup';
-import { getAngket, getSiswa, } from "../../api/guru";
+import { aktivasiAngket } from "../../api/guru";
+import { getAngket, getAktifasi, } from "../../api/guru";
 import { useQuery, useQueryClient } from "react-query";
 import axios from "../../api/axiosClient";
 import {
@@ -37,18 +38,31 @@ import { IoMdAddCircle } from "react-icons/io"
 import { IoArrowBackCircle } from "react-icons/io5"
 import { useNavigate } from 'react-router-dom';
 const RegisterSchema = Yup.object().shape({
-    nama_angket: Yup.string().required("Wajib di Isi"),
-    keterangan: Yup.string().required("Wajib di Isi"),
-    batas_waktu: Yup.date().required("Wajib di Isi"),
+    angket_id: Yup.string().required("Wajib di Isi"),
+    finish_at: Yup.string().required("Wajib di Isi"),
 });
 
 export default function Angket() {
     const initialValues = {
-        nama_angket: "",
-        keterangan: "",
-        batas_waktu: "",
+        angket_id: "",
+        time: "36000",
+        start_at: "1111",
+        finish_at: "",
     };
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
+        [
+            "angket-aktif",
+        ],
+
+        () =>
+            getAktifasi(),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
+    const { data: datangket } = useQuery(
         [
             "angket",
         ],
@@ -61,17 +75,7 @@ export default function Angket() {
             select: (response) => response.data.data,
         }
     );
-    const { data: datauser } = useQuery(
-        [
-            "siswa",
-        ],
-        () =>
-            getSiswa(),
-        {
-            keepPreviousData: true,
-            select: (response) => response.data,
-        }
-    );
+    console.log(data)
     const [editId, setEditId] = React.useState()
     let queryClient = useQueryClient();
     const toast = useToast()
@@ -86,6 +90,32 @@ export default function Angket() {
     }
     const [open, setOpen] = React.useState(false)
     const onTutup = () => setOpen(false)
+    const onSubmit = async (values) => {
+        try {
+            await aktivasiAngket(values);
+            queryClient.invalidateQueries("soal-angket")
+            toast({
+                title: 'Soal Terbuat.',
+                status: 'success',
+                position: 'top',
+                description: 'Pertanyaan Soal Telah Terbuat.',
+                variant: 'left-accent',
+                duration: 1000,
+                isClosable: true,
+            });
+        } catch (err) {
+            let halo = (err.response.data.message)
+            toast({
+                title: 'Failed',
+                status: 'error',
+                position: 'top',
+                variant: 'left-accent',
+                duration: 1000,
+                isClosable: true,
+                description: `${halo}`,
+            })
+        }
+    };
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
@@ -108,14 +138,14 @@ export default function Angket() {
                                 <div className=" space-x-3 ">
                                     <Button
                                         colorScheme={"red"}
-                                        onClick={()=>navigate("/dash-guru/angket")}
+                                        onClick={() => navigate("/dash-guru/angket")}
                                         size={"sm"}
                                     >
                                         <IoArrowBackCircle /> lihat aktifasi
                                     </Button>
                                     <Button
                                         colorScheme={"whatsapp"}
-                                        onClick={()=>onOpen()}
+                                        onClick={() => onOpen()}
                                         size={"sm"}
                                     >
                                         <IoMdAddCircle /> Tambah Akses
@@ -124,7 +154,53 @@ export default function Angket() {
                             </div>
                             {/* bawah */}
                             <div className="h-3/4 p-5 flex justify-center scroll-smooth overflow-y-scroll snap-y mt-5">
-                                belum ada akses
+                                {
+                                    isLoading ? (
+                                        <div className="w-full h-full justify-center items-center flex">
+                                            <Spinner
+                                                thickness='5px'
+                                                speed='0.65s'
+                                                emptyColor='gray.200'
+                                                color='blue.500'
+                                                size='xl'
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="w-full" >
+                                            {
+                                                data?.data.length === 0 ? (
+                                                    <div className="w-full flex justify-center">Belum Ada Angket Yang Aktif</div>
+                                                ) : (
+                                                    <div className="">{data?.data.map((angket, index) => (
+                                                        <div key={index} className="flex w-full items-center px-5 mb-7 justify-between border-b-2 border-hijau pb-3 md-max:px-1">
+                                                            <div className=" capitalize text-lg">
+                                                                {angket.nama_angket}
+                                                            </div>
+                                                            <div className=" space-x-5">
+                                                                <Button
+                                                                    shadow='md'
+                                                                    rounded='lg'
+                                                                    size={'md'}
+                                                                    _hover={{ bg: '#0369A1' }}
+                                                                    bgColor='blue.200'
+                                                                    onClick={() => navigate(`/dash-guru/angket/akses/${angket.id}`)}
+                                                                >
+                                                                    Akses Siswa
+                                                                </Button>
+                                                                <Button
+
+                                                                >
+                                                                    Jawaban Siswa
+                                                                </Button>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
+                                    )
+                                }
                             </div>
                         </Box>
                     </div>
@@ -141,7 +217,7 @@ export default function Angket() {
                     initialValues={initialValues}
                     validationSchema={RegisterSchema}
                     enableReinitialize
-                    // onSubmit={onSubmit}
+                    onSubmit={onSubmit}
                 >
                     {({
                         values,
@@ -159,8 +235,8 @@ export default function Angket() {
                             >
                                 <p className="md-max:text-sm">Buat Akses Angket</p>
                             </DrawerHeader>
-                            <form 
-                                // onSubmit={handleSubmit} 
+                            <form
+                                onSubmit={handleSubmit}
                                 className='w-full h-full'>
                                 <DrawerBody>
                                     <div>
@@ -168,42 +244,32 @@ export default function Angket() {
                                             <FormLabel htmlFor='nama_angket'>Angket</FormLabel>
                                             <Select
                                                 placeholder='Nama Angket'
-                                                id='nama_angket'
-                                                value={values.nama_angket}
+                                                id='angket_id'
+                                                value={values.angket_id}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                error={errors.nama_angket && touched.nama_angket}
+                                                error={errors.angket_id && touched.angket_id}
                                                 disabled={isSubmitting}
-                                            />
-                                            <div className=' text-red-400 text-xs'>{errors.nama_angket && touched.nama_angket && errors.nama_angket}</div>
-                                        </div>
-                                        <div className='my-2'>
-                                            <FormLabel htmlFor='keterangan'>Keterangan</FormLabel>
-                                            <Input
-                                                placeholder='Keterangan'
-                                                id='keterangan'
-                                                type='text'
-                                                value={values.keterangan}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                error={errors.keterangan && touched.keterangan}
-                                                disabled={isSubmitting}
-                                            />
-                                            <div className=' text-red-400 text-xs'>{errors.keterangan && touched.keterangan && errors.keterangan}</div>
+                                            >
+                                                {datangket?.data.map((angket, index) => (
+                                                    <option key={index} value={angket.id}>{angket.nama_angket}</option>
+                                                ))}
+                                            </Select>
+                                            <div className=' text-red-400 text-xs'>{errors.angket_id && touched.angket_id && errors.angket_id}</div>
                                         </div>
                                         <div className='my-2'>
                                             <FormLabel htmlFor='batas_waktu'>Batas Waktu</FormLabel>
                                             <Input
-                                                placeholder='Enter your batas_waktu'
-                                                id='batas_waktu'
-                                                type='date'
-                                                value={values.batas_waktu}
+                                                placeholder='Batas Waktu'
+                                                id='finish_at'
+                                                type='text'
+                                                value={values.finish_at}
                                                 onBlur={handleBlur}
-                                                error={errors.batas_waktu && touched.batas_waktu}
+                                                error={errors.finish_at && touched.finish_at}
                                                 onChange={handleChange}
                                                 disabled={isSubmitting}
                                             />
-                                            <div className=' text-red-400 text-xs'>{errors.batas_waktu && touched.batas_waktu && errors.batas_waktu}</div>
+                                            <div className=' text-red-400 text-xs'>{errors.finish_at && touched.finish_at && errors.finish_at}</div>
                                         </div>
                                     </div>
                                 </DrawerBody>
@@ -221,7 +287,7 @@ export default function Angket() {
                                         color="white"
                                         loading={isSubmitting}
                                         type='submit'
-                                        // onSubmit={handleSubmit}
+                                        onSubmit={handleSubmit}
                                     >
                                         {isSubmitting ?
                                             (<Spinner

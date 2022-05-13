@@ -1,46 +1,232 @@
-import React from 'react'
-import Layout from '../../layouts/gurulayout'
-import { 
-    Box,
-    Button
+import React from "react"
+import { useParams } from "react-router"
+import { useQuery, useQueryClient } from "react-query";
+import { useNavigate } from "react-router";
+import { getUserAktifasi, getSudahAktif } from "../../api/guru";
+import axios from "../../api/axiosClient";
+import * as Yup from 'yup';
+import {
+    Button,
+    Input,
+    Table,
+    Thead,
+    Tbody,
+    Tfoot,
+    Tr,
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+    Spinner,
+    Th,
+    Td,
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    useDisclosure,
+    useToast,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverFooter,
+    TableCaption,
+    Icon,
+    FormLabel,
 } from '@chakra-ui/react'
-import { useNavigate } from 'react-router'
-import Jempol from "../../assets/bouken.png"
-export default function LihatAkses() {
+import { Formik } from "formik";
+import { FiEdit } from 'react-icons/fi'
+import { IoMdArrowRoundBack, IoMdAddCircle } from 'react-icons/io'
+import { Link } from "react-router-dom";
+export default function Soalangket() {
     const navigate = useNavigate();
+    let queryClient = useQueryClient();
+    let id = useParams().id;
+    const toast = useToast()
+    const { isLoading, isError, data, isFetching, status, error, } = useQuery(
+        [
+            "user-belum",
+            {
+                id: id
+            }
+        ],
+
+        () =>
+            getUserAktifasi({
+                id: id
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
+    const { data: datauser } = useQuery(
+        [
+            "user-sudah",
+            {
+                id: id
+            }
+        ],
+
+        () =>
+            getSudahAktif({
+                id: id
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data,
+        }
+    );
     return (
-        <Layout>
-            <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
-                <div className="bg-gray-200 h-full w-full p-5 justify-center flex">
-                    <div className="h-full w-full ">
-                        <Box
-                            boxShadow='lg'
-                            bgColor='white'
-                            rounded='xl'
-                            height='100%'
-                        >
-                            {/* atas */}
-                            <div className="rounded-t-2xl h-2/10 bg-gradient-to-r justify-between px-10 flex items-center from-sky-500 to-sky-800  text-white">
-                                <div className="">
-                                    <div className="text-2xl pb-5 flex">
-                                        <p className="pr-2">Give Your Best</p><img src={Jempol} className="w-9 h-9" alt="" />
-                                    </div>
-                                    <p>The more we are grateful, the more happiness we get.</p>
-                                </div>
-                                <div>
-                                    <Button
-                                        size={"sm"}
-                                        colorScheme={"yellow"}
-                                        onClick={()=>navigate("/dash-guru/angket/akses")}
-                                    >
-                                        Beri Akses
-                                    </Button>
-                                </div>
+        <div className="h-screen relative">
+            <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">
+                <Link to='/dash-guru/angket'>
+                    <IoMdArrowRoundBack className="text-2xl" />
+                </Link>
+            </div>
+            <div className="w-full h-full">
+                <div className="h-1/10" />
+                <div className="w-full h-8/10 mt-10 justify-center flex ">
+                    <div className="w-3/4">
+                        <div className="h-2/10 px-10 flex items-center rounded-t-xl bg-amber-300">
+                            <div className="w-full flex items-center justify-between">
+                                <p className="text-xl text-white font-semibold">
+                                    Angket Bahasa Inggris
+                                </p>
                             </div>
-                        </Box>
+                        </div>
+                        <div className="mt-5 rounded sky-xl">
+                            <Table variant='striped' colorScheme='twitter'>
+                                <Thead>
+                                    <Tr>
+                                        <Th>No.</Th>
+                                        <Th>Nama User</Th>
+                                        <Th textAlign={'center'}>
+                                            Aksi
+                                        </Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody>
+                                    {
+                                        isLoading ? (
+                                            <div className="w-full h-full justify-center items-center flex">
+                                                <Spinner
+                                                    thickness='5px'
+                                                    speed='0.65s'
+                                                    emptyColor='gray.200'
+                                                    color='blue.500'
+                                                    size='xl'
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="w-full" >
+                                                {
+                                                    data?.data.length === 0 ? (
+                                                        <div className="w-full flex justify-center">Belum Ada Angket Yang Aktif</div>
+                                                    ) : (
+                                                        <div className="">
+                                                            {data?.data.map((row, index) => (
+                                                                <Tr key={index}>
+                                                                    <Td>
+                                                                        {index + 1} .
+                                                                    </Td>
+                                                                    <Td>
+                                                                        {row.nama_user}
+                                                                    </Td>
+                                                                    <Td>
+                                                                       
+                                                                    </Td>
+                                                                </Tr>
+                                                            ))}
+                                                        </div>
+                                                    )
+                                                }
+                                            </div>
+                                        )
+                                    }
+                                </Tbody>
+                            </Table>
+                            {datauser?.data.length === 0 ? (
+                                <div className="text-center">Belum ada Siswa yg diberi akses</div>
+                            ) : ''}
+                            {/* <div className="flex text-xl items-center mt-10 font-semibold">
+                                <IoMdAddCircle className=" text-green-500 mr-2" />
+                                Masukkan Soal
+                            </div>
+                            <Formik
+                                initialValues={initialValues}
+                                enableReinitialize
+                                onSubmit={onSubmit}
+                            >
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting,
+                                }) => (
+                                    <form onSubmit={handleSubmit}>
+                                        <Table variant='' colorScheme='twitter'>
+                                            <Tbody>
+                                                <Tr>
+                                                    <Td>
+                                                        <Input
+                                                            placeholder='Masukkan Soal'
+                                                            id='soal'
+                                                            type='text'
+                                                            value={values.soal}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            w='full'
+                                                            error={errors.nama_user && touched.nama_user}
+                                                            disabled={isSubmitting}
+                                                        />
+
+                                                    </Td>
+                                                    <Td>
+                                                        <Button
+                                                            colorScheme='blue'
+                                                            htmlType="submit"
+                                                            disabled={isSubmitting}
+                                                            block
+                                                            variant="solid"
+                                                            bgColor="#1F8AC6"
+                                                            color="white"
+                                                            loading={isSubmitting}
+                                                            type='submit'
+                                                            onSubmit={handleSubmit}
+                                                        >
+                                                            {isSubmitting ?
+                                                                (<Spinner
+                                                                    thickness='5px'
+                                                                    speed='0.65s'
+                                                                    emptyColor='gray.200'
+                                                                    color='blue.500'
+                                                                    size='md'
+                                                                />) : "Save"}
+                                                        </Button>
+                                                    </Td>
+                                                </Tr>
+                                            </Tbody>
+                                        </Table>
+                                    </form>
+                                )}
+                            </Formik> */}
+                        </div>
                     </div>
                 </div>
             </div>
-        </Layout>
+        </div >
     )
 }

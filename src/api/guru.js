@@ -54,3 +54,19 @@ export function getAngket() {
 export function changePass(values) {
   return axios.post("/change-password", values);
 }
+
+export function aktivasiAngket(values) {
+  return axios.post("/akses", values)
+}
+
+export function getAktifasi() {
+  return axios.get("/akses")
+}
+
+export function getUserAktifasi(id) {
+  return axios.get(`/beri-akses/${id.id}`)
+}
+
+export function getSudahAktif(id) {
+  return axios.get(`/user-akses/${id.id}`)
+}
