@@ -115,45 +115,48 @@ export default function Soalangket() {
                                         </Th>
                                     </Tr>
                                 </Thead>
-                                <Tbody>
-                                    {
-                                        isLoading ? (
-                                            <div className="w-full h-full justify-center items-center flex">
-                                                <Spinner
-                                                    thickness='5px'
-                                                    speed='0.65s'
-                                                    emptyColor='gray.200'
-                                                    color='blue.500'
-                                                    size='xl'
-                                                />
-                                            </div>
-                                        ) : (
-                                            <div className="w-full" >
-                                                {
-                                                    data?.data.length === 0 ? (
-                                                        <div className="w-full flex justify-center">Belum Ada Angket Yang Aktif</div>
-                                                    ) : (
-                                                        <div className="">
-                                                            {data?.data.map((row, index) => (
-                                                                <Tr key={index}>
-                                                                    <Td>
-                                                                        {index + 1} .
-                                                                    </Td>
-                                                                    <Td>
-                                                                        {row.nama_user}
-                                                                    </Td>
-                                                                    <Td>
-                                                                       
-                                                                    </Td>
-                                                                </Tr>
-                                                            ))}
+                                {
+                                    isLoading ? (
+                                        <div className="w-full h-full justify-center items-center flex">
+                                            <Spinner
+                                                thickness='5px'
+                                                speed='0.65s'
+                                                emptyColor='gray.200'
+                                                color='blue.500'
+                                                size='xl'
+                                            />
+                                        </div>
+                                    ) : (
+                                        <Tbody>
+                                            {data?.data.map((row, index) => (
+                                                <Tr key={index}>
+                                                    <Td>
+                                                        {index + 1} .
+                                                    </Td>
+                                                    <Td>
+                                                        {row.nama_siswa}
+                                                    </Td>
+                                                    <Td>
+                                                        <div className="flex justify-center">
+                                                            <Button
+                                                                colorScheme='whatsapp'
+                                                                htmlType="submit"
+                                                                block
+                                                                variant="solid"
+                                                                bgColor={"greenyellow"}
+                                                                color="white"
+                                                                shadow='md'
+                                                                type='submit'
+                                                            >
+                                                                Beri Akses
+                                                            </Button>
                                                         </div>
-                                                    )
-                                                }
-                                            </div>
-                                        )
-                                    }
-                                </Tbody>
+                                                    </Td>
+                                                </Tr>
+                                            ))}
+                                        </Tbody>
+                                    )
+                                }
                             </Table>
                             {datauser?.data.length === 0 ? (
                                 <div className="text-center">Belum ada Siswa yg diberi akses</div>
@@ -223,6 +226,14 @@ export default function Soalangket() {
                                     </form>
                                 )}
                             </Formik> */}
+                        </div>
+                        <div className="mt-7 font-semibold">
+                            <div className="text-xl">
+                                Siswa Yang Sudah Ada Akses
+                            </div>
+                            <div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
