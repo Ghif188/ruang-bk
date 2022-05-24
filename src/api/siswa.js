@@ -11,8 +11,11 @@ export function changePass(values) {
 }
 
 export function getAngket() {
-  return axios.get("/getAkses");
+  return axios.get("/angket");
 }
-export function getSoalAngket({id, page, perPage}) {
-  return axios.get(`/angket/${id}?&page=${page}&perpage=${perPage}`);
+export function getSoalAngket({id}) {
+  return axios.get(`/angket/${id}`);
+}
+export function postJawaban({id}) {
+  return axios.post(`/${id}/jawaban`);
 }

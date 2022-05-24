@@ -31,15 +31,6 @@ import {
     DrawerCloseButton,
     useDisclosure,
     useToast,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    PopoverHeader,
-    PopoverBody,
-    PopoverFooter,
-    TableCaption,
-    Icon,
-    FormLabel,
 } from '@chakra-ui/react'
 import { Formik } from "formik";
 import { FiEdit } from 'react-icons/fi'
@@ -86,6 +77,33 @@ export default function Soalangket() {
             select: (response) => response.data.data,
         }
     );
+    const postAksesSiswa = async (idSiswa) => {
+        let formData = new FormData()
+        formData.append("akses_id", id);
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ',' + pair[1])
+        }
+        const res = await axios.post(`/beri-akses-siswa/${idSiswa}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        console.log(res)
+        if (res.data.status === "success") {
+            queryClient.invalidateQueries("user-belum")
+            queryClient.invalidateQueries("user-sudah")
+            toast({
+                title: 'Berhasil',
+                status: 'success',
+                position: 'top',
+                description: 'Anda berhasil edit akun',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+        } else if (res.data.status === "failed") {
+        }
+    }
     return (
         <div className="h-screen relative">
             <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">
@@ -140,13 +158,12 @@ export default function Soalangket() {
                                                         <div className="flex justify-center">
                                                             <Button
                                                                 colorScheme='whatsapp'
-                                                                htmlType="submit"
                                                                 block
                                                                 variant="solid"
                                                                 bgColor={"greenyellow"}
                                                                 color="white"
                                                                 shadow='md'
-                                                                type='submit'
+                                                                onClick={() => postAksesSiswa(row.user_id)}
                                                             >
                                                                 Beri Akses
                                                             </Button>
@@ -161,78 +178,64 @@ export default function Soalangket() {
                             {datauser?.data.length === 0 ? (
                                 <div className="text-center">Belum ada Siswa yg diberi akses</div>
                             ) : ''}
-                            {/* <div className="flex text-xl items-center mt-10 font-semibold">
-                                <IoMdAddCircle className=" text-green-500 mr-2" />
-                                Masukkan Soal
-                            </div>
-                            <Formik
-                                initialValues={initialValues}
-                                enableReinitialize
-                                onSubmit={onSubmit}
-                            >
-                                {({
-                                    values,
-                                    errors,
-                                    touched,
-                                    handleChange,
-                                    handleBlur,
-                                    handleSubmit,
-                                    isSubmitting,
-                                }) => (
-                                    <form onSubmit={handleSubmit}>
-                                        <Table variant='' colorScheme='twitter'>
-                                            <Tbody>
-                                                <Tr>
-                                                    <Td>
-                                                        <Input
-                                                            placeholder='Masukkan Soal'
-                                                            id='soal'
-                                                            type='text'
-                                                            value={values.soal}
-                                                            onChange={handleChange}
-                                                            onBlur={handleBlur}
-                                                            w='full'
-                                                            error={errors.nama_user && touched.nama_user}
-                                                            disabled={isSubmitting}
-                                                        />
-
-                                                    </Td>
-                                                    <Td>
-                                                        <Button
-                                                            colorScheme='blue'
-                                                            htmlType="submit"
-                                                            disabled={isSubmitting}
-                                                            block
-                                                            variant="solid"
-                                                            bgColor="#1F8AC6"
-                                                            color="white"
-                                                            loading={isSubmitting}
-                                                            type='submit'
-                                                            onSubmit={handleSubmit}
-                                                        >
-                                                            {isSubmitting ?
-                                                                (<Spinner
-                                                                    thickness='5px'
-                                                                    speed='0.65s'
-                                                                    emptyColor='gray.200'
-                                                                    color='blue.500'
-                                                                    size='md'
-                                                                />) : "Save"}
-                                                        </Button>
-                                                    </Td>
-                                                </Tr>
-                                            </Tbody>
-                                        </Table>
-                                    </form>
-                                )}
-                            </Formik> */}
                         </div>
                         <div className="mt-7 font-semibold">
                             <div className="text-xl">
                                 Siswa Yang Sudah Ada Akses
                             </div>
                             <div>
-
+                                <Table variant='striped' colorScheme='twitter'>
+                                    <Thead>
+                                        <Tr>
+                                            <Th>No.</Th>
+                                            <Th>Nama User</Th>
+                                            <Th textAlign={'center'}>
+                                                Aksi
+                                            </Th>
+                                        </Tr>
+                                    </Thead>
+                                    {
+                                        isLoading ? (
+                                            <div className="w-full h-full justify-center items-center flex">
+                                                <Spinner
+                                                    thickness='5px'
+                                                    speed='0.65s'
+                                                    emptyColor='gray.200'
+                                                    color='blue.500'
+                                                    size='xl'
+                                                />
+                                            </div>
+                                        ) : (
+                                            <Tbody>
+                                                {datauser?.data.map((row, index) => (
+                                                    <Tr key={index}>
+                                                        <Td>
+                                                            {index + 1} .
+                                                        </Td>
+                                                        <Td>
+                                                            {row.nama_siswa}
+                                                        </Td>
+                                                        <Td>
+                                                            <div className="flex justify-center">
+                                                                {/* <Button
+                                                                    colorScheme='whatsapp'
+                                                                    block
+                                                                    variant="solid"
+                                                                    bgColor={"greenyellow"}
+                                                                    color="white"
+                                                                    shadow='md'
+                                                                    onClick={() => postAksesSiswa(row.user_id)}
+                                                                >
+                                                                    Beri Akses
+                                                                </Button> */}
+                                                            </div>
+                                                        </Td>
+                                                    </Tr>
+                                                ))}
+                                            </Tbody>
+                                        )
+                                    }
+                                </Table>
                             </div>
                         </div>
                     </div>

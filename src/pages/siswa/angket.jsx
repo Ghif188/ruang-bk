@@ -149,7 +149,7 @@ export default function Angket() {
                                                                         rounded='lg'
                                                                         size={MediaQ ? 'md' : 'sm'}
                                                                         bgColor='#38E569'
-                                                                        onClick={() => onFunc(ah.angket_id)}
+                                                                        onClick={() => onFunc(ah.id)}
                                                                     >
                                                                         <p className="md-max:text-sm">Kerjakan</p>
                                                                     </Button>
