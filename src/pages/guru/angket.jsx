@@ -3,8 +3,9 @@ import Jempol from "../../assets/bouken.png"
 import Layout from "../../layouts/gurulayout"
 import * as Yup from 'yup';
 import { aktivasiAngket } from "../../api/guru";
-import { getAngket, getAktifasi, } from "../../api/guru";
+import { getAngket, getAktifasi, importJawaban } from "../../api/guru";
 import { useQuery, useQueryClient } from "react-query";
+import { saveAs } from "file-saver";
 import axios from "../../api/axiosClient";
 import {
     useDisclosure,
@@ -93,7 +94,7 @@ export default function Angket() {
     const onSubmit = async (values) => {
         try {
             await aktivasiAngket(values);
-            queryClient.invalidateQueries("soal-angket")
+            queryClient.invalidateQueries("angket-aktif")
             toast({
                 title: 'Soal Terbuat.',
                 status: 'success',
@@ -116,6 +117,48 @@ export default function Angket() {
             })
         }
     };
+    // const onImport = async (id) => {
+    //     try {
+    //         await importJawaban(id);
+    //         toast({
+    //             title: 'Jawaban Terdownload.',
+    //             status: 'success',
+    //             position: 'top',
+    //             description: 'Pertanyaan Soal Telah Terbuat.',
+    //             variant: 'left-accent',
+    //             duration: 1000,
+    //             isClosable: true,
+    //         });
+    //     } catch (err) {
+    //         let halo = (err.response.data.message)
+    //         toast({
+    //             title: 'Failed',
+    //             status: 'error',
+    //             position: 'top',
+    //             variant: 'left-accent',
+    //             duration: 1000,
+    //             isClosable: true,
+    //             description: `${halo}`,
+    //         })
+    //     }
+    // };
+    const onImport = async (id) => {
+        const result = await importJawaban(id);
+        console.log(result)
+        queryClient.invalidateQueries("siswa")
+        toast({
+            title: 'Delete Account',
+            status: 'success',
+            position: 'top',
+            description: 'Akun Siswa Telah Dihapus.',
+            variant: 'left-accent',
+            duration: 9000,
+            isClosable: true,
+        })
+        let url = window.URL.createObjectURL(new Blob([result.data]));
+        saveAs(url, "jawaban-angket.xlsx");
+
+    };
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full sm-max:w-max w-9/12 px-10 pt-2">
@@ -137,18 +180,11 @@ export default function Angket() {
                                 </div>
                                 <div className=" space-x-3 ">
                                     <Button
-                                        colorScheme={"red"}
-                                        onClick={() => navigate("/dash-guru/angket")}
-                                        size={"sm"}
-                                    >
-                                        <IoArrowBackCircle /> lihat aktifasi
-                                    </Button>
-                                    <Button
                                         colorScheme={"whatsapp"}
                                         onClick={() => onOpen()}
                                         size={"sm"}
                                     >
-                                        <IoMdAddCircle /> Tambah Akses
+                                        <IoMdAddCircle /> Aktifkan Angket
                                     </Button>
                                 </div>
                             </div>
@@ -188,7 +224,7 @@ export default function Angket() {
                                                                     Akses Siswa
                                                                 </Button>
                                                                 <Button
-
+                                                                    onClick={()=>onImport(angket.angket_id)}
                                                                 >
                                                                     Jawaban Siswa
                                                                 </Button>

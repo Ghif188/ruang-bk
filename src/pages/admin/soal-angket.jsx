@@ -70,6 +70,7 @@ export default function Soalangket() {
     );
     const initialValues = {
         soal: "",
+        nomor_soal: "",
         angket_id: id
     };
     const initValues = {
@@ -267,7 +268,7 @@ export default function Soalangket() {
                                     {data?.data.map((row, index) => (
                                         <Tr key={index}>
                                             <Td>
-                                                {index + 1} .
+                                                {row.nomor_soal} .
                                             </Td>
                                             <Td>
                                                 {row.soal}
@@ -329,17 +330,28 @@ export default function Soalangket() {
                                                 <Tr>
                                                     <Td>
                                                         <Input
+                                                            placeholder='Nomor Soal'
+                                                            id='nomor_soal'
+                                                            type='number'
+                                                            w={"max"} 
+                                                            mr={"2"}
+                                                            value={values.nomor_soal}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            error={errors.nomor_soal && touched.nomor_soal}
+                                                            disabled={isSubmitting}
+                                                        />
+                                                        <Input
                                                             placeholder='Masukkan Soal'
                                                             id='soal'
                                                             type='text'
                                                             value={values.soal}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur}
-                                                            w='full'
-                                                            error={errors.nama_user && touched.nama_user}
+                                                            w='xl'
+                                                            error={errors.soal && touched.soal}
                                                             disabled={isSubmitting}
                                                         />
-
                                                     </Td>
                                                     <Td>
                                                         <Button

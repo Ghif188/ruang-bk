@@ -12,9 +12,9 @@ export function registerSiswa(values) {
   return axios.post("/register-user", values);
 }
 
-export function getSiswa(params) {
-  syncToken()
-  return axios.get(`/getSiswa`, { params });
+export function getSiswa() {
+  syncToken();
+  return axios.get(`/getSiswa`);
 }
 
 export function getJumlah() {
@@ -30,7 +30,7 @@ export function deleteSiswa(id) {
 }
 
 export function updateGuru(values) {
-  let formData = new URLSearchParams
+  let formData = new URLSearchParams()
   formData.append("nama_guru", values.nama_guru);
   formData.append("npsn", values.npsn);
   formData.append("tanggal_lahir", values.tanggal_lahir);
@@ -69,4 +69,8 @@ export function getUserAktifasi(id) {
 
 export function getSudahAktif(id) {
   return axios.get(`/user-akses/${id.id}`)
+}
+
+export function importJawaban(id) {
+  return axios.get(`/jawaban/export/xlsx/${id}`)
 }

@@ -23,7 +23,7 @@ export default function Dashboard() {
             select: (response) => response.data.data,
         }
     );
-    console.log(data)
+    console.log(localStorage)
     const [MediaQ] = useMediaQuery('(min-width: 766px)');
     return (
         <Layout>

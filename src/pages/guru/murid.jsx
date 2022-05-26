@@ -223,10 +223,6 @@ export default function Murid() {
                     minHeight: '30px', // override the row heigh
 
                 }
-
-
-
-
             },
 
         },
@@ -312,18 +308,13 @@ export default function Murid() {
         const result = await showSiswa(id);
         setSiswa(result.data.data)
     };
-    let params = {
-        page,
-        perpage
-    }
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
         [
             "siswa",
-            params
         ],
 
         () =>
-            getSiswa(params),
+            getSiswa(),
 
         {
             keepPreviousData: true,

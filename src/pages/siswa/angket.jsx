@@ -2,7 +2,7 @@ import React from "react";
 import Jempol from "../../assets/bouken.png"
 import Layout from "../../layouts/muridlayout"
 import * as Yup from 'yup';
-import { getAngket, getProfileSiswa } from "../../api/siswa";
+import { getAngket, getProfileSiswa, cekAkses } from "../../api/siswa";
 import { useQuery, useQueryClient } from "react-query";
 import {
     useDisclosure,
@@ -39,6 +39,7 @@ import {
 import { Formik } from "formik";
 import { FiEdit } from "react-icons/fi"
 import { useNavigate } from 'react-router-dom';
+import { clear } from "@testing-library/user-event/dist/clear";
 
 export default function Angket() {
     const [id, setId] = React.useState(1)
@@ -79,16 +80,29 @@ export default function Angket() {
         }
     );
     const [editid, setEditid] = React.useState()
-    const onFunc = (id) => {
+    const onFunc = (id, kode) => {
         onOpen();
-        setEditid(id);
+        onCheck(kode);
+        setEditid(kode);
+        localStorage.setItem("id_angket", id);
     }
     const onFunct = () => {
         navigate(`soal/${editid}`)
         onClose();
     }
+    const [cekakses, setCekakses] = React.useState(true)
+    const onCheck = async (kode) => {
+        const result = await cekAkses(kode);
+        console.log(result)
+        if (result.data.status == "belum mengerjakan") {
+            setCekakses(false);
+        }
+        if (result.data.status == "sudah mengerjakan") {
+            setCekakses(true);
+        }
+    };
     const setdata = data?.data
-    console.log(data)
+    console.log()
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full w-9/12 px-10 pt-2 md-max:w-full md-max:px-0">
@@ -133,7 +147,7 @@ export default function Angket() {
                                                 ) : (
                                                     <div>
                                                         {data?.data.map((ah, index) => (
-                                                            <div key={index} className="w-full px-5 py-3 flex rounded-lg text-white items-center bg-blue-300 justify-between md-max:px-3 md-max:py-2">
+                                                            <div key={index} className="w-full px-5 py-3 mb-3 flex rounded-lg text-white items-center bg-blue-300 justify-between md-max:px-3 md-max:py-2">
                                                                 <div className="w-8/10 md-max:w-7/10">
                                                                     <p className="font-semibold pb-3 text-lg border-b-2 md-max:text-base">{ah.nama_angket}</p>
                                                                     <div className="flex pt-3 justify-between items-center">
@@ -149,7 +163,7 @@ export default function Angket() {
                                                                         rounded='lg'
                                                                         size={MediaQ ? 'md' : 'sm'}
                                                                         bgColor='#38E569'
-                                                                        onClick={() => onFunc(ah.id)}
+                                                                        onClick={() => onFunc(ah.angket_id, ah.kode)}
                                                                     >
                                                                         <p className="md-max:text-sm">Kerjakan</p>
                                                                     </Button>
@@ -178,15 +192,17 @@ export default function Angket() {
                             Kerjakan Soal
                         </AlertDialogHeader>
                         <AlertDialogBody>
-                            Apakah Anda Siap Untuk Mengerjakan?
+                            {cekakses === true ? "Anda Sudah Mengerjakan Angket Ini" : "Apakah Anda Siap Untuk Mengerjakan?"}
                         </AlertDialogBody>
                         <AlertDialogFooter>
                             <Button onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button colorScheme='red' onClick={() => onFunct()} ml={3}>
-                                Kerjakan
-                            </Button>
+                            {cekakses === false ? (
+                                <Button colorScheme='red' onClick={() => onFunct()} ml={3}>
+                                    Kerjakan
+                                </Button>
+                            ) : ""}
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialogOverlay>

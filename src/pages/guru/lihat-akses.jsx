@@ -104,6 +104,7 @@ export default function Soalangket() {
         } else if (res.data.status === "failed") {
         }
     }
+    console.log(data)
     return (
         <div className="h-screen relative">
             <div className="h-1/10 w-full text-white px-10 fixed shadow-md flex items-center z-20 bg-sky-700">

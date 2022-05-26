@@ -17,7 +17,8 @@ import axiosClient from "../../api/axiosClient"
 export default function Soal() {
     const [MediaQ] = useMediaQuery('(min-width: 766px)');
     let id = useParams();
-    const setid = id.id
+    const kode = id.id
+    const setid = localStorage.getItem("id_angket");
     let navigate = useNavigate();
     let toast = useToast();
     const { isLoading, isError, data, isFetching } = useQuery(
@@ -48,11 +49,12 @@ export default function Soal() {
         for (let pair of formData.entries()) {
             console.log(pair[0] + ',' + pair[1])
         }
-        const res = await axiosClient.post(`/${setid}/jawaban`, formData, {
+        const res = await axiosClient.post(`/${kode}/jawaban`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
         });
+        localStorage.setItem("id_angket", "");
         console.log(res)
         if (res.data.status === "success") {
             navigate("/dash-siswa/angket")
@@ -73,64 +75,63 @@ export default function Soal() {
         const { name, value } = event.target;
         setTutorial({ ...tutorial, [name]: value });
     };
-    console.log(tutorial[9])
-    console.log(tutorial)
     let totalsoal = data?.data.length
     const namaangket = data?.data[0].nama_angket
     return (
-        <div className="w-full justify-center items-center bg-gray-100">
-            <div className="w-9/10 h-9/10 rounded-xl bg-white shadow-md md-max:w-11/12">
-                <div className="h-9/10">
+        <div className="w-full h-screen flex justify-center bg-gray-100">
+            <div className="w-9/10 h-full rounded-xl bg-white shadow-md md-max:w-11/12">
+                <div className="h-full">
                     {/* atas */}
                     <div className="flex justify-between items-center px-5 py-2 bg-gradient-to-r rounded-t-xl from-sky-700 to-sky-500 p-10 w-full h-1/10 md-max:p-2">
                         <div className="text-white text-lg font-semibold sm-max:font-medium sm-max:text-base">{namaangket}</div>
-                        <div>20:00:00</div>
                     </div>
                     {/* bawah */}
-                    <div className="px-20 text-xl h-8/10 py-20 space-y-5 md-max:px-5 md-max:py-12 md-max:text-sm">
+                    <div className="px-20 text-xl h-9/10 py-20 space-y-5 md-max:px-5 md-max:py-12 md-max:text-sm">
                         <form onSubmit={updateProfile} className='w-full h-full'>
-                            {data?.data.map((row, index) => (
-                                <div key={index}>
-                                    <Input
-                                        id='soal'
-                                        type='hidden'
-                                        name={"nomor_soal[" + row.id + "]"}
-                                    />
-                                    <div className=" flex">
-                                        <div className="mr-2">
-                                            {index + 1}.
+                            <div className="h-9/10">
+                                {data?.data.map((row, index) => (
+                                    <div className="mb-3" key={index}>
+                                        <div className="capitalize flex">
+                                            <div className="mr-2">
+                                                {index + 1}.
+                                            </div>
+                                            {row.soal}
                                         </div>
-                                        {row.soal}
+                                        <div className="w-full flex text-lg pt-3 justify-between px-5">
+                                            <label htmlFor="">
+                                                <input type="radio" value="a" onChange={handleInputChange} name={row.id} /> Setuju Sekali
+                                            </label>
+                                            <label htmlFor="">
+                                                <input type="radio" value="b" onChange={handleInputChange} name={row.id} /> Setuju
+                                            </label>
+                                            <label htmlFor="">
+                                                <input type="radio" value="c" onChange={handleInputChange} name={row.id} /> Biasa Saja
+                                            </label>
+                                            <label htmlFor="">
+                                                <input type="radio" value="d" onChange={handleInputChange} name={row.id} /> Tidak Setuju
+                                            </label>
+                                            <label htmlFor="">
+                                                <input type="radio" value="e" onChange={handleInputChange} name={row.id} /> Sangat Tidak Setuju
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div className="w-full">
-                                        <input type="radio" value="a" onChange={handleInputChange} name={row.id} /> Setuju Sekali
-                                        <input type="radio" value="b" onChange={handleInputChange} name={row.id} /> Setuju
-                                        <input type="radio" value="c" onChange={handleInputChange} name={row.id} /> Biasa Saja
-                                        <input type="radio" value="d" onChange={handleInputChange} name={row.id} /> Tidak Setuju
-                                        <input type="radio" value="e" onChange={handleInputChange} name={row.id} /> Sangat Tidak Setuju
-                                    </div>
-                                </div>
-                            ))}
-                            <Button
-                                colorScheme='blue'
-                                block
-                                variant="solid"
-                                bgColor="#1F8AC6"
-                                color="white"
-                                type='submit'
-                            >
-                                Save
-                            </Button>
+                                ))}
+                            </div>
+
+                            <div className="flex items-end">
+                                <Button
+                                    colorScheme='blue'
+                                    block
+                                    variant="solid"
+                                    bgColor="#1F8AC6"
+                                    color="white"
+                                    type='submit'
+                                >
+                                    Save
+                                </Button>
+                            </div>
                         </form>
                     </div>
-                    <Button
-                        rounded='lg'
-                        size={MediaQ ? 'md' : 'sm'}
-                        colorScheme='whatsapp'
-                        onClick={() => navigate('/dash-siswa/angket')}
-                    >
-                        <p className="text-sm md:text-lg">Selesai</p>
-                    </Button>
                 </div>
             </div>
         </div>
