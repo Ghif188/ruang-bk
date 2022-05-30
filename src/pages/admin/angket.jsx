@@ -327,10 +327,10 @@ export default function Angket() {
                     <AlertDialogOverlay>
                         <AlertDialogContent>
                             <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                                Hapus Akun Siswa
+                                Hapus Angket
                             </AlertDialogHeader>
                             <AlertDialogBody>
-                                Apakah kamu yakin untuk menghapus akun siswa ?.
+                                Apakah kamu yakin untuk menghapus?
                             </AlertDialogBody>
 
                             <AlertDialogFooter>

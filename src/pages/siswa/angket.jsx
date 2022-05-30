@@ -81,7 +81,7 @@ export default function Angket() {
     );
     const [editid, setEditid] = React.useState()
     const onFunc = (id, kode) => {
-        onOpen();
+        console.log(kode)
         onCheck(kode);
         setEditid(kode);
         localStorage.setItem("id_angket", id);
@@ -92,13 +92,16 @@ export default function Angket() {
     }
     const [cekakses, setCekakses] = React.useState(true)
     const onCheck = async (kode) => {
+        console.log(kode)
         const result = await cekAkses(kode);
         console.log(result)
         if (result.data.status == "belum mengerjakan") {
             setCekakses(false);
+            onOpen();
         }
         if (result.data.status == "sudah mengerjakan") {
             setCekakses(true);
+            onOpen();
         }
     };
     const setdata = data?.data

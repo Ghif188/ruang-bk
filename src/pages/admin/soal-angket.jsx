@@ -294,7 +294,7 @@ export default function Soalangket() {
                                                         marginLeft={'5'}
                                                         onClick={() => multiFunc(row.id)}
                                                     >
-                                                        Delete
+                                                        Hapus
                                                     </Button>
                                                 </div>
                                             </Td>
@@ -373,7 +373,7 @@ export default function Soalangket() {
                                                                     emptyColor='gray.200'
                                                                     color='blue.500'
                                                                     size='md'
-                                                                />) : "Save"}
+                                                                />) : "Simpan"}
                                                         </Button>
                                                     </Td>
                                                 </Tr>
@@ -410,50 +410,16 @@ export default function Soalangket() {
                                     Hapus Soal
                                 </AlertDialogHeader>
                                 <AlertDialogBody>
-                                    <div className="">
-                                        halo
-                                        <div className="mb-5">
-                                            <input
-                                                name="file"
-                                                disabled={isSubmitting}
-                                                id="file"
-                                                type="file"
-                                                onChange={(event) => {
-                                                    let reader = new FileReader();
-                                                    reader.readAsDataURL(
-                                                        event.target.files[0]
-                                                    );
-                                                    setFieldValue(
-                                                        `values.file`,
-                                                        event.currentTarget.files[0]
-                                                    );
-                                                }}
-                                                onBlur={handleBlur}
-                                                //value={values.file}
-                                                placeholder="Name"
-                                                tabIndex="1"
-                                                size="lg"
-                                            ></input>
-                                        </div>
-                                        <Button
-                                            tabIndex="3"
-                                            block
-                                            variant="solid"
-                                            color="green"
-                                            onClick={() => {
-                                                onSubmit(values);
-                                            }}
-                                        >
-                                            <span className="font-semibold">Simpan Data</span>
-                                        </Button>
+                                    <div>
+                                        Apakah anda yakin untuk menghapus?
                                     </div>
                                 </AlertDialogBody>
                                 <AlertDialogFooter>
                                     <Button onClick={onTutup}>
-                                        Cancel
+                                        Batalkan
                                     </Button>
                                     <Button colorScheme='red' onClick={() => multiFuncti()} ml={3}>
-                                        Delete
+                                        Hapus
                                     </Button>
                                 </AlertDialogFooter>
                             </form>

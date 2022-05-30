@@ -144,7 +144,7 @@ export default function Angket() {
     // };
     const onImport = async (id) => {
         const result = await importJawaban(id);
-        console.log(result)
+        console.log(result.data)
         queryClient.invalidateQueries("siswa")
         toast({
             title: 'Delete Account',
@@ -157,7 +157,6 @@ export default function Angket() {
         })
         let url = window.URL.createObjectURL(new Blob([result.data]));
         saveAs(url, "jawaban-angket.xlsx");
-
     };
     return (
         <Layout>

@@ -19,6 +19,7 @@ export function getSoalAngket({id}) {
 export function postJawaban({id}) {
   return axios.post(`/${id}/jawaban`);
 }
-export function cekAkses({kode}) {
+export function cekAkses(kode) {
+  console.log(kode)
   return axios.get(`/check-jawaban/${kode}`);
 }

@@ -6,8 +6,8 @@ import { useQuery } from "react-query";
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
-import BgProfile from "../../assets/bgprofile.png"
 import { MdEdit } from 'react-icons/md';
+import BgProfile from "../../assets/bg-profil.jpg"
 import axios from "../../api/axiosClient";
 import {
     Center,
@@ -120,9 +120,8 @@ export default function EditProfileSiswa() {
                 <form onSubmit={updateProfile} className="h-full w-10/12 px-20">
                     <div className="w-full mt-10 rounded-3xl flex h-2/10 mb-3">
                         <div className="flex relative rounded-3xl shadow-sm h-full w-full">
-                            <div className="flex w-full h-full rounded-3xl">
-                                <img src={BgProfile} alt="" className="rounded-3xl opacity-40 absolute h-full w-full" />
-                                <div className=" w-full flex justify-between h-full pl-10 backdrop-hue-rotate-90 rounded-3xl">
+                            <div style={{ backgroundImage: `url(${BgProfile})` }} className="flex bg-cover w-full h-full rounded-3xl">
+                                <div className=" w-full flex justify-between h-full pl-10  rounded-3xl">
                                     <div className="font-semibold font-bahnschrift flex items-center text-sky-800 text-3xl">
                                         Edit Profile
                                     </div>
