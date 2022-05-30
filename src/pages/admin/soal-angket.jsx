@@ -135,6 +135,7 @@ export default function Soalangket() {
     const [getDetail, setGetDetail] = React.useState([])
     const onShow = async (id) => {
         const result = await showSoal(id);
+        console.log(result)
         setGetDetail(result.data.data.data[0]);
     };
     const [errors, setErrors] = React.useState(false);
@@ -266,7 +267,7 @@ export default function Soalangket() {
                                 </Thead>
                                 <Tbody>
                                     {data?.data.map((row, index) => (
-                                        <Tr key={index}>
+                                        <Tr key={row.nomor_soal}>
                                             <Td>
                                                 {row.nomor_soal} .
                                             </Td>
@@ -469,6 +470,21 @@ export default function Soalangket() {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 value={values.soal}
+                                                placeholder="Soal"
+                                                tabIndex="1"
+                                                size="lg"
+                                            ></Input>
+                                        </div>
+                                        <div className='my-2 hidden'>
+                                            <FormLabel htmlFor='nomor_soal'>Soal</FormLabel>
+                                            <Input
+                                                name="nomor_soal"
+                                                disabled={isSubmitting}
+                                                id="nomor_soal"
+                                                type="text"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.nomor_soal}
                                                 placeholder="Soal"
                                                 tabIndex="1"
                                                 size="lg"

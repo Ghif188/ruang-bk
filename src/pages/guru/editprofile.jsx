@@ -205,7 +205,6 @@ export default function EditProfile() {
                                         />
                                     </div>
                                 </div>
-                                <img src={image} className="h-10" alt="" />
                             </div>
                             <div className="w-1/2 border-l-4 md:text-center pl-3 rounded-sm">
                                 <div className="w-full border-b-2 border-sky-700  py-2 md:flex justify-between">

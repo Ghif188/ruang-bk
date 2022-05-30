@@ -96,7 +96,7 @@ export default function Soalangket() {
                 title: 'Berhasil',
                 status: 'success',
                 position: 'top',
-                description: 'Anda berhasil edit akun',
+                description: 'Anda berhasil beri akses',
                 variant: 'left-accent',
                 duration: 9000,
                 isClosable: true,

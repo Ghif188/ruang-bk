@@ -105,7 +105,7 @@ export default function Angket() {
         }
     };
     const setdata = data?.data
-    console.log()
+    console.log(data)
     return (
         <Layout>
             <div className="bg-white antialiased bg-opacity-50 h-full w-9/12 px-10 pt-2 md-max:w-full md-max:px-0">
@@ -154,9 +154,9 @@ export default function Angket() {
                                                                 <div className="w-8/10 md-max:w-7/10">
                                                                     <p className="font-semibold pb-3 text-lg border-b-2 md-max:text-base">{ah.nama_angket}</p>
                                                                     <div className="flex pt-3 justify-between items-center">
-                                                                        <p className="text-sm md-max:text-xs">kerjain ya!!!</p>
+                                                                        <p className="text-sm md-max:text-xs">{ah.keterangan}</p>
                                                                         <div className="text-gray-500 md-max:text-xs">
-                                                                            <span className="text-sm text-white font-semibold mr-2 md-max:text-xs">tenggat :</span>20-02-2022
+                                                                            <span className="text-sm text-white font-semibold mr-2 md-max:text-xs">tenggat :</span>{ah.finish_at}
                                                                         </div>
                                                                     </div>
                                                                 </div>

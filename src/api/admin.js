@@ -45,6 +45,7 @@ export function updateSoal(values) {
     console.log(values)
     let formData = new URLSearchParams
     formData.append("soal", values.soal);
+    formData.append("nomor_soal", values.nomor_soal);
     formData.append("angket_id", values.angket_id);
 
     for (let pair of formData.entries()) {

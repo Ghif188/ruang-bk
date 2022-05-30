@@ -47,7 +47,7 @@ export default function Angket() {
     const initialValues = {
         angket_id: "",
         time: "36000",
-        start_at: "1111",
+        start_at: "",
         finish_at: "",
     };
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
@@ -96,10 +96,10 @@ export default function Angket() {
             await aktivasiAngket(values);
             queryClient.invalidateQueries("angket-aktif")
             toast({
-                title: 'Soal Terbuat.',
+                title: 'Angket Telah Aktif',
                 status: 'success',
                 position: 'top',
-                description: 'Pertanyaan Soal Telah Terbuat.',
+                description: 'Klik akses siswa untuk aktifkan akses pada siswa',
                 variant: 'left-accent',
                 duration: 1000,
                 isClosable: true,
@@ -293,11 +293,25 @@ export default function Angket() {
                                             <div className=' text-red-400 text-xs'>{errors.angket_id && touched.angket_id && errors.angket_id}</div>
                                         </div>
                                         <div className='my-2'>
-                                            <FormLabel htmlFor='batas_waktu'>Batas Waktu</FormLabel>
+                                            <FormLabel htmlFor='tanggal_mulai'>Tanggal Mulai</FormLabel>
+                                            <Input
+                                                placeholder='Batas Waktu'
+                                                id='start_at'
+                                                type='date'
+                                                value={values.start_at}
+                                                onBlur={handleBlur}
+                                                error={errors.start_at && touched.start_at}
+                                                onChange={handleChange}
+                                                disabled={isSubmitting}
+                                            />
+                                            <div className=' text-red-400 text-xs'>{errors.start_at && touched.start_at && errors.start_at}</div>
+                                        </div>
+                                        <div className='my-2'>
+                                            <FormLabel htmlFor='batas_waktu'>Tanggal Tenggat</FormLabel>
                                             <Input
                                                 placeholder='Batas Waktu'
                                                 id='finish_at'
-                                                type='text'
+                                                type='date'
                                                 value={values.finish_at}
                                                 onBlur={handleBlur}
                                                 error={errors.finish_at && touched.finish_at}
