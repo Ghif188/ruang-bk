@@ -98,7 +98,7 @@ export default function Soalangket() {
                 position: 'top',
                 description: 'Anda berhasil beri akses',
                 variant: 'left-accent',
-                duration: 9000,
+                duration: 1000,
                 isClosable: true,
             })
         } else if (res.data.status === "failed") {
@@ -135,17 +135,7 @@ export default function Soalangket() {
                                     </Tr>
                                 </Thead>
                                 {
-                                    isLoading ? (
-                                        <div className="w-full h-full justify-center items-center flex">
-                                            <Spinner
-                                                thickness='5px'
-                                                speed='0.65s'
-                                                emptyColor='gray.200'
-                                                color='blue.500'
-                                                size='xl'
-                                            />
-                                        </div>
-                                    ) : (
+                                    isLoading ? "" : (
                                         <Tbody>
                                             {data?.data.map((row, index) => (
                                                 <Tr key={index}>
@@ -176,6 +166,19 @@ export default function Soalangket() {
                                     )
                                 }
                             </Table>
+                            {
+                                isLoading ? (
+                                    <div className="w-full h-full justify-center items-center flex">
+                                        <Spinner
+                                            thickness='5px'
+                                            speed='0.65s'
+                                            emptyColor='gray.200'
+                                            color='blue.500'
+                                            size='xl'
+                                        />
+                                    </div>
+                                ) : ""
+                            }
                             {datauser?.data.length === 0 ? (
                                 <div className="text-center">Belum ada Siswa yg diberi akses</div>
                             ) : ''}
@@ -196,17 +199,7 @@ export default function Soalangket() {
                                         </Tr>
                                     </Thead>
                                     {
-                                        isLoading ? (
-                                            <div className="w-full h-full justify-center items-center flex">
-                                                <Spinner
-                                                    thickness='5px'
-                                                    speed='0.65s'
-                                                    emptyColor='gray.200'
-                                                    color='blue.500'
-                                                    size='xl'
-                                                />
-                                            </div>
-                                        ) : (
+                                        isLoading ? "": (
                                             <Tbody>
                                                 {datauser?.data.map((row, index) => (
                                                     <Tr key={index}>
@@ -238,6 +231,19 @@ export default function Soalangket() {
                                     }
                                 </Table>
                             </div>
+                            {
+                                isLoading ? (
+                                    <div className="w-full h-full justify-center items-center flex">
+                                        <Spinner
+                                            thickness='5px'
+                                            speed='0.65s'
+                                            emptyColor='gray.200'
+                                            color='blue.500'
+                                            size='xl'
+                                        />
+                                    </div>
+                                ) : ""
+                            }
                         </div>
                     </div>
                 </div>

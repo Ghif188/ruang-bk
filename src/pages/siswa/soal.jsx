@@ -78,7 +78,7 @@ export default function Soal() {
     let totalsoal = data?.data.length
     const namaangket = data?.data[0].nama_angket
     return (
-        <div className="w-full h-screen flex justify-center bg-gray-100">
+        <div className="w-full h-full flex justify-center bg-gray-100">
             <div className="w-9/10 h-full rounded-xl bg-white shadow-md md-max:w-11/12">
                 <div className="h-full">
                     {/* atas */}
@@ -86,48 +86,48 @@ export default function Soal() {
                         <div className="text-white text-lg font-semibold sm-max:font-medium sm-max:text-base">{namaangket}</div>
                     </div>
                     {/* bawah */}
-                    <div className="px-20 text-xl h-9/10 py-20 space-y-5 md-max:px-5 md-max:py-12 md-max:text-sm">
+                        <div className="px-20 border-b-2 font-semibold font-bahnschrift py-5 text-gray-500">
+                            Jawablah pertanyaan sesuai dengan definisi kepribadian anda !
+                        </div>
+                    <div className="px-20 h-9/10 pt-10 pb-20 space-y-5 md-max:px-5 md-max:py-12 md-max:text-sm">
                         <form onSubmit={updateProfile} className='w-full h-full'>
                             <div className="h-9/10">
                                 {data?.data.map((row, index) => (
-                                    <div className="mb-3" key={index}>
-                                        <div className="capitalize flex">
+                                    <div className="mb-5" key={index}>
+                                        <div className="capitalize text-lg font-semibold flex">
                                             <div className="mr-2">
                                                 {index + 1}.
                                             </div>
-                                            {row.soal}
+                                            {row.soal}.
                                         </div>
-                                        <div className="w-full flex text-lg pt-3 justify-between px-5">
-                                            <label htmlFor="">
+                                        <div className="w-full flex pt-3 justify-between px-5">
+                                            <label htmlFor="" className=" hover:text-red-700">
                                                 <input type="radio" value="a" onChange={handleInputChange} name={row.id} /> Setuju Sekali
                                             </label>
-                                            <label htmlFor="">
+                                            <label htmlFor="" className=" hover:text-red-700">
                                                 <input type="radio" value="b" onChange={handleInputChange} name={row.id} /> Setuju
                                             </label>
-                                            <label htmlFor="">
+                                            <label htmlFor="" className=" hover:text-red-700">
                                                 <input type="radio" value="c" onChange={handleInputChange} name={row.id} /> Biasa Saja
                                             </label>
-                                            <label htmlFor="">
+                                            <label htmlFor="" className=" hover:text-red-700">
                                                 <input type="radio" value="d" onChange={handleInputChange} name={row.id} /> Tidak Setuju
                                             </label>
-                                            <label htmlFor="">
+                                            <label htmlFor="" className=" hover:text-red-700">
                                                 <input type="radio" value="e" onChange={handleInputChange} name={row.id} /> Sangat Tidak Setuju
                                             </label>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-
-                            <div className="flex items-end">
+                            <div className="flex mt-10 pt-10 justify-center border-hijau border-t-2 items-end">
                                 <Button
-                                    colorScheme='blue'
+                                    colorScheme='yellow'
                                     block
                                     variant="solid"
-                                    bgColor="#1F8AC6"
-                                    color="white"
                                     type='submit'
                                 >
-                                    Save
+                                    Simpan Jawaban
                                 </Button>
                             </div>
                         </form>

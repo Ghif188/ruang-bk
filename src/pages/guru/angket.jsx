@@ -223,7 +223,9 @@ export default function Angket() {
                                                                     Akses Siswa
                                                                 </Button>
                                                                 <Button
-                                                                    onClick={()=>onImport(angket.angket_id)}
+                                                                    colorScheme={'orange'}
+                                                                    shadow={'md'}
+                                                                    onClick={() => onImport(angket.angket_id)}
                                                                 >
                                                                     Jawaban Siswa
                                                                 </Button>
