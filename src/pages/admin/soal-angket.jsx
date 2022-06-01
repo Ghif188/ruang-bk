@@ -269,7 +269,7 @@ export default function Soalangket() {
                                     {data?.data.map((row, index) => (
                                         <Tr key={row.nomor_soal}>
                                             <Td>
-                                                {row.nomor_soal} .
+                                                {index + 1} .
                                             </Td>
                                             <Td>
                                                 {row.soal}

@@ -79,6 +79,7 @@ export default function Angket() {
             select: (response) => response.data.data,
         }
     );
+    const toast = useToast()
     const [editid, setEditid] = React.useState()
     const onFunc = (id, kode) => {
         console.log(kode)
@@ -102,6 +103,17 @@ export default function Angket() {
         if (result.data.status == "sudah mengerjakan") {
             setCekakses(true);
             onOpen();
+        }
+        if (result.data.status == "terlambat") {
+            toast({
+                title: 'Terlambat',
+                status: 'info',
+                position: 'top',
+                description: 'Anda Sudah Terlambat',
+                variant: 'left-accent',
+                duration: 1000,
+                isClosable: true,
+            })
         }
     };
     const setdata = data?.data
@@ -151,7 +163,7 @@ export default function Angket() {
                                                     <div>
                                                         {data?.data.map((ah, index) => (
                                                             <div key={index} className="w-full px-5 py-3 mb-3 flex rounded-lg text-white items-center bg-blue-300 justify-between md-max:px-3 md-max:py-2">
-                                                                <div className="w-8/10 md-max:w-7/10">
+                                                                <div className="w-8/10 capitalize md-max:w-7/10">
                                                                     <p className="font-semibold pb-3 text-lg border-b-2 md-max:text-base">{ah.nama_angket}</p>
                                                                     <div className="flex pt-3 justify-between items-center">
                                                                         <p className="text-sm md-max:text-xs">{ah.keterangan}</p>

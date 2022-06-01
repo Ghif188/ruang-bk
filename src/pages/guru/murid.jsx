@@ -335,7 +335,7 @@ export default function Murid() {
         setValues(e.currentTarget.files[0]);
     }
     const [values, setValues] = React.useState({ user: '' })
-    const [dafodik, setDafodik] = React.useState({ user: '' })
+    const [dafodik, setDafodik] = React.useState({ detailprofile: '' })
     const onImport = async (e) => {
         e.preventDefault();
         let formData = new FormData()
@@ -375,11 +375,11 @@ export default function Murid() {
     const onImportDafodik = async (e) => {
         e.preventDefault();
         let formData = new FormData()
-        formData.append("user", values);
+        formData.append("detailprofile", values);
         for (let pair of formData.entries()) {
             console.log(pair[0] + ',' + pair[1])
         }
-        const res = await axios.post(`/import/data-dapodik/${importid}`, formData, {
+        const res = await axios.post(`/import-detail-profile/${importid}`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
@@ -686,7 +686,7 @@ export default function Murid() {
                                                             id="user"
                                                             type="file"
                                                             onChange={handleFile}
-                                                            value={values.user}
+                                                            value={values.detailprofile}
                                                             placeholder="user"
                                                             tabIndex="1"
                                                             className="text-black"

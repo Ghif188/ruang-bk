@@ -59,7 +59,10 @@ export default function Angket() {
         ],
 
         () =>
-            getAngket(),
+            getAngket({
+                page: 1,
+                perPage: 10
+            }),
 
         {
             keepPreviousData: true,

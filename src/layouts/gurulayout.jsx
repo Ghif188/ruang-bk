@@ -34,10 +34,6 @@ export default function GuruLayout({ children }) {
         // console.log("halo");
         navigate("/dash-guru/angket");
     };
-    const handleJawaban = () => {
-        // console.log("halo");
-        navigate("/dash-guru/jawaban");
-    };
     const logClear = () => {
         window.localStorage.clear();
         navigate("/login");
@@ -123,21 +119,6 @@ export default function GuruLayout({ children }) {
                                     >
                                         Angket
                                     </NavLink>
-                                    <NavLink
-                                        to="/dash-guru/jawaban"
-                                        style={({ isActive }) => {
-                                            return {
-                                                backgroundColor: isActive ? 'rgb(14, 165, 233)' : '',
-                                                padding: '1rem',
-                                                height: '100%',
-                                                borderBottom: isActive ? '4px solid #38E569' : '',
-                                                color: 'white',
-                                                fontWeight: '500'
-                                            }
-                                        }}
-                                    >
-                                        Jawaban
-                                    </NavLink>
                                 </div>
                                 <div className="flex px-10 h-full rounded-r-full">
                                     <Menu>
@@ -171,7 +152,6 @@ export default function GuruLayout({ children }) {
                                     <MenuItem icon={< CgProfile />} onClick={handleHome}>Home</MenuItem>
                                     <MenuItem icon={< BsPeopleFill />} onClick={handleMurid}>Murid</MenuItem>
                                     <MenuItem icon={<BsFillFileTextFill />} onClick={handleAngket}>Angket</MenuItem>
-                                    <MenuItem icon={<BsFillFileTextFill />} onClick={handleJawaban}>jawaban</MenuItem>
                                 </MenuList>
                             </Menu>
                             <Menu>
