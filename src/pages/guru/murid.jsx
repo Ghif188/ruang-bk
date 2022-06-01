@@ -288,7 +288,9 @@ export default function Murid() {
     const multiFunct = async (id) => {
         onShow(id);
         setBuka(true);
+        setImportid(id);
     }
+    const [importid, setImportid] = React.useState()
     const [MediaQ] = useMediaQuery('(min-width: 1024px)');
     const [editid, setEditid] = React.useState();
     const onDelete = async (id) => {
@@ -328,7 +330,12 @@ export default function Murid() {
         e.persist();
         setValues(e.currentTarget.files[0]);
     }
+    const handleFileDafodik = (e) => {
+        e.persist();
+        setValues(e.currentTarget.files[0]);
+    }
     const [values, setValues] = React.useState({ user: '' })
+    const [dafodik, setDafodik] = React.useState({ user: '' })
     const onImport = async (e) => {
         e.preventDefault();
         let formData = new FormData()
@@ -353,6 +360,43 @@ export default function Murid() {
                 duration: 9000,
                 isClosable: true,
             })
+        } else {
+            toast({
+                title: 'Gagal',
+                status: 'error',
+                position: 'top',
+                description: 'Gagal Import Excel',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+        }
+    }
+    const onImportDafodik = async (e) => {
+        e.preventDefault();
+        let formData = new FormData()
+        formData.append("user", values);
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ',' + pair[1])
+        }
+        const res = await axios.post(`/import/data-dapodik/${importid}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        queryClient.invalidateQueries("siswa");
+        console.log(res)
+        if (res.status === 200) {
+            toast({
+                title: 'Berhasil',
+                status: 'success',
+                position: 'top',
+                description: 'Berhasil Import Excel',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+            onTutup1();
         } else {
             toast({
                 title: 'Gagal',
@@ -630,9 +674,33 @@ export default function Murid() {
                                                             <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nomor_telp}</div>
                                                         </div>
                                                     </div>
+                                                    <div className="text-sky-600 font-bold font-bahnschrift text-lg">
+                                                        Import Data Dafodik
+                                                    </div>
                                                 </ModalBody>
                                                 <ModalFooter>
-                                                    <Button onClick={onTutup1}>Close</Button>
+                                                    <form onSubmit={onImportDafodik} className="flex w-full justify-between">
+                                                        <Input
+                                                            w="sm"
+                                                            name="user"
+                                                            id="user"
+                                                            type="file"
+                                                            onChange={handleFile}
+                                                            value={values.user}
+                                                            placeholder="user"
+                                                            tabIndex="1"
+                                                            className="text-black"
+                                                            size="lg"
+                                                        ></Input>
+                                                        <Button
+                                                            block
+                                                            variant="solid"
+                                                            bgColor={'greenyellow'}
+                                                            type="submit"
+                                                        >
+                                                            <span className="font-semibold">Simpan Data</span>
+                                                        </Button>
+                                                    </form>
                                                 </ModalFooter>
                                             </ModalContent>
                                         </Modal>
