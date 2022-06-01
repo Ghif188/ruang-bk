@@ -34,9 +34,10 @@ import {
     Select,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
-import { FiEdit } from "react-icons/fi"
+import { FaUser } from "react-icons/fa"
 import { IoMdAddCircle } from "react-icons/io"
 import { IoArrowBackCircle } from "react-icons/io5"
+import {AiFillFileZip} from "react-icons/ai"
 import { useNavigate } from 'react-router-dom';
 const RegisterSchema = Yup.object().shape({
     angket_id: Yup.string().required("Wajib di Isi"),
@@ -183,7 +184,7 @@ export default function Angket() {
                                         onClick={() => onOpen()}
                                         size={"sm"}
                                     >
-                                        <IoMdAddCircle /> Aktifkan Angket
+                                        <IoMdAddCircle className="mr-1"/> Aktifkan Angket
                                     </Button>
                                 </div>
                             </div>
@@ -220,6 +221,7 @@ export default function Angket() {
                                                                     bgColor='blue.200'
                                                                     onClick={() => navigate(`/dash-guru/angket/akses/${angket.id}`)}
                                                                 >
+                                                                    <FaUser className="mr-1"/>
                                                                     Akses Siswa
                                                                 </Button>
                                                                 <Button
@@ -227,7 +229,7 @@ export default function Angket() {
                                                                     shadow={'md'}
                                                                     onClick={() => onImport(angket.angket_id)}
                                                                 >
-                                                                    Jawaban Siswa
+                                                                    <AiFillFileZip className="mr-1"/> Ekspor Jawaban
                                                                 </Button>
                                                             </div>
                                                         </div>
