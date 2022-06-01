@@ -4,6 +4,9 @@ import Layout from "../../layouts/adminlayout"
 import * as Yup from 'yup';
 import { tambahAngket, getAngket, deleteAngket } from "../../api/admin";
 import { useQuery, useQueryClient } from "react-query";
+import {RiQuestionAnswerFill} from "react-icons/ri"
+import {FaTrash} from "react-icons/fa"
+import { IoMdAddCircle } from "react-icons/io"
 import {
     useDisclosure,
     Tbody,
@@ -152,6 +155,7 @@ export default function Angket() {
                                         _hover={{ bg: 'orange.500' }}
                                         onClick={onOpen}
                                     >
+                                        <IoMdAddCircle className="mr-1"/>
                                         <p className="text-xs md:text-base">
                                             Tambah Angket
                                         </p>
@@ -272,9 +276,9 @@ export default function Angket() {
                                                 ) : (
                                                     <div className="">{data?.data.map((angket, index) => (
                                                         <div key={index} className="flex items-center px-5 mb-7  justify-between border-b-2 border-hijau pb-3 md-max:px-1">
-                                                            <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-blue-400 md-max:py-2 md-max:px-2">
+                                                            <div className="w-full px-5 py-3 flex rounded-lg text-white items-center justify-between bg-sky-600 md-max:py-2 md-max:px-2">
                                                                 <div className="w-8/10">
-                                                                    <p className="font-semibold pb-3 text-lg border-b-2 md-max:text-sm md-max:pb-1">{angket.nama_angket}</p>
+                                                                    <p className="font-semibold capitalize pb-3 text-lg border-b-2 md-max:text-sm md-max:pb-1">{angket.nama_angket}</p>
                                                                     <div className="flex pt-3 justify-between items-center md-max:pt-1">
                                                                         <p className="text-sm md-max:text-xs">{angket.keterangan}</p>
                                                                     </div>
@@ -283,12 +287,13 @@ export default function Angket() {
                                                                     <Button
                                                                         shadow='md'
                                                                         rounded='lg'
-                                                                        width={MediaQ ? '20' : '16'}
+                                                                        width={MediaQ ? '28' : '16'}
                                                                         size={MediaQ ? 'md' : 'sm'}
-                                                                        _hover={{ bg: '#0369A1' }}
-                                                                        bgColor='blue.200'
+                                                                        mr="1"
+                                                                        colorScheme="whatsapp"
                                                                         onClick={() => navigate(`/dash-admin/angket/${angket.id}`)}
                                                                     >
+                                                                        <RiQuestionAnswerFill className="text-md mr-1"/>
                                                                         <p className="text-xs md:text-base">
                                                                             Soal
                                                                         </p>
@@ -296,12 +301,13 @@ export default function Angket() {
                                                                     <Button
                                                                         shadow='md'
                                                                         rounded='lg'
-                                                                        width={MediaQ ? '20' : '16'}
+                                                                        width={MediaQ ? '28' : '16'}
                                                                         size={MediaQ ? 'md' : 'sm'}
                                                                         _hover={{ bg: 'red.700' }}
                                                                         bgColor='red.600'
                                                                         onClick={() => multiFunct(angket.id)}
                                                                     >
+                                                                        <FaTrash className="text-xl mr-1"/>
                                                                         <p className="text-xs md:text-base">
                                                                             Delete
                                                                         </p>

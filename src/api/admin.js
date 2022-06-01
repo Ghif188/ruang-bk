@@ -13,8 +13,8 @@ export function getAllUser({ page, perPage, keyword }) {
     return axios.get(`/users?keywords=${keyword}&page=${page}&perpage=${perPage}`);
 }
 
-export function getAngket() {
-    return axios.get(`/angket`);
+export function getAngket({ page, perPage, keyword }) {
+    return axios.get(`/angket?page=${page}&perpage=${perPage}`);
 }
 
 export function tambahAngket(values) {
