@@ -2,15 +2,77 @@ import React from "react";
 import Layout from "../../layouts/muridlayout"
 import { BsPersonCircle } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
-import { getProfileSiswa } from '../../api/siswa';
+import { getProfileSiswa, changePass } from '../../api/siswa';
 import { useQuery } from "react-query";
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import { useNavigate } from "react-router";
-import { Center, Box, Circle, Avatar, position, Button, Image, List, ListItem, ListIcon, Icon, Input, useToast, Spinner } from '@chakra-ui/react';
+import {
+    Center,
+    Box,
+    Circle,
+    Avatar,
+    position,
+    Button,
+    Image,
+    List,
+    ListItem,
+    ListIcon,
+    Icon,
+    Input,
+    useToast,
+    Spinner,
+    useMediaQuery,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    FormLabel
+} from '@chakra-ui/react';
 import BgProfile from "../../assets/bg-profil.jpg"
+
+const NpsnSchema = Yup.object().shape({
+    password: Yup.string().min(8, "Minimal 8 Digit").required("Wajib terisi *"),
+});
+
 export default function ProfileSiswa() {
+    const initialValues = {
+        password: "",
+    };
     const [edit, setEdit] = React.useState(true)
+    const [buka, setBuka] = React.useState(false)
+    const [MediaQ] = useMediaQuery('(min-width: 1024px)');
+    const onTutup1 = () => setBuka(false)
+    const onSubmit = async (values) => {
+        const result = await changePass(values);
+        if (result.data.status === "success") {
+            onTutup1();
+            toast({
+                title: 'Berhasil',
+                status: 'success',
+                position: 'top',
+                description: 'Berhasil ubah password anda.',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+        } else {
+            onTutup1();
+            toast({
+                title: 'Gagal',
+                status: 'error',
+                position: 'top',
+                description: 'Gagal merubah password.',
+                variant: 'left-accent',
+                duration: 9000,
+                isClosable: true,
+            })
+        };
+        console.log(result);
+    };
     const { isLoading, isError, data, isFetching } = useQuery(
         [
             "profile-siswa",
@@ -46,7 +108,7 @@ export default function ProfileSiswa() {
                     <div className="h-full w-10/12 px-20">
                         <div className="w-full mt-10 rounded-3xl flex h-2/10 shadow-md mb-3 shadow-green-200">
                             <div className="flex relative rounded-3xl h-full w-full">
-                                <div className="flex w-full h-full rounded-3xl bg-cover justify-end" style={{backgroundImage:`url(${BgProfile})`}}>
+                                <div className="flex w-full h-full rounded-3xl bg-cover justify-end" style={{ backgroundImage: `url(${BgProfile})` }}>
                                     <div className="border-r-2 relative text-white border-sky-600 w-1/3 text-5xl capitalize pr-5 font-bahnschrift font-semibold h-full flex justify-end items-center">
                                         {data.nama_siswa == null ? (<div className="text-red-500">Belum Terisi</div>) : data.nama_siswa}
                                     </div>
@@ -110,9 +172,90 @@ export default function ProfileSiswa() {
                                     >
                                         Edit
                                     </Button>
+                                    <Button
+                                        size={MediaQ ? 'lg' : 'md'}
+                                        colorScheme='yellow'
+                                        marginLeft={'5'}
+                                        leftIcon={<MdEdit />}
+                                        onClick={() => setBuka(true)}
+                                    >
+                                        Ubah Password
+                                    </Button>
                                 </div>
                             </div>
                         </div>
+                        <Modal onClose={onTutup1} isOpen={buka} size='xl' isCentered>
+                            <ModalOverlay bg='blackAlpha.200'
+                                backdropFilter='auto'
+                                backdropBlur='1px' />
+                            <Formik
+                                initialValues={initialValues}
+                                validationSchema={NpsnSchema}
+                                enableReinitialize
+                                onSubmit={onSubmit}
+                            >
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting,
+                                }) => (
+                                    <form onSubmit={handleSubmit} className='w-full'>
+                                        <ModalContent >
+                                            <ModalHeader></ModalHeader>
+                                            <ModalCloseButton />
+                                            <ModalBody>
+                                                <div className='text-3xl font-sans flex font-semibold'>
+                                                    <div className='text-center mx-10 mb-5 w-full'>
+                                                        Ubah Password
+                                                    </div>
+                                                </div>
+                                                <div className="border-b-8 border-blue-300 rounded-md mx-10" />
+                                                <div>
+                                                    <div className='mx-10 my-4'>
+                                                        <FormLabel htmlFor='password'>Password</FormLabel>
+                                                        <Input
+                                                            placeholder='Enter your password'
+                                                            borderColor='#1F8AC6'
+                                                            id='password'
+                                                            type='password'
+                                                            value={values.password}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            error={errors.password && touched.password}
+                                                            disabled={isSubmitting}
+                                                        />
+                                                        <div className=' text-red-400 text-sm mt-2'>{errors.password && touched.password && errors.password}</div>
+                                                    </div>
+                                                    <div className='mx-10 mt-5'>
+
+                                                    </div>
+                                                </div>
+                                            </ModalBody>
+                                            <ModalFooter><Button
+                                                size='md'
+                                                isFullWidth
+                                                tabIndex="3"
+                                                htmlType="submit"
+                                                disabled={isSubmitting}
+                                                block
+                                                variant="solid"
+                                                bgColor="#1F8AC6"
+                                                color="white"
+                                                loading={isSubmitting}
+                                                type='submit'
+                                                onSubmit={handleSubmit}
+                                            >
+                                                <span className="font-semibold text-xl">{isLoading ? "Process ..." : "Simpan"}</span>
+                                            </Button></ModalFooter>
+                                        </ModalContent>
+                                    </form>
+                                )}
+                            </Formik>
+                        </Modal>
                     </div>
                 )
             }

@@ -108,7 +108,6 @@ export default function MuridLayout({ children }) {
                                         </MenuButton>
                                         <MenuList>
                                             <MenuItem icon={< CgProfile />} onClick={handleShow}>Profil</MenuItem>
-                                            <MenuItem icon={< RiLockPasswordLine />}>Change password</MenuItem>
                                             <MenuItem icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                         </MenuList>
                                     </Menu>
@@ -153,7 +152,6 @@ export default function MuridLayout({ children }) {
                                 bgColor='gray.100'
                                 >
                                     <MenuItem mb='2px' rounded='lg' _hover={{ fontWeight:'semibold', bgColor:'gray.300'}} icon={< CgProfile />} onClick={handleProfile}>Profil</MenuItem>
-                                    <MenuItem mb='2px' rounded='lg' _hover={{ fontWeight:'semibold', bgColor:'gray.300'}} icon={< RiLockPasswordLine />}>Change password</MenuItem>
                                     <MenuItem rounded='lg' _hover={{ fontWeight:'semibold', bgColor:'gray.300'}} icon={<BiLogOut />} onClick={logClear}>Logout</MenuItem>
                                 </MenuList>
                             </Menu>
