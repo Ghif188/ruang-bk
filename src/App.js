@@ -27,6 +27,7 @@ import ProtectedAdmin from "./routers/ProtectedAdmin";
 import ProtectedMurid from "./routers/ProtectedMurid";
 import AngketGuru from './pages/guru/angket';
 import Murid from './pages/guru/murid';
+import List from './pages/guru/listselesai';
 import Profile from './pages/guru/profile';
 import EditProfile from './pages/guru/editprofile';
 import EditProfileSiswa from './pages/siswa/editprofile';
@@ -60,6 +61,7 @@ function App() {
         <Route path='dash-guru/angket/akses/:id' element={<LihatAkses />} />
         <Route path='dash-guru/angket/edit/:id' element={<EditSoal />} />
         <Route path='dash-guru/murid' element={<Murid />} />
+        <Route path='dash-guru/list' element={<List />} />
       </Route>
 
       {/* Route Siswa */}

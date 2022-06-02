@@ -63,6 +63,10 @@ export function getAktifasi() {
   return axios.get("/akses")
 }
 
+export function getList(id) {
+  return axios.get(`/list-jawaban/${id}`)
+}
+
 export function getDetailProfile({id}) {
   console.log(id)
   return axios.get(`/detail-profile/${id}`);
