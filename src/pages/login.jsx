@@ -88,28 +88,45 @@ const Login = () => {
     const onSubmitWa = async (values) => {
         const result = await dispatch(authLoginWa(values));
         console.log(result);
+        if (result.massage === "Unauthorized") {
+            setHasil("Akun Belum Terbuat")
+        }
         if (result.message === "fail") {
             alert(result?.msg)
         }
         if (result.message === "Success") {
             if (result.user.role === 1) {
                 navigate("/dash-admin/home");
-                window.location.reload()
+                window.location.reload();
             }
             if (result.user.role === 2) {
                 if (result.npsn === "terisi") {
                     navigate("/dash-guru/home");
-                    window.location.reload()
+                    window.location.reload();
                 } else {
-                    navigate("/dash-guru/npsn")
-                    window.location.reload()
+                    navigate("/dash-guru/npsn");
+                    window.location.reload();
                 }
             }
             if (result.user.role === 3) {
-                if (result.user.password_status)
-                navigate("/dash-siswa/home")
-                window.location.reload()
+                if (result.user.password_status === 0) {
+                    navigate("/dash-siswa/change-password");
+                    window.location.reload();
+                } else {
+                    navigate("/dash-siswa/home");
+                    window.location.reload();
+                }
             }
+        } else {
+            toast({
+                title: 'Failed',
+                status: 'error',
+                position: 'top',
+                variant: 'left-accent',
+                duration: 10000,
+                isClosable: true,
+                description: hasil,
+            })
         }
     };
     const [button] = useMediaQuery('(min-width: 1024px)');
@@ -318,7 +335,7 @@ const Login = () => {
                     </div>
                     <div className='w-full flex justify-center'>
                         <div className='mt-5 w-3/5 sm-max:w-2/3 text-center p-2 border-white border-2 self-center text-white text-base sm-max:text-sm rounded-full bg-transparent' onClick={handleNavigate}>
-                            Belum Mempunyai Akun ?
+                            Buat Akun Guru
                         </div>
                     </div>
                 </div>

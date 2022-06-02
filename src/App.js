@@ -67,7 +67,7 @@ function App() {
         <Route path="/dash-siswa/home" element={<DashSiswa />} />
         <Route path="/dash-siswa/change-password" element={<ChangePass />} />
         <Route path="/dash-siswa/profile" element={<ProfileSiswa />} />
-        <Route path="/dash-siswa/edit-profile" element={<EditProfileSiswa />} />
+        <Route path="/dash-siswa/edit-profile/:id" element={<EditProfileSiswa />} />
         <Route path="/dash-siswa/angket" element={<AngketSiswa />} />
         <Route path="/dash-siswa/angket/soal/:id" element={<SoalSiswa />} />
       </Route>

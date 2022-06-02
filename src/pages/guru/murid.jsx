@@ -44,7 +44,7 @@ import {
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from "react-redux";
-import { registerSiswa, getSiswa, deleteSiswa, showSiswa } from "../../api/guru";
+import { registerSiswa, getSiswa, deleteSiswa, showSiswa, getDetailProfile } from "../../api/guru";
 import { useQuery, useQueryClient } from "react-query";
 const RegisterSchema = Yup.object().shape({
     nisn: Yup.number().required("Wajib di Isi").positive().integer(),
@@ -255,7 +255,7 @@ export default function Murid() {
                     shadow='md'
                     onClick={() => multiFunct(row.user_id)}
                 >
-                    Show
+                    Detail
                 </Button>
             ,
         },
@@ -271,7 +271,7 @@ export default function Murid() {
                     shadow='md'
                     onClick={() => multiFunc(row.id)}
                 >
-                    Delete
+                    Hapus
                 </Button>
             ,
         },
@@ -289,6 +289,9 @@ export default function Murid() {
         onShow(id);
         setBuka(true);
         setImportid(id);
+        console.log(id)
+        const result = await getDetailProfile({ id });
+        setDetail(result.data.data.data[0])
     }
     const [importid, setImportid] = React.useState()
     const [MediaQ] = useMediaQuery('(min-width: 1024px)');
@@ -310,6 +313,13 @@ export default function Murid() {
         const result = await showSiswa(id);
         setSiswa(result.data.data)
     };
+    const [detail, setDetail] = React.useState([])
+    const onShow2 = async (id) => {
+        console.log(id)
+        const result = await getDetailProfile(id);
+        setDetail(result.data.data)
+    };
+    console.log(detail)
     const { isLoading, isError, data, isFetching, status, error, } = useQuery(
         [
             "siswa",
@@ -325,7 +335,6 @@ export default function Murid() {
     );
     const pageakhir = data?.last_page
     const dataakhir = data?.data
-    console.log(data)
     const handleFile = (e) => {
         e.persist();
         setValues(e.currentTarget.files[0]);
@@ -391,7 +400,7 @@ export default function Murid() {
                 title: 'Berhasil',
                 status: 'success',
                 position: 'top',
-                description: 'Berhasil Import Excel',
+                description: 'Berhasil Memasukkan Data Dapodik',
                 variant: 'left-accent',
                 duration: 9000,
                 isClosable: true,
@@ -654,16 +663,16 @@ export default function Murid() {
                                                         <div className="flex justify-between mb-3 items-center">
                                                             <div className='w-4/10'>
                                                                 <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tanggal Lahir</div>
-                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tanggal_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tanggal_lahir)}</div>
+                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{detail?.tanggal_lahir === undefined ? (<div className=" text-red-400">Belum Terisi</div>) : (detail.tanggal_lahir)}</div>
                                                             </div>
                                                             <div className='w-4/10'>
                                                                 <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Tempat Lahir</div>
-                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.tempat_lahir === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.tempat_lahir)}</div>
+                                                                <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{detail?.tempat_lahir === undefined ? (<div className=" text-red-400">Belum Terisi</div>) : (detail.tempat_lahir)}</div>
                                                             </div>
                                                         </div>
                                                         <div className='my-5'>
                                                             <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Alamat</div>
-                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.alamat === null ? (<div className=" text-red-400">Belum Terisi</div>) : (siswa.alamat)}</div>
+                                                            <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{detail?.alamat === undefined ? (<div className=" text-red-400">Belum Terisi</div>) : (detail.alamat)}</div>
                                                         </div>
                                                         <div className='my-5'>
                                                             <div className="text-sky-600 p-2 font-bold font-bahnschrift text-lg">Email</div>
@@ -674,33 +683,37 @@ export default function Murid() {
                                                             <div className="bg-pink-200 text-right px-5 py-2 uppercase text-md rounded-md">{siswa.nomor_telp}</div>
                                                         </div>
                                                     </div>
-                                                    <div className="text-sky-600 font-bold font-bahnschrift text-lg">
-                                                        Import Data Dafodik
-                                                    </div>
+                                                    {detail?.tempat_lahir === undefined ? (
+                                                        <div className="text-sky-600 font-bold font-bahnschrift text-lg">
+                                                            Import Data Dapodik
+                                                        </div>
+                                                    ) : ""}
                                                 </ModalBody>
                                                 <ModalFooter>
-                                                    <form onSubmit={onImportDafodik} className="flex w-full justify-between">
-                                                        <Input
-                                                            w="sm"
-                                                            name="user"
-                                                            id="user"
-                                                            type="file"
-                                                            onChange={handleFile}
-                                                            value={values.detailprofile}
-                                                            placeholder="user"
-                                                            tabIndex="1"
-                                                            className="text-black"
-                                                            size="lg"
-                                                        ></Input>
-                                                        <Button
-                                                            block
-                                                            variant="solid"
-                                                            bgColor={'greenyellow'}
-                                                            type="submit"
-                                                        >
-                                                            <span className="font-semibold">Simpan Data</span>
-                                                        </Button>
-                                                    </form>
+                                                    {detail?.tempat_lahir === undefined ? (
+                                                        <form onSubmit={onImportDafodik} className="flex w-full justify-between">
+                                                            <Input
+                                                                w="sm"
+                                                                name="user"
+                                                                id="user"
+                                                                type="file"
+                                                                onChange={handleFile}
+                                                                value={values.detailprofile}
+                                                                placeholder="user"
+                                                                tabIndex="1"
+                                                                className="text-black"
+                                                                size="lg"
+                                                            ></Input>
+                                                            <Button
+                                                                block
+                                                                variant="solid"
+                                                                bgColor={'greenyellow'}
+                                                                type="submit"
+                                                            >
+                                                                <span className="font-semibold">Simpan Data</span>
+                                                            </Button>
+                                                        </form>
+                                                    ) : ""}
                                                 </ModalFooter>
                                             </ModalContent>
                                         </Modal>

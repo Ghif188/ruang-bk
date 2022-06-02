@@ -5,6 +5,9 @@ export function getProfileSiswa() {
   console.log(localStorage.getItem("token"))
   return axios.get("/profile");
 }
+export function getDetailProfile({id}) {
+  return axios.get(`/detail-profile/${id}`);
+}
 
 export function changePass(values) {
   return axios.post("/change-password", values);

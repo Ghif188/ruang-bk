@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../../layouts/muridlayout"
 import { BsPersonCircle } from 'react-icons/bs';
 import { MdEdit } from 'react-icons/md';
-import { getProfileSiswa, changePass } from '../../api/siswa';
+import { getProfileSiswa, changePass, getDetailProfile } from '../../api/siswa';
 import { useQuery } from "react-query";
 import { Formik } from "formik";
 import * as Yup from 'yup';
@@ -89,9 +89,29 @@ export default function ProfileSiswa() {
             select: (response) => response.data.data,
         }
     );
+    let id = data?.user_id
+    const {data:datadetail} = useQuery(
+        [
+            "detail",
+            {
+            },
+        ],
+
+        () =>
+            getDetailProfile({
+                id: id
+            }),
+
+        {
+            keepPreviousData: true,
+            select: (response) => response.data.data.data[0],
+        }
+    );
     const toast = useToast();
     const navigate = useNavigate();
     console.log(data)
+    console.log(datadetail)
+    console.log(id)
     return (
         <Layout>
             {isLoading ? (
@@ -150,15 +170,15 @@ export default function ProfileSiswa() {
                                 <div className="w-1/2 border-l-4 text-center pl-3 rounded-sm">
                                     <div className="w-full border-b-2 border-sky-700  py-2 flex justify-between">
                                         <p>Alamat</p>
-                                        <p className="text-lg font-semibold">{data.alamat == null ? (<div className="text-red-500">Belum Terisi</div>) : data.alamat}</p>
+                                        <p className="text-lg font-semibold">{data?.alamat == null ? datadetail?.alamat : data?.alamat}</p>
                                     </div>
                                     <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between">
                                         <p>Tempat Lahir</p>
-                                        <p className="text-lg font-semibold">{data.tempat_lahir == null ? (<div className="text-red-500">Belum Terisi</div>) : data.tempat_lahir}</p>
+                                        <p className="text-lg font-semibold">{data?.tempat_lahir == null ? datadetail?.tempat_lahir : data?.tempat_lahir}</p>
                                     </div>
                                     <div className="w-full border-b-2 border-sky-700 mt-6  py-2 flex justify-between">
                                         <p>Tanggal lahir</p>
-                                        <p className="text-lg font-semibold">{data.tanggal_lahir == null ? (<div className="text-red-500">Belum Terisi</div>) : data.tanggal_lahir}</p>
+                                        <p className="text-lg font-semibold">{data?.tanggal_lahir == null ? datadetail?.tanggal_lahir : data?.tanggal_lahir}</p>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +188,7 @@ export default function ProfileSiswa() {
                                         size='lg'
                                         colorScheme='facebook'
                                         leftIcon={<MdEdit />}
-                                        onClick={() => navigate("/dash-siswa/edit-profile")}
+                                        onClick={() => navigate(`/dash-siswa/edit-profile/${id}`)}
                                     >
                                         Edit
                                     </Button>
