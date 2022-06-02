@@ -90,10 +90,6 @@ export default function Angket() {
         setOpen(true)
         setEditId(id)
     }
-    const listSiswa = () => {
-        // console.log("halo");
-        navigate("/dash-guru/list");
-    };
     const [open, setOpen] = React.useState(false)
     const onTutup = () => setOpen(false)
     const onSubmit = async (values) => {
@@ -231,9 +227,9 @@ export default function Angket() {
                                                                 <Button
                                                                     colorScheme={'orange'}
                                                                     shadow={'md'}
-                                                                    onClick={listSiswa}
+                                                                    onClick={() => onImport(angket.angket_id)}
                                                                 >
-                                                                    <AiFillFileZip className="mr-1"/> List Siswa
+                                                                    <AiFillFileZip className="mr-1"/> Ekspor Jawaban
                                                                 </Button>
                                                             </div>
                                                         </div>
