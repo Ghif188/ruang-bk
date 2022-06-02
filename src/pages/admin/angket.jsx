@@ -80,10 +80,10 @@ export default function Angket() {
             await tambahAngket(values);
             queryClient.invalidateQueries("angket")
             toast({
-                title: 'Account created.',
+                title: 'Angket created.',
                 status: 'success',
                 position: 'top',
-                description: 'Akun Angket Telah Terbuat.',
+                description: 'Angket Telah Terbuat.',
                 variant: 'left-accent',
                 duration: 1000,
                 isClosable: true,
@@ -116,10 +116,10 @@ export default function Angket() {
         const result = await deleteAngket(id);
         queryClient.invalidateQueries("angket")
         toast({
-            title: 'Delete Account',
+            title: 'Delete Angket',
             status: 'success',
             position: 'top',
-            description: 'Akun Angket Telah Dihapus.',
+            description: 'Angket Telah Dihapus.',
             variant: 'left-accent',
             duration: 9000,
             isClosable: true,
